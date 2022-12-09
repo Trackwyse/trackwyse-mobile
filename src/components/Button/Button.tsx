@@ -29,7 +29,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   size?: "sm" | "lg";
   iconLeft?: keyof typeof Ionicons.glyphMap;
   iconRight?: keyof typeof Ionicons.glyphMap;
-  style: any;
+  style?: any;
   disabled?: boolean;
 }
 
@@ -44,13 +44,13 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const buttonClassNames = tw.style(
     "flex flex-row justify-between font-medium",
-    !disabled ? buttonColorClasses[color] : "bg-gray-200",
+    !disabled ? buttonColorClasses[color] : "bg-gray-100",
     sizeClasses[size],
     style
   );
 
   const textClassNames = tw.style(
-    "text-base",
+    "text-base font-medium",
     !disabled ? textColorClasses[color] : "text-gray-300"
   );
 

@@ -1,5 +1,6 @@
 import {
   TextInput,
+  Text,
   TextInputProps,
   TouchableWithoutFeedback,
   View,
@@ -17,10 +18,14 @@ export interface InputProps extends TextInputProps {
   size?: "sm" | "lg";
   icon?: keyof typeof Ionicons.glyphMap;
   disabled?: boolean;
+  style?: any;
+  error?: string;
 }
 
 const Input: React.FC<InputProps> = ({
   icon,
+  style,
+  error,
   size = "sm",
   disabled = false,
   ...props
@@ -30,8 +35,10 @@ const Input: React.FC<InputProps> = ({
 
   const containerColorClasses = tw.style(
     "flex-row items-center w-11/12 bg-gray-100 px-4 border-2",
-    isFocused && "border-black",
-    !isFocused && "border-gray-100"
+    error && "border-red",
+    !error && isFocused && "border-black",
+    !error && !isFocused && "border-gray-100",
+    style
   );
 
   const textColorClasses = tw.style(
@@ -48,24 +55,27 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <TouchableWithoutFeedback onPress={onContainerPress}>
-      <View style={containerColorClasses}>
-        {icon && <Ionicons name={icon} size={30} style={textColorClasses} />}
-        <TextInput
-          ref={inputRef}
-          editable={!disabled}
-          style={tw.style(
-            `px-2 text-lg leading-[22px]`,
-            sizeClasses[size],
-            textColorClasses
-          )}
-          placeholderTextColor={placeholderTextColor}
-          onBlur={() => setIsFocused(false)}
-          onFocus={() => setIsFocused(true)}
-          {...props}
-        />
-      </View>
-    </TouchableWithoutFeedback>
+    <View>
+      <TouchableWithoutFeedback onPress={onContainerPress}>
+        <View style={containerColorClasses}>
+          {icon && <Ionicons name={icon} size={30} style={textColorClasses} />}
+          <TextInput
+            ref={inputRef}
+            editable={!disabled}
+            style={tw.style(
+              `px-2 text-lg leading-[22px] w-full`,
+              sizeClasses[size],
+              textColorClasses
+            )}
+            placeholderTextColor={placeholderTextColor}
+            onBlur={() => setIsFocused(false)}
+            onFocus={() => setIsFocused(true)}
+            {...props}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+      {error && <Text style={tw`text-red mt-1 mb-2`}>{error}</Text>}
+    </View>
   );
 };
 

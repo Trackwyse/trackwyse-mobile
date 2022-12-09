@@ -10,42 +10,55 @@ type AuthContextData = {
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-type Props = {
-  children?: React.ReactNode;
-};
-
-const AuthProvider: React.FC<Props> = ({ children }) => {
+const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [accessToken, setAccessToken] = useState<string>("");
 
   // Load the access token from storage, if it exists
   useEffect(() => {
-    const getAccessToken = async () => {
-      try {
-        const token = await AsyncStorage.getItem("accessToken");
-        if (token) {
-          setAccessToken(token);
-        }
-      } catch (error) {
-      } finally {
-        setLoading(false);
-      }
-    };
-    getAccessToken();
+    loadAccessToken();
   });
 
-  const updateAccessToken = async (token: string) => {
-  }
+  const loadAccessToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem("accessToken");
+      if (token) {
+        setAccessToken(token);
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const signOut = async () => {};
+  // Update the access token in storage
+  const updateAccessToken = async (token: string) => {
+    try {
+      await AsyncStorage.setItem("accessToken", token);
+      setAccessToken(token);
+    } catch (error) {}
+  };
+
+  // Remove the access token from storage
+  const signOut = async () => {
+    try {
+      await AsyncStorage.removeItem("accessToken");
+      setAccessToken("");
+    } catch (error) {}
+  };
 
   return (
-    <AuthContext.Provider value={{ accessToken, loading, updateAccessToken, signOut }}>
+    <AuthContext.Provider
+      value={{ accessToken, loading, updateAccessToken, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
+// Hook to use the auth context
 export const useAuth = () => {
   const context = useContext(AuthContext);
 
