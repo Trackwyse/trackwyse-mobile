@@ -3,6 +3,7 @@ import {
   TouchableOpacityProps,
   Text,
   View,
+  StyleProp,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -28,21 +29,24 @@ export interface ButtonProps extends TouchableOpacityProps {
   size?: "sm" | "lg";
   iconLeft?: keyof typeof Ionicons.glyphMap;
   iconRight?: keyof typeof Ionicons.glyphMap;
+  style: any;
   disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
   iconLeft,
   iconRight,
+  style, // This is to prevent the style prop from being passed to the TouchableOpacity
   color = "primary",
   size = "sm",
   disabled = false,
   ...props
 }) => {
   const buttonClassNames = tw.style(
-    "flex flex-row justify-between font-medium", // Default classes
-    !disabled ? buttonColorClasses[color] : "bg-gray-200", // Background colors
-    sizeClasses[size] // Size
+    "flex flex-row justify-between font-medium",
+    !disabled ? buttonColorClasses[color] : "bg-gray-200",
+    sizeClasses[size],
+    style
   );
 
   const textClassNames = tw.style(
