@@ -2,6 +2,7 @@ import { registerRootComponent } from "expo";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 import RootStackNavigator from "./navigation";
+import AuthProvider from "./contexts/Auth";
 
 const theme = {
   ...DefaultTheme,
@@ -13,9 +14,11 @@ const theme = {
 
 const App = () => {
   return (
-    <NavigationContainer theme={theme}>
-      <RootStackNavigator />
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer theme={theme}>
+        <RootStackNavigator />
+      </NavigationContainer>
+    </AuthProvider>
   );
 };
 
