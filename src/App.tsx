@@ -1,11 +1,19 @@
 import { registerRootComponent } from "expo";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 import RootStackNavigator from "./navigation";
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "white",
+  },
+};
+
 const App = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <RootStackNavigator />
     </NavigationContainer>
   );
