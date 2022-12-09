@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, Text, View } from "react-native";
 import BadgeButton from "../components/BadgeButton";
 import Input from "../components/Input";
 import tw from "../lib/tailwind";
-import { validateLoginInput } from "../lib/validators";
+import { validateRegisterInput } from "../lib/validators";
 
 const Register: React.FC = () => {
   const registerInput = useFormik({
@@ -14,7 +14,7 @@ const Register: React.FC = () => {
     },
     validateOnChange: false,
     validateOnBlur: false,
-    validate: validateLoginInput,
+    validate: validateRegisterInput,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
