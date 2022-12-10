@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
 import { KeyboardAvoidingView, Text, View } from "react-native";
-import BadgeButton from "../components/BadgeButton";
-import Input from "../components/Input";
+
 import tw from "../lib/tailwind";
+import Input from "../components/Input";
+import BadgeButton from "../components/BadgeButton";
 import { validateRegisterInput } from "../lib/validators";
 
 const Register: React.FC = () => {
@@ -67,6 +68,7 @@ const Register: React.FC = () => {
         <BadgeButton
           size="lg"
           iconRight="arrow-forward"
+          disabled={registerInput.isSubmitting || !registerInput.dirty}
           onPress={() => registerInput.handleSubmit()}
         >
           Next

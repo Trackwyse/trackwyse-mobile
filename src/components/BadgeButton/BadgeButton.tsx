@@ -36,7 +36,7 @@ const BadgeButton: React.FC<BadgeButtonProps> = ({
 }) => {
   const buttonClassNames = tw.style(
     "flex self-start flex-row justify-between font-medium rounded-full", // Default classes
-    !disabled ? buttonColorClasses[color] : "bg-gray-200", // Background colors
+    !disabled ? buttonColorClasses[color] : "bg-gray-100", // Background colors
     sizeClasses[size] // Size
   );
 

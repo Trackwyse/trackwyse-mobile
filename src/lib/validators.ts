@@ -48,6 +48,12 @@ const validateRegisterInput = (registerInput: RegisterInput) => {
     errors.email = 'Email is invalid';
   }
 
+  // Test the password length
+  if (registerInput.password.length < 8) {
+    errors.password = 'Password must be at least 8 characters';
+    errors.confirmPassword = 'Password must be at least 8 characters';
+  }
+
   // Test if the passwords match
   if (registerInput.password !== registerInput.confirmPassword) {
     errors.password = 'Passwords must match';
