@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { KeyboardAvoidingView, Text, View } from "react-native";
 
+import Toast from "react-native-toast-message";
 import { validateLoginInput } from "../lib/validators";
 import Button from "../components/Button";
 import Input from "../components/Input";
@@ -14,9 +15,9 @@ const Login: React.FC = () => {
 
   const mutation = useMutation({
     mutationFn: (values: LoginInput) => {
-      return apiClient.post("/auth/v1/login", values);
-    }
-  })
+      return apiClient.login(values);
+    },
+  });
 
   const loginInput = useFormik({
     initialValues: {
@@ -26,7 +27,24 @@ const Login: React.FC = () => {
     validateOnChange: false,
     validateOnBlur: false,
     validate: validateLoginInput,
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      mutation.mutate(values, {
+        onSuccess: (data) => {
+          updateAccessToken(data.accessToken);
+          Toast.show({
+            type: "success",
+            text1: "Success",
+            text2: "You have successfully logged in.",
+          });
+        },
+        onError: () => {
+          loginInput.setErrors({
+            email: "Invalid email or password.",
+            password: "Invalid email or password.",
+          });
+        },
+      });
+    },
   });
 
   return (
@@ -42,6 +60,7 @@ const Login: React.FC = () => {
           size="lg"
           placeholder="Email"
           style={tw`my-1`}
+          disabled={mutation.isLoading}
           error={loginInput.errors.email}
           value={loginInput.values.email}
           onChangeText={loginInput.handleChange("email")}
@@ -51,6 +70,7 @@ const Login: React.FC = () => {
           placeholder="Password"
           secureTextEntry
           style={tw`my-1`}
+          disabled={mutation.isLoading}
           error={loginInput.errors.password}
           value={loginInput.values.password}
           onChangeText={loginInput.handleChange("password")}
@@ -63,7 +83,11 @@ const Login: React.FC = () => {
         behavior="padding"
         keyboardVerticalOffset={100}
       >
-        <Button size="lg" onPress={() => loginInput.handleSubmit()}>
+        <Button
+          size="lg"
+          disabled={mutation.isLoading}
+          onPress={() => loginInput.handleSubmit()}
+        >
           Login
         </Button>
       </KeyboardAvoidingView>

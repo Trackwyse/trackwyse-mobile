@@ -17,3 +17,9 @@ interface Register2Input {
 interface Register3Input {
   verificationCode: string;
 }
+
+interface LoginAPIResponse {
+  error: boolean;
+  message: string;
+  accessToken: string;
+}
