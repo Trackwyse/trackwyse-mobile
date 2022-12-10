@@ -8,3 +8,12 @@ interface RegisterInput {
   password: string;
   confirmPassword: string;
 }
+
+interface Register2Input {
+  firstName: string;
+  lastName: string;
+}
+
+interface Register3Input {
+  verificationCode: string;
+}

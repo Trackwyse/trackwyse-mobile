@@ -19,6 +19,13 @@ const validateLoginInput = (loginInput: LoginInput) => {
     errors.email = 'Email is invalid';
   }
 
+  // see if all errors are empty, if so, return empty object
+  const allErrors = Object.values(errors).filter((error) => error !== '');
+
+  if (allErrors.length === 0) {
+    return {};
+  }
+
   return errors;
 }
 
@@ -60,7 +67,83 @@ const validateRegisterInput = (registerInput: RegisterInput) => {
     errors.confirmPassword = 'Passwords must match';
   }
 
+  // see if all errors are empty, if so, return empty object
+  const allErrors = Object.values(errors).filter((error) => error !== '');
+
+  if (allErrors.length === 0) {
+    return {};
+  }
+
   return errors;
 }
 
-export { validateLoginInput, validateRegisterInput };
+const validateRegister2Input = (register2Input: Register2Input) => {
+  const errors: Register2Input = {
+    firstName: '',
+    lastName: '',
+  };
+
+  if (!register2Input.firstName) {
+    errors.firstName = 'First name field is required';
+  }
+
+  if (!register2Input.lastName) {
+    errors.lastName = 'Last name field is required';
+  }
+
+  // Ensure no numbers in the first name
+  const firstNameRegex = /^[a-zA-Z]+$/;
+
+  if (!firstNameRegex.test(register2Input.firstName)) {
+    if (errors.firstName === '') {
+      errors.firstName = 'First name must not contain symbols';
+    }
+  }
+
+  // Ensure no numbers in the last name
+  const lastNameRegex = /^[a-zA-Z]+$/;
+
+  if (!lastNameRegex.test(register2Input.lastName)) {
+    if (errors.lastName === '') {
+      errors.lastName = 'Last name must not contain symbols';
+    }
+  }
+
+  // see if all errors are empty, if so, return empty object
+  const allErrors = Object.values(errors).filter((error) => error !== '');
+
+  if (allErrors.length === 0) {
+    return {};
+  }
+
+  return errors;
+}
+
+const validateRegister3Input = (register3Input: Register3Input) => {
+  const errors: Register3Input = {
+    verificationCode: '',
+  };
+
+  if (!register3Input.verificationCode) {
+    errors.verificationCode = 'Verification code field is required';
+  }
+
+  // Ensure the verification code is 6 characters long, and only numbers
+  const verificationCodeRegex = /^[0-9]{6}$/;
+
+  if (!verificationCodeRegex.test(register3Input.verificationCode)) {
+    errors.verificationCode = 'Verification code is invalid';
+  }
+
+  // see if all errors are empty, if so, return empty object
+  const allErrors = Object.values(errors).filter((error) => error !== '');
+
+  if (allErrors.length === 0) {
+    return {};
+  }
+
+  return errors;
+}
+
+
+export { validateLoginInput, validateRegisterInput, validateRegister2Input, validateRegister3Input };

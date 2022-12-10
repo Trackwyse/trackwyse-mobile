@@ -5,8 +5,13 @@ import tw from "../lib/tailwind";
 import Input from "../components/Input";
 import BadgeButton from "../components/BadgeButton";
 import { validateRegisterInput } from "../lib/validators";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-const Register: React.FC = () => {
+interface RegisterScreenProps {
+  navigation: NativeStackNavigationProp<any>;
+}
+
+const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
   const registerInput = useFormik({
     initialValues: {
       email: "",
@@ -17,9 +22,19 @@ const Register: React.FC = () => {
     validateOnBlur: false,
     validate: validateRegisterInput,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      navigation.navigate("register2", {
+        email: values.email,
+        password: values.password,
+      });
+
+      // Set isSubmitting to false so that the button is enabled again
+      registerInput.setSubmitting(false);
     },
   });
+
+  const onSubmit = () => {
+    registerInput.handleSubmit();
+  };
 
   return (
     <View style={tw`h-full`}>
@@ -69,7 +84,7 @@ const Register: React.FC = () => {
           size="lg"
           iconRight="arrow-forward"
           disabled={registerInput.isSubmitting || !registerInput.dirty}
-          onPress={() => registerInput.handleSubmit()}
+          onPress={onSubmit}
         >
           Next
         </BadgeButton>

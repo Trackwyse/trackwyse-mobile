@@ -4,6 +4,7 @@ import {
   Text,
   View,
   StyleProp,
+  ActivityIndicator,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -30,6 +31,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   iconLeft?: keyof typeof Ionicons.glyphMap;
   iconRight?: keyof typeof Ionicons.glyphMap;
   style?: any;
+  loading?: boolean;
   disabled?: boolean;
 }
 
@@ -39,12 +41,13 @@ const Button: React.FC<ButtonProps> = ({
   style, // This is to prevent the style prop from being passed to the TouchableOpacity
   color = "primary",
   size = "sm",
+  loading = false,
   disabled = false,
   ...props
 }) => {
   const buttonClassNames = tw.style(
-    "flex flex-row justify-between font-medium",
-    !disabled ? buttonColorClasses[color] : "bg-gray-100",
+    "flex flex-row justify-between font-medium relative ",
+    !disabled && !loading ? buttonColorClasses[color] : "bg-gray-100",
     sizeClasses[size],
     style
   );
@@ -55,13 +58,25 @@ const Button: React.FC<ButtonProps> = ({
   );
 
   return (
-    <TouchableOpacity disabled={disabled} style={buttonClassNames} {...props}>
+    <TouchableOpacity
+      disabled={disabled || loading}
+      style={buttonClassNames}
+      {...props}
+    >
       {iconLeft ? (
         <Ionicons name={iconLeft} style={textClassNames} />
       ) : (
         <View />
       )}
-      <Text style={textClassNames}>{props.children}</Text>
+      <Text style={tw.style(textClassNames, loading ? "opacity-0" : "")}>
+        {props.children}
+      </Text>
+      {loading && (
+        <ActivityIndicator
+          style={tw`absolute inset-0`}
+          color={tw.color("primary-200")}
+        />
+      )}
       {iconRight ? (
         <Ionicons name={iconRight} style={textClassNames} />
       ) : (

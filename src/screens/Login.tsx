@@ -1,11 +1,23 @@
 import { useFormik } from "formik";
 import { KeyboardAvoidingView, Text, View } from "react-native";
+
+import { validateLoginInput } from "../lib/validators";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import tw from "../lib/tailwind";
-import { validateLoginInput } from "../lib/validators";
+import apiClient from "../api";
+import { useAuth } from "../contexts/Auth";
+import { useMutation } from "@tanstack/react-query";
 
 const Login: React.FC = () => {
+  const { updateAccessToken } = useAuth();
+
+  const mutation = useMutation({
+    mutationFn: (values: LoginInput) => {
+      return apiClient.post("/auth/v1/login", values);
+    }
+  })
+
   const loginInput = useFormik({
     initialValues: {
       email: "",
@@ -14,9 +26,7 @@ const Login: React.FC = () => {
     validateOnChange: false,
     validateOnBlur: false,
     validate: validateLoginInput,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    onSubmit: (values) => {},
   });
 
   return (
