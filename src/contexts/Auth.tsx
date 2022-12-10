@@ -19,9 +19,9 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({
   // Load the access token from storage, if it exists
   useEffect(() => {
     loadAccessToken();
-  });
+  }, []);
 
-  const loadAccessToken = async () => {
+  async function loadAccessToken() {
     try {
       const token = await AsyncStorage.getItem("accessToken");
       if (token) {
@@ -31,12 +31,13 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   // Update the access token in storage
   const updateAccessToken = async (token: string) => {
     try {
       await AsyncStorage.setItem("accessToken", token);
+
       setAccessToken(token);
     } catch (error) {}
   };

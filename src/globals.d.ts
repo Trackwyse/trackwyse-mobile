@@ -19,7 +19,9 @@ interface Register3Input {
 }
 
 interface LoginAPIResponse {
-  error: boolean;
-  message: string;
-  accessToken: string;
+  data: {
+    error: boolean;
+    message: string;
+    accessToken: string;
+  }
 }

@@ -1,14 +1,14 @@
 import { useFormik } from "formik";
+import Toast from "react-native-toast-message";
+import { useMutation } from "@tanstack/react-query";
 import { KeyboardAvoidingView, Text, View } from "react-native";
 
-import Toast from "react-native-toast-message";
-import { validateLoginInput } from "../lib/validators";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import tw from "../lib/tailwind";
 import apiClient from "../api";
+import tw from "../lib/tailwind";
+import Input from "../components/Input";
+import Button from "../components/Button";
 import { useAuth } from "../contexts/Auth";
-import { useMutation } from "@tanstack/react-query";
+import { validateLoginInput } from "../lib/validators";
 
 const Login: React.FC = () => {
   const { updateAccessToken } = useAuth();
@@ -29,7 +29,7 @@ const Login: React.FC = () => {
     validate: validateLoginInput,
     onSubmit: (values) => {
       mutation.mutate(values, {
-        onSuccess: (data) => {
+        onSuccess: ({ data }) => {
           updateAccessToken(data.accessToken);
           Toast.show({
             type: "success",
