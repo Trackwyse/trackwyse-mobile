@@ -4,7 +4,7 @@ import { KeyboardAvoidingView, Text, View } from "react-native";
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
 import BadgeButton from "../components/BadgeButton";
-import { validateRegister3Input } from "../lib/validators";
+import { validateVerifyInput } from "../lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface RegisterScreenProps {
@@ -18,7 +18,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
     },
     validateOnChange: false,
     validateOnBlur: false,
-    validate: validateRegister3Input,
+    validate: validateVerifyInput,
     onSubmit: (values) => {
       navigation.navigate("register4");
 

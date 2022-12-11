@@ -1,18 +1,11 @@
-import { useFormik } from "formik";
 import { KeyboardAvoidingView, Text, View } from "react-native";
 
 import tw from "../lib/tailwind";
-import Input from "../components/Input";
 import BadgeButton from "../components/BadgeButton";
-import { validateRegister3Input } from "../lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 
-interface RegisterScreenProps {
-  navigation: NativeStackNavigationProp<any>;
-}
-
-const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
+const Register: React.FC = () => {
   const [selected, setSelected] = useState<boolean>(false);
 
   const onSelect = () => {

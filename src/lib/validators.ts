@@ -51,12 +51,12 @@ const validateRegisterInput = (registerInput: RegisterInput) => {
   // Test if the email is valid
   const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-  if (!emailRegex.test(registerInput.email)) {
+  if (!emailRegex.test(registerInput.email || '')) {
     errors.email = 'Email is invalid';
   }
 
   // Test the password length
-  if (registerInput.password.length < 8) {
+  if ((registerInput.password as string).length  < 8) {
     errors.password = 'Password must be at least 8 characters';
     errors.confirmPassword = 'Password must be at least 8 characters';
   }
@@ -94,7 +94,7 @@ const validateRegister2Input = (register2Input: Register2Input) => {
   // Ensure no numbers in the first name
   const firstNameRegex = /^[a-zA-Z]+$/;
 
-  if (!firstNameRegex.test(register2Input.firstName)) {
+  if (!firstNameRegex.test(register2Input.firstName as string)) {
     if (errors.firstName === '') {
       errors.firstName = 'First name must not contain symbols';
     }
@@ -103,7 +103,7 @@ const validateRegister2Input = (register2Input: Register2Input) => {
   // Ensure no numbers in the last name
   const lastNameRegex = /^[a-zA-Z]+$/;
 
-  if (!lastNameRegex.test(register2Input.lastName)) {
+  if (!lastNameRegex.test(register2Input.lastName as string)) {
     if (errors.lastName === '') {
       errors.lastName = 'Last name must not contain symbols';
     }
@@ -119,19 +119,19 @@ const validateRegister2Input = (register2Input: Register2Input) => {
   return errors;
 }
 
-const validateRegister3Input = (register3Input: Register3Input) => {
-  const errors: Register3Input = {
+const validateVerifyInput = (verifyInput: VerifyInput) => {
+  const errors: VerifyInput = {
     verificationCode: '',
   };
 
-  if (!register3Input.verificationCode) {
+  if (!verifyInput.verificationCode) {
     errors.verificationCode = 'Verification code field is required';
   }
 
   // Ensure the verification code is 6 characters long, and only numbers
   const verificationCodeRegex = /^[0-9]{6}$/;
 
-  if (!verificationCodeRegex.test(register3Input.verificationCode)) {
+  if (!verificationCodeRegex.test(verifyInput.verificationCode)) {
     errors.verificationCode = 'Verification code is invalid';
   }
 
@@ -146,4 +146,4 @@ const validateRegister3Input = (register3Input: Register3Input) => {
 }
 
 
-export { validateLoginInput, validateRegisterInput, validateRegister2Input, validateRegister3Input };
+export { validateLoginInput, validateRegisterInput, validateRegister2Input, validateVerifyInput };

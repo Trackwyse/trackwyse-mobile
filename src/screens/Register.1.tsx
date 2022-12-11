@@ -3,15 +3,23 @@ import { KeyboardAvoidingView, Text, View } from "react-native";
 
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
+import apiClient from "../api";
 import BadgeButton from "../components/BadgeButton";
 import { validateRegisterInput } from "../lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useMutation } from "@tanstack/react-query";
 
 interface RegisterScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
 const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
+  const mutation = useMutation({
+    mutationFn: (values: RegisterInput) => {
+      return apiClient.checkEmail(values);
+    },
+  });
+
   const registerInput = useFormik({
     initialValues: {
       email: "",
@@ -22,9 +30,25 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
     validateOnBlur: false,
     validate: validateRegisterInput,
     onSubmit: (values) => {
-      navigation.navigate("register2", {
-        email: values.email,
-        password: values.password,
+      mutation.mutate(values, {
+        onSuccess: ({ data }) => {
+          if (data.emailInUse) {
+            registerInput.setErrors({
+              email: "Email already in use.",
+            });
+            return;
+          }
+
+          navigation.navigate("register2", {
+            email: values.email,
+            password: values.password,
+          });
+        },
+        onError: () => {
+          registerInput.setErrors({
+            email: "Email already in use.",
+          });
+        },
       });
 
       // Set isSubmitting to false so that the button is enabled again

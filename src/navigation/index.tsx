@@ -4,8 +4,8 @@ import Login from "../screens/Login";
 import Landing from "../screens/Landing";
 import Register from "../screens/Register.1";
 import Register2 from "../screens/Register.2";
-import Register3 from "../screens/Register.3";
-import Register4 from "../screens/Register.4";
+import Verify from "../screens/Verify";
+import Terms from "../screens/Terms";
 import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 import { useAuth } from "../contexts/Auth";
 import Home from "../screens/Home";
@@ -28,9 +28,21 @@ const AuthStackNavigator: React.FC = () => {
       />
       <Stack.Screen name="register" component={Register} />
       <Stack.Screen name="register2" component={Register2} />
-      <Stack.Screen name="register3" component={Register3} />
-      <Stack.Screen name="register4" component={Register4} />
+      <Stack.Screen name="terms" component={Terms} />
       <Stack.Screen name="login" component={Login} />
+    </Stack.Navigator>
+  );
+};
+
+const VerificationStackNavigator: React.FC = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        title: "",
+        gestureEnabled: false,
+      }}
+    >
+      <Stack.Screen name="verify" component={Verify} />
     </Stack.Navigator>
   );
 };
@@ -44,10 +56,14 @@ const AppStackNavigator: React.FC = () => {
 };
 
 const RootStackNavigator: React.FC = () => {
-  const { loading, accessToken } = useAuth();
+  const { loading, accessToken, user } = useAuth();
 
   if (loading) {
     return <></>;
+  }
+
+  if (!user?.verified) {
+    return <VerificationStackNavigator />;
   }
 
   if (accessToken) {

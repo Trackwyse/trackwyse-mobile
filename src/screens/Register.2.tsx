@@ -3,9 +3,12 @@ import { KeyboardAvoidingView, Text, View } from "react-native";
 
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
+import apiClient from "../api";
 import BadgeButton from "../components/BadgeButton";
 import { validateRegister2Input } from "../lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useMutation } from "@tanstack/react-query";
+import { useAuth } from "../contexts/Auth";
 
 interface RegisterScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -13,7 +16,14 @@ interface RegisterScreenProps {
 }
 
 const Register: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
+  const { updateAccessToken } = useAuth();
   const { email, password } = route.params;
+
+  const mutation = useMutation({
+    mutationFn: (values: Register2Input) => {
+      return apiClient.register(values);
+    },
+  });
 
   const registerInput = useFormik({
     initialValues: {
@@ -24,7 +34,18 @@ const Register: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
     validateOnBlur: false,
     validate: validateRegister2Input,
     onSubmit: (values) => {
-      navigation.navigate("register3");
+      mutation.mutate(
+        {
+          ...values,
+          email,
+          password,
+        },
+        {
+          onSuccess: ({ data }) => {
+            updateAccessToken(data.accessToken);
+          },
+        }
+      );
 
       // Set isSubmitting to false so that the button is enabled again
       registerInput.setSubmitting(false);

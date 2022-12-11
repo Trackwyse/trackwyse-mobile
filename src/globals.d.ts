@@ -1,20 +1,29 @@
+interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  verified: boolean;
+  email: string;
+  createdAt: string;
+}
+
 interface LoginInput {
   email: string;
   password: string;
 }
 
 interface RegisterInput {
-  email: string;
-  password: string;
-  confirmPassword: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
-interface Register2Input {
-  firstName: string;
-  lastName: string;
+interface Register2Input extends RegisterInput {
+  firstName?: string;
+  lastName?: string;
 }
 
-interface Register3Input {
+interface VerifyInput {
   verificationCode: string;
 }
 
@@ -23,5 +32,29 @@ interface LoginAPIResponse {
     error: boolean;
     message: string;
     accessToken: string;
+  }
+}
+
+interface RegisterAPIResponse {
+  data: {
+    error: boolean;
+    message: string;
+    accessToken: string;
+  }
+}
+
+interface UserAPIResponse {
+  data: {
+    error: boolean;
+    message: string;
+    user: User;
+  }
+}
+
+interface CheckEmailAPIResponse {
+  data: {
+    error: boolean;
+    message: string;
+    emailInUse: boolean;
   }
 }
