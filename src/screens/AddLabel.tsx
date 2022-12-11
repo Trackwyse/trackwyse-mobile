@@ -11,8 +11,13 @@ import { useAuth } from "../contexts/Auth";
 import BadgeButton from "../components/BadgeButton";
 import Permissions from "../components/Permissions";
 import { validateLabelUrl } from "../lib/validators";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-const AddLabel: React.FC = () => {
+interface AddLabelScreenProps {
+  navigation: NativeStackNavigationProp<any>;
+}
+
+const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
   const { accessToken } = useAuth();
   const [hasBeenScanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
@@ -48,6 +53,8 @@ const AddLabel: React.FC = () => {
             text1: "Label Added",
             text2: "Your label has been added to your account",
           });
+
+          navigation.navigate("editLabel", { labelId });
         },
         onError: (error) => {
           Toast.show({

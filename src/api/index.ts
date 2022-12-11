@@ -83,8 +83,17 @@ const addLabel = ({
   );
 };
 
+const getLabels = (accessToken: string): Promise<GetLabelsAPIResponse> => {
+  return apiClient.get("/api/v1/labels", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
 export default {
   addLabel,
+  getLabels,
   apiClient,
   verifyEmail,
   reverifyEmail,

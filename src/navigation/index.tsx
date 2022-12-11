@@ -77,7 +77,7 @@ const AppStackNavigator: React.FC = () => {
         options={({ navigation }) => ({
           title: "Edit Label",
           gestureEnabled: false,
-          headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
         })}
       />
     </Stack.Navigator>
