@@ -73,6 +73,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
           size="lg"
           placeholder="Email"
           style={tw`my-1`}
+          disabled={mutation.isLoading}
           error={registerInput.errors.email}
           value={registerInput.values.email}
           onChangeText={registerInput.handleChange("email")}
@@ -82,6 +83,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
           placeholder="Password"
           secureTextEntry
           style={tw`my-1`}
+          disabled={mutation.isLoading}
           error={registerInput.errors.password}
           value={registerInput.values.password}
           onChangeText={registerInput.handleChange("password")}
@@ -91,6 +93,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
           placeholder="Confirm Password"
           secureTextEntry
           style={tw`my-1`}
+          disabled={mutation.isLoading}
           error={registerInput.errors.confirmPassword}
           value={registerInput.values.confirmPassword}
           onChangeText={registerInput.handleChange("confirmPassword")}
@@ -107,6 +110,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
         <BadgeButton
           size="lg"
           iconRight="arrow-forward"
+          loading={mutation.isLoading}
           disabled={registerInput.isSubmitting || !registerInput.dirty}
           onPress={onSubmit}
         >

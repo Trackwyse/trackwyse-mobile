@@ -69,6 +69,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
           size="lg"
           placeholder="First Name"
           style={tw`my-1`}
+          disabled={mutation.isLoading}
           error={registerInput.errors.firstName}
           value={registerInput.values.firstName}
           onChangeText={registerInput.handleChange("firstName")}
@@ -77,6 +78,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
           size="lg"
           placeholder="Last Name"
           style={tw`my-1`}
+          disabled={mutation.isLoading}
           error={registerInput.errors.lastName}
           value={registerInput.values.lastName}
           onChangeText={registerInput.handleChange("lastName")}
@@ -92,6 +94,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
         <BadgeButton
           size="lg"
           iconRight="arrow-forward"
+          loading={mutation.isLoading}
           disabled={registerInput.isSubmitting || !registerInput.dirty}
           onPress={onSubmit}
         >

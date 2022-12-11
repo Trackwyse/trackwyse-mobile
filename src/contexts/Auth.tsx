@@ -7,6 +7,7 @@ type AuthContextData = {
   accessToken: string;
   loading: boolean;
   updateAccessToken: (token: string) => void;
+  updateUser: (user: User) => void;
   signOut: () => void;
 };
 
@@ -69,6 +70,10 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({
     } catch (error) {}
   };
 
+  const updateUser = async (user: User) => {
+    setUser(user);
+  };
+
   // Remove the access token from storage
   const signOut = async () => {
     try {
@@ -79,7 +84,7 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({
 
   return (
     <AuthContext.Provider
-      value={{ accessToken, user, loading, updateAccessToken, signOut }}
+      value={{ accessToken, user, loading, updateAccessToken, updateUser, signOut }}
     >
       {children}
     </AuthContext.Provider>

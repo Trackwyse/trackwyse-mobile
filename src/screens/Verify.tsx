@@ -1,34 +1,85 @@
 import { useFormik } from "formik";
-import { KeyboardAvoidingView, Text, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Toast from "react-native-toast-message";
 
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
+import apiClient from "../api";
 import BadgeButton from "../components/BadgeButton";
 import { validateVerifyInput } from "../lib/validators";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useMutation } from "@tanstack/react-query";
+import { useAuth } from "../contexts/Auth";
 
-interface RegisterScreenProps {
-  navigation: NativeStackNavigationProp<any>;
-}
+const Verify: React.FC = () => {
+  const { user, updateUser, accessToken } = useAuth();
 
-const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
-  const registerInput = useFormik({
+  const verificationMutation = useMutation({
+    mutationFn: (values: VerifyInput) => {
+      return apiClient.verifyEmail({
+        ...values,
+        accessToken,
+      });
+    },
+  });
+
+  const reverificationMutation = useMutation({
+    mutationFn: () => {
+      return apiClient.reverifyEmail(accessToken);
+    },
+  });
+
+  const verifyInput = useFormik({
     initialValues: {
-      verificationCode: "",
+      verificationToken: "",
     },
     validateOnChange: false,
     validateOnBlur: false,
     validate: validateVerifyInput,
     onSubmit: (values) => {
-      navigation.navigate("register4");
+      verificationMutation.mutate(values, {
+        onSuccess: ({ data }) => {
+          updateUser({
+            ...user,
+            verified: true,
+          });
+        },
+        onError: (error) => {
+          verifyInput.setErrors({
+            verificationToken: "Invalid verification code",
+          });
+        },
+      });
 
       // Set isSubmitting to false so that the button is enabled again
-      registerInput.setSubmitting(false);
+      verifyInput.setSubmitting(false);
     },
   });
 
+  const onReverifyPress = () => {
+    reverificationMutation.mutate(undefined, {
+      onSuccess: () => {
+        Toast.show({
+          type: "success",
+          text1: "Reverification email sent",
+          text2: "Please check your email for the verification code",
+        });
+      },
+      onError: (error) => {
+        verifyInput.setErrors({
+          verificationToken:
+            "Verification code already sent. Please wait 5 minutes.",
+        });
+      },
+    });
+  };
+
   const onSubmit = () => {
-    registerInput.handleSubmit();
+    verifyInput.handleSubmit();
   };
 
   return (
@@ -37,7 +88,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
         <View style={tw`w-11/12 pt-10`}>
           <Text style={tw`text-2xl font-bold`}>Verification</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
-            Enter the 6 digit code that we sent to bob*****@gmail.com
+            We sent a verification code to your email address. Please enter it
           </Text>
         </View>
         <Input
@@ -45,10 +96,19 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
           placeholder="Verification Code"
           keyboardType="numeric"
           style={tw`my-1`}
-          error={registerInput.errors.verificationCode}
-          value={registerInput.values.verificationCode}
-          onChangeText={registerInput.handleChange("verificationCode")}
+          error={verifyInput.errors.verificationToken}
+          value={verifyInput.values.verificationToken}
+          onChangeText={verifyInput.handleChange("verificationToken")}
         />
+
+        <TouchableOpacity
+          style={tw`justify-start w-11/12 mt-2`}
+          onPress={onReverifyPress}
+        >
+          <Text style={tw`underline text-primary-100`}>
+            Request another code
+          </Text>
+        </TouchableOpacity>
 
         <View style={tw`flex-1`} />
       </KeyboardAvoidingView>
@@ -61,7 +121,8 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
         <BadgeButton
           size="lg"
           iconRight="arrow-forward"
-          disabled={registerInput.isSubmitting || !registerInput.dirty}
+          loading={verificationMutation.isLoading}
+          disabled={verifyInput.isSubmitting || !verifyInput.dirty}
           onPress={onSubmit}
         >
           Next
@@ -71,4 +132,4 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
   );
 };
 
-export default Register;
+export default Verify;

@@ -62,15 +62,15 @@ const RootStackNavigator: React.FC = () => {
     return <></>;
   }
 
+  if (!accessToken) {
+    return <AuthStackNavigator />;
+  }
+
   if (!user?.verified) {
     return <VerificationStackNavigator />;
   }
 
-  if (accessToken) {
-    return <AppStackNavigator />;
-  }
-
-  return <AuthStackNavigator />;
+  return <AppStackNavigator />;
 };
 
 export default RootStackNavigator;

@@ -1,4 +1,9 @@
-import { TouchableOpacity, TouchableOpacityProps, Text } from "react-native";
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import tw from "../../lib/tailwind";
@@ -23,6 +28,7 @@ export interface BadgeButtonProps extends TouchableOpacityProps {
   size?: "sm" | "lg";
   iconLeft?: keyof typeof Ionicons.glyphMap;
   iconRight?: keyof typeof Ionicons.glyphMap;
+  loading?: boolean;
   disabled?: boolean;
 }
 
@@ -31,12 +37,13 @@ const BadgeButton: React.FC<BadgeButtonProps> = ({
   iconRight,
   color = "primary",
   size = "sm",
+  loading = false,
   disabled = false,
   ...props
 }) => {
   const buttonClassNames = tw.style(
     "flex self-start flex-row justify-between font-medium rounded-full", // Default classes
-    !disabled ? buttonColorClasses[color] : "bg-gray-100", // Background colors
+    !disabled && !loading ? buttonColorClasses[color] : "bg-gray-100", // Background colors
     sizeClasses[size] // Size
   );
 
@@ -51,7 +58,16 @@ const BadgeButton: React.FC<BadgeButtonProps> = ({
         <Ionicons name={iconLeft} style={tw.style("mr-3", textClassNames)} />
       )}
 
-      <Text style={textClassNames}>{props.children}</Text>
+      <Text style={tw.style(textClassNames, loading ? "opacity-0" : "")}>
+        {props.children}
+      </Text>
+
+      {loading && (
+        <ActivityIndicator
+          style={tw`absolute inset-0`}
+          color={tw.color("primary-200")}
+        />
+      )}
 
       {iconRight && (
         <Ionicons name={iconRight} style={tw.style("ml-3", textClassNames)} />

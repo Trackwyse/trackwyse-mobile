@@ -13,12 +13,28 @@ const login = ({email, password}: LoginInput): Promise<LoginAPIResponse> => {
   })
 }
 
-const register = ({email, password, firstName, lastName}: Register2Input) => {
+const register = ({email, password, firstName, lastName}: Register2Input): Promise<RegisterAPIResponse> => {
   return apiClient.post('/auth/v1/register', {
     email,
     password,
     firstName,
     lastName,
+  })
+}
+
+const verifyEmail = ({verificationToken, accessToken}: {accessToken: string} & VerifyInput): Promise<VerifyEmailAPIResponse> => {
+  return apiClient.post('/auth/v1/verify', {    verificationToken}, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
+}
+
+const reverifyEmail = (accessToken: string): Promise<ReverifyEmailAPIResponse> => {
+  return apiClient.post('/auth/v1/reverify',{}, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
   })
 }
 
@@ -38,6 +54,8 @@ const getUser = (accessToken: string): Promise<UserAPIResponse> => {
 
 export default {
   apiClient,
+  verifyEmail,
+  reverifyEmail,
   checkEmail,
   getUser,
   register,

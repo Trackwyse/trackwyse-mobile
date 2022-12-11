@@ -121,18 +121,18 @@ const validateRegister2Input = (register2Input: Register2Input) => {
 
 const validateVerifyInput = (verifyInput: VerifyInput) => {
   const errors: VerifyInput = {
-    verificationCode: '',
+    verificationToken: '',
   };
 
-  if (!verifyInput.verificationCode) {
-    errors.verificationCode = 'Verification code field is required';
+  if (!verifyInput.verificationToken) {
+    errors.verificationToken = 'Verification code field is required';
   }
 
   // Ensure the verification code is 6 characters long, and only numbers
   const verificationCodeRegex = /^[0-9]{6}$/;
 
-  if (!verificationCodeRegex.test(verifyInput.verificationCode)) {
-    errors.verificationCode = 'Verification code is invalid';
+  if (!verificationCodeRegex.test(verifyInput.verificationToken)) {
+    errors.verificationToken = 'Verification code is invalid';
   }
 
   // see if all errors are empty, if so, return empty object

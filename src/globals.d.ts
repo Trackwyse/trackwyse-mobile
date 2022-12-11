@@ -24,7 +24,7 @@ interface Register2Input extends RegisterInput {
 }
 
 interface VerifyInput {
-  verificationCode: string;
+  verificationToken: string;
 }
 
 interface LoginAPIResponse {
@@ -56,5 +56,19 @@ interface CheckEmailAPIResponse {
     error: boolean;
     message: string;
     emailInUse: boolean;
+  }
+}
+
+interface VerifyEmailAPIResponse {
+  data: {
+    error: boolean;
+    message: string;
+  }
+}
+
+interface ReverifyEmailAPIResponse {
+  data: {
+    error: boolean;
+    message: string;
   }
 }
