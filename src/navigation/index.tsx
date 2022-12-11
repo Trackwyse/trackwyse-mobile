@@ -12,6 +12,7 @@ import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 import { useAuth } from "../contexts/Auth";
 import Home from "../screens/Home";
 import AddLabel from "../screens/AddLabel";
+import EditLabel from "../screens/EditLabel";
 
 const Stack = createNativeStackNavigator();
 
@@ -66,6 +67,15 @@ const AppStackNavigator: React.FC = () => {
         component={AddLabel}
         options={({ navigation }) => ({
           title: "Add Label",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} />,
+        })}
+      />
+      <Stack.Screen
+        name="editLabel"
+        component={EditLabel}
+        options={({ navigation }) => ({
+          title: "Edit Label",
           gestureEnabled: false,
           headerLeft: () => <NavigationWithBack navigation={navigation} />,
         })}

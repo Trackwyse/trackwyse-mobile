@@ -1,29 +1,26 @@
-import { Camera, CameraType } from "expo-camera";
 import { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
-import tw from "../lib/tailwind";
-import apiClient from "../api";
-import { validateLabelUrl } from "../lib/validators";
-import { BarCodeScanner } from "expo-barcode-scanner";
-import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "../contexts/Auth";
 import Toast from "react-native-toast-message";
+import { Camera, CameraType } from "expo-camera";
+import { useMutation } from "@tanstack/react-query";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import { View, Text, ActivityIndicator } from "react-native";
+
+import apiClient from "../api";
+import tw from "../lib/tailwind";
+import { useAuth } from "../contexts/Auth";
 import BadgeButton from "../components/BadgeButton";
+import Permissions from "../components/Permissions";
+import { validateLabelUrl } from "../lib/validators";
 
 const AddLabel: React.FC = () => {
   const { accessToken } = useAuth();
+  const [hasBeenScanned, setScanned] = useState(false);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
 
   const mutation = useMutation({
     mutationFn: (values: AddLabelInput) => {
       return apiClient.addLabel({ ...values, accessToken });
     },
-  });
-
-  const [hasBeenScanned, setScanned] = useState(false);
-  const [permission, requestPermission] = Camera.useCameraPermissions();
-
-  useEffect(() => {
-    requestPermission();
   });
 
   const onBarCodeScanned = (scannedData: any) => {
@@ -63,13 +60,18 @@ const AddLabel: React.FC = () => {
     );
   };
 
-  if (permission === null) {
-    return <View></View>;
-  }
+  useEffect(() => {
+    requestPermission();
+  });
 
-  if (permission.granted === false) {
-    return <Text>No access to camera</Text>;
-  }
+  if (permission?.status !== "granted")
+    return (
+      <Permissions
+        title="Missing Permissions"
+        description="This app requires access to your camera to scan QR codes. Please enable camera access in
+  your device settings."
+      />
+    );
 
   return (
     <View style={tw`flex-1`}>
