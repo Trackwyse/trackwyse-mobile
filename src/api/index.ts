@@ -6,7 +6,6 @@ const apiClient = axios.create({
   baseURL: endpoint,
 });
 
-
 const login = ({ email, password }: LoginInput): Promise<LoginAPIResponse> => {
   return apiClient.post("/auth/v1/login", {
     email,
@@ -69,7 +68,23 @@ const getUser = (accessToken: string): Promise<UserAPIResponse> => {
   });
 };
 
+const addLabel = ({
+  id,
+  accessToken,
+}: { accessToken: string } & AddLabelInput): Promise<AddLabelAPIResponse> => {
+  return apiClient.post(
+    `/api/v1/labels/add/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
 export default {
+  addLabel,
   apiClient,
   verifyEmail,
   reverifyEmail,

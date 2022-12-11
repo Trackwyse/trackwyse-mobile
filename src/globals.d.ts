@@ -18,6 +18,10 @@ interface RegisterInput {
   confirmPassword?: string;
 }
 
+interface AddLabelInput {
+  id: string;
+}
+
 interface Register2Input extends RegisterInput {
   firstName?: string;
   lastName?: string;
@@ -32,7 +36,7 @@ interface LoginAPIResponse {
     error: boolean;
     message: string;
     accessToken: string;
-  }
+  };
 }
 
 interface RegisterAPIResponse {
@@ -40,7 +44,7 @@ interface RegisterAPIResponse {
     error: boolean;
     message: string;
     accessToken: string;
-  }
+  };
 }
 
 interface UserAPIResponse {
@@ -48,7 +52,7 @@ interface UserAPIResponse {
     error: boolean;
     message: string;
     user: User;
-  }
+  };
 }
 
 interface CheckEmailAPIResponse {
@@ -56,19 +60,26 @@ interface CheckEmailAPIResponse {
     error: boolean;
     message: string;
     emailInUse: boolean;
-  }
+  };
 }
 
 interface VerifyEmailAPIResponse {
   data: {
     error: boolean;
     message: string;
-  }
+  };
 }
 
 interface ReverifyEmailAPIResponse {
   data: {
     error: boolean;
     message: string;
-  }
+  };
+}
+
+interface AddLabelAPIResponse {
+  data: {
+    error: boolean;
+    message: string;
+  };
 }

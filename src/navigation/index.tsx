@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Login from "../screens/Login";
 import Landing from "../screens/Landing";
@@ -10,6 +11,7 @@ import Terms from "../screens/Terms";
 import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 import { useAuth } from "../contexts/Auth";
 import Home from "../screens/Home";
+import AddLabel from "../screens/AddLabel";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,9 +48,28 @@ const VerificationStackNavigator: React.FC = () => {
 };
 
 const AppStackNavigator: React.FC = () => {
+  const { user } = useAuth();
+
   return (
     <Stack.Navigator>
-      <Stack.Screen name="home" component={Home} />
+      <Stack.Screen
+        name="home"
+        component={Home}
+        options={{
+          title: `Welcome, ${user?.firstName[0].toUpperCase() + user?.firstName.slice(1)}.`,
+          headerLargeTitle: true,
+          headerShadowVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="addLabel"
+        component={AddLabel}
+        options={({ navigation }) => ({
+          title: "Add Label",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} />,
+        })}
+      />
     </Stack.Navigator>
   );
 };
