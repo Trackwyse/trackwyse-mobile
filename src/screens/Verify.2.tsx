@@ -1,10 +1,5 @@
 import { useFormik } from "formik";
-import {
-  KeyboardAvoidingView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { KeyboardAvoidingView, Text, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
 
 import tw from "../lib/tailwind";
@@ -71,8 +66,7 @@ const Verify: React.FC = () => {
       },
       onError: (error) => {
         verifyInput.setErrors({
-          verificationToken:
-            "Verification code already sent. Please wait 5 minutes.",
+          verificationToken: "Verification code already sent. Please wait 5 minutes.",
         });
       },
     });
@@ -101,13 +95,8 @@ const Verify: React.FC = () => {
           onChangeText={verifyInput.handleChange("verificationToken")}
         />
 
-        <TouchableOpacity
-          style={tw`justify-start w-11/12 mt-2`}
-          onPress={onReverifyPress}
-        >
-          <Text style={tw`underline text-primary-100`}>
-            Request another code
-          </Text>
+        <TouchableOpacity style={tw`justify-start w-11/12 mt-2`} onPress={onReverifyPress}>
+          <Text style={tw`underline text-primary-100`}>Request another code</Text>
         </TouchableOpacity>
 
         <View style={tw`flex-1`} />

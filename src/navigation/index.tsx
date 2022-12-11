@@ -4,7 +4,8 @@ import Login from "../screens/Login";
 import Landing from "../screens/Landing";
 import Register from "../screens/Register.1";
 import Register2 from "../screens/Register.2";
-import Verify from "../screens/Verify";
+import Verify1 from "../screens/Verify.1";
+import Verify2 from "../screens/Verify.2";
 import Terms from "../screens/Terms";
 import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 import { useAuth } from "../contexts/Auth";
@@ -21,11 +22,7 @@ const AuthStackNavigator: React.FC = () => {
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
-      <Stack.Screen
-        name="landing"
-        component={Landing}
-        options={{ headerLeft: () => <></> }}
-      />
+      <Stack.Screen name="landing" component={Landing} options={{ headerLeft: () => <></> }} />
       <Stack.Screen name="register" component={Register} />
       <Stack.Screen name="register2" component={Register2} />
       <Stack.Screen name="terms" component={Terms} />
@@ -42,7 +39,8 @@ const VerificationStackNavigator: React.FC = () => {
         gestureEnabled: false,
       }}
     >
-      <Stack.Screen name="verify" component={Verify} />
+      <Stack.Screen name="verify1" component={Verify1} />
+      <Stack.Screen name="verify2" component={Verify2} />
     </Stack.Navigator>
   );
 };
