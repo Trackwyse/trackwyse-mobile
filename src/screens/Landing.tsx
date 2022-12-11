@@ -1,7 +1,7 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { View } from "react-native";
+
 import Button from "../components/Button";
-import Input from "../components/Input";
 import tw from "../lib/tailwind";
 
 interface LandingScreenProps {

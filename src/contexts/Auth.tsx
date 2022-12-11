@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import api from "../api";
 
 type AuthContextData = {
@@ -13,9 +14,7 @@ type AuthContextData = {
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({
-  children,
-}) => {
+const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User>({} as User);
   const [loading, setLoading] = useState<boolean>(true);
   const [accessToken, setAccessToken] = useState<string>("");

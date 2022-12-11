@@ -6,6 +6,7 @@ const apiClient = axios.create({
   baseURL: endpoint,
 });
 
+
 const login = ({ email, password }: LoginInput): Promise<LoginAPIResponse> => {
   return apiClient.post("/auth/v1/login", {
     email,

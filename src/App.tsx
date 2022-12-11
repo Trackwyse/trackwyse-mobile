@@ -1,11 +1,11 @@
 import { registerRootComponent } from "expo";
+import Toast from "react-native-toast-message";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 import queryClient from "./lib/queryClient";
 import AuthProvider from "./contexts/Auth";
 import RootStackNavigator from "./navigation";
-import Toast from "react-native-toast-message";
-import { QueryClientProvider } from "@tanstack/react-query";
 
 const theme = {
   ...DefaultTheme,

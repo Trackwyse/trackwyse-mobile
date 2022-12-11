@@ -1,13 +1,13 @@
 import { useFormik } from "formik";
+import { useMutation } from "@tanstack/react-query";
 import { KeyboardAvoidingView, Text, View } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
+import apiClient from "../api";
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
-import apiClient from "../api";
 import BadgeButton from "../components/BadgeButton";
 import { validateRegisterInput } from "../lib/validators";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useMutation } from "@tanstack/react-query";
 
 interface RegisterScreenProps {
   navigation: NativeStackNavigationProp<any>;

@@ -1,9 +1,8 @@
+import { useState } from "react";
 import { KeyboardAvoidingView, Text, View } from "react-native";
 
 import tw from "../lib/tailwind";
 import BadgeButton from "../components/BadgeButton";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from "react";
 
 const Register: React.FC = () => {
   const [selected, setSelected] = useState<boolean>(false);
