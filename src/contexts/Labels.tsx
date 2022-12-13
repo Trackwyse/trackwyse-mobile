@@ -34,13 +34,13 @@ const labelsReducer = (state: Label[], action: LabelsAction) => {
       return [...state, action.payload];
     case "UPDATE_LABEL":
       return state.map((label) => {
-        if (label.id === action.payload.id) {
+        if (label._id === action.payload._id) {
           return action.payload;
         }
         return label;
       });
     case "DELETE_LABEL":
-      return state.filter((label) => label.id !== action.payload.id);
+      return state.filter((label) => label._id !== action.payload._id);
     default:
       return state;
   }
@@ -69,7 +69,7 @@ const LabelsProvider: React.FC<{ children?: React.ReactNode }> = ({
     try {
       dispatch({
         type: "CREATE_LABEL",
-        payload: { id, activated: true, isLost: false },
+        payload: { _id: id, activated: true, isLost: false },
       });
     } catch (error) {
     } finally {

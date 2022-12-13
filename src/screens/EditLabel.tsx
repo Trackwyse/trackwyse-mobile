@@ -1,25 +1,113 @@
-import { View, Text } from "react-native";
+import { useFormik } from "formik";
+import { View, Text, KeyboardAvoidingView } from "react-native";
 import Input from "../components/Input";
+import { useLabels } from "../contexts/Labels";
+import { useAuth } from "../contexts/Auth";
 import tw from "../lib/tailwind";
+import apiClient from "../api";
+import Toast from "react-native-toast-message";
+import { useMutation } from "@tanstack/react-query";
+import Button from "../components/Button";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface EditLabelScreenProps {
   route: any;
+  navigation: NativeStackNavigationProp<any>;
 }
 
-const EditLabel: React.FC<EditLabelScreenProps> = ({ route }) => {
+const EditLabel: React.FC<EditLabelScreenProps> = ({ route, navigation }) => {
+  const { labels, updateLabel } = useLabels();
   const { labelId } = route.params;
+  const { accessToken } = useAuth();
+
+  const label = labels.find((label) => label._id === labelId) as Label;
+
+  const mutation = useMutation({
+    mutationFn: (values: ModifyLabelInput) => {
+      return apiClient.modifyLabel({ ...values, accessToken, id: labelId });
+    },
+  });
+
+  const editInput = useFormik({
+    initialValues: {
+      name: label?.name || "",
+      phoneNumber: label?.phoneNumber || "",
+      message: label?.message || "",
+    },
+    onSubmit: (values) => {
+      mutation.mutate(values, {
+        onSuccess: () => {
+          Toast.show({
+            type: "success",
+            text1: "Label Updated",
+            text2: "Your label has been updated successfully",
+          });
+
+          updateLabel({ ...label, ...values });
+          navigation.navigate("home");
+        },
+        onError: (err) => {
+          Toast.show({
+            type: "error",
+            text1: "Error",
+            text2: "There was an error updating your label",
+          });
+        },
+      });
+    },
+  });
 
   return (
-    <View style={tw`flex items-center`}>
-      <View style={tw`w-11/12 pt-10`}>
-        <Text style={tw`text-2xl font-bold`}>Edit Label</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
-          Update details about your label in order to have the best chance of finding a lost item.
-        </Text>
-      </View>
+    <View style={tw`h-full`}>
+      <KeyboardAvoidingView style={tw`items-center justify-end flex-1`}>
+        <View style={tw`w-11/12 pt-10`}>
+          <Text style={tw`text-2xl font-bold`}>Edit Label</Text>
+          <Text style={tw`my-4 text-gray-400 text-base`}>
+            Update details about your label in order to have the best chance of
+            finding a lost item.
+          </Text>
+        </View>
 
-      <Input placeholder="Tracker Name" size="lg" style={tw`my-1`} />
-      <Input placeholder="Phone Number" size="lg" style={tw`my-1`} keyboardType="numeric" />
+        <Input
+          placeholder="Tracker Name"
+          size="lg"
+          style={tw`my-1`}
+          value={editInput.values.name}
+          onChangeText={editInput.handleChange("name")}
+        />
+        <Input
+          placeholder="Phone Number"
+          size="lg"
+          style={tw`my-1`}
+          keyboardType="numeric"
+          value={editInput.values.phoneNumber}
+          onChangeText={editInput.handleChange("phoneNumber")}
+        />
+        <Input
+          placeholder="Message"
+          size="lg"
+          style={tw`my-1 h-32`}
+          multiline
+          value={editInput.values.message}
+          onChangeText={editInput.handleChange("message")}
+        />
+
+        <View style={tw`flex-1`} />
+      </KeyboardAvoidingView>
+
+      <KeyboardAvoidingView
+        style={tw`items-center mt-auto mb-10  `}
+        behavior="padding"
+        keyboardVerticalOffset={100}
+      >
+        <Button
+          size="lg"
+          loading={mutation.isLoading}
+          onPress={() => editInput.handleSubmit()}
+        >
+          Update
+        </Button>
+      </KeyboardAvoidingView>
     </View>
   );
 };

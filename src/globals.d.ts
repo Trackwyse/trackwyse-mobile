@@ -8,7 +8,7 @@ interface User {
 }
 
 interface Label {
-  id: string;
+  _id: string;
   activated: boolean;
   isLost: boolean;
 
@@ -50,6 +50,14 @@ interface Register2Input extends RegisterInput {
 
 interface VerifyInput {
   verificationToken: string;
+}
+
+interface ModifyLabelInput {
+  id?: string;
+  name?: string;
+  color?: string;
+  message?: string;
+  phoneNumber?: string;
 }
 
 interface LoginAPIResponse {
@@ -111,4 +119,11 @@ interface GetLabelsAPIResponse {
     message: string;
     labels: Label[];
   };
+}
+
+interface ModifyLabelAPIResponse {
+  data: {
+    error: boolean;
+    message: string;
+  }
 }

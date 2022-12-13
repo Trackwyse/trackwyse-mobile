@@ -91,9 +91,28 @@ const getLabels = (accessToken: string): Promise<GetLabelsAPIResponse> => {
   });
 };
 
+const modifyLabel = ({accessToken, id, name, color, message, phoneNumber}: {accessToken: string} & ModifyLabelInput): Promise<ModifyLabelAPIResponse> => {
+  return apiClient.patch(
+    `/api/v1/labels/modify/${id}`,
+    {
+      labelName: name,
+      labelColor: color,
+      labelMessage: message,
+      phoneNumber
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
+
 export default {
   addLabel,
   getLabels,
+  modifyLabel,
   apiClient,
   verifyEmail,
   reverifyEmail,

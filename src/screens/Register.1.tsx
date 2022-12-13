@@ -58,7 +58,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
 
   const onSubmit = () => {
     registerInput.handleSubmit();
-  };
+  }; 
 
   return (
     <View style={tw`h-full`}>

@@ -17,7 +17,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ navigation }) => {
   const { loading, labels } = useLabels();
 
-  if (loading) return <></>;
+  if (loading) return <></>; // TODO: Add loading screen
 
   return (
     <SafeAreaView>
@@ -66,7 +66,7 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
           <TouchableOpacity
             style={tw`py-12 border  border-gray-100 rounded-lg items-center`}
             onPress={() =>
-              navigation.navigate("editLabel", { labelId: firstLabel.id })
+              navigation.navigate("editLabel", { labelId: firstLabel._id })
             }
           >
             <View style={tw`bg-blue-200 rounded-full p-4`}>
@@ -96,7 +96,7 @@ const TestItem = ({
     <View style={tw`max-w-1/2 flex-1 p-1`}>
       <TouchableOpacity
         style={tw`py-12 border  border-gray-100 rounded-lg items-center`}
-        onPress={() => navigation.navigate("editLabel", { labelId: label.id })}
+        onPress={() => navigation.navigate("editLabel", { labelId: label._id })}
       >
         <View style={tw`bg-blue-200 rounded-full p-4`}>
           <Ionicons name="ios-locate-outline" size={32} color="white" />
