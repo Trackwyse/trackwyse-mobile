@@ -1,10 +1,15 @@
 import { useFormik } from "formik";
-import { KeyboardAvoidingView, Text, TouchableOpacity, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Toast from "react-native-toast-message";
 
+import api from "../api";
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
-import apiClient from "../api";
 import BadgeButton from "../components/BadgeButton";
 import { validateVerifyInput } from "../lib/validators";
 import { useMutation } from "@tanstack/react-query";
@@ -15,7 +20,7 @@ const Verify: React.FC = () => {
 
   const verificationMutation = useMutation({
     mutationFn: (values: VerifyInput) => {
-      return apiClient.verifyEmail({
+      return api.verifyEmail({
         ...values,
         accessToken,
       });
@@ -24,7 +29,7 @@ const Verify: React.FC = () => {
 
   const reverificationMutation = useMutation({
     mutationFn: () => {
-      return apiClient.reverifyEmail(accessToken);
+      return api.reverifyEmail(accessToken);
     },
   });
 
@@ -66,7 +71,8 @@ const Verify: React.FC = () => {
       },
       onError: (error) => {
         verifyInput.setErrors({
-          verificationToken: "Verification code already sent. Please wait 5 minutes.",
+          verificationToken:
+            "Verification code already sent. Please wait 5 minutes.",
         });
       },
     });
@@ -95,8 +101,13 @@ const Verify: React.FC = () => {
           onChangeText={verifyInput.handleChange("verificationToken")}
         />
 
-        <TouchableOpacity style={tw`justify-start w-11/12 mt-2`} onPress={onReverifyPress}>
-          <Text style={tw`underline text-primary-100`}>Request another code</Text>
+        <TouchableOpacity
+          style={tw`justify-start w-11/12 mt-2`}
+          onPress={onReverifyPress}
+        >
+          <Text style={tw`underline text-primary-100`}>
+            Request another code
+          </Text>
         </TouchableOpacity>
 
         <View style={tw`flex-1`} />

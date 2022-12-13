@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { KeyboardAvoidingView, Text, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import apiClient from "../api";
+import api from "../api";
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
 import { useAuth } from "../contexts/Auth";
@@ -21,7 +21,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
 
   const mutation = useMutation({
     mutationFn: (values: Register2Input) => {
-      return apiClient.register(values);
+      return api.register(values);
     },
   });
 

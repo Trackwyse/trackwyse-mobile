@@ -1,22 +1,26 @@
 import { useFormik } from "formik";
-import { View, Text, KeyboardAvoidingView } from "react-native";
-import Input from "../components/Input";
-import { useLabels } from "../contexts/Labels";
-import { useAuth } from "../contexts/Auth";
-import tw from "../lib/tailwind";
-import apiClient from "../api";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
-import Button from "../components/Button";
+import { View, Text, KeyboardAvoidingView } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import api from "../api";
+import tw from "../lib/tailwind";
+import Input from "../components/Input";
+import Button from "../components/Button";
+import { useAuth } from "../contexts/Auth";
+import { useLabels } from "../contexts/Labels";
 import { validateModifyLabelInput } from "../lib/validators";
 
-interface EditLabelScreenProps {
+interface ModifyLabelScreenProps {
   route: any;
   navigation: NativeStackNavigationProp<any>;
 }
 
-const EditLabel: React.FC<EditLabelScreenProps> = ({ route, navigation }) => {
+const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
+  route,
+  navigation,
+}) => {
   const { labels, updateLabel } = useLabels();
   const { labelId } = route.params;
   const { accessToken } = useAuth();
@@ -25,7 +29,7 @@ const EditLabel: React.FC<EditLabelScreenProps> = ({ route, navigation }) => {
 
   const mutation = useMutation({
     mutationFn: (values: ModifyLabelInput) => {
-      return apiClient.modifyLabel({ ...values, accessToken, id: labelId });
+      return api.modifyLabel({ ...values, accessToken, id: labelId });
     },
   });
 
@@ -120,4 +124,4 @@ const EditLabel: React.FC<EditLabelScreenProps> = ({ route, navigation }) => {
   );
 };
 
-export default EditLabel;
+export default ModifyLabel;

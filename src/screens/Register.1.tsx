@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { KeyboardAvoidingView, Text, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import apiClient from "../api";
+import api from "../api";
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
 import BadgeButton from "../components/BadgeButton";
@@ -16,7 +16,7 @@ interface RegisterScreenProps {
 const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
   const mutation = useMutation({
     mutationFn: (values: RegisterInput) => {
-      return apiClient.checkEmail(values);
+      return api.checkEmail(values);
     },
   });
 
@@ -58,7 +58,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
 
   const onSubmit = () => {
     registerInput.handleSubmit();
-  }; 
+  };
 
   return (
     <View style={tw`h-full`}>

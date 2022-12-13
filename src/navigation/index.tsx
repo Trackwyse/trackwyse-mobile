@@ -13,7 +13,7 @@ import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 import { useAuth } from "../contexts/Auth";
 import Home from "../screens/Home";
 import AddLabel from "../screens/AddLabel";
-import EditLabel from "../screens/EditLabel";
+import EditLabel from "../screens/ModifyLabel";
 
 const Stack = createNativeStackNavigator();
 

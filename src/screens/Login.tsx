@@ -3,7 +3,7 @@ import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 import { KeyboardAvoidingView, Text, View } from "react-native";
 
-import apiClient from "../api";
+import api from "../api";
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
 
   const mutation = useMutation({
     mutationFn: (values: LoginInput) => {
-      return apiClient.login(values);
+      return api.login(values);
     },
   });
 

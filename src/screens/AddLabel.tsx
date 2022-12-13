@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { View, Text, ActivityIndicator } from "react-native";
 
-import apiClient from "../api";
+import api from "../api";
 import tw from "../lib/tailwind";
 import { useAuth } from "../contexts/Auth";
 import BadgeButton from "../components/BadgeButton";
@@ -26,7 +26,7 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
 
   const mutation = useMutation({
     mutationFn: (values: AddLabelInput) => {
-      return apiClient.addLabel({ ...values, accessToken });
+      return api.addLabel({ ...values, accessToken });
     },
   });
 
