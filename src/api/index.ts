@@ -220,14 +220,14 @@ const modifyLabel = (values: ModifyLabelInput, accessToken: string): Promise<Mod
 
 
 export default {
+  login,
+  register,
+  getUser,
+  checkEmail,
+  verifyEmail,
+  reverifyEmail,
+
   addLabel,
   getLabels,
   modifyLabel,
-  apiClient,
-  verifyEmail,
-  reverifyEmail,
-  checkEmail,
-  getUser,
-  register,
-  login,
 };
