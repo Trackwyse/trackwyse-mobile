@@ -24,8 +24,8 @@ interface Label {
   foundRecoveryPossible?: boolean; // If the user can recover the label
   finderPhoneNumber?: string; // Phone number of the person who found the label
 
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 interface LoginInput {

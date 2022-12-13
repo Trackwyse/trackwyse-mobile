@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
+import { LabelsProvider } from "../contexts/Labels";
 import Login from "../screens/Login";
 import Landing from "../screens/Landing";
 import Register from "../screens/Register.1";
@@ -25,7 +26,11 @@ const AuthStackNavigator: React.FC = () => {
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
-      <Stack.Screen name="landing" component={Landing} options={{ headerLeft: () => <></> }} />
+      <Stack.Screen
+        name="landing"
+        component={Landing}
+        options={{ headerLeft: () => <></> }}
+      />
       <Stack.Screen name="register" component={Register} />
       <Stack.Screen name="register2" component={Register2} />
       <Stack.Screen name="terms" component={Terms} />
@@ -52,35 +57,41 @@ const AppStackNavigator: React.FC = () => {
   const { user } = useAuth();
 
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="home"
-        component={Home}
-        options={{
-          title: `Welcome, ${user?.firstName[0].toUpperCase() + user?.firstName.slice(1)}.`,
-          headerLargeTitle: true,
-          headerShadowVisible: false,
-        }}
-      />
-      <Stack.Screen
-        name="addLabel"
-        component={AddLabel}
-        options={({ navigation }) => ({
-          title: "Add Label",
-          gestureEnabled: false,
-          headerLeft: () => <NavigationWithBack navigation={navigation} />,
-        })}
-      />
-      <Stack.Screen
-        name="editLabel"
-        component={EditLabel}
-        options={({ navigation }) => ({
-          title: "Edit Label",
-          gestureEnabled: false,
-          headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
-        })}
-      />
-    </Stack.Navigator>
+    <LabelsProvider>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="home"
+          component={Home}
+          options={{
+            title: `Welcome, ${
+              user?.firstName[0].toUpperCase() + user?.firstName.slice(1)
+            }.`,
+            headerLargeTitle: true,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="addLabel"
+          component={AddLabel}
+          options={({ navigation }) => ({
+            title: "Add Label",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="editLabel"
+          component={EditLabel}
+          options={({ navigation }) => ({
+            title: "Edit Label",
+            gestureEnabled: false,
+            headerLeft: () => (
+              <NavigationWithBack navigation={navigation} returnHome />
+            ),
+          })}
+        />
+      </Stack.Navigator>
+    </LabelsProvider>
   );
 };
 

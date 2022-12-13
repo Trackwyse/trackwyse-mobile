@@ -12,6 +12,7 @@ import BadgeButton from "../components/BadgeButton";
 import Permissions from "../components/Permissions";
 import { validateLabelUrl } from "../lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useLabels } from "../contexts/Labels";
 
 interface AddLabelScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -19,6 +20,7 @@ interface AddLabelScreenProps {
 
 const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
   const { accessToken } = useAuth();
+  const { createLabel } = useLabels();
   const [hasBeenScanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
@@ -53,7 +55,7 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
             text1: "Label Added",
             text2: "Your label has been added to your account",
           });
-
+          createLabel(labelId);
           navigation.navigate("editLabel", { labelId });
         },
         onError: (error) => {
@@ -91,8 +93,12 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
         onBarCodeScanned={onBarCodeScanned}
       >
         {(mutation.isLoading || mutation.isError) && hasBeenScanned && (
-          <View style={tw`bg-black absolute w-full h-full opacity-90 justify-center`}>
-            {mutation.isLoading && <ActivityIndicator size={"large"} color="white" />}
+          <View
+            style={tw`bg-black absolute w-full h-full opacity-90 justify-center`}
+          >
+            {mutation.isLoading && (
+              <ActivityIndicator size={"large"} color="white" />
+            )}
           </View>
         )}
       </Camera>
@@ -108,7 +114,11 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
 
       <View style={tw`mt-auto flex-row-reverse mb-10 w-11/12`}>
         {mutation.isError && hasBeenScanned && (
-          <BadgeButton iconRight="camera-outline" size="lg" onPress={() => setScanned(false)}>
+          <BadgeButton
+            iconRight="camera-outline"
+            size="lg"
+            onPress={() => setScanned(false)}
+          >
             Retry Scan
           </BadgeButton>
         )}
