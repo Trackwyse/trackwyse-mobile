@@ -28,7 +28,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
     },
     validateOnChange: false,
     validateOnBlur: false,
-    validate: validateRegisterInput,
+    validate: (values) => validateRegisterInput(values, 1),
     onSubmit: (values) => {
       mutation.mutate(values, {
         onSuccess: ({ data }) => {

@@ -8,7 +8,7 @@ import tw from "../lib/tailwind";
 import Input from "../components/Input";
 import { useAuth } from "../contexts/Auth";
 import BadgeButton from "../components/BadgeButton";
-import { validateRegister2Input } from "../lib/validators";
+import { validateRegisterInput } from "../lib/validators";
 
 interface RegisterScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -20,7 +20,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
   const { email, password } = route.params;
 
   const mutation = useMutation({
-    mutationFn: (values: Register2Input) => {
+    mutationFn: (values: RegisterInput) => {
       return api.register(values);
     },
   });
@@ -32,7 +32,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
     },
     validateOnChange: false,
     validateOnBlur: false,
-    validate: validateRegister2Input,
+    validate: (values) => validateRegisterInput(values, 2),
     onSubmit: (values) => {
       mutation.mutate(
         {

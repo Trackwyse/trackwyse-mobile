@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text } from "react-native";
 import tw from "../lib/tailwind";
 import BadgeButton from "../components/BadgeButton";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";

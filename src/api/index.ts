@@ -19,7 +19,7 @@ const register = ({
   password,
   firstName,
   lastName,
-}: Register2Input): Promise<RegisterAPIResponse> => {
+}: RegisterInput): Promise<RegisterAPIResponse> => {
   return apiClient.post("/auth/v1/register", {
     email,
     password,
