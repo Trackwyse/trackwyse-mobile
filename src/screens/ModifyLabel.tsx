@@ -17,10 +17,7 @@ interface ModifyLabelScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
-const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
-  route,
-  navigation,
-}) => {
+const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) => {
   const { labelId } = route.params;
   const { accessToken } = useAuth();
   const { labels, updateLabel } = useLabels();
@@ -72,8 +69,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
         <View style={tw`w-11/12 pt-10`}>
           <Text style={tw`text-2xl font-bold`}>Edit Label</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
-            Update details about your label in order to have the best chance of
-            finding a lost item.
+            Update details about your label in order to have the best chance of finding a lost item.
           </Text>
         </View>
 
@@ -113,11 +109,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
         behavior="padding"
         keyboardVerticalOffset={100}
       >
-        <Button
-          size="lg"
-          loading={mutation.isLoading}
-          onPress={() => editInput.handleSubmit()}
-        >
+        <Button size="lg" loading={mutation.isLoading} onPress={() => editInput.handleSubmit()}>
           Update
         </Button>
       </KeyboardAvoidingView>
