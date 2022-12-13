@@ -2,6 +2,7 @@ import axios from "axios";
 
 const endpoint = "https://trackerwind.in-staging.space";
 
+// Base API Client
 const apiClient = axios.create({
   baseURL: endpoint,
 });

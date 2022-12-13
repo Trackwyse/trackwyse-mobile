@@ -6,14 +6,14 @@ import {
   View,
 } from "react-native";
 import Toast from "react-native-toast-message";
+import { useMutation } from "@tanstack/react-query";
 
 import api from "../api";
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
+import { useAuth } from "../contexts/Auth";
 import BadgeButton from "../components/BadgeButton";
 import { validateVerifyInput } from "../lib/validators";
-import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "../contexts/Auth";
 
 const Verify: React.FC = () => {
   const { user, updateUser, accessToken } = useAuth();
