@@ -9,6 +9,7 @@ import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 import Button from "../components/Button";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { validateModifyLabelInput } from "../lib/validators";
 
 interface EditLabelScreenProps {
   route: any;
@@ -34,6 +35,9 @@ const EditLabel: React.FC<EditLabelScreenProps> = ({ route, navigation }) => {
       phoneNumber: label?.phoneNumber || "",
       message: label?.message || "",
     },
+    validateOnChange: false,
+    validateOnBlur: false,
+    validate: validateModifyLabelInput,
     onSubmit: (values) => {
       mutation.mutate(values, {
         onSuccess: () => {
@@ -73,6 +77,7 @@ const EditLabel: React.FC<EditLabelScreenProps> = ({ route, navigation }) => {
           size="lg"
           style={tw`my-1`}
           value={editInput.values.name}
+          disabled={mutation.isLoading}
           onChangeText={editInput.handleChange("name")}
         />
         <Input
@@ -80,7 +85,9 @@ const EditLabel: React.FC<EditLabelScreenProps> = ({ route, navigation }) => {
           size="lg"
           style={tw`my-1`}
           keyboardType="numeric"
+          disabled={mutation.isLoading}
           value={editInput.values.phoneNumber}
+          error={editInput.errors.phoneNumber}
           onChangeText={editInput.handleChange("phoneNumber")}
         />
         <Input
@@ -88,6 +95,7 @@ const EditLabel: React.FC<EditLabelScreenProps> = ({ route, navigation }) => {
           size="lg"
           style={tw`my-1 h-32`}
           multiline
+          disabled={mutation.isLoading}
           value={editInput.values.message}
           onChangeText={editInput.handleChange("message")}
         />

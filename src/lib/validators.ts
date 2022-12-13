@@ -145,6 +145,31 @@ const validateVerifyInput = (verifyInput: VerifyInput) => {
   return errors;
 };
 
+const validateModifyLabelInput = (modifyLabelInput: ModifyLabelInput) => {
+  const errors: ModifyLabelInput = {
+    // TODO: Add color to this.
+    name: "",
+    phoneNumber: "",
+    message: "",
+  }
+
+  // Verify the phone number is valid, only if it is not empty
+  const phoneNumberRegex = /^[0-9]{10}$/;
+
+  if (modifyLabelInput.phoneNumber && !phoneNumberRegex.test(modifyLabelInput.phoneNumber)) {
+    errors.phoneNumber = "Phone number is invalid";
+  }
+
+  // see if all errors are empty, if so, return empty object
+  const allErrors = Object.values(errors).filter((error) => error !== "");
+
+  if (allErrors.length === 0) {
+    return {};
+  }
+
+  return errors;
+}
+
 const validateLabelUrl = (labelUrl: string) => {
   const labelUrlRegex = /^trw:\/\/[a-f\d]{24}$/i;
 
@@ -159,6 +184,7 @@ export {
   validateLoginInput,
   validateRegisterInput,
   validateRegister2Input,
+  validateModifyLabelInput,
   validateVerifyInput,
   validateLabelUrl,
 };
