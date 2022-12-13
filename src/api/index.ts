@@ -7,19 +7,44 @@ const apiClient = axios.create({
   baseURL: endpoint,
 });
 
-const login = ({ email, password }: LoginInput): Promise<LoginAPIResponse> => {
+/*
+  POST /auth/v1/login
+
+  Request Body:
+    - email: string
+    - password: string
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - accessToken: string
+*/
+const login = (values: LoginInput): Promise<LoginAPIResponse> => {
+  const { email, password } = values;
+
   return apiClient.post("/auth/v1/login", {
     email,
     password,
   });
 };
 
-const register = ({
-  email,
-  password,
-  firstName,
-  lastName,
-}: RegisterInput): Promise<RegisterAPIResponse> => {
+/*
+  POST /auth/v1/register
+
+  Request Body:
+    - email: string
+    - password: string
+    - firstName: string
+    - lastName: string
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - accessToken: string
+*/
+const register = (value: RegisterInput): Promise<RegisterAPIResponse> => {
+  const { email, password, firstName, lastName } = value;
+
   return apiClient.post("/auth/v1/register", {
     email,
     password,
@@ -28,10 +53,22 @@ const register = ({
   });
 };
 
-const verifyEmail = ({
-  verificationToken,
-  accessToken,
-}: { accessToken: string } & VerifyInput): Promise<VerifyEmailAPIResponse> => {
+/*
+  POST /auth/v1/verify
+
+  Request Body:
+    - verificationToken: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const verifyEmail = (values: VerifyInput, accessToken: string): Promise<VerifyEmailAPIResponse> => {
+  const {verificationToken} = values;
+
   return apiClient.post(
     "/auth/v1/verify",
     { verificationToken },
@@ -43,6 +80,16 @@ const verifyEmail = ({
   );
 };
 
+/*
+  POST /auth/v1/reverify
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
 const reverifyEmail = (accessToken: string): Promise<ReverifyEmailAPIResponse> => {
   return apiClient.post(
     "/auth/v1/reverify",
@@ -55,12 +102,36 @@ const reverifyEmail = (accessToken: string): Promise<ReverifyEmailAPIResponse> =
   );
 };
 
-const checkEmail = ({ email }: RegisterInput): Promise<CheckEmailAPIResponse> => {
+/*
+  POST /auth/v1/checkEmail
+
+  Request Body:
+    - email: string
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - emailInUse: boolean
+*/
+const checkEmail = (values: RegisterInput): Promise<CheckEmailAPIResponse> => {
+  const { email } = values;
+
   return apiClient.post("/auth/v1/checkEmail", {
     email,
   });
 };
 
+/*
+  GET /auth/v1/me
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - user: User
+*/
 const getUser = (accessToken: string): Promise<UserAPIResponse> => {
   return apiClient.get("/auth/v1/me", {
     headers: {
@@ -69,10 +140,19 @@ const getUser = (accessToken: string): Promise<UserAPIResponse> => {
   });
 };
 
-const addLabel = ({
-  id,
-  accessToken,
-}: { accessToken: string } & AddLabelInput): Promise<AddLabelAPIResponse> => {
+/*
+  POST /api/v1/labels/add/:id
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const addLabel = (values: AddLabelInput, accessToken: string): Promise<AddLabelAPIResponse> => {
+  const { id } = values;
+
   return apiClient.post(
     `/api/v1/labels/add/${id}`,
     {},
@@ -84,6 +164,17 @@ const addLabel = ({
   );
 };
 
+/*
+  GET /api/v1/labels
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - labels: Label[]
+*/
 const getLabels = (accessToken: string): Promise<GetLabelsAPIResponse> => {
   return apiClient.get("/api/v1/labels", {
     headers: {
@@ -92,7 +183,25 @@ const getLabels = (accessToken: string): Promise<GetLabelsAPIResponse> => {
   });
 };
 
-const modifyLabel = ({accessToken, id, name, color, message, phoneNumber}: {accessToken: string} & ModifyLabelInput): Promise<ModifyLabelAPIResponse> => {
+/*
+  PATCH /api/v1/labels/modify/:id
+
+  Request Body:
+    - labelName: string
+    - labelColor: string
+    - labelMessage: string
+    - phoneNumber: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const modifyLabel = (values: ModifyLabelInput, accessToken: string): Promise<ModifyLabelAPIResponse> => {
+  const { id, name, color, message, phoneNumber } = values;
+
   return apiClient.patch(
     `/api/v1/labels/modify/${id}`,
     {

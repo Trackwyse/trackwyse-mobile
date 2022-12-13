@@ -26,7 +26,7 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
 
   const mutation = useMutation({
     mutationFn: (values: AddLabelInput) => {
-      return api.addLabel({ ...values, accessToken });
+      return api.addLabel(values, accessToken);
     },
   });
 

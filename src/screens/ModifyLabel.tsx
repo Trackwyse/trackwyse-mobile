@@ -21,20 +21,21 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
   route,
   navigation,
 }) => {
-  const { labels, updateLabel } = useLabels();
   const { labelId } = route.params;
   const { accessToken } = useAuth();
+  const { labels, updateLabel } = useLabels();
 
   const label = labels.find((label) => label._id === labelId) as Label;
 
   const mutation = useMutation({
     mutationFn: (values: ModifyLabelInput) => {
-      return api.modifyLabel({ ...values, accessToken, id: labelId });
+      return api.modifyLabel(values, accessToken);
     },
   });
 
   const editInput = useFormik({
     initialValues: {
+      id: labelId,
       name: label?.name || "",
       phoneNumber: label?.phoneNumber || "",
       message: label?.message || "",

@@ -20,10 +20,7 @@ const Verify: React.FC = () => {
 
   const verificationMutation = useMutation({
     mutationFn: (values: VerifyInput) => {
-      return api.verifyEmail({
-        ...values,
-        accessToken,
-      });
+      return api.verifyEmail(values, accessToken);
     },
   });
 
