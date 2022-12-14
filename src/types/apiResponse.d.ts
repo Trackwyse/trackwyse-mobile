@@ -9,6 +9,8 @@ type AddLabelAPIResponse = APIResponse
 
 type ModifyLabelAPIResponse = APIResponse
 
+type DeleteLabelAPIResponse = APIResponse
+
 type VerifyEmailAPIResponse = APIResponse
 
 type ReverifyEmailAPIResponse = APIResponse 

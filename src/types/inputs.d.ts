@@ -15,6 +15,10 @@ interface AddLabelInput {
   id: string;
 }
 
+interface DeleteLabelInput {
+  id: string;
+}
+
 interface VerifyInput {
   verificationToken: string;
 }

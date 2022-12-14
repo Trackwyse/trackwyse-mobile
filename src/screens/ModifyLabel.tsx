@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
@@ -11,22 +12,32 @@ import Button from "../components/Button";
 import { useAuth } from "../contexts/Auth";
 import { useLabels } from "../contexts/Labels";
 import { validateModifyLabelInput } from "../lib/validators";
+import IconButton from "../components/IconButton";
 
 interface ModifyLabelScreenProps {
   route: any;
   navigation: NativeStackNavigationProp<any>;
 }
 
-const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) => {
+const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
+  route,
+  navigation,
+}) => {
   const { labelId } = route.params;
   const { accessToken } = useAuth();
-  const { labels, updateLabel } = useLabels();
+  const { labels, updateLabel, deleteLabel } = useLabels();
 
   const label = labels.find((label) => label._id === labelId) as Label;
 
-  const mutation = useMutation({
+  const modificationMutation = useMutation({
     mutationFn: (values: ModifyLabelInput) => {
       return api.modifyLabel(values, accessToken);
+    },
+  });
+
+  const deletionMutation = useMutation({
+    mutationFn: () => {
+      return api.deleteLabel({ id: labelId }, accessToken);
     },
   });
 
@@ -41,7 +52,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
     validateOnBlur: false,
     validate: validateModifyLabelInput,
     onSubmit: (values) => {
-      mutation.mutate(values, {
+      modificationMutation.mutate(values, {
         onSuccess: () => {
           Toast.show({
             type: "success",
@@ -63,13 +74,46 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
     },
   });
 
+  // Update the header to include a deletion button
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <IconButton
+          icon="trash-outline"
+          color="firebrick"
+          onPress={() => {
+            deletionMutation.mutate(undefined, {
+              onSuccess: () => {
+                deleteLabel(label);
+                navigation.navigate("home");
+                Toast.show({
+                  type: "success",
+                  text1: "Label Deleted",
+                  text2: "Your label has been deleted successfully",
+                });
+              },
+              onError: (err) => {
+                Toast.show({
+                  type: "error",
+                  text1: "Error",
+                  text2: "There was an error deleting your label",
+                });
+              },
+            });
+          }}
+        />
+      ),
+    });
+  }, [navigation]);
+
   return (
     <View style={tw`h-full`}>
       <KeyboardAvoidingView style={tw`items-center justify-end flex-1`}>
         <View style={tw`w-11/12 pt-10`}>
           <Text style={tw`text-2xl font-bold`}>Edit Label</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
-            Update details about your label in order to have the best chance of finding a lost item.
+            Update details about your label in order to have the best chance of
+            finding a lost item.
           </Text>
         </View>
 
@@ -78,7 +122,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
           size="lg"
           style={tw`my-1`}
           value={editInput.values.name}
-          disabled={mutation.isLoading}
+          disabled={modificationMutation.isLoading}
           onChangeText={editInput.handleChange("name")}
         />
         <Input
@@ -86,7 +130,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
           size="lg"
           style={tw`my-1`}
           keyboardType="numeric"
-          disabled={mutation.isLoading}
+          disabled={modificationMutation.isLoading}
           value={editInput.values.phoneNumber}
           error={editInput.errors.phoneNumber}
           onChangeText={editInput.handleChange("phoneNumber")}
@@ -96,7 +140,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
           size="lg"
           style={tw`my-1 h-32`}
           multiline
-          disabled={mutation.isLoading}
+          disabled={modificationMutation.isLoading}
           value={editInput.values.message}
           onChangeText={editInput.handleChange("message")}
         />
@@ -109,7 +153,11 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
         behavior="padding"
         keyboardVerticalOffset={100}
       >
-        <Button size="lg" loading={mutation.isLoading} onPress={() => editInput.handleSubmit()}>
+        <Button
+          size="lg"
+          loading={modificationMutation.isLoading}
+          onPress={() => editInput.handleSubmit()}
+        >
           Update
         </Button>
       </KeyboardAvoidingView>

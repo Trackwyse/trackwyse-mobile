@@ -15,6 +15,7 @@ import AcceptTerms2 from "../screens/AcceptTerms.2";
 import { useAuth } from "../contexts/Auth";
 import { LabelsProvider } from "../contexts/Labels";
 import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
+import IconButton from "../components/IconButton";
 
 const Stack = createNativeStackNavigator();
 
@@ -125,6 +126,9 @@ const AppStackNavigator: React.FC = () => {
             gestureEnabled: false,
             headerLeft: () => (
               <NavigationWithBack navigation={navigation} returnHome />
+            ),
+            headerRight: () => (
+              <IconButton icon="trash-outline" color="firebrick" />
             ),
           })}
         />

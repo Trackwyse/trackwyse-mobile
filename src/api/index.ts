@@ -219,6 +219,29 @@ const modifyLabel = (values: ModifyLabelInput, accessToken: string): Promise<Mod
 };
 
 /*
+  DELETE /api/v1/labels/delete/:id
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const deleteLabel = (values: DeleteLabelInput, accessToken: string): Promise<DeleteLabelAPIResponse> => {
+  const { id } = values;
+
+  return apiClient.delete(
+    `/api/v1/labels/delete/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
+/*
   POST /auth/v1/acceptTerms
 
   Request Headers:
@@ -253,4 +276,5 @@ export default {
   addLabel,
   getLabels,
   modifyLabel,
+  deleteLabel,
 };
