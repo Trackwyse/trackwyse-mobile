@@ -218,11 +218,34 @@ const modifyLabel = (values: ModifyLabelInput, accessToken: string): Promise<Mod
   );
 };
 
+/*
+  POST /auth/v1/acceptTerms
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string 
+*/
+const acceptTerms = (accessToken: string): Promise<AcceptTermsAPIResponse> => {
+  return apiClient.post(
+    "/auth/v1/acceptTerms",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
 
 export default {
   login,
   register,
   getUser,
+  acceptTerms,
   checkEmail,
   verifyEmail,
   reverifyEmail,

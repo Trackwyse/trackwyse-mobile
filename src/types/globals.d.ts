@@ -3,6 +3,7 @@ interface User {
   firstName: string;
   lastName: string;
   verified: boolean;
+  termsAccepted: boolean;
   email: string;
   labels: Label[];
   createdAt: string;

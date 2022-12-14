@@ -1,22 +1,28 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
-import { LabelsProvider } from "../contexts/Labels";
+import Home from "../screens/Home";
 import Login from "../screens/Login";
 import Landing from "../screens/Landing";
-import Register from "../screens/Register.1";
-import Register2 from "../screens/Register.2";
 import Verify1 from "../screens/Verify.1";
 import Verify2 from "../screens/Verify.2";
-import Terms from "../screens/Terms";
-import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
-import { useAuth } from "../contexts/Auth";
-import Home from "../screens/Home";
 import AddLabel from "../screens/AddLabel";
+import Register from "../screens/Register.1";
+import Register2 from "../screens/Register.2";
 import EditLabel from "../screens/ModifyLabel";
+import AcceptTerms1 from "../screens/AcceptTerms.1";
+import AcceptTerms2 from "../screens/AcceptTerms.2";
+
+import { useAuth } from "../contexts/Auth";
+import { LabelsProvider } from "../contexts/Labels";
+import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 
 const Stack = createNativeStackNavigator();
 
+/*
+  Stack navigator for the authentication screens.
+  This is a separate stack navigator because the user
+  must be authenticated before they can use the app.
+*/
 const AuthStackNavigator: React.FC = () => {
   return (
     <Stack.Navigator
@@ -33,18 +39,23 @@ const AuthStackNavigator: React.FC = () => {
       />
       <Stack.Screen name="register" component={Register} />
       <Stack.Screen name="register2" component={Register2} />
-      <Stack.Screen name="terms" component={Terms} />
       <Stack.Screen name="login" component={Login} />
     </Stack.Navigator>
   );
 };
 
+/*
+  Stack navigator for the verification screens.
+  This is a separate stack navigator because the user
+  must verify their email before they can use the app.
+*/
 const VerificationStackNavigator: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         title: "",
         gestureEnabled: false,
+        headerLeft: () => <></>,
       }}
     >
       <Stack.Screen name="verify1" component={Verify1} />
@@ -53,6 +64,33 @@ const VerificationStackNavigator: React.FC = () => {
   );
 };
 
+/*
+  Stack navigator for the terms and conditions screens.
+  This is a separate stack navigator because the user
+  must accept the terms and conditions before they can
+  use the app.
+*/
+const AcceptTermsStackNavigator: React.FC = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        title: "",
+        gestureEnabled: false,
+        headerLeft: () => <></>,
+      }}
+    >
+      <Stack.Screen name="terms1" component={AcceptTerms1} />
+      <Stack.Screen name="terms2" component={AcceptTerms2} />
+    </Stack.Navigator>
+  );
+};
+
+/*
+  Stack navigator for the app screens.
+  This is a separate stack navigator because the user
+  must be authenticated and verified before they can use
+  the app.
+*/
 const AppStackNavigator: React.FC = () => {
   const { user } = useAuth();
 
@@ -95,6 +133,12 @@ const AppStackNavigator: React.FC = () => {
   );
 };
 
+/*
+  Root stack navigator.
+  This is the main stack navigator that determines which
+  stack navigator to use based on the user's authentication
+  and verification status.
+*/
 const RootStackNavigator: React.FC = () => {
   const { loading, accessToken, user } = useAuth();
 
@@ -108,6 +152,10 @@ const RootStackNavigator: React.FC = () => {
 
   if (!user?.verified) {
     return <VerificationStackNavigator />;
+  }
+
+  if (!user?.termsAccepted) {
+    return <AcceptTermsStackNavigator />;
   }
 
   return <AppStackNavigator />;

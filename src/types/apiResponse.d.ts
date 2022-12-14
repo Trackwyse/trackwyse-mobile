@@ -13,6 +13,8 @@ type VerifyEmailAPIResponse = APIResponse
 
 type ReverifyEmailAPIResponse = APIResponse 
 
+type AcceptTermsAPIResponse = APIResponse
+
 type LoginAPIResponse = APIResponse & {
   data: {
     accessToken: string;
