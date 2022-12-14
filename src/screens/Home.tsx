@@ -5,10 +5,12 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import tw from "../lib/tailwind";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import tw from "../lib/tailwind";
 import { useLabels } from "../contexts/Labels";
+import HomeLoader from "../components/Loaders/Home";
 
 interface HomeProps {
   navigation: NativeStackNavigationProp<any>;
@@ -17,7 +19,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ navigation }) => {
   const { loading, labels } = useLabels();
 
-  if (loading) return <></>; // TODO: Add loading screen
+  if (loading) return <HomeLoader />;
 
   return (
     <SafeAreaView>
