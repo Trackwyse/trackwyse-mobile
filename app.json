@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "codespaces-blank",
-    "slug": "codespaces-blank",
+    "slug": "trackerwind",
+    "scheme": "trw",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,7 +19,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.js00001.trackerwind"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,6 +30,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "dd4a8282-e33f-4b3f-909b-4cb550ad18d0"
+      }
+    },
+    "owner": "js00001"
   }
 }

@@ -66,7 +66,7 @@ const Verify: React.FC = () => {
           text2: "Please check your email for the verification code",
         });
       },
-      onError: (error) => {
+      onError: () => {
         verifyInput.setErrors({
           verificationToken:
             "Verification code already sent. Please wait 5 minutes.",
