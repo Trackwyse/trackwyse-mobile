@@ -53,8 +53,10 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
           onPress={() => navigation.navigate("addLabel")}
           style={tw`py-12 border border-dashed border-gray-200 rounded-lg items-center`}
         >
-          <View style={tw`bg-primary-200 rounded-full p-4`}>
-            <Ionicons name="add" size={32} color="white" />
+          <View style={tw`bg-primary-200 rounded-full p-8`}>
+            <View style={tw`absolute inset-0  items-center justify-center`}>
+              <Ionicons name="add" size={32} color="white" />
+            </View>
           </View>
           <Text style={tw`font-medium text-lg mt-3`}>Add Label</Text>
           <Text style={tw`text-gray-400 text-sm text-center`}>
@@ -71,8 +73,10 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
               navigation.navigate("editLabel", { labelId: firstLabel._id })
             }
           >
-            <View style={tw.style(` rounded-full p-4`, firstLabel.color?.bg)}>
-              <Ionicons name="ios-locate-outline" size={32} color="white" />
+            <View style={tw.style(` rounded-full p-8`, firstLabel.color?.bg)}>
+              <View style={tw`absolute inset-0  items-center justify-center`}>
+                <Ionicons name="ios-locate-outline" size={32} color="white" />
+              </View>
             </View>
             <Text style={tw`font-medium text-lg mt-3`}>
               {firstLabel.name ? firstLabel.name : "No Name"}
@@ -100,8 +104,10 @@ const TestItem = ({
         style={tw`py-12 border  border-gray-100 rounded-lg items-center`}
         onPress={() => navigation.navigate("editLabel", { labelId: label._id })}
       >
-        <View style={tw.style(` rounded-full p-4`, label.color?.bg)}>
-          <Ionicons name="ios-locate-outline" size={32} color="white" />
+        <View style={tw.style(`rounded-full p-8`, label.color?.bg)}>
+          <View style={tw`absolute inset-0  items-center justify-center`}>
+            <Ionicons name="ios-locate-outline" size={32} color="white" />
+          </View>
         </View>
         <Text style={tw`font-medium text-lg mt-3`}>
           {label.name ? label.name : "No Name"}
