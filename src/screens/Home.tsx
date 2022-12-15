@@ -71,7 +71,7 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
               navigation.navigate("editLabel", { labelId: firstLabel._id })
             }
           >
-            <View style={tw`bg-blue-200 rounded-full p-4`}>
+            <View style={tw.style(` rounded-full p-4`, firstLabel.color?.bg)}>
               <Ionicons name="ios-locate-outline" size={32} color="white" />
             </View>
             <Text style={tw`font-medium text-lg mt-3`}>
@@ -100,7 +100,7 @@ const TestItem = ({
         style={tw`py-12 border  border-gray-100 rounded-lg items-center`}
         onPress={() => navigation.navigate("editLabel", { labelId: label._id })}
       >
-        <View style={tw`bg-blue-200 rounded-full p-4`}>
+        <View style={tw.style(` rounded-full p-4`, label.color?.bg)}>
           <Ionicons name="ios-locate-outline" size={32} color="white" />
         </View>
         <Text style={tw`font-medium text-lg mt-3`}>

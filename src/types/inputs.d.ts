@@ -26,7 +26,7 @@ interface VerifyInput {
 interface ModifyLabelInput {
   id?: string;
   name?: string;
-  color?: string;
+  color?: number;
   message?: string;
   phoneNumber?: string;
 }

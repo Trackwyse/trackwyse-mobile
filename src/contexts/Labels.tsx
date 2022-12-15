@@ -7,6 +7,7 @@ import {
 } from "react";
 
 import api from "../api";
+import { colors } from "../components/ColorSelector/ColorSelector";
 import { useAuth } from "./Auth";
 
 type LabelsContextData = {
@@ -69,7 +70,7 @@ const LabelsProvider: React.FC<{ children?: React.ReactNode }> = ({
     try {
       dispatch({
         type: "CREATE_LABEL",
-        payload: { _id: id, activated: true, isLost: false },
+        payload: { _id: id, activated: true, isLost: false, color: colors[0] },
       });
     } catch (error) {
     } finally {

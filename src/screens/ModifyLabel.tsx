@@ -13,6 +13,8 @@ import { useAuth } from "../contexts/Auth";
 import { useLabels } from "../contexts/Labels";
 import { validateModifyLabelInput } from "../lib/validators";
 import IconButton from "../components/IconButton";
+import ColorSelector from "../components/ColorSelector";
+import { colors } from "../components/ColorSelector/ColorSelector";
 
 interface ModifyLabelScreenProps {
   route: any;
@@ -44,6 +46,8 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
   const editInput = useFormik({
     initialValues: {
       id: labelId,
+      // Color key that returns an index of the color in the colors array, or 0 if the color is not found
+      color: colors.findIndex((color) => color.bg === label.color?.bg) || 0,
       name: label?.name || "",
       phoneNumber: label?.phoneNumber || "",
       message: label?.message || "",
@@ -60,7 +64,11 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
             text2: "Your label has been updated successfully",
           });
 
-          updateLabel({ ...label, ...values });
+          updateLabel({
+            ...label,
+            ...values,
+            color: colors[values.color as number],
+          });
           navigation.navigate("home");
         },
         onError: (err) => {
@@ -143,6 +151,12 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
           disabled={modificationMutation.isLoading}
           value={editInput.values.message}
           onChangeText={editInput.handleChange("message")}
+        />
+
+        <ColorSelector
+          style={tw`mt-5`}
+          onChange={(value: number) => editInput.setFieldValue("color", value)}
+          value={editInput.values.color}
         />
 
         <View style={tw`flex-1`} />
