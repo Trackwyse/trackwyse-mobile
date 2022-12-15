@@ -1,4 +1,5 @@
 import { TouchableOpacity, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import tw from "../../lib/tailwind";
 
 export const colors = [
@@ -71,12 +72,21 @@ const ColorItem: React.FC<ColorItemProps> = ({ color, selected, onPress }) => {
     <TouchableOpacity onPress={onPress}>
       <View
         style={tw.style(
-          `border-4 p-6 rounded-full`,
+          `border-4 p-3 rounded-full`,
           color.bg,
           selected && color.borderSelected,
           !selected && color.borderUnselected
         )}
-      />
+      >
+        <Ionicons
+          name="ios-checkmark-sharp"
+          size={24}
+          style={tw.style(
+            selected && "text-white",
+            !selected && "text-transparent"
+          )}
+        />
+      </View>
     </TouchableOpacity>
   );
 };

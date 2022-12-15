@@ -92,8 +92,8 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
           onPress={() => {
             deletionMutation.mutate(undefined, {
               onSuccess: () => {
-                deleteLabel(label);
                 navigation.navigate("home");
+                deleteLabel(label);
                 Toast.show({
                   type: "success",
                   text1: "Label Deleted",
