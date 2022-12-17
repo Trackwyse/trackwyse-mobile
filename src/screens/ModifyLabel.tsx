@@ -32,10 +32,9 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
   const { labelId } = route.params;
   const { accessToken } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
-  const [isDeletionModalVisible, setIsDeletionModalVisible] = useState(false);
-  const [isLeaveScreenModalVisible, setIsLeaveScreenModalVisible] =
-    useState(false);
   const { labels, updateLabel, deleteLabel, getLabels } = useLabels();
+  const [isUnsavedModalVisible, setIsUnsavedModalVisible] = useState(false);
+  const [isDeletionModalVisible, setIsDeletionModalVisible] = useState(false);
 
   const label = labels.find((label) => label._id === labelId) as Label;
 
@@ -141,7 +140,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
             );
 
             if (hasChanged) {
-              setIsLeaveScreenModalVisible(true);
+              setIsUnsavedModalVisible(true);
             } else {
               navigation.navigate("home");
             }
@@ -156,9 +155,9 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
       <Modal
         animationInTiming={1}
         animationOutTiming={1}
-        isVisible={isLeaveScreenModalVisible}
+        isVisible={isUnsavedModalVisible}
         backdropOpacity={0.4}
-        onBackdropPress={() => setIsLeaveScreenModalVisible(false)}
+        onBackdropPress={() => setIsUnsavedModalVisible(false)}
       >
         <View style={tw`items-center justify-center flex-1`}>
           <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
@@ -176,7 +175,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
             </Button>
             <Button
               style={tw`w-full rounded-md py-2 my-1`}
-              onPress={() => setIsLeaveScreenModalVisible(false)}
+              onPress={() => setIsUnsavedModalVisible(false)}
             >
               Go Back
             </Button>
