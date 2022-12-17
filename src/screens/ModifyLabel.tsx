@@ -18,6 +18,7 @@ import { convertDateToReadable } from "../lib/dateUtil";
 import ColorSelector from "../components/ColorSelector";
 import { validateModifyLabelInput } from "../lib/validators";
 import { colors } from "../components/ColorSelector/ColorSelector";
+import Modal from "react-native-modal";
 
 interface ModifyLabelScreenProps {
   route: any;
@@ -30,8 +31,9 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
 }) => {
   const { labelId } = route.params;
   const { accessToken } = useAuth();
-  const { labels, updateLabel, deleteLabel, getLabels } = useLabels();
   const [refreshing, setRefreshing] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const { labels, updateLabel, deleteLabel, getLabels } = useLabels();
 
   const label = labels.find((label) => label._id === labelId) as Label;
 
@@ -121,11 +123,60 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
           }}
         />
       ),
+      headerLeft: () => (
+        <IconButton
+          icon="arrow-back"
+          size={25}
+          onPress={() => {
+            const hasChanged = Object.keys(editInput.values).some(
+              (key) =>
+                editInput.values[key as keyof ModifyLabelInput] !==
+                editInput.initialValues[key as keyof ModifyLabelInput]
+            );
+
+            if (hasChanged) {
+              setModalVisible(true);
+            } else {
+              navigation.navigate("home");
+            }
+          }}
+        />
+      ),
     });
-  }, [navigation]);
+  }, [navigation, editInput.values, editInput.initialValues]);
 
   return (
     <View>
+      <Modal
+        animationInTiming={1}
+        animationOutTiming={1}
+        isVisible={isModalVisible}
+        backdropOpacity={0.4}
+        onBackdropPress={() => setModalVisible(false)}
+      >
+        <View style={tw`items-center justify-center flex-1`}>
+          <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
+            <Text style={tw`text-2xl font-bold`}>Wait!</Text>
+            <Text style={tw`my-4 text-gray-400 text-base`}>
+              You have unsaved changes. Are you sure you want to leave this
+              page?
+            </Text>
+            <Button
+              style={tw`w-full rounded-md my-1 py-2`}
+              color="secondary"
+              onPress={() => navigation.navigate("home")}
+            >
+              Leave Page
+            </Button>
+            <Button
+              style={tw`w-full rounded-md py-2 my-1`}
+              onPress={() => setModalVisible(false)}
+            >
+              Go Back
+            </Button>
+          </View>
+        </View>
+      </Modal>
       <KeyboardAwareScrollView
         contentContainerStyle={tw`items-center`}
         style={tw`h-full w-full`}

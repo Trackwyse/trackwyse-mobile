@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { View, Text } from "react-native";
+import Modal from "react-native-modal";
 import { useMutation } from "@tanstack/react-query";
 import Toast from "react-native-toast-message";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -12,6 +13,8 @@ import { useAuth } from "../contexts/Auth";
 import Button from "../components/Button";
 import ListItem from "../components/ListItem";
 import { validateFoundLabelDetailsInput } from "../lib/validators";
+import { useEffect, useState } from "react";
+import IconButton from "../components/IconButton";
 
 interface FoundLabelDetailsScreenProps {
   route: any;
@@ -24,6 +27,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({
 }) => {
   const { accessToken } = useAuth();
   const { label }: { label: Label } = route.params;
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const modificationMutation = useMutation({
     mutationFn: (values: FoundLabelDetailsInput) => {
@@ -63,8 +67,63 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({
     },
   });
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <IconButton
+          icon="arrow-back"
+          size={25}
+          onPress={() => {
+            const hasChanged = Object.keys(editInput.values).some(
+              (key) =>
+                editInput.values[key as keyof FoundLabelDetailsInput] !==
+                editInput.initialValues[key as keyof FoundLabelDetailsInput]
+            );
+
+            if (hasChanged) {
+              setModalVisible(true);
+            } else {
+              navigation.navigate("home");
+            }
+          }}
+        />
+      ),
+    });
+  }, [navigation, editInput.values, editInput.initialValues]);
+
   return (
     <View>
+      <Modal
+        animationInTiming={1}
+        animationOutTiming={1}
+        isVisible={isModalVisible}
+        backdropOpacity={0.4}
+        onBackdropPress={() => setModalVisible(false)}
+      >
+        <View style={tw`items-center justify-center flex-1`}>
+          <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
+            <Text style={tw`text-2xl font-bold`}>Wait!</Text>
+            <Text style={tw`my-4 text-gray-400 text-base`}>
+              You have unsaved changes. Are you sure you want to leave this
+              page?
+            </Text>
+            <Button
+              style={tw`w-full rounded-md my-1 py-2`}
+              color="secondary"
+              onPress={() => navigation.navigate("home")}
+            >
+              Leave Page
+            </Button>
+            <Button
+              style={tw`w-full rounded-md py-2 my-1`}
+              onPress={() => setModalVisible(false)}
+            >
+              Go Back
+            </Button>
+          </View>
+        </View>
+      </Modal>
+
       <KeyboardAwareScrollView
         contentContainerStyle={tw`items-center`}
         style={tw`h-full w-full`}
