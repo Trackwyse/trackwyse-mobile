@@ -93,8 +93,6 @@ const AcceptTermsStackNavigator: React.FC = () => {
   the app.
 */
 const AppStackNavigator: React.FC = () => {
-  const { user } = useAuth();
-
   return (
     <LabelsProvider>
       <Stack.Navigator>
@@ -102,10 +100,7 @@ const AppStackNavigator: React.FC = () => {
           name="home"
           component={Home}
           options={{
-            title: `Welcome, ${
-              user?.firstName[0].toUpperCase() + user?.firstName.slice(1)
-            }.`,
-            headerLargeTitle: true,
+            title: ``,
             headerShadowVisible: false,
           }}
         />

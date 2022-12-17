@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
-import { View, Text, KeyboardAvoidingView } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "../api";
@@ -15,6 +17,7 @@ import { validateModifyLabelInput } from "../lib/validators";
 import IconButton from "../components/IconButton";
 import ColorSelector from "../components/ColorSelector";
 import { colors } from "../components/ColorSelector/ColorSelector";
+import ListItem from "../components/ListItem";
 
 interface ModifyLabelScreenProps {
   route: any;
@@ -115,8 +118,66 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
   }, [navigation]);
 
   return (
-    <View style={tw`h-full`}>
-      <KeyboardAvoidingView style={tw`items-center justify-end flex-1`}>
+    <View>
+      <KeyboardAwareScrollView
+        contentContainerStyle={tw`items-center`}
+        style={tw`h-full w-full`}
+      >
+        {label.isLost && (
+          <View style={tw`w-full items-center`}>
+            <View style={tw`w-11/12 pt-10`}>
+              <Text style={tw`text-2xl font-bold`}>Label Recovered</Text>
+              <Text style={tw`my-4 text-gray-400 text-base`}>
+                Your label has been located by another user. Make sure that your
+                information is up to date.
+              </Text>
+            </View>
+
+            <ListItem title="Currently Lost" iconRight="checkmark-outline" />
+            <ListItem
+              title="Recoverable"
+              position="middle"
+              iconRight={
+                label.foundRecoveryPossible
+                  ? "checkmark-outline"
+                  : "close-outline"
+              }
+            />
+            <ListItem
+              title="Contact Number"
+              position="middle"
+              textRight={
+                label.finderPhoneNumber
+                  ? label.finderPhoneNumber
+                  : "Not provided"
+              }
+            />
+            <ListItem
+              title="Found Near"
+              position="middle"
+              textRight={label.foundNear ? label.foundNear : "Not provided"}
+            />
+            <ListItem
+              title="Found At"
+              position="middle"
+              textRight={
+                label.foundExactLocation
+                  ? label.foundExactLocation
+                  : "Not provided"
+              }
+            />
+            <ListItem
+              title="Recovery Location"
+              position="bottom"
+              textRight={
+                label.foundRecoveryLocation
+                  ? label.foundRecoveryLocation
+                  : "Not provided"
+              }
+            />
+          </View>
+        )}
+
         <View style={tw`w-11/12 pt-10`}>
           <Text style={tw`text-2xl font-bold`}>Edit Label</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
@@ -154,27 +215,20 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
         />
 
         <ColorSelector
-          style={tw`mt-5`}
+          style={tw`my-5`}
           onChange={(value: number) => editInput.setFieldValue("color", value)}
           value={editInput.values.color}
         />
 
-        <View style={tw`flex-1`} />
-      </KeyboardAvoidingView>
-
-      <KeyboardAvoidingView
-        style={tw`items-center mt-auto mb-10  `}
-        behavior="padding"
-        keyboardVerticalOffset={100}
-      >
         <Button
           size="lg"
+          style={tw`mb-10`}
           loading={modificationMutation.isLoading}
           onPress={() => editInput.handleSubmit()}
         >
           Update
         </Button>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     </View>
   );
 };

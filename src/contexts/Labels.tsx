@@ -13,7 +13,7 @@ import { useAuth } from "./Auth";
 type LabelsContextData = {
   labels: Label[];
   loading: boolean;
-  getLabels: () => void;
+  getLabels: () => Promise<void>;
   createLabel: (id: string) => void;
   updateLabel: (label: Label) => void;
   deleteLabel: (label: Label) => void;
@@ -54,7 +54,7 @@ const LabelsProvider: React.FC<{ children?: React.ReactNode }> = ({
   const [labels, dispatch] = useReducer(labelsReducer, []);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const getLabels = async () => {
+  const getLabels = async (): Promise<void> => {
     setLoading(true);
     try {
       const response = await api.getLabels(accessToken);

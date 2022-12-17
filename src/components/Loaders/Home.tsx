@@ -35,7 +35,7 @@ const HomeLoader: React.FC = () => {
   );
 };
 
-const LoadingRect = (props: { style?: StyleProp<ViewStyle> }) => {
+export const LoadingRect = (props: { style?: StyleProp<ViewStyle> }) => {
   const pulseAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
