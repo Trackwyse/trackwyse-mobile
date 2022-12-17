@@ -186,7 +186,6 @@ const validateVerifyInput = (verifyInput: VerifyInput) => {
 */
 const validateModifyLabelInput = (modifyLabelInput: ModifyLabelInput) => {
   const errors: ModifyLabelInput = {
-    // TODO: Add color to this.
     name: "",
     phoneNumber: "",
     message: "",
@@ -196,6 +195,36 @@ const validateModifyLabelInput = (modifyLabelInput: ModifyLabelInput) => {
   const phoneNumberRegex = /^[0-9]{10}$/;
 
   if (modifyLabelInput.phoneNumber && !phoneNumberRegex.test(modifyLabelInput.phoneNumber)) {
+    errors.phoneNumber = "Phone number is invalid";
+  }
+
+  // see if all errors are empty, if so, return empty object
+  const allErrors = Object.values(errors).filter((error) => error !== "");
+
+  if (allErrors.length === 0) {
+    return {};
+  }
+
+  return errors;
+}
+
+/*
+  Validate the Found Label Details Form
+
+  Required fields: phoneNumber, exactLocation, recoveryLocation
+  Phone number must be 10 digits long, and only numbers
+*/
+const validateFoundLabelDetailsInput = (foundLabelDetailsInput: FoundLabelDetailsInput) => {
+  const errors: FoundLabelDetailsInput = {
+    phoneNumber: "",
+    exactLocation: "",
+    recoveryLocation: "",
+  }
+
+  // Verify the phone number is valid, only if it is not empty
+  const phoneNumberRegex = /^[0-9]{10}$/;
+
+  if (foundLabelDetailsInput.phoneNumber && !phoneNumberRegex.test(foundLabelDetailsInput.phoneNumber)) {
     errors.phoneNumber = "Phone number is invalid";
   }
 
@@ -232,4 +261,5 @@ export {
   validateVerifyInput,
   validateRegisterInput,
   validateModifyLabelInput,
+  validateFoundLabelDetailsInput
 };

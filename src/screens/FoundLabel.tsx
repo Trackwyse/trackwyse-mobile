@@ -49,11 +49,14 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
     mutation.mutate(
       { id: labelId },
       {
-        onSuccess: () => {
+        onSuccess: ({ data }) => {
           Toast.show({
             type: "success",
             text1: "Label Found",
             text2: "The owner of this label has been notified",
+          });
+          navigation.navigate("foundLabelDetails", {
+            label: data.label,
           });
         },
         onError: (err) => {

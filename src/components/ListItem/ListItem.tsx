@@ -6,13 +6,15 @@ const borderClasses = {
   top: "rounded-t-md border-b border-zinc-200",
   middle: "border-b border-zinc-200",
   bottom: "rounded-b-md",
+  alone: "rounded-md",
 };
 
 interface ListItemProps {
   title: string;
-  position?: "top" | "middle" | "bottom";
+  position?: "top" | "middle" | "bottom" | "alone";
   iconRight?: keyof typeof Ionicons.glyphMap;
   textRight?: string;
+  textBottom?: string;
   style?: any;
 }
 
@@ -21,10 +23,12 @@ const ListItem: React.FC<ListItemProps> = ({
   position = "top",
   iconRight,
   textRight,
+  textBottom,
   style,
 }) => {
   const containerClasses = tw.style(
-    "p-4 bg-gray-100 w-11/12 flex-row items-center justify-between",
+    "p-4 bg-gray-100 w-11/12",
+    textBottom ? "flex-col" : "flex-row justify-between items-center",
     borderClasses[position],
     style
   );
@@ -37,6 +41,9 @@ const ListItem: React.FC<ListItemProps> = ({
       )}
       {textRight && (
         <Text style={tw` text-gray-300 text-base`}>{textRight}</Text>
+      )}
+      {textBottom && (
+        <Text style={tw`text-gray-300 text-base pt-2`}>{textBottom}</Text>
       )}
     </View>
   );

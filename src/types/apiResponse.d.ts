@@ -17,6 +17,8 @@ type ReverifyEmailAPIResponse = APIResponse
 
 type AcceptTermsAPIResponse = APIResponse
 
+type FoundLabelDetailsAPIResponse = APIResponse
+
 type LoginAPIResponse = APIResponse & {
   data: {
     accessToken: string;

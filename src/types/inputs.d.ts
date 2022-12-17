@@ -34,3 +34,10 @@ interface ModifyLabelInput {
   message?: string;
   phoneNumber?: string;
 }
+
+interface FoundLabelDetailsInput {
+  id?: string;
+  phoneNumber?: string;
+  exactLocation?: string;
+  recoveryLocation?: string;
+}

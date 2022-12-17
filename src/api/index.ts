@@ -256,11 +256,42 @@ const getLabel = (values: GetLabelInput, accessToken?: string): Promise<GetLabel
   const { id } = values;
 
   return apiClient.get(`/api/v1/labels/${id}`, {
+          // Disable in order to allow users to find their own labels
+    // headers: {
+    //   Authorization: `Bearer ${accessToken}`,
+    // },
+  });
+};
+
+/*
+  POST /api/v1/labels/found/:id
+
+  Request Body:
+    - phoneNumber: string
+    - recoveryLocation: string
+    - exactLocation: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const updateFoundLabelDetails = (values: FoundLabelDetailsInput, accessToken: string): Promise<FoundLabelDetailsAPIResponse> => {
+  const {id, phoneNumber, recoveryLocation, exactLocation} = values;
+
+  return apiClient.post(`/api/v1/labels/found/${id}`, {
+    phoneNumber,
+    recoveryLocation,
+    exactLocation
+  }, {
+    // Disable in order to allow users to find their own labels
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-};
+}
 
 /*
   POST /auth/v1/acceptTerms
@@ -299,4 +330,5 @@ export default {
   getLabels,
   modifyLabel,
   deleteLabel,
+  updateFoundLabelDetails
 };
