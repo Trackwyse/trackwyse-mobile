@@ -32,7 +32,9 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
   const { labelId } = route.params;
   const { accessToken } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isDeletionModalVisible, setIsDeletionModalVisible] = useState(false);
+  const [isLeaveScreenModalVisible, setIsLeaveScreenModalVisible] =
+    useState(false);
   const { labels, updateLabel, deleteLabel, getLabels } = useLabels();
 
   const label = labels.find((label) => label._id === labelId) as Label;
@@ -94,6 +96,27 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
     },
   });
 
+  const onDeleteLabel = () => {
+    deletionMutation.mutate(undefined, {
+      onSuccess: () => {
+        navigation.navigate("home");
+        deleteLabel(label);
+        Toast.show({
+          type: "success",
+          text1: "Label Deleted",
+          text2: "Your label has been deleted successfully",
+        });
+      },
+      onError: (err) => {
+        Toast.show({
+          type: "error",
+          text1: "Error",
+          text2: "There was an error deleting your label",
+        });
+      },
+    });
+  };
+
   // Update the header to include a deletion button
   useEffect(() => {
     navigation.setOptions({
@@ -102,24 +125,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
           icon="trash-outline"
           color="firebrick"
           onPress={() => {
-            deletionMutation.mutate(undefined, {
-              onSuccess: () => {
-                navigation.navigate("home");
-                deleteLabel(label);
-                Toast.show({
-                  type: "success",
-                  text1: "Label Deleted",
-                  text2: "Your label has been deleted successfully",
-                });
-              },
-              onError: (err) => {
-                Toast.show({
-                  type: "error",
-                  text1: "Error",
-                  text2: "There was an error deleting your label",
-                });
-              },
-            });
+            setIsDeletionModalVisible(true);
           }}
         />
       ),
@@ -135,7 +141,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
             );
 
             if (hasChanged) {
-              setModalVisible(true);
+              setIsLeaveScreenModalVisible(true);
             } else {
               navigation.navigate("home");
             }
@@ -150,9 +156,9 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
       <Modal
         animationInTiming={1}
         animationOutTiming={1}
-        isVisible={isModalVisible}
+        isVisible={isLeaveScreenModalVisible}
         backdropOpacity={0.4}
-        onBackdropPress={() => setModalVisible(false)}
+        onBackdropPress={() => setIsLeaveScreenModalVisible(false)}
       >
         <View style={tw`items-center justify-center flex-1`}>
           <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
@@ -170,9 +176,39 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
             </Button>
             <Button
               style={tw`w-full rounded-md py-2 my-1`}
-              onPress={() => setModalVisible(false)}
+              onPress={() => setIsLeaveScreenModalVisible(false)}
             >
               Go Back
+            </Button>
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationInTiming={1}
+        animationOutTiming={1}
+        isVisible={isDeletionModalVisible}
+        backdropOpacity={0.4}
+        onBackdropPress={() => setIsDeletionModalVisible(false)}
+      >
+        <View style={tw`items-center justify-center flex-1`}>
+          <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
+            <Text style={tw`text-2xl font-bold`}>Delete Label</Text>
+            <Text style={tw`my-4 text-gray-400 text-base`}>
+              This action is irreversible. Are you sure you want to delete this
+              label?
+            </Text>
+            <Button
+              style={tw`w-full rounded-md my-1 py-2`}
+              color="secondary"
+              onPress={() => setIsDeletionModalVisible(false)}
+            >
+              Don't Delete
+            </Button>
+            <Button
+              style={tw`w-full rounded-md py-2 my-1 bg-rose-800`}
+              onPress={onDeleteLabel}
+            >
+              Delete (Irreversible)
             </Button>
           </View>
         </View>
