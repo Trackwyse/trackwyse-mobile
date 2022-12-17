@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import Modal from "react-native-modal";
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
@@ -18,7 +19,6 @@ import { convertDateToReadable } from "../lib/dateUtil";
 import ColorSelector from "../components/ColorSelector";
 import { validateModifyLabelInput } from "../lib/validators";
 import { colors } from "../components/ColorSelector/ColorSelector";
-import Modal from "react-native-modal";
 
 interface ModifyLabelScreenProps {
   route: any;
