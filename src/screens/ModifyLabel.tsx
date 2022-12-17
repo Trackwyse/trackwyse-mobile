@@ -14,6 +14,7 @@ import { useAuth } from "../contexts/Auth";
 import ListItem from "../components/ListItem";
 import { useLabels } from "../contexts/Labels";
 import IconButton from "../components/IconButton";
+import { convertDateToReadable } from "../lib/dateUtil";
 import ColorSelector from "../components/ColorSelector";
 import { validateModifyLabelInput } from "../lib/validators";
 import { colors } from "../components/ColorSelector/ColorSelector";
@@ -150,6 +151,15 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
                 label.foundRecoveryPossible
                   ? "checkmark-outline"
                   : "close-outline"
+              }
+            />
+            <ListItem
+              title="Found On"
+              position="middle"
+              textRight={
+                label.foundDate
+                  ? convertDateToReadable(new Date(label.foundDate))
+                  : "Not Provided"
               }
             />
             <ListItem

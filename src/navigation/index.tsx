@@ -16,6 +16,7 @@ import { useAuth } from "../contexts/Auth";
 import { LabelsProvider } from "../contexts/Labels";
 import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 import IconButton from "../components/IconButton";
+import FoundLabel from "../screens/FoundLabel";
 
 const Stack = createNativeStackNavigator();
 
@@ -109,6 +110,15 @@ const AppStackNavigator: React.FC = () => {
           component={AddLabel}
           options={({ navigation }) => ({
             title: "Add Label",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="foundLabel"
+          component={FoundLabel}
+          options={({ navigation }) => ({
+            title: "Found Label",
             gestureEnabled: false,
             headerLeft: () => <NavigationWithBack navigation={navigation} />,
           })}

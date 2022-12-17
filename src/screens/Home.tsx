@@ -45,8 +45,8 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
 
       <FlatList
         numColumns={2}
-        style={tw`mx-3 my-5 h-full`}
-        data={labels.length > 0 ? labels.slice(1) : labels}
+        style={tw`mx-3 my-5`}
+        data={labels}
         ListHeaderComponent={
           <ListHeader navigation={navigation} firstLabel={labels[0]} />
         }
@@ -76,7 +76,7 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
         >
           <View style={tw`bg-primary-200 rounded-full p-8`}>
             <View style={tw`absolute inset-0  items-center justify-center`}>
-              <Ionicons name="add" size={32} color="white" />
+              <Ionicons name="camera-outline" size={32} color="white" />
             </View>
           </View>
           <Text style={tw`font-medium text-lg mt-3`}>Add Label</Text>
@@ -86,7 +86,22 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
         </TouchableOpacity>
       </View>
 
-      {firstLabel && <Label label={firstLabel} />}
+      <View style={tw`max-w-1/2 flex-1 p-1`}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("foundLabel")}
+          style={tw`py-12 border border-dashed border-gray-200 rounded-lg items-center`}
+        >
+          <View style={tw`bg-primary-200 rounded-full p-8`}>
+            <View style={tw`absolute inset-0  items-center justify-center`}>
+              <Ionicons name="search-outline" size={32} color="white" />
+            </View>
+          </View>
+          <Text style={tw`font-medium text-lg mt-3`}>Found Label</Text>
+          <Text style={tw`text-gray-400 text-sm text-center`}>
+            Found a lost item? Alert the owner
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
