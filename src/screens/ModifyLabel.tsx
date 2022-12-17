@@ -1,9 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  ScrollView,
+  RefreshControl,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -30,9 +36,16 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
 }) => {
   const { labelId } = route.params;
   const { accessToken } = useAuth();
-  const { labels, updateLabel, deleteLabel } = useLabels();
+  const { labels, updateLabel, deleteLabel, getLabels } = useLabels();
+  const [refreshing, setRefreshing] = useState(false);
 
   const label = labels.find((label) => label._id === labelId) as Label;
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await getLabels();
+    setRefreshing(false);
+  };
 
   const modificationMutation = useMutation({
     mutationFn: (values: ModifyLabelInput) => {
@@ -122,6 +135,9 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
       <KeyboardAwareScrollView
         contentContainerStyle={tw`items-center`}
         style={tw`h-full w-full`}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         {label.isLost && (
           <View style={tw`w-full items-center`}>
