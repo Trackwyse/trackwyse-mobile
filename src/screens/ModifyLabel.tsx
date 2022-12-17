@@ -1,29 +1,22 @@
-import { useEffect, useState } from "react";
 import { useFormik } from "formik";
+import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  ScrollView,
-  RefreshControl,
-} from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { View, Text, RefreshControl } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import api from "../api";
 import tw from "../lib/tailwind";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { useAuth } from "../contexts/Auth";
+import ListItem from "../components/ListItem";
 import { useLabels } from "../contexts/Labels";
-import { validateModifyLabelInput } from "../lib/validators";
 import IconButton from "../components/IconButton";
 import ColorSelector from "../components/ColorSelector";
+import { validateModifyLabelInput } from "../lib/validators";
 import { colors } from "../components/ColorSelector/ColorSelector";
-import ListItem from "../components/ListItem";
 
 interface ModifyLabelScreenProps {
   route: any;

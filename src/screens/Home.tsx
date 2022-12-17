@@ -6,16 +6,15 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from "react-native";
+import { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import tw from "../lib/tailwind";
+import Label from "../components/Label";
+import { useAuth } from "../contexts/Auth";
 import { useLabels } from "../contexts/Labels";
 import HomeLoader from "../components/Loaders/Home";
-import Chip from "../components/Chip";
-import Label from "../components/Label";
-import { useState } from "react";
-import { useAuth } from "../contexts/Auth";
 
 interface HomeProps {
   navigation: NativeStackNavigationProp<any>;
