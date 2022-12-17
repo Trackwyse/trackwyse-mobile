@@ -73,7 +73,6 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
     requestPermission();
   });
 
-
   if (permission?.status !== "granted")
     return (
       <Permissions

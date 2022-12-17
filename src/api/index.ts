@@ -7,7 +7,6 @@ const apiClient = axios.create({
   baseURL
 });
 
-// Test
 /*
   POST /auth/v1/login
 
