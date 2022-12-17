@@ -13,6 +13,7 @@ import Permissions from "../components/Permissions";
 import { validateLabelUrl } from "../lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useLabels } from "../contexts/Labels";
+import { AxiosError } from "axios";
 
 interface FoundLabelScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -22,6 +23,12 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
   const { accessToken } = useAuth();
   const [hasBeenScanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
+
+  const mutation = useMutation({
+    mutationFn: (values: GetLabelInput) => {
+      return api.getLabel(values, accessToken);
+    },
+  });
 
   const onBarCodeScanned = (scannedData: any) => {
     const { data } = scannedData;
@@ -38,6 +45,29 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
     const labelId = data.split("//")[1];
 
     setScanned(true);
+
+    mutation.mutate(
+      { id: labelId },
+      {
+        onSuccess: () => {
+          Toast.show({
+            type: "success",
+            text1: "Label Found",
+            text2: "The owner of this label has been notified",
+          });
+        },
+        onError: (err) => {
+          if (err instanceof AxiosError) {
+            const statusCode = err.response?.data.message;
+            Toast.show({
+              type: "error",
+              text1: "An error occurred",
+              text2: statusCode,
+            });
+          }
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -62,7 +92,17 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
           barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr],
         }}
         onBarCodeScanned={onBarCodeScanned}
-      ></Camera>
+      >
+        {(mutation.isLoading || mutation.isError) && hasBeenScanned && (
+          <View
+            style={tw`bg-black absolute w-full h-full opacity-90 justify-center`}
+          >
+            {mutation.isLoading && (
+              <ActivityIndicator size={"large"} color="white" />
+            )}
+          </View>
+        )}
+      </Camera>
 
       <View style={tw`flex items-center`}>
         <View style={tw`w-11/12 pt-10`}>
@@ -72,6 +112,18 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
             and optionally provide your contact information.
           </Text>
         </View>
+      </View>
+
+      <View style={tw`mt-auto flex-row-reverse mb-10 w-11/12`}>
+        {mutation.isError && hasBeenScanned && (
+          <BadgeButton
+            iconRight="camera-outline"
+            size="lg"
+            onPress={() => setScanned(false)}
+          >
+            Retry Scan
+          </BadgeButton>
+        )}
       </View>
     </View>
   );

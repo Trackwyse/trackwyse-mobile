@@ -242,6 +242,27 @@ const deleteLabel = (values: DeleteLabelInput, accessToken: string): Promise<Del
 };
 
 /*
+  GET /api/v1/labels/:id
+
+  Request Headers:
+    - Authorization: Bearer <accessToken> (optional)
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - label: Label
+*/
+const getLabel = (values: GetLabelInput, accessToken?: string): Promise<GetLabelAPIResponse> => {
+  const { id } = values;
+
+  return apiClient.get(`/api/v1/labels/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+/*
   POST /auth/v1/acceptTerms
 
   Request Headers:
@@ -274,6 +295,7 @@ export default {
   reverifyEmail,
 
   addLabel,
+  getLabel,
   getLabels,
   modifyLabel,
   deleteLabel,

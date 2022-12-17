@@ -46,3 +46,9 @@ type GetLabelsAPIResponse = APIResponse & {
     labels: Label[];
   };
 }
+
+type GetLabelAPIResponse = APIResponse & {
+  data: {
+    label: Label;
+  };
+}
