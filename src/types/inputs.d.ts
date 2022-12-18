@@ -19,6 +19,10 @@ interface DeleteLabelInput {
   id: string;
 }
 
+interface GetLabelInput {
+  id: string;
+}
+
 interface VerifyInput {
   verificationToken: string;
 }
@@ -29,4 +33,11 @@ interface ModifyLabelInput {
   color?: number;
   message?: string;
   phoneNumber?: string;
+}
+
+interface FoundLabelDetailsInput {
+  id?: string;
+  phoneNumber?: string;
+  exactLocation?: string;
+  recoveryLocation?: string;
 }

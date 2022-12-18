@@ -242,6 +242,58 @@ const deleteLabel = (values: DeleteLabelInput, accessToken: string): Promise<Del
 };
 
 /*
+  GET /api/v1/labels/:id
+
+  Request Headers:
+    - Authorization: Bearer <accessToken> (optional)
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - label: Label
+*/
+const getLabel = (values: GetLabelInput, accessToken?: string): Promise<GetLabelAPIResponse> => {
+  const { id } = values;
+
+  return apiClient.get(`/api/v1/labels/${id}`, {
+          // Disable in order to allow users to find their own labels
+    // headers: {
+    //   Authorization: `Bearer ${accessToken}`,
+    // },
+  });
+};
+
+/*
+  POST /api/v1/labels/found/:id
+
+  Request Body:
+    - phoneNumber: string
+    - recoveryLocation: string
+    - exactLocation: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const updateFoundLabelDetails = (values: FoundLabelDetailsInput, accessToken: string): Promise<FoundLabelDetailsAPIResponse> => {
+  const {id, phoneNumber, recoveryLocation, exactLocation} = values;
+
+  return apiClient.post(`/api/v1/labels/found/${id}`, {
+    phoneNumber,
+    recoveryLocation,
+    exactLocation
+  }, {
+    // Disable in order to allow users to find their own labels
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
+
+/*
   POST /auth/v1/acceptTerms
 
   Request Headers:
@@ -274,7 +326,9 @@ export default {
   reverifyEmail,
 
   addLabel,
+  getLabel,
   getLabels,
   modifyLabel,
   deleteLabel,
+  updateFoundLabelDetails
 };

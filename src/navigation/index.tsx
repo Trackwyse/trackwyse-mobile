@@ -20,6 +20,7 @@ import { LabelsProvider } from "../contexts/Labels";
 import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 import IconButton from "../components/IconButton";
 import FoundLabel from "../screens/FoundLabel";
+import FoundLabelDetails from "../screens/FoundLabelDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -123,6 +124,17 @@ const AppStackNavigator: React.FC = () => {
             title: "Found Label",
             gestureEnabled: false,
             headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="foundLabelDetails"
+          component={FoundLabelDetails}
+          options={({ navigation }) => ({
+            title: "Found Label",
+            gestureEnabled: false,
+            headerLeft: () => (
+              <NavigationWithBack navigation={navigation} returnHome />
+            ),
           })}
         />
         <Stack.Screen
