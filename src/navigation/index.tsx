@@ -11,6 +11,9 @@ import Register2 from "../screens/Register.2";
 import EditLabel from "../screens/ModifyLabel";
 import AcceptTerms1 from "../screens/AcceptTerms.1";
 import AcceptTerms2 from "../screens/AcceptTerms.2";
+import ForgotPassword from "../screens/ForgotPassword.1";
+import ForgotPassword2 from "../screens/ForgotPassword.2";
+import ForgotPassword3 from "../screens/ForgotPassword.3";
 
 import { useAuth } from "../contexts/Auth";
 import { LabelsProvider } from "../contexts/Labels";
@@ -34,14 +37,13 @@ const AuthStackNavigator: React.FC = () => {
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
-      <Stack.Screen
-        name="landing"
-        component={Landing}
-        options={{ headerLeft: () => <></> }}
-      />
+      <Stack.Screen name="landing" component={Landing} options={{ headerLeft: () => <></> }} />
       <Stack.Screen name="register" component={Register} />
       <Stack.Screen name="register2" component={Register2} />
       <Stack.Screen name="login" component={Login} />
+      <Stack.Screen name="forgotPassword" component={ForgotPassword} />
+      <Stack.Screen name="forgotPassword2" component={ForgotPassword2} />
+      <Stack.Screen name="forgotPassword3" component={ForgotPassword3} />
     </Stack.Navigator>
   );
 };
@@ -129,12 +131,8 @@ const AppStackNavigator: React.FC = () => {
           options={({ navigation }) => ({
             title: "Edit Label",
             gestureEnabled: false,
-            headerLeft: () => (
-              <NavigationWithBack navigation={navigation} returnHome />
-            ),
-            headerRight: () => (
-              <IconButton icon="trash-outline" color="firebrick" />
-            ),
+            headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+            headerRight: () => <IconButton icon="trash-outline" color="firebrick" />,
           })}
         />
       </Stack.Navigator>
