@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { Camera, CameraType } from "expo-camera";
@@ -5,15 +6,13 @@ import { useMutation } from "@tanstack/react-query";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { View, Text, ActivityIndicator } from "react-native";
 
-import api from "../api";
-import tw from "../lib/tailwind";
-import { useAuth } from "../contexts/Auth";
-import BadgeButton from "../components/BadgeButton";
-import Permissions from "../components/Permissions";
-import { validateLabelUrl } from "../lib/validators";
+import api from "@/api";
+import tw from "@/lib/tailwind";
+import { useAuth } from "@/contexts/Auth";
+import BadgeButton from "@/components/BadgeButton";
+import Permissions from "@/components/Permissions";
+import { validateLabelUrl } from "@/lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useLabels } from "../contexts/Labels";
-import { AxiosError } from "axios";
 
 interface FoundLabelScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -97,12 +96,8 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
         onBarCodeScanned={onBarCodeScanned}
       >
         {(mutation.isLoading || mutation.isError) && hasBeenScanned && (
-          <View
-            style={tw`bg-black absolute w-full h-full opacity-90 justify-center`}
-          >
-            {mutation.isLoading && (
-              <ActivityIndicator size={"large"} color="white" />
-            )}
+          <View style={tw`bg-black absolute w-full h-full opacity-90 justify-center`}>
+            {mutation.isLoading && <ActivityIndicator size={"large"} color="white" />}
           </View>
         )}
       </Camera>
@@ -111,19 +106,15 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
         <View style={tw`w-11/12 pt-10`}>
           <Text style={tw`text-2xl font-bold`}>Found a Label</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
-            Found a lost item with a label? Scan the QR code to alert the owner,
-            and optionally provide your contact information.
+            Found a lost item with a label? Scan the QR code to alert the owner, and optionally
+            provide your contact information.
           </Text>
         </View>
       </View>
 
       <View style={tw`mt-auto flex-row-reverse mb-10 w-11/12`}>
         {mutation.isError && hasBeenScanned && (
-          <BadgeButton
-            iconRight="camera-outline"
-            size="lg"
-            onPress={() => setScanned(false)}
-          >
+          <BadgeButton iconRight="camera-outline" size="lg" onPress={() => setScanned(false)}>
             Retry Scan
           </BadgeButton>
         )}

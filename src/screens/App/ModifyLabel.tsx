@@ -7,28 +7,25 @@ import { View, Text, RefreshControl } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import api from "../api";
-import tw from "../lib/tailwind";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import { useAuth } from "../contexts/Auth";
-import ListItem from "../components/ListItem";
-import { useLabels } from "../contexts/Labels";
-import IconButton from "../components/IconButton";
-import { convertDateToReadable } from "../lib/dateUtil";
-import ColorSelector from "../components/ColorSelector";
-import { validateModifyLabelInput } from "../lib/validators";
-import { colors } from "../components/ColorSelector/ColorSelector";
+import api from "@/api";
+import tw from "@/lib/tailwind";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+import { useAuth } from "@/contexts/Auth";
+import ListItem from "@/components/ListItem";
+import { useLabels } from "@/contexts/Labels";
+import IconButton from "@/components/IconButton";
+import { convertDateToReadable } from "@/lib/dateUtil";
+import ColorSelector from "@/components/ColorSelector";
+import { validateModifyLabelInput } from "@/lib/validators";
+import { colors } from "@/components/ColorSelector/ColorSelector";
 
 interface ModifyLabelScreenProps {
   route: any;
   navigation: NativeStackNavigationProp<any>;
 }
 
-const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
-  route,
-  navigation,
-}) => {
+const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) => {
   const { labelId } = route.params;
   const { accessToken } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
@@ -163,8 +160,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
           <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
             <Text style={tw`text-2xl font-bold`}>Wait!</Text>
             <Text style={tw`my-4 text-gray-400 text-base`}>
-              You have unsaved changes. Are you sure you want to leave this
-              page?
+              You have unsaved changes. Are you sure you want to leave this page?
             </Text>
             <Button
               style={tw`w-full rounded-md my-1 py-2`}
@@ -193,8 +189,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
           <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
             <Text style={tw`text-2xl font-bold`}>Delete Label</Text>
             <Text style={tw`my-4 text-gray-400 text-base`}>
-              This action is irreversible. Are you sure you want to delete this
-              label?
+              This action is irreversible. Are you sure you want to delete this label?
             </Text>
             <Button
               style={tw`w-full rounded-md my-1 py-2`}
@@ -203,10 +198,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
             >
               Don't Delete
             </Button>
-            <Button
-              style={tw`w-full rounded-md py-2 my-1 bg-rose-800`}
-              onPress={onDeleteLabel}
-            >
+            <Button style={tw`w-full rounded-md py-2 my-1 bg-rose-800`} onPress={onDeleteLabel}>
               Delete (Irreversible)
             </Button>
           </View>
@@ -215,17 +207,15 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
       <KeyboardAwareScrollView
         contentContainerStyle={tw`items-center`}
         style={tw`h-full w-full`}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
         {label.isLost && (
           <View style={tw`w-full items-center`}>
             <View style={tw`w-11/12 pt-10`}>
               <Text style={tw`text-2xl font-bold`}>Label Recovered</Text>
               <Text style={tw`my-4 text-gray-400 text-base`}>
-                Your label has been located by another user. Make sure that your
-                information is up to date.
+                Your label has been located by another user. Make sure that your information is up
+                to date.
               </Text>
             </View>
 
@@ -233,29 +223,19 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
             <ListItem
               title="Recoverable"
               position="middle"
-              iconRight={
-                label.foundRecoveryPossible
-                  ? "checkmark-outline"
-                  : "close-outline"
-              }
+              iconRight={label.foundRecoveryPossible ? "checkmark-outline" : "close-outline"}
             />
             <ListItem
               title="Found On"
               position="middle"
               textRight={
-                label.foundDate
-                  ? convertDateToReadable(new Date(label.foundDate))
-                  : "Not Provided"
+                label.foundDate ? convertDateToReadable(new Date(label.foundDate)) : "Not Provided"
               }
             />
             <ListItem
               title="Contact Number"
               position="middle"
-              textRight={
-                label.finderPhoneNumber
-                  ? label.finderPhoneNumber
-                  : "Not provided"
-              }
+              textRight={label.finderPhoneNumber ? label.finderPhoneNumber : "Not provided"}
             />
             <ListItem
               title="Found Near"
@@ -265,20 +245,12 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
             <ListItem
               title="Found At"
               position="middle"
-              textRight={
-                label.foundExactLocation
-                  ? label.foundExactLocation
-                  : "Not provided"
-              }
+              textRight={label.foundExactLocation ? label.foundExactLocation : "Not provided"}
             />
             <ListItem
               title="Recovery Location"
               position="bottom"
-              textRight={
-                label.foundRecoveryLocation
-                  ? label.foundRecoveryLocation
-                  : "Not provided"
-              }
+              textRight={label.foundRecoveryLocation ? label.foundRecoveryLocation : "Not provided"}
             />
           </View>
         )}
@@ -286,8 +258,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({
         <View style={tw`w-11/12 pt-10`}>
           <Text style={tw`text-2xl font-bold`}>Edit Label</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
-            Update details about your label in order to have the best chance of
-            finding a lost item.
+            Update details about your label in order to have the best chance of finding a lost item.
           </Text>
         </View>
 

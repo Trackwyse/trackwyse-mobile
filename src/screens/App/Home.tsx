@@ -9,16 +9,17 @@ import {
 } from "react-native";
 import { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { LinearGradient } from "expo-linear-gradient";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import Assets from "../assets";
-import tw from "../lib/tailwind";
-import Label from "../components/Label";
-import { useAuth } from "../contexts/Auth";
-import { useLabels } from "../contexts/Labels";
-import HomeLoader from "../components/Loaders/Home";
-import IconButton from "../components/IconButton";
-import { LinearGradient } from "expo-linear-gradient";
+import Assets from "@/assets";
+import tw from "@/lib/tailwind";
+import Label from "@/components/Label";
+import { useAuth } from "@/contexts/Auth";
+import { useLabels } from "@/contexts/Labels";
+import HomeLoader from "@/components/Loaders/Home";
+import IconButton from "@/components/IconButton";
+
 
 interface HomeProps {
   navigation: NativeStackNavigationProp<any>;

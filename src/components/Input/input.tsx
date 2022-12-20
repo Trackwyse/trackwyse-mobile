@@ -1,12 +1,6 @@
-import {
-  TextInput,
-  Text,
-  TextInputProps,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { TextInput, Text, TextInputProps, TouchableWithoutFeedback, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import tw from "../../lib/tailwind";
+import tw from "@/lib/tailwind";
 import { useRef, useState } from "react";
 
 const sizeClasses = {
@@ -41,10 +35,7 @@ const Input: React.FC<InputProps> = ({
     style
   );
 
-  const textColorClasses = tw.style(
-    disabled && "text-gray-300",
-    !disabled && "text-black"
-  );
+  const textColorClasses = tw.style(disabled && "text-gray-300", !disabled && "text-black");
 
   const placeholderTextColor = tw.color(disabled ? "gray-300" : "gray-400");
 

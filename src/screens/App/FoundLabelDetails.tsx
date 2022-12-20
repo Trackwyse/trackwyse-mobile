@@ -1,30 +1,27 @@
 import { useFormik } from "formik";
-import { View, Text } from "react-native";
 import Modal from "react-native-modal";
-import { useMutation } from "@tanstack/react-query";
+import { View, Text } from "react-native";
+import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
+import { useMutation } from "@tanstack/react-query";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import api from "../api";
-import tw from "../lib/tailwind";
-import Input from "../components/Input";
-import { useAuth } from "../contexts/Auth";
-import Button from "../components/Button";
-import ListItem from "../components/ListItem";
-import { validateFoundLabelDetailsInput } from "../lib/validators";
-import { useEffect, useState } from "react";
-import IconButton from "../components/IconButton";
+import api from "@/api";
+import tw from "@/lib/tailwind";
+import Input from "@/components/Input";
+import { useAuth } from "@/contexts/Auth";
+import Button from "@/components/Button";
+import ListItem from "@/components/ListItem";
+import IconButton from "@/components/IconButton";
+import { validateFoundLabelDetailsInput } from "@/lib/validators";
 
 interface FoundLabelDetailsScreenProps {
   route: any;
   navigation: NativeStackNavigationProp<any>;
 }
 
-const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({
-  route,
-  navigation,
-}) => {
+const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navigation }) => {
   const { accessToken } = useAuth();
   const { label }: { label: Label } = route.params;
   const [isModalVisible, setModalVisible] = useState(false);
@@ -104,8 +101,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({
           <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
             <Text style={tw`text-2xl font-bold`}>Wait!</Text>
             <Text style={tw`my-4 text-gray-400 text-base`}>
-              You have unsaved changes. Are you sure you want to leave this
-              page?
+              You have unsaved changes. Are you sure you want to leave this page?
             </Text>
             <Button
               style={tw`w-full rounded-md my-1 py-2`}
@@ -114,33 +110,24 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({
             >
               Leave Page
             </Button>
-            <Button
-              style={tw`w-full rounded-md py-2 my-1`}
-              onPress={() => setModalVisible(false)}
-            >
+            <Button style={tw`w-full rounded-md py-2 my-1`} onPress={() => setModalVisible(false)}>
               Go Back
             </Button>
           </View>
         </View>
       </Modal>
 
-      <KeyboardAwareScrollView
-        contentContainerStyle={tw`items-center`}
-        style={tw`h-full w-full`}
-      >
+      <KeyboardAwareScrollView contentContainerStyle={tw`items-center`} style={tw`h-full w-full`}>
         <View style={tw`w-full items-center`}>
           <View style={tw`w-11/12 pt-10`}>
             <Text style={tw`text-2xl font-bold`}>Label Details</Text>
             <Text style={tw`my-4 text-gray-400 text-base`}>
-              Thank you for finding this label. The owner has been notified and
-              has provided the following information.
+              Thank you for finding this label. The owner has been notified and has provided the
+              following information.
             </Text>
           </View>
 
-          <ListItem
-            title="Item Name"
-            textRight={label.name ? label.name : "Not provided"}
-          />
+          <ListItem title="Item Name" textRight={label.name ? label.name : "Not provided"} />
           <ListItem
             title="Contact Number"
             position="middle"
@@ -149,17 +136,15 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({
           <ListItem
             title="Message"
             position="bottom"
-            {...(label.message
-              ? { textBottom: label.message }
-              : { textRight: "Not provided" })}
+            {...(label.message ? { textBottom: label.message } : { textRight: "Not provided" })}
           />
         </View>
 
         <View style={tw`w-11/12 pt-10`}>
           <Text style={tw`text-2xl font-bold`}>Update Information</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
-            Would you like to provide your contact information or a recovery
-            address to the owner? If so, please fill out the form below.
+            Would you like to provide your contact information or a recovery address to the owner?
+            If so, please fill out the form below.
           </Text>
         </View>
 
@@ -196,8 +181,8 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({
           <View style={tw`w-11/12 pt-10`}>
             <Text style={tw`text-2xl font-bold`}>Privacy Details</Text>
             <Text style={tw`my-4 text-gray-400 text-base`}>
-              Your approximate location has been shared with the owner. You can
-              view what information is being shared with the owner below.
+              Your approximate location has been shared with the owner. You can view what
+              information is being shared with the owner below.
             </Text>
           </View>
 

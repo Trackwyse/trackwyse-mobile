@@ -1,6 +1,6 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { View, Text, TouchableOpacity } from "react-native";
-import tw from "../../lib/tailwind";
+import tw from "@/lib/tailwind";
 
 const borderClasses = {
   top: "rounded-t-md border-b border-zinc-200",

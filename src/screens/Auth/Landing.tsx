@@ -1,9 +1,9 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { View, Text, SafeAreaView } from "react-native";
 
-import Hyperlink from "../components/Hyperlink";
-import Button from "../components/Button";
-import tw from "../lib/tailwind";
+import Hyperlink from "@/components/Hyperlink";
+import Button from "@/components/Button";
+import tw from "@/lib/tailwind";
 
 interface LandingScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -27,8 +27,8 @@ const Landing: React.FC<LandingScreenProps> = ({ navigation }) => {
         <View style={tw`items-center w-full`}>
           <View style={tw`w-11/12 items-start`}>
             <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Track items.</Text>
-            <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Notified when found.</Text>
-            <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Day saved.</Text>
+            <Text style={tw`max-w-4/5 text-4xl font-medium my-2`}>Get notified when found.</Text>
+            <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Save the day.</Text>
           </View>
         </View>
         <View style={tw`bg-white w-full items-center rounded-t-3xl pt-4 pb-8`}>

@@ -1,23 +1,12 @@
 import { useEffect, useRef } from "react";
-import {
-  Animated,
-  Easing,
-  SafeAreaView,
-  StyleProp,
-  View,
-  ViewStyle,
-} from "react-native";
+import { Animated, Easing, SafeAreaView, StyleProp, View, ViewStyle } from "react-native";
 import * as Animatable from "react-native-animatable";
-import tw from "../../lib/tailwind";
+import tw from "@/lib/tailwind";
 
 const HomeLoader: React.FC = () => {
   return (
     <SafeAreaView style={tw`mx-3 my-5`}>
-      <Animatable.View
-        animation="pulse"
-        easing="ease-out"
-        iterationCount="infinite"
-      >
+      <Animatable.View animation="pulse" easing="ease-out" iterationCount="infinite">
         <View style={tw` justify-between flex-row`}>
           <LoadingRect />
           <LoadingRect />

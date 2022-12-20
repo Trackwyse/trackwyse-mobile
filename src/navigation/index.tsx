@@ -1,27 +1,27 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Home from "../screens/Home";
-import Login from "../screens/Login";
-import Landing from "../screens/Landing";
-import Verify1 from "../screens/Verify.1";
-import Verify2 from "../screens/Verify.2";
-import AddLabel from "../screens/AddLabel";
-import Register from "../screens/Register.1";
-import Register2 from "../screens/Register.2";
-import EditLabel from "../screens/ModifyLabel";
-import AcceptTerms1 from "../screens/AcceptTerms.1";
-import AcceptTerms2 from "../screens/AcceptTerms.2";
-import ForgotPassword from "../screens/ForgotPassword.1";
-import ForgotPassword2 from "../screens/ForgotPassword.2";
-import ForgotPassword3 from "../screens/ForgotPassword.3";
+import Home from "../screens/App/Home";
+import Login from "../screens/Auth/Login";
+import Landing from "../screens/Auth/Landing";
+import Verify1 from "../screens/Verify/Verify.1";
+import Verify2 from "../screens/Verify/Verify.2";
+import AddLabel from "../screens/App/AddLabel";
+import Register from "../screens/Auth/Register.1";
+import Register2 from "../screens/Auth/Register.2";
+import EditLabel from "../screens/App/ModifyLabel";
+import AcceptTerms1 from "../screens/Terms/AcceptTerms.1";
+import AcceptTerms2 from "../screens/Terms/AcceptTerms.2";
+import ForgotPassword from "../screens/Auth/ForgotPassword.1";
+import ForgotPassword2 from "../screens/Auth/ForgotPassword.2";
+import ForgotPassword3 from "../screens/Auth/ForgotPassword.3";
 
 import { useAuth } from "../contexts/Auth";
 import { LabelsProvider } from "../contexts/Labels";
 import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 import IconButton from "../components/IconButton";
-import FoundLabel from "../screens/FoundLabel";
-import FoundLabelDetails from "../screens/FoundLabelDetails";
-import Profile from "../screens/Profile";
+import FoundLabel from "../screens/App/FoundLabel";
+import FoundLabelDetails from "../screens/App/FoundLabelDetails";
+import Profile from "../screens/Profile/Profile";
 
 const Stack = createNativeStackNavigator();
 

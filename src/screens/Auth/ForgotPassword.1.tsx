@@ -1,8 +1,8 @@
 import { View, Text } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import tw from "../lib/tailwind";
-import BadgeButton from "../components/BadgeButton";
+import tw from "@/lib/tailwind";
+import BadgeButton from "@/components/BadgeButton";
 
 interface ForgotPasswordScreenProps {
   navigation: NativeStackNavigationProp<any>;

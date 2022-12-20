@@ -1,6 +1,6 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacityProps, TouchableOpacity } from "react-native";
-import tw from "../../lib/tailwind";
+import tw from "@/lib/tailwind";
 
 interface IconButtonProps extends TouchableOpacityProps {
   icon: keyof typeof Ionicons.glyphMap;

@@ -1,7 +1,8 @@
 import { ScrollView } from "react-native";
-import ListItem from "../components/ListItem";
-import { useAuth } from "../contexts/Auth";
-import tw from "../lib/tailwind";
+
+import tw from "@/lib/tailwind";
+import { useAuth } from "@/contexts/Auth";
+import ListItem from "@/components/ListItem";
 
 interface ProfileScreenProps {}
 

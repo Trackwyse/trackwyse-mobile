@@ -1,16 +1,16 @@
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
-import { KeyboardAvoidingView, Text, TouchableOpacity, View } from "react-native";
+import { KeyboardAvoidingView, Text, View } from "react-native";
 
-import api from "../api";
-import tw from "../lib/tailwind";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import { useAuth } from "../contexts/Auth";
-import { validateLoginInput } from "../lib/validators";
+import api from "@/api";
+import tw from "@/lib/tailwind";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+import { useAuth } from "@/contexts/Auth";
+import Hyperlink from "@/components/Hyperlink";
+import { validateLoginInput } from "@/lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import Hyperlink from "../components/Hyperlink";
 
 interface LoginScreenProps {
   navigation: NativeStackNavigationProp<any>;

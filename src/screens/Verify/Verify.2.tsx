@@ -1,15 +1,15 @@
 import { useFormik } from "formik";
-import { KeyboardAvoidingView, Text, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
+import { KeyboardAvoidingView, Text, View } from "react-native";
 
-import api from "../api";
-import tw from "../lib/tailwind";
-import Input from "../components/Input";
-import { useAuth } from "../contexts/Auth";
-import BadgeButton from "../components/BadgeButton";
-import { validateVerifyInput } from "../lib/validators";
-import Hyperlink from "../components/Hyperlink";
+import api from "@/api";
+import tw from "@/lib/tailwind";
+import Input from "@/components/Input";
+import { useAuth } from "@/contexts/Auth";
+import Hyperlink from "@/components/Hyperlink";
+import BadgeButton from "@/components/BadgeButton";
+import { validateVerifyInput } from "@/lib/validators";
 
 const Verify: React.FC = () => {
   const { user, updateUser, accessToken } = useAuth();
