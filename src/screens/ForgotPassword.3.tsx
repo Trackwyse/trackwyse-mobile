@@ -1,15 +1,15 @@
-import { View, Text, KeyboardAvoidingView, TouchableOpacity } from "react-native";
 import { useFormik } from "formik";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
-import tw from "../lib/tailwind";
-import BadgeButton from "../components/BadgeButton";
-import Input from "../components/Input";
-import { useMutation } from "@tanstack/react-query";
-import api from "../api";
-import { validateResetPasswordInput } from "../lib/validators";
 import { AxiosError } from "axios";
 import Toast from "react-native-toast-message";
+import { useMutation } from "@tanstack/react-query";
+import { View, Text, KeyboardAvoidingView } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import api from "../api";
+import tw from "../lib/tailwind";
+import Input from "../components/Input";
+import BadgeButton from "../components/BadgeButton";
+import { validateResetPasswordInput } from "../lib/validators";
 
 interface ForgotPasswordScreenProps {
   navigation: NativeStackNavigationProp<any>;
