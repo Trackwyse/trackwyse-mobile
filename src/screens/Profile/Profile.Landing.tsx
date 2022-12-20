@@ -3,14 +3,21 @@ import { ScrollView } from "react-native";
 import tw from "@/lib/tailwind";
 import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-interface ProfileScreenProps {}
+interface ProfileScreenProps {
+  navigation: NativeStackNavigationProp<any>;
+}
 
-const Profile: React.FC<ProfileScreenProps> = ({}) => {
+const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { signOut } = useAuth();
 
   const handleLogout = () => {
     signOut();
+  };
+
+  const handleItemPress = (location: string) => {
+    navigation.navigate(location);
   };
 
   return (
@@ -22,6 +29,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
         position="alone"
         iconRight="md-chevron-forward-outline"
         style={tw`mt-5`}
+        onPress={() => handleItemPress("ProfileUserInfo")}
       />
 
       <ListItem
@@ -31,6 +39,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
         position="top"
         style={tw`mt-5`}
         iconRight="md-chevron-forward-outline"
+        onPress={() => handleItemPress("ProfilePurchase")}
       />
       <ListItem
         pressable
@@ -38,6 +47,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
         iconLeft="star-outline"
         position="middle"
         iconRight="md-chevron-forward-outline"
+        onPress={() => handleItemPress("ProfileRate")}
       />
       <ListItem
         pressable
@@ -45,6 +55,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
         iconLeft="share-social-outline"
         position="middle"
         iconRight="md-chevron-forward-outline"
+        onPress={() => handleItemPress("ProfileShare")}
       />
       <ListItem
         pressable
@@ -52,6 +63,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
         iconLeft="help-circle-outline"
         position="middle"
         iconRight="md-chevron-forward-outline"
+        onPress={() => handleItemPress("ProfileHelp")}
       />
       <ListItem
         pressable
@@ -59,6 +71,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
         iconLeft="information-circle-outline"
         position="bottom"
         iconRight="md-chevron-forward-outline"
+        onPress={() => handleItemPress("ProfileAbout")}
       />
 
       <ListItem
