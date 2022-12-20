@@ -10,7 +10,7 @@ interface ForgotPasswordScreenProps {
 
 const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation }) => {
   const onPress = () => {
-    navigation.navigate("forgotPassword2");
+    navigation.navigate("ForgotPasswordAction");
   };
 
   return (

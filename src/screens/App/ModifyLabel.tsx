@@ -79,7 +79,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
             ...values,
             color: colors[values.color as number],
           });
-          navigation.navigate("home");
+          navigation.navigate("Home");
         },
         onError: (err) => {
           Toast.show({
@@ -95,7 +95,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
   const onDeleteLabel = () => {
     deletionMutation.mutate(undefined, {
       onSuccess: () => {
-        navigation.navigate("home");
+        navigation.navigate("Home");
         deleteLabel(label);
         Toast.show({
           type: "success",
@@ -165,7 +165,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
             <Button
               style={tw`w-full rounded-md my-1 py-2`}
               color="secondary"
-              onPress={() => navigation.navigate("home")}
+              onPress={() => navigation.navigate("Home")}
             >
               Leave Page
             </Button>

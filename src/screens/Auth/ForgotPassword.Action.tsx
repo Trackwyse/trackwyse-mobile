@@ -31,7 +31,7 @@ const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation }) => 
     onSubmit: (values) => {
       mutation.mutate(values, {
         onSuccess: () => {
-          navigation.navigate("forgotPassword3", { email: values.email });
+          navigation.navigate("ForgotPasswordReset", { email: values.email });
         },
         onError: (error) => {
           if (error instanceof AxiosError) {

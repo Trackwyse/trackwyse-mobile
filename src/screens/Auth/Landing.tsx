@@ -11,11 +11,11 @@ interface LandingScreenProps {
 
 const Landing: React.FC<LandingScreenProps> = ({ navigation }) => {
   const navigateToLogin = () => {
-    navigation.navigate("login");
+    navigation.navigate("Login");
   };
 
   const navigateToRegister = () => {
-    navigation.navigate("register");
+    navigation.navigate("RegisterStep1");
   };
 
   return (

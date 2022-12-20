@@ -54,7 +54,7 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
             text1: "Label Found",
             text2: "The owner of this label has been notified",
           });
-          navigation.navigate("foundLabelDetails", {
+          navigation.navigate("FoundLabelDetails", {
             label: data.label,
           });
         },

@@ -99,7 +99,7 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
       <View style={tw`flex-2 flex-row justify-between`}>
         <View style={tw`max-w-1/2 flex-1 p-1`}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("addLabel")}
+            onPress={() => navigation.navigate("AddLabel")}
             style={tw`py-12 border border-dashed border-gray-200 rounded-lg items-center`}
           >
             <View style={tw`bg-primary-200 rounded-full p-8`}>
@@ -116,7 +116,7 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
 
         <View style={tw`max-w-1/2 flex-1 p-1`}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("foundLabel")}
+            onPress={() => navigation.navigate("FoundLabelScan")}
             style={tw`py-12 border border-dashed border-gray-200 rounded-lg items-center`}
           >
             <View style={tw`bg-primary-200 rounded-full p-8`}>

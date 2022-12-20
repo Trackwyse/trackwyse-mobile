@@ -56,7 +56,7 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
             text2: "Your label has been added to your account",
           });
           createLabel(labelId);
-          navigation.navigate("editLabel", { labelId });
+          navigation.navigate("EditLabel", { labelId });
         },
         onError: (error) => {
           Toast.show({

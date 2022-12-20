@@ -51,7 +51,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
             text2: "Thank you for recovering this label",
           });
 
-          navigation.navigate("home");
+          navigation.navigate("Home");
         },
         onError: () => {
           Toast.show({
@@ -80,7 +80,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
             if (hasChanged) {
               setModalVisible(true);
             } else {
-              navigation.navigate("home");
+              navigation.navigate("Home");
             }
           }}
         />
@@ -106,7 +106,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
             <Button
               style={tw`w-full rounded-md my-1 py-2`}
               color="secondary"
-              onPress={() => navigation.navigate("home")}
+              onPress={() => navigation.navigate("Home")}
             >
               Leave Page
             </Button>

@@ -39,7 +39,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
             return;
           }
 
-          navigation.navigate("register2", {
+          navigation.navigate("RegisterStep2", {
             email: values.email,
             password: values.password,
           });

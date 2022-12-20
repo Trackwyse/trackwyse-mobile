@@ -11,7 +11,7 @@ interface LabelProps {
 }
 
 type RootStackParamList = {
-  editLabel: { labelId: string } | undefined;
+  EditLabel: { labelId: string } | undefined;
 };
 
 const Label: React.FC<LabelProps> = ({ label }) => {
@@ -21,7 +21,7 @@ const Label: React.FC<LabelProps> = ({ label }) => {
     <View style={tw`max-w-1/2 flex-1 p-1`}>
       <TouchableOpacity
         style={tw.style(`pt-12 border  border-gray-100 rounded-lg items-center pb-5`)}
-        onPress={() => navigation.navigate("editLabel", { labelId: label._id })}
+        onPress={() => navigation.navigate("EditLabel", { labelId: label._id })}
       >
         <View style={tw.style(`rounded-full p-8`, label.color?.bg)}>
           <View style={tw`absolute inset-0  items-center justify-center`}>

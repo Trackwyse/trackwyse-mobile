@@ -4,11 +4,14 @@ import Home from "../screens/App/Home";
 import Login from "../screens/Auth/Login";
 import Landing from "../screens/Auth/Landing";
 
-import Register from "../screens/Auth/Register.1";
-import Register2 from "../screens/Auth/Register.2";
+import RegisterStep1 from "../screens/Auth/Register.Step1";
+import RegisterStep2 from "../screens/Auth/Register.Step2";
 
 import AddLabel from "../screens/App/AddLabel";
 import EditLabel from "../screens/App/ModifyLabel";
+
+import FoundLabelScan from "../screens/App/FoundLabel.Scan";
+import FoundLabelDetails from "../screens/App/FoundLabel.Details";
 
 import ProfileRate from "../screens/Profile/Profile.Rate";
 import ProfileShare from "../screens/Profile/Profile.Share";
@@ -18,9 +21,9 @@ import ProfileLanding from "../screens/Profile/Profile.Landing";
 import ProfileUserInfo from "../screens/Profile/Profile.UserInfo";
 import ProfilePurchase from "../screens/Profile/Profile.Purchase";
 
-import ForgotPassword from "../screens/Auth/ForgotPassword.1";
-import ForgotPassword2 from "../screens/Auth/ForgotPassword.2";
-import ForgotPassword3 from "../screens/Auth/ForgotPassword.3";
+import ForgotPasswordLanding from "../screens/Auth/ForgotPassword.Landing";
+import ForgotPasswordAction from "../screens/Auth/ForgotPassword.Action";
+import ForgotPasswordReset from "../screens/Auth/ForgotPassword.Reset";
 
 import AcceptTermsAction from "../screens/Terms/AcceptTerms.Action";
 import AcceptTermsLanding from "../screens/Terms/AcceptTerms.Landing";
@@ -30,9 +33,7 @@ import VerificationLanding from "../screens/Verification/Verification.Landing";
 
 import { useAuth } from "../contexts/Auth";
 import IconButton from "../components/IconButton";
-import FoundLabel from "../screens/App/FoundLabel";
 import { LabelsProvider } from "../contexts/Labels";
-import FoundLabelDetails from "../screens/App/FoundLabelDetails";
 import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 
 const Stack = createNativeStackNavigator();
@@ -51,13 +52,13 @@ const AuthStackNavigator: React.FC = () => {
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
-      <Stack.Screen name="landing" component={Landing} options={{ headerShown: false }} />
-      <Stack.Screen name="register" component={Register} />
-      <Stack.Screen name="register2" component={Register2} />
-      <Stack.Screen name="login" component={Login} />
-      <Stack.Screen name="forgotPassword" component={ForgotPassword} />
-      <Stack.Screen name="forgotPassword2" component={ForgotPassword2} />
-      <Stack.Screen name="forgotPassword3" component={ForgotPassword3} />
+      <Stack.Screen name="Landing" component={Landing} options={{ headerShown: false }} />
+      <Stack.Screen name="RegisterStep1" component={RegisterStep1} />
+      <Stack.Screen name="RegisterStep2" component={RegisterStep2} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="ForgotPasswordLanding" component={ForgotPasswordLanding} />
+      <Stack.Screen name="ForgotPasswordAction" component={ForgotPasswordAction} />
+      <Stack.Screen name="ForgotPasswordReset" component={ForgotPasswordReset} />
     </Stack.Navigator>
   );
 };
@@ -114,7 +115,7 @@ const AppStackNavigator: React.FC = () => {
     <LabelsProvider>
       <Stack.Navigator>
         <Stack.Screen
-          name="home"
+          name="Home"
           component={Home}
           options={{
             title: ``,
@@ -122,7 +123,7 @@ const AppStackNavigator: React.FC = () => {
           }}
         />
         <Stack.Screen
-          name="addLabel"
+          name="AddLabel"
           component={AddLabel}
           options={({ navigation }) => ({
             title: "Add Label",
@@ -194,8 +195,8 @@ const AppStackNavigator: React.FC = () => {
           })}
         />
         <Stack.Screen
-          name="foundLabel"
-          component={FoundLabel}
+          name="FoundLabelScan"
+          component={FoundLabelScan}
           options={({ navigation }) => ({
             title: "Found Label",
             gestureEnabled: false,
@@ -203,7 +204,7 @@ const AppStackNavigator: React.FC = () => {
           })}
         />
         <Stack.Screen
-          name="foundLabelDetails"
+          name="FoundLabelDetails"
           component={FoundLabelDetails}
           options={({ navigation }) => ({
             title: "Found Label",
@@ -212,7 +213,7 @@ const AppStackNavigator: React.FC = () => {
           })}
         />
         <Stack.Screen
-          name="editLabel"
+          name="EditLabel"
           component={EditLabel}
           options={({ navigation }) => ({
             title: "Edit Label",
