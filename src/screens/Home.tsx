@@ -1,8 +1,17 @@
-import { Text, View, SafeAreaView, FlatList, TouchableOpacity, RefreshControl } from "react-native";
+import {
+  Text,
+  View,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
+  RefreshControl,
+  Image,
+} from "react-native";
 import { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
+import Assets from "../assets";
 import tw from "../lib/tailwind";
 import Label from "../components/Label";
 import { useAuth } from "../contexts/Auth";
@@ -71,11 +80,17 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
           start={{ x: 0, y: 0 }}
           end={{ x: 1.2, y: 1.2 }}
           colors={[tw.color("aqua-100") as string, tw.color("aqua-200") as string]}
-          style={tw` rounded-3xl w-full mt-5 mb-7 p-7`}
+          style={tw`flex-row justify-between rounded-3xl w-full mt-5 mb-7 p-7`}
         >
           <View style={tw`max-w-1/2`}>
             <Text style={tw`text-xl font-medium`}>Save 15% with your first order.</Text>
             <Text style={tw`mt-8 text-primary-100 text-base`}>Order Now</Text>
+          </View>
+          <View>
+            <Image
+              source={Assets.tag}
+              style={{ flex: 1, width: 110, height: 110, resizeMode: "contain" }}
+            />
           </View>
         </LinearGradient>
       </View>
