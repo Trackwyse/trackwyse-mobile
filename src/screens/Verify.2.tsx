@@ -1,10 +1,5 @@
 import { useFormik } from "formik";
-import {
-  KeyboardAvoidingView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { KeyboardAvoidingView, Text, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 
@@ -68,8 +63,7 @@ const Verify: React.FC = () => {
       },
       onError: () => {
         verifyInput.setErrors({
-          verificationToken:
-            "Verification code already sent. Please wait 5 minutes.",
+          verificationToken: "Verification code already sent. Please wait 5 minutes.",
         });
       },
     });
@@ -80,8 +74,8 @@ const Verify: React.FC = () => {
   };
 
   return (
-    <View style={tw`h-full`}>
-      <KeyboardAvoidingView style={tw`items-center justify-end flex-1`}>
+    <View style={tw`h-full items-center`}>
+      <KeyboardAvoidingView style={tw`w-full items-center justify-end flex-1`}>
         <View style={tw`w-11/12 pt-10`}>
           <Text style={tw`text-2xl font-bold`}>Verification</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
@@ -98,13 +92,8 @@ const Verify: React.FC = () => {
           onChangeText={verifyInput.handleChange("verificationToken")}
         />
 
-        <TouchableOpacity
-          style={tw`justify-start w-11/12 mt-2`}
-          onPress={onReverifyPress}
-        >
-          <Text style={tw`underline text-primary-100`}>
-            Request another code
-          </Text>
+        <TouchableOpacity style={tw`justify-start w-11/12 mt-2`} onPress={onReverifyPress}>
+          <Text style={tw`underline text-primary-100`}>Request another code</Text>
         </TouchableOpacity>
 
         <View style={tw`flex-1`} />

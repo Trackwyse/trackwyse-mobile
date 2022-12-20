@@ -53,7 +53,7 @@ const BadgeButton: React.FC<BadgeButtonProps> = ({
   );
 
   return (
-    <TouchableOpacity disabled={disabled} style={buttonClassNames} {...props}>
+    <TouchableOpacity disabled={disabled || loading} style={buttonClassNames} {...props}>
       {iconLeft && (
         <Ionicons name={iconLeft} style={tw.style("mr-3", textClassNames)} />
       )}

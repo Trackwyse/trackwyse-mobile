@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const baseURL  = "https://trackerwind.in-staging.space";
+const baseURL = "https://trackerwind.in-staging.space";
 
 // Base API Client
 const apiClient = axios.create({
-  baseURL
+  baseURL,
 });
 
 /*
@@ -67,7 +67,7 @@ const register = (value: RegisterInput): Promise<RegisterAPIResponse> => {
     - message: string
 */
 const verifyEmail = (values: VerifyInput, accessToken: string): Promise<VerifyEmailAPIResponse> => {
-  const {verificationToken} = values;
+  const { verificationToken } = values;
 
   return apiClient.post(
     "/auth/v1/verify",
@@ -199,7 +199,10 @@ const getLabels = (accessToken: string): Promise<GetLabelsAPIResponse> => {
     - error: boolean
     - message: string
 */
-const modifyLabel = (values: ModifyLabelInput, accessToken: string): Promise<ModifyLabelAPIResponse> => {
+const modifyLabel = (
+  values: ModifyLabelInput,
+  accessToken: string
+): Promise<ModifyLabelAPIResponse> => {
   const { id, name, color, message, phoneNumber } = values;
 
   return apiClient.patch(
@@ -208,7 +211,7 @@ const modifyLabel = (values: ModifyLabelInput, accessToken: string): Promise<Mod
       labelName: name,
       labelColor: color,
       labelMessage: message,
-      phoneNumber
+      phoneNumber,
     },
     {
       headers: {
@@ -228,17 +231,17 @@ const modifyLabel = (values: ModifyLabelInput, accessToken: string): Promise<Mod
     - error: boolean
     - message: string
 */
-const deleteLabel = (values: DeleteLabelInput, accessToken: string): Promise<DeleteLabelAPIResponse> => {
+const deleteLabel = (
+  values: DeleteLabelInput,
+  accessToken: string
+): Promise<DeleteLabelAPIResponse> => {
   const { id } = values;
 
-  return apiClient.delete(
-    `/api/v1/labels/delete/${id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
+  return apiClient.delete(`/api/v1/labels/delete/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 };
 
 /*
@@ -256,7 +259,7 @@ const getLabel = (values: GetLabelInput, accessToken?: string): Promise<GetLabel
   const { id } = values;
 
   return apiClient.get(`/api/v1/labels/${id}`, {
-          // Disable in order to allow users to find their own labels
+    // Disable in order to allow users to find their own labels
     // headers: {
     //   Authorization: `Bearer ${accessToken}`,
     // },
@@ -278,20 +281,27 @@ const getLabel = (values: GetLabelInput, accessToken?: string): Promise<GetLabel
     - error: boolean
     - message: string
 */
-const updateFoundLabelDetails = (values: FoundLabelDetailsInput, accessToken: string): Promise<FoundLabelDetailsAPIResponse> => {
-  const {id, phoneNumber, recoveryLocation, exactLocation} = values;
+const updateFoundLabelDetails = (
+  values: FoundLabelDetailsInput,
+  accessToken: string
+): Promise<FoundLabelDetailsAPIResponse> => {
+  const { id, phoneNumber, recoveryLocation, exactLocation } = values;
 
-  return apiClient.post(`/api/v1/labels/found/${id}`, {
-    phoneNumber,
-    recoveryLocation,
-    exactLocation
-  }, {
-    // Disable in order to allow users to find their own labels
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
+  return apiClient.post(
+    `/api/v1/labels/found/${id}`,
+    {
+      phoneNumber,
+      recoveryLocation,
+      exactLocation,
     },
-  });
-}
+    {
+      // Disable in order to allow users to find their own labels
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
 
 /*
   POST /auth/v1/acceptTerms
@@ -315,12 +325,53 @@ const acceptTerms = (accessToken: string): Promise<AcceptTermsAPIResponse> => {
   );
 };
 
+/*
+  POST /auth/v1/forgot
+
+  Request Body:
+    - email: string
+    
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const forgotPassword = (values: ForgotPasswordInput): Promise<ForgotPasswordAPIResponse> => {
+  const { email } = values;
+
+  return apiClient.post("/auth/v1/forgot", {
+    email,
+  });
+};
+
+/*
+  POST /auth/v1/reset
+
+  Request Body:
+    - password: string
+    - email: string
+    - resetToken: string
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const resetPassword = (values: ResetPasswordInput): Promise<ResetPasswordAPIResponse> => {
+  const { password, email, resetToken } = values;
+
+  return apiClient.post("/auth/v1/reset", {
+    password,
+    email,
+    resetToken,
+  });
+};
 
 export default {
   login,
   register,
   getUser,
   acceptTerms,
+  forgotPassword,
+  resetPassword,
   checkEmail,
   verifyEmail,
   reverifyEmail,
@@ -330,5 +381,5 @@ export default {
   getLabels,
   modifyLabel,
   deleteLabel,
-  updateFoundLabelDetails
+  updateFoundLabelDetails,
 };

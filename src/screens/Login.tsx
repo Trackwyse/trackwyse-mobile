@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
-import { KeyboardAvoidingView, Text, View } from "react-native";
+import { KeyboardAvoidingView, Text, TouchableOpacity, View } from "react-native";
 
 import api from "../api";
 import tw from "../lib/tailwind";
@@ -9,8 +9,13 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import { useAuth } from "../contexts/Auth";
 import { validateLoginInput } from "../lib/validators";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-const Login: React.FC = () => {
+interface LoginScreenProps {
+  navigation: NativeStackNavigationProp<any>;
+}
+
+const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
   const { updateAccessToken } = useAuth();
 
   const mutation = useMutation({
@@ -47,6 +52,10 @@ const Login: React.FC = () => {
     },
   });
 
+  const onForgotPress = () => {
+    navigation.navigate("forgotPassword");
+  };
+
   return (
     <View style={tw`h-full`}>
       <KeyboardAvoidingView style={tw`items-center justify-end flex-1`}>
@@ -75,6 +84,11 @@ const Login: React.FC = () => {
           value={loginInput.values.password}
           onChangeText={loginInput.handleChange("password")}
         />
+
+        <TouchableOpacity style={tw`justify-start w-11/12 mt-2`} onPress={onForgotPress}>
+          <Text style={tw`underline text-primary-100`}>Forgot Password?</Text>
+        </TouchableOpacity>
+
         <View style={tw`flex-1`} />
       </KeyboardAvoidingView>
 
@@ -83,11 +97,7 @@ const Login: React.FC = () => {
         behavior="padding"
         keyboardVerticalOffset={100}
       >
-        <Button
-          size="lg"
-          disabled={mutation.isLoading}
-          onPress={() => loginInput.handleSubmit()}
-        >
+        <Button size="lg" disabled={mutation.isLoading} onPress={() => loginInput.handleSubmit()}>
           Login
         </Button>
       </KeyboardAvoidingView>
