@@ -9,6 +9,7 @@ import Input from "../components/Input";
 import { useAuth } from "../contexts/Auth";
 import BadgeButton from "../components/BadgeButton";
 import { validateVerifyInput } from "../lib/validators";
+import Hyperlink from "../components/Hyperlink";
 
 const Verify: React.FC = () => {
   const { user, updateUser, accessToken } = useAuth();
@@ -92,9 +93,9 @@ const Verify: React.FC = () => {
           onChangeText={verifyInput.handleChange("verificationToken")}
         />
 
-        <TouchableOpacity style={tw`justify-start w-11/12 mt-2`} onPress={onReverifyPress}>
-          <Text style={tw`underline text-primary-100`}>Request another code</Text>
-        </TouchableOpacity>
+        <Hyperlink style={tw`w-11/12 mt-2`} onPress={onReverifyPress}>
+          Request another code
+        </Hyperlink>
 
         <View style={tw`flex-1`} />
       </KeyboardAvoidingView>

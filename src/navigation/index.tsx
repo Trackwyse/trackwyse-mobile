@@ -39,7 +39,7 @@ const AuthStackNavigator: React.FC = () => {
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
-      <Stack.Screen name="landing" component={Landing} options={{ headerLeft: () => <></> }} />
+      <Stack.Screen name="landing" component={Landing} options={{ headerShown: false }} />
       <Stack.Screen name="register" component={Register} />
       <Stack.Screen name="register2" component={Register2} />
       <Stack.Screen name="login" component={Login} />

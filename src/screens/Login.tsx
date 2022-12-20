@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import { useAuth } from "../contexts/Auth";
 import { validateLoginInput } from "../lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import Hyperlink from "../components/Hyperlink";
 
 interface LoginScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -85,9 +86,9 @@ const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
           onChangeText={loginInput.handleChange("password")}
         />
 
-        <TouchableOpacity style={tw`justify-start w-11/12 mt-2`} onPress={onForgotPress}>
-          <Text style={tw`underline text-primary-100`}>Forgot Password?</Text>
-        </TouchableOpacity>
+        <Hyperlink style={tw`justify-start w-11/12 mt-2`} onPress={onForgotPress}>
+          Forgot Password?
+        </Hyperlink>
 
         <View style={tw`flex-1`} />
       </KeyboardAvoidingView>
