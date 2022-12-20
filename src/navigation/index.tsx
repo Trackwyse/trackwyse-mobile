@@ -21,6 +21,7 @@ import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 import IconButton from "../components/IconButton";
 import FoundLabel from "../screens/FoundLabel";
 import FoundLabelDetails from "../screens/FoundLabelDetails";
+import Profile from "../screens/Profile";
 
 const Stack = createNativeStackNavigator();
 
@@ -118,6 +119,15 @@ const AppStackNavigator: React.FC = () => {
           })}
         />
         <Stack.Screen
+          name="profile"
+          component={Profile}
+          options={({ navigation }) => ({
+            title: "Profile",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
           name="foundLabel"
           component={FoundLabel}
           options={({ navigation }) => ({
@@ -132,9 +142,7 @@ const AppStackNavigator: React.FC = () => {
           options={({ navigation }) => ({
             title: "Found Label",
             gestureEnabled: false,
-            headerLeft: () => (
-              <NavigationWithBack navigation={navigation} returnHome />
-            ),
+            headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
           })}
         />
         <Stack.Screen

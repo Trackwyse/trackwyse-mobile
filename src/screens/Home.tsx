@@ -1,11 +1,4 @@
-import {
-  Text,
-  View,
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity,
-  RefreshControl,
-} from "react-native";
+import { Text, View, SafeAreaView, FlatList, TouchableOpacity, RefreshControl } from "react-native";
 import { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -15,6 +8,7 @@ import Label from "../components/Label";
 import { useAuth } from "../contexts/Auth";
 import { useLabels } from "../contexts/Labels";
 import HomeLoader from "../components/Loaders/Home";
+import IconButton from "../components/IconButton";
 
 interface HomeProps {
   navigation: NativeStackNavigationProp<any>;
@@ -35,27 +29,31 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      <View style={tw`items-center`}>
-        <View style={tw`w-11/12`}>
-          <Text style={tw`font-bold text-3xl`}>
-            Welcome {user?.firstName || ""}
-          </Text>
+      <View style={tw`items-center mb-2`}>
+        <View style={tw`w-11/12 flex-row items-center justify-between`}>
+          <Text style={tw`font-bold text-3xl`}>Welcome {user?.firstName || ""}</Text>
+          <IconButton
+            icon="person"
+            size={25}
+            filled
+            onPress={() => navigation.navigate("profile")}
+          />
         </View>
+      </View>
+
+      <View style={tw`items-center`}>
+        <View style={tw`bg-red h-38 rounded-md w-11/12`} />
       </View>
 
       <FlatList
         numColumns={2}
         style={tw`mx-3 my-5`}
         data={labels}
-        ListHeaderComponent={
-          <ListHeader navigation={navigation} firstLabel={labels[0]} />
-        }
+        ListHeaderComponent={<ListHeader navigation={navigation} firstLabel={labels[0]} />}
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={tw`flex-1 justify-between`}
         renderItem={({ item: label }) => <Label label={label} />}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
     </SafeAreaView>
   );
