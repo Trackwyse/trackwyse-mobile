@@ -42,8 +42,6 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
         </View>
       </View>
 
-      {/* Move inside List, and make into component */}
-
       <FlatList
         numColumns={2}
         style={tw`mx-3 mb-5`}
@@ -71,7 +69,7 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
       <View style={tw`items-center`}>
         <LinearGradient
           start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
+          end={{ x: 1.2, y: 1.2 }}
           colors={[tw.color("aqua-100") as string, tw.color("aqua-200") as string]}
           style={tw` rounded-3xl w-full mt-5 mb-7 p-7`}
         >
@@ -81,6 +79,7 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation, firstLabel }) => {
           </View>
         </LinearGradient>
       </View>
+      {/* END TODO */}
 
       <View style={tw`flex-2 flex-row justify-between`}>
         <View style={tw`max-w-1/2 flex-1 p-1`}>
