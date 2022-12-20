@@ -3,14 +3,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../screens/App/Home";
 import Login from "../screens/Auth/Login";
 import Landing from "../screens/Auth/Landing";
-import Verify1 from "../screens/Verify/Verify.1";
-import Verify2 from "../screens/Verify/Verify.2";
+import VerificationLanding from "../screens/Verify/VerificationLanding";
+import VerificationAction from "../screens/Verify/VerificationAction";
 import AddLabel from "../screens/App/AddLabel";
 import Register from "../screens/Auth/Register.1";
 import Register2 from "../screens/Auth/Register.2";
 import EditLabel from "../screens/App/ModifyLabel";
-import AcceptTerms1 from "../screens/Terms/AcceptTerms.1";
-import AcceptTerms2 from "../screens/Terms/AcceptTerms.2";
+import AcceptTermsLanding from "../screens/Terms/AcceptTermsLanding";
+import AcceptTermsAction from "../screens/Terms/AcceptTermsAction";
 import ForgotPassword from "../screens/Auth/ForgotPassword.1";
 import ForgotPassword2 from "../screens/Auth/ForgotPassword.2";
 import ForgotPassword3 from "../screens/Auth/ForgotPassword.3";
@@ -64,8 +64,8 @@ const VerificationStackNavigator: React.FC = () => {
         headerLeft: () => <></>,
       }}
     >
-      <Stack.Screen name="verify1" component={Verify1} />
-      <Stack.Screen name="verify2" component={Verify2} />
+      <Stack.Screen name="VerificationLanding" component={VerificationLanding} />
+      <Stack.Screen name="VerificationAction" component={VerificationAction} />
     </Stack.Navigator>
   );
 };
@@ -85,8 +85,8 @@ const AcceptTermsStackNavigator: React.FC = () => {
         headerLeft: () => <></>,
       }}
     >
-      <Stack.Screen name="terms1" component={AcceptTerms1} />
-      <Stack.Screen name="terms2" component={AcceptTerms2} />
+      <Stack.Screen name="AcceptTermsLanding" component={AcceptTermsLanding} />
+      <Stack.Screen name="AcceptTermsAction" component={AcceptTermsAction} />
     </Stack.Navigator>
   );
 };

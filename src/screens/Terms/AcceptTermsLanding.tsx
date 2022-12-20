@@ -10,7 +10,7 @@ interface AcceptTermsProps {
 
 const AcceptTerms: React.FC<AcceptTermsProps> = ({ navigation }) => {
   const onPress = () => {
-    navigation.navigate("terms2");
+    navigation.navigate("AcceptTermsAction");
   };
 
   return (

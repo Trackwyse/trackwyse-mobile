@@ -10,7 +10,7 @@ interface VerifyProps {
 
 const Verify: React.FC<VerifyProps> = ({ navigation }) => {
   const onPress = () => {
-    navigation.navigate("verify2");
+    navigation.navigate("VerificationAction");
   };
 
   return (
