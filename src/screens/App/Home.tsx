@@ -20,7 +20,6 @@ import { useLabels } from "@/contexts/Labels";
 import HomeLoader from "@/components/Loaders/Home";
 import IconButton from "@/components/IconButton";
 
-
 interface HomeProps {
   navigation: NativeStackNavigationProp<any>;
 }
@@ -47,7 +46,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
             icon="person"
             size={25}
             filled
-            onPress={() => navigation.navigate("profile")}
+            onPress={() => navigation.navigate("ProfileLanding")}
           />
         </View>
       </View>

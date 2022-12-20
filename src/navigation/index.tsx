@@ -3,25 +3,37 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../screens/App/Home";
 import Login from "../screens/Auth/Login";
 import Landing from "../screens/Auth/Landing";
-import VerificationLanding from "../screens/Verify/VerificationLanding";
-import VerificationAction from "../screens/Verify/VerificationAction";
-import AddLabel from "../screens/App/AddLabel";
+
 import Register from "../screens/Auth/Register.1";
 import Register2 from "../screens/Auth/Register.2";
+
+import AddLabel from "../screens/App/AddLabel";
 import EditLabel from "../screens/App/ModifyLabel";
-import AcceptTermsLanding from "../screens/Terms/AcceptTermsLanding";
-import AcceptTermsAction from "../screens/Terms/AcceptTermsAction";
+
+import ProfileRate from "../screens/Profile/Profile.Rate";
+import ProfileShare from "../screens/Profile/Profile.Share";
+import ProfileHelp from "../screens/Profile/Profile.Help";
+import ProfileAbout from "../screens/Profile/Profile.About";
+import ProfileLanding from "../screens/Profile/Profile.Landing";
+import ProfileUserInfo from "../screens/Profile/Profile.UserInfo";
+import ProfilePurchase from "../screens/Profile/Profile.Purchase";
+
 import ForgotPassword from "../screens/Auth/ForgotPassword.1";
 import ForgotPassword2 from "../screens/Auth/ForgotPassword.2";
 import ForgotPassword3 from "../screens/Auth/ForgotPassword.3";
 
+import AcceptTermsAction from "../screens/Terms/AcceptTerms.Action";
+import AcceptTermsLanding from "../screens/Terms/AcceptTerms.Landing";
+
+import VerificationAction from "../screens/Verification/Verification.Action";
+import VerificationLanding from "../screens/Verification/Verification.Landing";
+
 import { useAuth } from "../contexts/Auth";
-import { LabelsProvider } from "../contexts/Labels";
-import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 import IconButton from "../components/IconButton";
 import FoundLabel from "../screens/App/FoundLabel";
+import { LabelsProvider } from "../contexts/Labels";
 import FoundLabelDetails from "../screens/App/FoundLabelDetails";
-import Profile from "../screens/Profile/Profile";
+import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
 
 const Stack = createNativeStackNavigator();
 
@@ -119,10 +131,64 @@ const AppStackNavigator: React.FC = () => {
           })}
         />
         <Stack.Screen
-          name="profile"
-          component={Profile}
+          name="ProfileLanding"
+          component={ProfileLanding}
           options={({ navigation }) => ({
             title: "Profile",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfileUserInfo"
+          component={ProfileUserInfo}
+          options={({ navigation }) => ({
+            title: "User Info",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfilePurchase"
+          component={ProfilePurchase}
+          options={({ navigation }) => ({
+            title: "Purchase",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfileAbout"
+          component={ProfileAbout}
+          options={({ navigation }) => ({
+            title: "About",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfileRate"
+          component={ProfileRate}
+          options={({ navigation }) => ({
+            title: "Rate",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfileShare"
+          component={ProfileShare}
+          options={({ navigation }) => ({
+            title: "Share",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfileHelp"
+          component={ProfileHelp}
+          options={({ navigation }) => ({
+            title: "Help",
             gestureEnabled: false,
             headerLeft: () => <NavigationWithBack navigation={navigation} />,
           })}
