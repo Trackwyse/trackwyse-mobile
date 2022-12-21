@@ -19,8 +19,6 @@ import ProfileAbout from "../screens/Profile/Profile.About";
 import ProfileLanding from "../screens/Profile/Profile.Landing";
 import ProfileUserInfo from "../screens/Profile/Profile.UserInfo";
 import ProfilePurchase from "../screens/Profile/Profile.Purchase";
-import ProfileTerms from "../screens/Profile/Profile.Terms";
-import ProfilePrivacy from "../screens/Profile/Profile.Privacy";
 
 import ForgotPasswordLanding from "../screens/Auth/ForgotPassword.Landing";
 import ForgotPasswordAction from "../screens/Auth/ForgotPassword.Action";
@@ -182,24 +180,6 @@ const AppStackNavigator: React.FC = () => {
           component={ProfileHelp}
           options={({ navigation }) => ({
             title: "Help",
-            gestureEnabled: false,
-            headerLeft: () => <NavigationWithBack navigation={navigation} />,
-          })}
-        />
-        <Stack.Screen
-          name="ProfilePrivacy"
-          component={ProfilePrivacy}
-          options={({ navigation }) => ({
-            title: "Privacy",
-            gestureEnabled: false,
-            headerLeft: () => <NavigationWithBack navigation={navigation} />,
-          })}
-        />
-        <Stack.Screen
-          name="ProfileTerms"
-          component={ProfileTerms}
-          options={({ navigation }) => ({
-            title: "Terms",
             gestureEnabled: false,
             headerLeft: () => <NavigationWithBack navigation={navigation} />,
           })}

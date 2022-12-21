@@ -1,27 +1,26 @@
 import { ScrollView, View, Text } from "react-native";
 import { useQuery } from "@tanstack/react-query";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import tw from "@/lib/tailwind";
 import cmsApi from "@/api/content";
 import ListItem from "@/components/ListItem";
 import LegalLoader from "@/components/Loaders/Legal";
+import PrivacyPolicy from "@/components/PrivacyPolicy";
+import useBottomSheetRef from "@/hooks/useBottomSheetRef";
+import TermsOfService from "@/components/TermsOfService/TermsOfService";
 
-interface ProfileScreenProps {
-  navigation: NativeStackNavigationProp<any>;
-}
+interface ProfileScreenProps {}
 
-const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
+const Profile: React.FC<ProfileScreenProps> = () => {
+  const { open: openPrivacyPolicy, bottomSheetRef: privacyPolicyRef } = useBottomSheetRef();
+  const { open: openTermsOfService, bottomSheetRef: termsOfServiceRef } = useBottomSheetRef();
+
   const query = useQuery({
     queryKey: ["about"],
     queryFn: () => {
       return cmsApi.getAbout();
     },
   });
-
-  const handleItemPress = (location: string) => {
-    navigation.navigate(location);
-  };
 
   if (query.isLoading) return <LegalLoader />;
 
@@ -38,7 +37,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         position="alone"
         iconRight="md-chevron-forward-outline"
         style={tw`mt-5`}
-        onPress={() => handleItemPress("ProfileTerms")}
+        onPress={openTermsOfService}
       />
 
       <ListItem
@@ -48,7 +47,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         position="alone"
         style={tw`mt-5`}
         iconRight="md-chevron-forward-outline"
-        onPress={() => handleItemPress("ProfilePrivacy")}
+        onPress={openPrivacyPolicy}
       />
 
       <View style={tw`w-11/12 h-full pt-10`}>
@@ -57,6 +56,9 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           {query.data?.data.data.attributes.content}
         </Text>
       </View>
+
+      <TermsOfService innerRef={termsOfServiceRef} />
+      <PrivacyPolicy innerRef={privacyPolicyRef} />
     </ScrollView>
   );
 };
