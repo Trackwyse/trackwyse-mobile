@@ -16,36 +16,42 @@ interface File {
 
 interface TermsOfServiceCMSResponse {
   data: {
-    id: string;
-    attributes: {
-      title: string;
-      content: string;
-      createdAt: string;
-      updatedAt: string;
+    data: {
+      id: string;
+      attributes: {
+        title: string;
+        content: string;
+        createdAt: string;
+        updatedAt: string;
+      };
     };
   };
 }
 
 interface PrivacyPolicyCMSResponse {
   data: {
-    id: string;
-    attributes: {
-      title: string;
-      content: string;
-      createdAt: string;
-      updatedAt: string;
+    data: {
+      id: string;
+      attributes: {
+        title: string;
+        content: string;
+        createdAt: string;
+        updatedAt: string;
+      };
     };
   };
 }
 
 interface AboutCMSResponse {
   data: {
-    id: string;
-    attributes: {
-      title: string;
-      content: string;
-      createdAt: string;
-      updatedAt: string;
+    data: {
+      id: string;
+      attributes: {
+        title: string;
+        content: string;
+        createdAt: string;
+        updatedAt: string;
+      };
     };
   };
 }
