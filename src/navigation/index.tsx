@@ -14,7 +14,6 @@ import FoundLabelScan from "../screens/App/FoundLabel.Scan";
 import FoundLabelDetails from "../screens/App/FoundLabel.Details";
 
 import ProfileRate from "../screens/Profile/Profile.Rate";
-import ProfileShare from "../screens/Profile/Profile.Share";
 import ProfileHelp from "../screens/Profile/Profile.Help";
 import ProfileAbout from "../screens/Profile/Profile.About";
 import ProfileLanding from "../screens/Profile/Profile.Landing";
@@ -174,15 +173,6 @@ const AppStackNavigator: React.FC = () => {
           component={ProfileRate}
           options={({ navigation }) => ({
             title: "Rate",
-            gestureEnabled: false,
-            headerLeft: () => <NavigationWithBack navigation={navigation} />,
-          })}
-        />
-        <Stack.Screen
-          name="ProfileShare"
-          component={ProfileShare}
-          options={({ navigation }) => ({
-            title: "Share",
             gestureEnabled: false,
             headerLeft: () => <NavigationWithBack navigation={navigation} />,
           })}

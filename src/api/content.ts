@@ -76,8 +76,25 @@ const getAbout = async (): Promise<AboutCMSResponse> => {
   return fetchStrapiAPI("/about");
 };
 
+/*
+  GET /api/helps
+
+  Response Body:
+    - data (array):
+      - id: string
+      - attributes:
+        - title: string
+        - content: string
+        - createdAt: string
+        - updatedAt: string
+*/
+const getHelps = async (): Promise<HelpCMSResponse> => {
+  return fetchStrapiAPI("/helps");
+};
+
 export default {
   getTermsOfService,
   getPrivacyPolicy,
   getAbout,
+  getHelps,
 };

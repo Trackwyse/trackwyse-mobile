@@ -55,3 +55,17 @@ interface AboutCMSResponse {
     };
   };
 }
+
+interface HelpCMSResponse {
+  data: {
+    data: {
+      id: string;
+      attributes: {
+        title: string;
+        content: string;
+        createdAt: string;
+        updatedAt: string;
+      };
+    }[];
+  };
+}

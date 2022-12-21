@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import { ScrollView, Share } from "react-native";
 
 import tw from "@/lib/tailwind";
 import { useAuth } from "@/contexts/Auth";
@@ -18,6 +18,15 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
   const handleItemPress = (location: string) => {
     navigation.navigate(location);
+  };
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        url: "https://trackerwind.com",
+        message: "Check out Trackerwind!",
+      });
+    } catch {}
   };
 
   return (
@@ -55,7 +64,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         iconLeft="share-social-outline"
         position="middle"
         iconRight="md-chevron-forward-outline"
-        onPress={() => handleItemPress("ProfileShare")}
+        onPress={onShare}
       />
       <ListItem
         pressable
