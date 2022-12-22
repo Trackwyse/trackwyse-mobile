@@ -1,7 +1,7 @@
 import qs from "qs";
 import axios from "axios";
 
-const baseURL = "https://content.jsenyitko.tech"; // CHANGE
+const baseURL = "https://content.trackwyse.com"; // CHANGE
 
 const cmsClient = axios.create({
   baseURL,

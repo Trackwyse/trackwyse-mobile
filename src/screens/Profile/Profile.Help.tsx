@@ -23,7 +23,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
       <View style={tw`w-11/12 pt-10`}>
         <Text style={tw`text-2xl font-bold`}>Frequently Asked</Text>
         <Text style={tw`my-4 text-gray-400 text-base`}>
-          View frequently asked questions and get started with Trackerwind.
+          View frequently asked questions and get started with Trackwyse.
         </Text>
       </View>
 

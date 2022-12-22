@@ -66,7 +66,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
         <View style={tw`w-11/12 pt-10`}>
           <Text style={tw`text-2xl font-bold`}>Register</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
-            Welcome to Trackerwind. Enter an email and password to get started.
+            Welcome to Trackwyse. Enter an email and password to get started.
           </Text>
         </View>
         <Input

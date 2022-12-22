@@ -24,7 +24,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
     try {
       await Share.share({
         url: "https://trackerwind.com",
-        message: "Check out Trackerwind!",
+        message: "Check out Trackwyse!",
       });
     } catch {}
   };
@@ -52,7 +52,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
       />
       <ListItem
         pressable
-        title="Rate Trackerwind"
+        title="Rate Trackwyse"
         iconLeft="star-outline"
         position="middle"
         iconRight="md-chevron-forward-outline"
@@ -60,7 +60,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
       />
       <ListItem
         pressable
-        title="Share Trackerwind"
+        title="Share Trackwyse"
         iconLeft="share-social-outline"
         position="middle"
         iconRight="md-chevron-forward-outline"
