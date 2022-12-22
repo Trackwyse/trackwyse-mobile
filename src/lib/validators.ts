@@ -3,7 +3,7 @@
 
   Required fields: email, password
   Email must be valid
-  Password must be at least 8 characters
+  Password must be valid
 */
 const validateLoginInput = (loginInput: LoginInput) => {
   const errors: LoginInput = {
@@ -109,36 +109,36 @@ const validateRegisterInput = (registerInput: RegisterInput, step: 1 | 2 = 1) =>
     if (!registerInput.firstName) {
       errors.firstName = "First name field is required";
     }
-  
+
     if (!registerInput.lastName) {
       errors.lastName = "Last name field is required";
     }
-  
+
     // Ensure no numbers in the first name
     const firstNameRegex = /^[a-zA-Z]+$/;
-  
+
     if (!firstNameRegex.test(registerInput.firstName as string)) {
       if (errors.firstName === "") {
         errors.firstName = "First name must not contain symbols";
       }
     }
-  
+
     // Ensure no numbers in the last name
     const lastNameRegex = /^[a-zA-Z]+$/;
-  
+
     if (!lastNameRegex.test(registerInput.lastName as string)) {
       if (errors.lastName === "") {
         errors.lastName = "Last name must not contain symbols";
       }
     }
-  
+
     // see if all errors are empty, if so, return empty object
     const allErrors = Object.values(errors).filter((error) => error !== "");
-  
+
     if (allErrors.length === 0) {
       return {};
     }
-  
+
     return errors;
   }
 };
@@ -189,7 +189,7 @@ const validateModifyLabelInput = (modifyLabelInput: ModifyLabelInput) => {
     name: "",
     phoneNumber: "",
     message: "",
-  }
+  };
 
   // Verify the phone number is valid, only if it is not empty
   const phoneNumberRegex = /^[0-9]{10}$/;
@@ -206,7 +206,7 @@ const validateModifyLabelInput = (modifyLabelInput: ModifyLabelInput) => {
   }
 
   return errors;
-}
+};
 
 /*
   Validate the Found Label Details Form
@@ -219,12 +219,15 @@ const validateFoundLabelDetailsInput = (foundLabelDetailsInput: FoundLabelDetail
     phoneNumber: "",
     exactLocation: "",
     recoveryLocation: "",
-  }
+  };
 
   // Verify the phone number is valid, only if it is not empty
   const phoneNumberRegex = /^[0-9]{10}$/;
 
-  if (foundLabelDetailsInput.phoneNumber && !phoneNumberRegex.test(foundLabelDetailsInput.phoneNumber)) {
+  if (
+    foundLabelDetailsInput.phoneNumber &&
+    !phoneNumberRegex.test(foundLabelDetailsInput.phoneNumber)
+  ) {
     errors.phoneNumber = "Phone number is invalid";
   }
 
@@ -236,7 +239,116 @@ const validateFoundLabelDetailsInput = (foundLabelDetailsInput: FoundLabelDetail
   }
 
   return errors;
-}
+};
+
+/*
+  Validate the Forgot Password Form
+
+  Required fields: email
+  Email must be in the format of <email>@<domain>.<domain>
+*/
+const validateForgotPasswordInput = (forgotPasswordInput: ForgotPasswordInput) => {
+  const errors: ForgotPasswordInput = {
+    email: "",
+  };
+
+  if (!forgotPasswordInput.email) {
+    errors.email = "Email field is required";
+  }
+
+  // Ensure the email is valid
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!emailRegex.test(forgotPasswordInput.email)) {
+    errors.email = "Email is invalid";
+  }
+
+  // see if all errors are empty, if so, return empty object
+  const allErrors = Object.values(errors).filter((error) => error !== "");
+
+  if (allErrors.length === 0) {
+    return {};
+  }
+
+  return errors;
+};
+
+/*
+  Validate the Reset Password Form
+
+  Required fields: email, resetToken, password, confirmPassword
+
+  Email must be in the format of <email>@<domain>.<domain>
+  Reset token must be 6 characters long, and only numbers
+  Password must be at least 8 characters long
+  Password and confirm password must match
+*/
+const validateResetPasswordInput = (resetPasswordInput: ResetPasswordInput) => {
+  const errors: ResetPasswordInput = {
+    email: "",
+    resetToken: "",
+    password: "",
+    confirmPassword: "",
+  };
+
+  if (!resetPasswordInput.email) {
+    errors.email = "Email field is required";
+  }
+
+  // Ensure the email is valid
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!emailRegex.test(resetPasswordInput.email)) {
+    errors.email = "Email is invalid";
+  }
+
+  if (!resetPasswordInput.resetToken) {
+    errors.resetToken = "Reset token field is required";
+  }
+
+  // Ensure the reset token is valid
+  const resetTokenRegex = /^[0-9]{6}$/;
+
+  if (!resetTokenRegex.test(resetPasswordInput.resetToken)) {
+    errors.resetToken = "Reset token is invalid";
+  }
+
+  if (!resetPasswordInput.password) {
+    errors.password = "Password field is required";
+  }
+
+  if (!resetPasswordInput.confirmPassword) {
+    errors.confirmPassword = "Confirm password field is required";
+  }
+
+  // Ensure the password is valid
+  const passwordRegex = /^.{8,}$/;
+
+  if (!passwordRegex.test(resetPasswordInput.password)) {
+    errors.password = "Password must be at least 8 characters long";
+  }
+
+  // Ensure the confirm password is valid
+  if (!passwordRegex.test(resetPasswordInput.confirmPassword)) {
+    errors.confirmPassword = "Confirm password must be at least 8 characters long";
+  }
+
+  // Ensure the passwords match
+  if (resetPasswordInput.password !== resetPasswordInput.confirmPassword) {
+    errors.confirmPassword = "Passwords must match";
+  }
+
+  // see if all errors are empty, if so, return empty object
+  const allErrors = Object.values(errors).filter((error) => error !== "");
+
+  if (allErrors.length === 0) {
+    return {};
+  }
+
+  return errors;
+};
 
 /*
   Validate the label URL
@@ -261,5 +373,7 @@ export {
   validateVerifyInput,
   validateRegisterInput,
   validateModifyLabelInput,
-  validateFoundLabelDetailsInput
+  validateForgotPasswordInput,
+  validateResetPasswordInput,
+  validateFoundLabelDetailsInput,
 };

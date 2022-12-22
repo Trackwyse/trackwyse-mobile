@@ -1,6 +1,6 @@
 import { TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import tw from "../../lib/tailwind";
+import tw from "@/lib/tailwind";
 
 export const colors = [
   {
@@ -36,11 +36,7 @@ interface ColorSelectorProps {
   style?: any;
 }
 
-const ColorSelector: React.FC<ColorSelectorProps> = ({
-  style,
-  value = 0,
-  onChange,
-}) => {
+const ColorSelector: React.FC<ColorSelectorProps> = ({ style, value = 0, onChange }) => {
   return (
     <View style={tw.style(`flex-row`, style)}>
       <View style={tw`flex-row w-11/12 justify-between`}>
@@ -81,10 +77,7 @@ const ColorItem: React.FC<ColorItemProps> = ({ color, selected, onPress }) => {
         <Ionicons
           name="ios-checkmark-sharp"
           size={24}
-          style={tw.style(
-            selected && "text-white",
-            !selected && "text-transparent"
-          )}
+          style={tw.style(selected && "text-white", !selected && "text-transparent")}
         />
       </View>
     </TouchableOpacity>

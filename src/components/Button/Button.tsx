@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import tw from "../../lib/tailwind";
+import tw from "@/lib/tailwind";
 
 const buttonColorClasses = {
   primary: "bg-primary-200 text-white",
@@ -58,30 +58,13 @@ const Button: React.FC<ButtonProps> = ({
   );
 
   return (
-    <TouchableOpacity
-      disabled={disabled || loading}
-      style={buttonClassNames}
-      {...props}
-    >
-      {iconLeft ? (
-        <Ionicons name={iconLeft} style={textClassNames} />
-      ) : (
-        <View />
-      )}
-      <Text style={tw.style(textClassNames, loading ? "opacity-0" : "")}>
-        {props.children}
-      </Text>
+    <TouchableOpacity disabled={disabled || loading} style={buttonClassNames} {...props}>
+      {iconLeft ? <Ionicons name={iconLeft} style={textClassNames} /> : <View />}
+      <Text style={tw.style(textClassNames, loading ? "opacity-0" : "")}>{props.children}</Text>
       {loading && (
-        <ActivityIndicator
-          style={tw`absolute inset-0`}
-          color={tw.color("primary-200")}
-        />
+        <ActivityIndicator style={tw`absolute inset-0`} color={tw.color("primary-200")} />
       )}
-      {iconRight ? (
-        <Ionicons name={iconRight} style={textClassNames} />
-      ) : (
-        <View />
-      )}
+      {iconRight ? <Ionicons name={iconRight} style={textClassNames} /> : <View />}
     </TouchableOpacity>
   );
 };

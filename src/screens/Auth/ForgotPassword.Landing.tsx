@@ -1,25 +1,25 @@
 import { View, Text } from "react-native";
-import tw from "../lib/tailwind";
-import BadgeButton from "../components/BadgeButton";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-interface AcceptTermsProps {
+import tw from "@/lib/tailwind";
+import BadgeButton from "@/components/BadgeButton";
+
+interface ForgotPasswordScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
-const AcceptTerms: React.FC<AcceptTermsProps> = ({ navigation }) => {
+const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation }) => {
   const onPress = () => {
-    navigation.navigate("terms2");
+    navigation.navigate("ForgotPasswordAction");
   };
 
   return (
     <View style={tw`h-full`}>
       <View style={tw`items-center`}>
         <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Terms and Conditions</Text>
+          <Text style={tw`text-2xl font-bold`}>Forgot Password</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
-            It looks like you haven't accepted our terms and conditions yet.
-            Let's get you up to speed.
+            Forgot your password? No worries. We'll guide you through the process of resetting it.
           </Text>
         </View>
       </View>
@@ -33,4 +33,4 @@ const AcceptTerms: React.FC<AcceptTermsProps> = ({ navigation }) => {
   );
 };
 
-export default AcceptTerms;
+export default ForgotPassword;

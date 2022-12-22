@@ -3,11 +3,11 @@ import { useMutation } from "@tanstack/react-query";
 import { KeyboardAvoidingView, Text, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import api from "../api";
-import tw from "../lib/tailwind";
-import Input from "../components/Input";
-import BadgeButton from "../components/BadgeButton";
-import { validateRegisterInput } from "../lib/validators";
+import api from "@/api";
+import tw from "@/lib/tailwind";
+import Input from "@/components/Input";
+import BadgeButton from "@/components/BadgeButton";
+import { validateRegisterInput } from "@/lib/validators";
 
 interface RegisterScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -39,7 +39,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
             return;
           }
 
-          navigation.navigate("register2", {
+          navigation.navigate("RegisterStep2", {
             email: values.email,
             password: values.password,
           });

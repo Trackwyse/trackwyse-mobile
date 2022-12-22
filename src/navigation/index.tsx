@@ -1,23 +1,39 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Home from "../screens/Home";
-import Login from "../screens/Login";
-import Landing from "../screens/Landing";
-import Verify1 from "../screens/Verify.1";
-import Verify2 from "../screens/Verify.2";
-import AddLabel from "../screens/AddLabel";
-import Register from "../screens/Register.1";
-import Register2 from "../screens/Register.2";
-import EditLabel from "../screens/ModifyLabel";
-import AcceptTerms1 from "../screens/AcceptTerms.1";
-import AcceptTerms2 from "../screens/AcceptTerms.2";
+import Home from "../screens/App/Home";
+import Login from "../screens/Auth/Login";
+import Landing from "../screens/Auth/Landing";
+
+import RegisterStep1 from "../screens/Auth/Register.Step1";
+import RegisterStep2 from "../screens/Auth/Register.Step2";
+
+import AddLabel from "../screens/App/AddLabel";
+import EditLabel from "../screens/App/ModifyLabel";
+
+import FoundLabelScan from "../screens/App/FoundLabel.Scan";
+import FoundLabelDetails from "../screens/App/FoundLabel.Details";
+
+import ProfileRate from "../screens/Profile/Profile.Rate";
+import ProfileHelp from "../screens/Profile/Profile.Help";
+import ProfileAbout from "../screens/Profile/Profile.About";
+import ProfileLanding from "../screens/Profile/Profile.Landing";
+import ProfileUserInfo from "../screens/Profile/Profile.UserInfo";
+import ProfilePurchase from "../screens/Profile/Profile.Purchase";
+
+import ForgotPasswordLanding from "../screens/Auth/ForgotPassword.Landing";
+import ForgotPasswordAction from "../screens/Auth/ForgotPassword.Action";
+import ForgotPasswordReset from "../screens/Auth/ForgotPassword.Reset";
+
+import AcceptTermsAction from "../screens/Terms/AcceptTerms.Action";
+import AcceptTermsLanding from "../screens/Terms/AcceptTerms.Landing";
+
+import VerificationAction from "../screens/Verification/Verification.Action";
+import VerificationLanding from "../screens/Verification/Verification.Landing";
 
 import { useAuth } from "../contexts/Auth";
+import IconButton from "../components/IconButton";
 import { LabelsProvider } from "../contexts/Labels";
 import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
-import IconButton from "../components/IconButton";
-import FoundLabel from "../screens/FoundLabel";
-import FoundLabelDetails from "../screens/FoundLabelDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,14 +51,13 @@ const AuthStackNavigator: React.FC = () => {
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
-      <Stack.Screen
-        name="landing"
-        component={Landing}
-        options={{ headerLeft: () => <></> }}
-      />
-      <Stack.Screen name="register" component={Register} />
-      <Stack.Screen name="register2" component={Register2} />
-      <Stack.Screen name="login" component={Login} />
+      <Stack.Screen name="Landing" component={Landing} options={{ headerShown: false }} />
+      <Stack.Screen name="RegisterStep1" component={RegisterStep1} />
+      <Stack.Screen name="RegisterStep2" component={RegisterStep2} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="ForgotPasswordLanding" component={ForgotPasswordLanding} />
+      <Stack.Screen name="ForgotPasswordAction" component={ForgotPasswordAction} />
+      <Stack.Screen name="ForgotPasswordReset" component={ForgotPasswordReset} />
     </Stack.Navigator>
   );
 };
@@ -61,8 +76,8 @@ const VerificationStackNavigator: React.FC = () => {
         headerLeft: () => <></>,
       }}
     >
-      <Stack.Screen name="verify1" component={Verify1} />
-      <Stack.Screen name="verify2" component={Verify2} />
+      <Stack.Screen name="VerificationLanding" component={VerificationLanding} />
+      <Stack.Screen name="VerificationAction" component={VerificationAction} />
     </Stack.Navigator>
   );
 };
@@ -82,8 +97,8 @@ const AcceptTermsStackNavigator: React.FC = () => {
         headerLeft: () => <></>,
       }}
     >
-      <Stack.Screen name="terms1" component={AcceptTerms1} />
-      <Stack.Screen name="terms2" component={AcceptTerms2} />
+      <Stack.Screen name="AcceptTermsLanding" component={AcceptTermsLanding} />
+      <Stack.Screen name="AcceptTermsAction" component={AcceptTermsAction} />
     </Stack.Navigator>
   );
 };
@@ -99,7 +114,7 @@ const AppStackNavigator: React.FC = () => {
     <LabelsProvider>
       <Stack.Navigator>
         <Stack.Screen
-          name="home"
+          name="Home"
           component={Home}
           options={{
             title: ``,
@@ -107,7 +122,7 @@ const AppStackNavigator: React.FC = () => {
           }}
         />
         <Stack.Screen
-          name="addLabel"
+          name="AddLabel"
           component={AddLabel}
           options={({ navigation }) => ({
             title: "Add Label",
@@ -116,8 +131,62 @@ const AppStackNavigator: React.FC = () => {
           })}
         />
         <Stack.Screen
-          name="foundLabel"
-          component={FoundLabel}
+          name="ProfileLanding"
+          component={ProfileLanding}
+          options={({ navigation }) => ({
+            title: "Profile",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfileUserInfo"
+          component={ProfileUserInfo}
+          options={({ navigation }) => ({
+            title: "User Info",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfilePurchase"
+          component={ProfilePurchase}
+          options={({ navigation }) => ({
+            title: "Purchase",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfileAbout"
+          component={ProfileAbout}
+          options={({ navigation }) => ({
+            title: "About",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfileRate"
+          component={ProfileRate}
+          options={({ navigation }) => ({
+            title: "Rate",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="ProfileHelp"
+          component={ProfileHelp}
+          options={({ navigation }) => ({
+            title: "Help",
+            gestureEnabled: false,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="FoundLabelScan"
+          component={FoundLabelScan}
           options={({ navigation }) => ({
             title: "Found Label",
             gestureEnabled: false,
@@ -125,28 +194,22 @@ const AppStackNavigator: React.FC = () => {
           })}
         />
         <Stack.Screen
-          name="foundLabelDetails"
+          name="FoundLabelDetails"
           component={FoundLabelDetails}
           options={({ navigation }) => ({
             title: "Found Label",
             gestureEnabled: false,
-            headerLeft: () => (
-              <NavigationWithBack navigation={navigation} returnHome />
-            ),
+            headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
           })}
         />
         <Stack.Screen
-          name="editLabel"
+          name="EditLabel"
           component={EditLabel}
           options={({ navigation }) => ({
             title: "Edit Label",
             gestureEnabled: false,
-            headerLeft: () => (
-              <NavigationWithBack navigation={navigation} returnHome />
-            ),
-            headerRight: () => (
-              <IconButton icon="trash-outline" color="firebrick" />
-            ),
+            headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+            headerRight: () => <IconButton icon="trash-outline" color="firebrick" />,
           })}
         />
       </Stack.Navigator>

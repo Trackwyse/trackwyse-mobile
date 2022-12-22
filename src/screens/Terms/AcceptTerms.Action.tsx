@@ -1,12 +1,12 @@
-import { View, Text, KeyboardAvoidingView } from "react-native";
-import tw from "../lib/tailwind";
-import BadgeButton from "../components/BadgeButton";
-
-import api from "../api";
 import { useState } from "react";
 import Toast from "react-native-toast-message";
-import { useAuth } from "../contexts/Auth";
 import { useMutation } from "@tanstack/react-query";
+import { View, Text, KeyboardAvoidingView } from "react-native";
+
+import api from "@/api";
+import tw from "@/lib/tailwind";
+import { useAuth } from "@/contexts/Auth";
+import BadgeButton from "@/components/BadgeButton";
 
 const AcceptTerms: React.FC = () => {
   const { user, updateUser, accessToken } = useAuth();
@@ -24,7 +24,7 @@ const AcceptTerms: React.FC = () => {
 
   const onSubmit = () => {
     mutation.mutate(undefined, {
-      onSuccess: ({ data }) => {
+      onSuccess: () => {
         updateUser({
           ...user,
           termsAccepted: true,
@@ -36,7 +36,7 @@ const AcceptTerms: React.FC = () => {
           text2: "Thank you for acecpting our terms and conditions",
         });
       },
-      onError: (error) => {
+      onError: () => {
         Toast.show({
           type: "error",
           text1: "Error",
@@ -52,9 +52,8 @@ const AcceptTerms: React.FC = () => {
         <View style={tw`w-11/12 pt-10`}>
           <Text style={tw`text-2xl font-bold`}>Terms and Conditions</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
-            By selecting “I agree” below, I have read and agree to the terms of
-            use and acknowledge the privacy notice. I am at least 13 years of
-            age.
+            By selecting “I agree” below, I have read and agree to the terms of use and acknowledge
+            the privacy notice. I am at least 13 years of age.
           </Text>
         </View>
       </View>
@@ -68,12 +67,7 @@ const AcceptTerms: React.FC = () => {
         >
           I Agree
         </BadgeButton>
-        <BadgeButton
-          size="lg"
-          iconRight="arrow-forward"
-          disabled={!selected}
-          onPress={onSubmit}
-        >
+        <BadgeButton size="lg" iconRight="arrow-forward" disabled={!selected} onPress={onSubmit}>
           Finish
         </BadgeButton>
       </View>

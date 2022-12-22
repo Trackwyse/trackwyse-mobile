@@ -13,7 +13,7 @@ const NavigationWithBack: React.FC<NavigationBackArrowProps> = ({
 }) => {
   const onPress = () => {
     if (returnHome) {
-      return navigation.navigate("home");
+      return navigation.navigate("Home");
     }
 
     navigation.goBack();

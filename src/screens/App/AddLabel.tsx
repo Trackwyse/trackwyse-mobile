@@ -5,28 +5,28 @@ import { useMutation } from "@tanstack/react-query";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { View, Text, ActivityIndicator } from "react-native";
 
-import api from "../api";
-import tw from "../lib/tailwind";
-import { useAuth } from "../contexts/Auth";
-import BadgeButton from "../components/BadgeButton";
-import Permissions from "../components/Permissions";
-import { validateLabelUrl } from "../lib/validators";
+import api from "@/api";
+import tw from "@/lib/tailwind";
+import { useAuth } from "@/contexts/Auth";
+import BadgeButton from "@/components/BadgeButton";
+import Permissions from "@/components/Permissions";
+import { validateLabelUrl } from "@/lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useLabels } from "../contexts/Labels";
-import { AxiosError } from "axios";
+import { useLabels } from "@/contexts/Labels";
 
-interface FoundLabelScreenProps {
+interface AddLabelScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
-const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
+const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
   const { accessToken } = useAuth();
+  const { createLabel } = useLabels();
   const [hasBeenScanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
   const mutation = useMutation({
-    mutationFn: (values: GetLabelInput) => {
-      return api.getLabel(values, accessToken);
+    mutationFn: (values: AddLabelInput) => {
+      return api.addLabel(values, accessToken);
     },
   });
 
@@ -49,25 +49,21 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
     mutation.mutate(
       { id: labelId },
       {
-        onSuccess: ({ data }) => {
+        onSuccess: () => {
           Toast.show({
             type: "success",
-            text1: "Label Found",
-            text2: "The owner of this label has been notified",
+            text1: "Label Added",
+            text2: "Your label has been added to your account",
           });
-          navigation.navigate("foundLabelDetails", {
-            label: data.label,
-          });
+          createLabel(labelId);
+          navigation.navigate("EditLabel", { labelId });
         },
-        onError: (err) => {
-          if (err instanceof AxiosError) {
-            const statusCode = err.response?.data.message;
-            Toast.show({
-              type: "error",
-              text1: "An error occurred",
-              text2: statusCode,
-            });
-          }
+        onError: (error) => {
+          Toast.show({
+            type: "error",
+            text1: "Error",
+            text2: "This label has already been added to an account",
+          });
         },
       }
     );
@@ -97,33 +93,24 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
         onBarCodeScanned={onBarCodeScanned}
       >
         {(mutation.isLoading || mutation.isError) && hasBeenScanned && (
-          <View
-            style={tw`bg-black absolute w-full h-full opacity-90 justify-center`}
-          >
-            {mutation.isLoading && (
-              <ActivityIndicator size={"large"} color="white" />
-            )}
+          <View style={tw`bg-black absolute w-full h-full opacity-90 justify-center`}>
+            {mutation.isLoading && <ActivityIndicator size={"large"} color="white" />}
           </View>
         )}
       </Camera>
 
       <View style={tw`flex items-center`}>
         <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Found a Label</Text>
+          <Text style={tw`text-2xl font-bold`}>Add a Label</Text>
           <Text style={tw`my-4 text-gray-400 text-base`}>
-            Found a lost item with a label? Scan the QR code to alert the owner,
-            and optionally provide your contact information.
+            To get started, scan the QR code on one of your labels.
           </Text>
         </View>
       </View>
 
       <View style={tw`mt-auto flex-row-reverse mb-10 w-11/12`}>
         {mutation.isError && hasBeenScanned && (
-          <BadgeButton
-            iconRight="camera-outline"
-            size="lg"
-            onPress={() => setScanned(false)}
-          >
+          <BadgeButton iconRight="camera-outline" size="lg" onPress={() => setScanned(false)}>
             Retry Scan
           </BadgeButton>
         )}
@@ -132,4 +119,4 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
   );
 };
 
-export default FoundLabel;
+export default AddLabel;

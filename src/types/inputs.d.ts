@@ -1,7 +1,7 @@
 interface LoginInput {
   email: string;
   password: string;
-} 
+}
 
 interface RegisterInput {
   email?: string;
@@ -9,6 +9,17 @@ interface RegisterInput {
   confirmPassword?: string;
   firstName?: string;
   lastName?: string;
+}
+
+interface ForgotPasswordInput {
+  email: string;
+}
+
+interface ResetPasswordInput {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  resetToken: string;
 }
 
 interface AddLabelInput {

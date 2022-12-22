@@ -1,7 +1,8 @@
 import { View, Text } from "react-native";
-import tw from "../lib/tailwind";
-import BadgeButton from "../components/BadgeButton";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import tw from "@/lib/tailwind";
+import BadgeButton from "@/components/BadgeButton";
 
 interface VerifyProps {
   navigation: NativeStackNavigationProp<any>;
@@ -9,7 +10,7 @@ interface VerifyProps {
 
 const Verify: React.FC<VerifyProps> = ({ navigation }) => {
   const onPress = () => {
-    navigation.navigate("verify2");
+    navigation.navigate("VerificationAction");
   };
 
   return (
