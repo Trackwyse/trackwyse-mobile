@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "codespaces-blank",
-    "slug": "trackerwind",
+    "slug": "trackwyse",
     "scheme": "trw",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,7 +20,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.js00001.trackerwind"
+      "bundleIdentifier": "com.js00001.trackwyse"
     },
     "android": {
       "adaptiveIcon": {

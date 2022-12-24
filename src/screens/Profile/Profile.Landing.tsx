@@ -23,7 +23,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const onShare = async () => {
     try {
       await Share.share({
-        url: "https://trackerwind.com",
+        url: "https://trackwyse.com",
         message: "Check out Trackwyse!",
       });
     } catch {}
