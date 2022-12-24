@@ -12,6 +12,7 @@ import AuthProvider from "./contexts/Auth";
 import RootStackNavigator from "./navigation";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+// Test
 const theme = {
   ...DefaultTheme,
   colors: {
