@@ -20,7 +20,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.js00001.trackwyse"
+      "bundleIdentifier": "com.js00001.trackwyse",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
@@ -33,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "dd4a8282-e33f-4b3f-909b-4cb550ad18d0"
+        "projectId": "1dfd6eca-ffee-4132-bb86-20c878ffabfa"
       }
     },
     "owner": "js00001"

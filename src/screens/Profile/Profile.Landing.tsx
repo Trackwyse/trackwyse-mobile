@@ -35,10 +35,18 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         pressable
         title="User Info"
         iconLeft="person-outline"
-        position="alone"
+        position="top"
         iconRight="md-chevron-forward-outline"
         style={tw`mt-5`}
         onPress={() => handleItemPress("ProfileUserInfo")}
+      />
+      <ListItem
+        pressable
+        title="Notifications"
+        iconLeft="notifications-outline"
+        position="bottom"
+        iconRight="md-chevron-forward-outline"
+        onPress={() => handleItemPress("ProfileNotifications")}
       />
 
       <ListItem
