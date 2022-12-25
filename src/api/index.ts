@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://trackerwind.in-staging.space";
+const baseURL = "https://trackwyse.in-staging.space";
 
 // Base API Client
 const apiClient = axios.create({

@@ -13,7 +13,10 @@ interface CollapsableProps {
 const Collapsable: React.FC<CollapsableProps> = ({ title, content, style }) => {
   const [expanded, setExpanded] = useState(false);
 
-  const containerClasses = tw.style("w-11/12 bg-gray-100 p-5 rounded-2xl", style);
+  const containerClasses = tw.style(
+    "w-11/12 bg-gray-100 p-5 rounded-2xl",
+    style
+  );
 
   const onPress = () => {
     setExpanded(!expanded);
@@ -25,7 +28,7 @@ const Collapsable: React.FC<CollapsableProps> = ({ title, content, style }) => {
         <Text style={tw`text-lg font-semibold`}>{title}</Text>
         <Ionicons
           name={expanded ? "md-chevron-up" : "md-chevron-down"}
-          style={tw`text-gray-300`}
+          style={tw`text-gray-300 `}
           size={20}
         />
       </View>
