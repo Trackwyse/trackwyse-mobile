@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 
 interface ProfileScreenProps {}
 
+//
 const Profile: React.FC<ProfileScreenProps> = ({}) => {
   return (
     <View style={tw`items-center`}>
