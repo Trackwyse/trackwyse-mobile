@@ -35,6 +35,12 @@ type RegisterAPIResponse = APIResponse & {
   };
 };
 
+type UpdateUserAPIResponse = APIResponse & {
+  data: {
+    user: User;
+  };
+};
+
 type UserAPIResponse = APIResponse & {
   data: {
     user: User;

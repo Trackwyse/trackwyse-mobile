@@ -51,7 +51,6 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
         const response = await api.getUser(accessToken);
         setUser(response.data.user);
       } catch (error) {
-        setAccessToken("");
       } finally {
         setLoading(false);
       }

@@ -52,3 +52,11 @@ interface FoundLabelDetailsInput {
   exactLocation?: string;
   recoveryLocation?: string;
 }
+
+interface UpdateUserInput {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  notificationPushToken?: string;
+  notificationsEnabled?: "true" | "false";
+}

@@ -1,10 +1,11 @@
 interface User {
   _id: string;
+  email: string;
   firstName: string;
   lastName: string;
   verified: boolean;
   termsAccepted: boolean;
-  email: string;
+  notificationsEnabled: boolean;
   labels: Label[];
   createdAt: string;
 }

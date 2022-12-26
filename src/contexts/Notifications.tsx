@@ -1,7 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import * as Device from "expo-device";
+import { useMutation } from "@tanstack/react-query";
 import * as Notifications from "expo-notifications";
-import { useAuth } from "./Auth";
+import * as Device from "expo-device";
+
+import { useAuth } from "@/contexts/Auth";
+
+import api from "@/api";
 
 type NotificationsContextData = {
   enabled: boolean;
@@ -20,11 +24,15 @@ Notifications.setNotificationHandler({
   }),
 });
 
-const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({
-  children,
-}) => {
+const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const { user, accessToken } = useAuth();
   const [enabled, setEnabled] = useState<boolean>(false);
+
+  const mutation = useMutation({
+    mutationFn: (values: UpdateUserInput) => {
+      return api.updateUser(values, accessToken);
+    },
+  });
 
   useEffect(() => {
     registerForPostNotifications();
@@ -36,21 +44,30 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({
         const { status } = await Notifications.getPermissionsAsync();
         let finalStatus = status;
 
+        // If the user does not already have permission, ask for it
         if (status !== "granted") {
-          const { status: askStatus } =
-            await Notifications.requestPermissionsAsync();
+          const { status: askStatus } = await Notifications.requestPermissionsAsync();
           finalStatus = askStatus;
         }
 
+        // If the user does not agree to the permissions, exit
         if (finalStatus !== "granted") {
           return;
         }
 
-        const token = (await Notifications.getExpoPushTokenAsync()).data;
+        const notificationPushToken = (await Notifications.getExpoPushTokenAsync()).data;
 
-        setEnabled(true);
-        console.log(token);
-        // Send to API
+        // Update push token in API
+        if (notificationPushToken) {
+          mutation.mutate(
+            { notificationPushToken, notificationsEnabled: "true" },
+            {
+              onSuccess: () => {
+                setEnabled(true);
+              },
+            }
+          );
+        }
       }
     }
   };
@@ -59,8 +76,15 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({
     if (status) {
       registerForPostNotifications();
     } else {
-      setEnabled(false);
       // Send to API
+      mutation.mutate(
+        { notificationsEnabled: "false" },
+        {
+          onSuccess: () => {
+            setEnabled(false);
+          },
+        }
+      );
     }
   };
 

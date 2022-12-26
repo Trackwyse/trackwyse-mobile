@@ -365,16 +365,59 @@ const resetPassword = (values: ResetPasswordInput): Promise<ResetPasswordAPIResp
   });
 };
 
+/*
+  PATCH /api/v1/user/update
+  
+  Request Body:
+    - firstName: string
+    - lastName: string
+    - email: string
+    - notificationsEnabled: 'true' | 'false'
+    - notificationPushToken: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - user: User
+*/
+const updateUser = async (
+  values: UpdateUserInput,
+  accessToken: string
+): Promise<UpdateUserAPIResponse> => {
+  const { firstName, lastName, email, notificationsEnabled, notificationPushToken } = values;
+
+  return apiClient.patch(
+    "/api/v1/user/update",
+    {
+      firstName,
+      lastName,
+      email,
+      notificationsEnabled,
+      notificationPushToken,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
 export default {
   login,
   register,
-  getUser,
   acceptTerms,
   forgotPassword,
   resetPassword,
   checkEmail,
   verifyEmail,
   reverifyEmail,
+
+  getUser,
+  updateUser,
 
   addLabel,
   getLabel,

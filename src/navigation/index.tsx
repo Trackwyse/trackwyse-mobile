@@ -52,26 +52,13 @@ const AuthStackNavigator: React.FC = () => {
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
-      <Stack.Screen
-        name="Landing"
-        component={Landing}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="Landing" component={Landing} options={{ headerShown: false }} />
       <Stack.Screen name="RegisterStep1" component={RegisterStep1} />
       <Stack.Screen name="RegisterStep2" component={RegisterStep2} />
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen
-        name="ForgotPasswordLanding"
-        component={ForgotPasswordLanding}
-      />
-      <Stack.Screen
-        name="ForgotPasswordAction"
-        component={ForgotPasswordAction}
-      />
-      <Stack.Screen
-        name="ForgotPasswordReset"
-        component={ForgotPasswordReset}
-      />
+      <Stack.Screen name="ForgotPasswordLanding" component={ForgotPasswordLanding} />
+      <Stack.Screen name="ForgotPasswordAction" component={ForgotPasswordAction} />
+      <Stack.Screen name="ForgotPasswordReset" component={ForgotPasswordReset} />
     </Stack.Navigator>
   );
 };
@@ -90,10 +77,7 @@ const VerificationStackNavigator: React.FC = () => {
         headerLeft: () => <></>,
       }}
     >
-      <Stack.Screen
-        name="VerificationLanding"
-        component={VerificationLanding}
-      />
+      <Stack.Screen name="VerificationLanding" component={VerificationLanding} />
       <Stack.Screen name="VerificationAction" component={VerificationAction} />
     </Stack.Navigator>
   );
@@ -144,11 +128,7 @@ const AppStackNavigator: React.FC = () => {
             headerLeft: () => <></>,
           }}
         />
-        <Stack.Screen
-          name="AddLabel"
-          component={AddLabel}
-          options={{ title: "Add Label" }}
-        />
+        <Stack.Screen name="AddLabel" component={AddLabel} options={{ title: "Add Label" }} />
         <Stack.Screen
           name="ProfileLanding"
           component={ProfileLanding}
@@ -169,21 +149,9 @@ const AppStackNavigator: React.FC = () => {
           component={ProfilePurchase}
           options={{ title: "Purchase" }}
         />
-        <Stack.Screen
-          name="ProfileAbout"
-          component={ProfileAbout}
-          options={{ title: "About" }}
-        />
-        <Stack.Screen
-          name="ProfileRate"
-          component={ProfileRate}
-          options={{ title: "Rate" }}
-        />
-        <Stack.Screen
-          name="ProfileHelp"
-          component={ProfileHelp}
-          options={{ title: "Help" }}
-        />
+        <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
+        <Stack.Screen name="ProfileRate" component={ProfileRate} options={{ title: "Rate" }} />
+        <Stack.Screen name="ProfileHelp" component={ProfileHelp} options={{ title: "Help" }} />
         <Stack.Screen
           name="FoundLabelScan"
           component={FoundLabelScan}
@@ -195,9 +163,7 @@ const AppStackNavigator: React.FC = () => {
           options={({ navigation }) => ({
             title: "Found Label",
             gestureEnabled: false,
-            headerLeft: () => (
-              <NavigationWithBack navigation={navigation} returnHome />
-            ),
+            headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
           })}
         />
         <Stack.Screen
@@ -206,12 +172,8 @@ const AppStackNavigator: React.FC = () => {
           options={({ navigation }) => ({
             title: "Edit Label",
             gestureEnabled: false,
-            headerLeft: () => (
-              <NavigationWithBack navigation={navigation} returnHome />
-            ),
-            headerRight: () => (
-              <IconButton icon="trash-outline" color="firebrick" />
-            ),
+            headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+            headerRight: () => <IconButton icon="trash-outline" color="firebrick" />,
           })}
         />
       </Stack.Navigator>
@@ -232,7 +194,7 @@ const RootStackNavigator: React.FC = () => {
     return <></>;
   }
 
-  if (!accessToken) {
+  if (!user || Object.keys(user).length === 0) {
     return <AuthStackNavigator />;
   }
 
