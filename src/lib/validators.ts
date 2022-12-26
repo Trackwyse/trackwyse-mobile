@@ -397,6 +397,61 @@ const validateUpdateUserInput = (updateUserInput: UpdateUserInput) => {
   return errors;
 };
 
+/* 
+  Validate the Update User Password Form
+  When a user updates their password, they must provide their current password, and a new password
+
+  Required fields: currentPassword, newPassword, confirmPassword
+  Current password must be entered
+  New password must be at least 8 characters long
+  New password and confirm new password must match
+*/
+const validateUpdateUserPasswordInput = (updateUserPasswordInput: UpdateUserPasswordInput) => {
+  const errors: UpdateUserPasswordInput = {
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  };
+
+  if (!updateUserPasswordInput.currentPassword) {
+    errors.currentPassword = "Current password field is required";
+  }
+
+  if (!updateUserPasswordInput.newPassword) {
+    errors.newPassword = "New password field is required";
+  }
+
+  if (!updateUserPasswordInput.confirmPassword) {
+    errors.confirmPassword = "Confirm password field is required";
+  }
+
+  // Ensure the password is valid
+  const passwordRegex = /^.{8,}$/;
+
+  if (!passwordRegex.test(updateUserPasswordInput.newPassword)) {
+    errors.newPassword = "New password must be at least 8 characters long";
+  }
+
+  // Ensure the confirm password is valid
+  if (!passwordRegex.test(updateUserPasswordInput.confirmPassword)) {
+    errors.confirmPassword = "Confirm password must be at least 8 characters long";
+  }
+
+  // Ensure the passwords match
+  if (updateUserPasswordInput.newPassword !== updateUserPasswordInput.confirmPassword) {
+    errors.confirmPassword = "Passwords must match";
+  }
+
+  // see if all errors are empty, if so, return empty object
+  const allErrors = Object.values(errors).filter((error) => error !== "");
+
+  if (allErrors.length === 0) {
+    return {};
+  }
+
+  return errors;
+};
+
 /*
   Validate the label URL
   When a user scans a label, the URL will be in the format of trw://<labelId>
@@ -423,5 +478,6 @@ export {
   validateForgotPasswordInput,
   validateResetPasswordInput,
   validateUpdateUserInput,
+  validateUpdateUserPasswordInput,
   validateFoundLabelDetailsInput,
 };

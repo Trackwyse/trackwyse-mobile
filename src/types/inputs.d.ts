@@ -60,3 +60,9 @@ interface UpdateUserInput {
   notificationPushToken?: string;
   notificationsEnabled?: "true" | "false";
 }
+
+interface UpdateUserPasswordInput {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}

@@ -23,6 +23,8 @@ type AcceptTermsAPIResponse = APIResponse;
 
 type FoundLabelDetailsAPIResponse = APIResponse;
 
+type UpdateUserPasswordAPIResponse = APIResponse;
+
 type LoginAPIResponse = APIResponse & {
   data: {
     accessToken: string;

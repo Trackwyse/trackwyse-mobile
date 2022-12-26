@@ -406,6 +406,40 @@ const updateUser = async (
   );
 };
 
+/*
+  POST /api/v1/user/updatePassword
+
+  Request Body:
+    - currentPassword: string
+    - newPassword: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const updateUserPassword = async (
+  values: UpdateUserPasswordInput,
+  accessToken: string
+): Promise<UpdateUserPasswordAPIResponse> => {
+  const { currentPassword, newPassword } = values;
+
+  return apiClient.post(
+    "/api/v1/user/updatePassword",
+    {
+      currentPassword,
+      newPassword,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
 export default {
   login,
   register,
@@ -418,6 +452,7 @@ export default {
 
   getUser,
   updateUser,
+  updateUserPassword,
 
   addLabel,
   getLabel,
