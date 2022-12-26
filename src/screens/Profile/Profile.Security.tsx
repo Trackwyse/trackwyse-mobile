@@ -1,17 +1,17 @@
-import api from "@/api";
-import Button from "@/components/Button";
-import Input from "@/components/Input";
-import ListItem from "@/components/ListItem";
-import { useAuth } from "@/contexts/Auth";
-import tw from "@/lib/tailwind";
-import { validateUpdateUserPasswordInput } from "@/lib/validators";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useFormik } from "formik";
 import { View, Text } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Toast from "react-native-toast-message";
+import { useMutation } from "@tanstack/react-query";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+import api from "@/api";
+import tw from "@/lib/tailwind";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+import { useAuth } from "@/contexts/Auth";
+import { validateUpdateUserPasswordInput } from "@/lib/validators";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
