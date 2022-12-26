@@ -12,6 +12,7 @@ interface User {
 
 interface Label {
   _id: string;
+  owner: string;
   activated: boolean;
   isLost: boolean;
 

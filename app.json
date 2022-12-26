@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "codespaces-blank",
+    "name": "Trackwyse",
     "slug": "trackwyse",
     "scheme": "trw",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,7 +21,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.js00001.trackwyse",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.1"
     },
     "android": {
       "adaptiveIcon": {
