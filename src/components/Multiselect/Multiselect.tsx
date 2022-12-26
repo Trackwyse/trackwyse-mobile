@@ -1,7 +1,8 @@
-import tw from "@/lib/tailwind";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { BlurView } from "expo-blur";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { View, TouchableOpacity, Text, ActivityIndicator } from "react-native";
+
+import tw from "@/lib/tailwind";
 
 interface MultiselectProps {
   title: string;
@@ -39,7 +40,7 @@ const Multiselect: React.FC<MultiselectProps> = ({
       </TouchableOpacity>
       {loading && (
         <BlurView
-          intensity={5}
+          intensity={2}
           style={tw`absolute w-full h-full rounded-md  items-center justify-center`}
         >
           <ActivityIndicator size="large" color="black" />
