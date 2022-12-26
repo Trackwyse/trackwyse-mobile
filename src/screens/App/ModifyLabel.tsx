@@ -139,7 +139,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
             if (hasChanged) {
               setIsUnsavedModalVisible(true);
             } else {
-              navigation.navigate("home");
+              navigation.navigate("Home");
             }
           }}
         />
@@ -198,7 +198,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
             >
               Don't Delete
             </Button>
-            <Button style={tw`w-full rounded-md py-2 my-1 bg-rose-800`} onPress={onDeleteLabel}>
+            <Button style={tw`w-full rounded-md py-2 my-1 bg-rose-600`} onPress={onDeleteLabel}>
               Delete (Irreversible)
             </Button>
           </View>

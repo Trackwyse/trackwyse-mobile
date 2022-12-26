@@ -17,6 +17,7 @@ import ProfileRate from "../screens/Profile/Profile.Rate";
 import ProfileHelp from "../screens/Profile/Profile.Help";
 import ProfileAbout from "../screens/Profile/Profile.About";
 import ProfileLanding from "../screens/Profile/Profile.Landing";
+import ProfileSecurity from "@/screens/Profile/Profile.Security";
 import ProfileUserInfo from "../screens/Profile/Profile.UserInfo";
 import ProfilePurchase from "../screens/Profile/Profile.Purchase";
 import ProfileNotifications from "@/screens/Profile/Profile.Notifications";
@@ -152,6 +153,11 @@ const AppStackNavigator: React.FC = () => {
         <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
         <Stack.Screen name="ProfileRate" component={ProfileRate} options={{ title: "Rate" }} />
         <Stack.Screen name="ProfileHelp" component={ProfileHelp} options={{ title: "Help" }} />
+        <Stack.Screen
+          name="ProfileSecurity"
+          component={ProfileSecurity}
+          options={{ title: "Security" }}
+        />
         <Stack.Screen
           name="FoundLabelScan"
           component={FoundLabelScan}

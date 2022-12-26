@@ -351,6 +351,53 @@ const validateResetPasswordInput = (resetPasswordInput: ResetPasswordInput) => {
 };
 
 /*
+  Validate the Update User Form
+  When a user updates their profile, they can update their email, firstName, and lastName
+
+  Optional fields: email, firstName, lastName
+  Email must be in the format of <email>@<domain>.<domain>
+  First Name and Last Name must be only letters
+*/
+const validateUpdateUserInput = (updateUserInput: UpdateUserInput) => {
+  const errors: UpdateUserInput = {
+    email: "",
+    firstName: "",
+    lastName: "",
+  };
+
+  // Ensure the email is valid
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (updateUserInput.email && !emailRegex.test(updateUserInput.email)) {
+    errors.email = "Email is invalid";
+  }
+
+  // Ensure the first name is valid
+  const firstNameRegex = /^[a-zA-Z]+$/;
+
+  if (updateUserInput.firstName && !firstNameRegex.test(updateUserInput.firstName)) {
+    errors.firstName = "First name is invalid";
+  }
+
+  // Ensure the last name is valid
+  const lastNameRegex = /^[a-zA-Z]+$/;
+
+  if (updateUserInput.lastName && !lastNameRegex.test(updateUserInput.lastName)) {
+    errors.lastName = "Last name is invalid";
+  }
+
+  // see if all errors are empty, if so, return empty object
+  const allErrors = Object.values(errors).filter((error) => error !== "");
+
+  if (allErrors.length === 0) {
+    return {};
+  }
+
+  return errors;
+};
+
+/*
   Validate the label URL
   When a user scans a label, the URL will be in the format of trw://<labelId>
 
@@ -375,5 +422,6 @@ export {
   validateModifyLabelInput,
   validateForgotPasswordInput,
   validateResetPasswordInput,
+  validateUpdateUserInput,
   validateFoundLabelDetailsInput,
 };
