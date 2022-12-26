@@ -9,6 +9,7 @@ import api from "@/api";
 
 type NotificationsContextData = {
   enabled: boolean;
+  loading: boolean;
   setStatus: (status: boolean) => void;
 };
 
@@ -89,7 +90,7 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
   };
 
   return (
-    <NotificationsContext.Provider value={{ enabled, setStatus }}>
+    <NotificationsContext.Provider value={{ enabled, setStatus, loading: mutation.isLoading }}>
       {children}
     </NotificationsContext.Provider>
   );

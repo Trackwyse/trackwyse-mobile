@@ -22,6 +22,7 @@
     "classnames": "^2.3.2",
     "expo": "~47.0.8",
     "expo-barcode-scanner": "~12.1.0",
+    "expo-blur": "~12.0.1",
     "expo-camera": "~13.1.0",
     "expo-device": "~5.0.0",
     "expo-linear-gradient": "^12.0.1",
