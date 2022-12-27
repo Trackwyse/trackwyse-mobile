@@ -1,6 +1,6 @@
-import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { View, TouchableOpacity, Text } from "react-native";
+import { useNavigation } from "@react-navigation/core";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import tw from "@/lib/tailwind";

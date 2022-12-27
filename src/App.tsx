@@ -25,12 +25,10 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <BottomSheetModalProvider>
           <AuthProvider>
-            <NotificationsProvider>
-              <NavigationContainer theme={theme}>
-                <RootStackNavigator />
-                <Toast />
-              </NavigationContainer>
-            </NotificationsProvider>
+            <NavigationContainer theme={theme}>
+              <RootStackNavigator />
+              <Toast />
+            </NavigationContainer>
           </AuthProvider>
         </BottomSheetModalProvider>
       </QueryClientProvider>

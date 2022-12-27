@@ -36,6 +36,7 @@ import { useAuth } from "../contexts/Auth";
 import IconButton from "../components/IconButton";
 import { LabelsProvider } from "../contexts/Labels";
 import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
+import NotificationsProvider from "@/contexts/Notifications";
 
 const Stack = createNativeStackNavigator();
 
@@ -113,77 +114,79 @@ const AcceptTermsStackNavigator: React.FC = () => {
 */
 const AppStackNavigator: React.FC = () => {
   return (
-    <LabelsProvider>
-      <Stack.Navigator
-        screenOptions={({ navigation }) => ({
-          gestureEnabled: false,
-          headerLeft: () => <NavigationWithBack navigation={navigation} />,
-        })}
-      >
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            title: "",
-            headerShadowVisible: false,
-            headerLeft: () => <></>,
-          }}
-        />
-        <Stack.Screen name="AddLabel" component={AddLabel} options={{ title: "Add Label" }} />
-        <Stack.Screen
-          name="ProfileLanding"
-          component={ProfileLanding}
-          options={{ title: "Profile" }}
-        />
-        <Stack.Screen
-          name="ProfileUserInfo"
-          component={ProfileUserInfo}
-          options={{ title: "User Info" }}
-        />
-        <Stack.Screen
-          name="ProfileNotifications"
-          component={ProfileNotifications}
-          options={{ title: "Notifications" }}
-        />
-        <Stack.Screen
-          name="ProfilePurchase"
-          component={ProfilePurchase}
-          options={{ title: "Purchase" }}
-        />
-        <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
-        <Stack.Screen name="ProfileRate" component={ProfileRate} options={{ title: "Rate" }} />
-        <Stack.Screen name="ProfileHelp" component={ProfileHelp} options={{ title: "Help" }} />
-        <Stack.Screen
-          name="ProfileSecurity"
-          component={ProfileSecurity}
-          options={{ title: "Security" }}
-        />
-        <Stack.Screen
-          name="FoundLabelScan"
-          component={FoundLabelScan}
-          options={{ title: "Found Label" }}
-        />
-        <Stack.Screen
-          name="FoundLabelDetails"
-          component={FoundLabelDetails}
-          options={({ navigation }) => ({
-            title: "Found Label",
+    <NotificationsProvider>
+      <LabelsProvider>
+        <Stack.Navigator
+          screenOptions={({ navigation }) => ({
             gestureEnabled: false,
-            headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+            headerLeft: () => <NavigationWithBack navigation={navigation} />,
           })}
-        />
-        <Stack.Screen
-          name="EditLabel"
-          component={EditLabel}
-          options={({ navigation }) => ({
-            title: "Edit Label",
-            gestureEnabled: false,
-            headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
-            headerRight: () => <IconButton icon="trash-outline" color="firebrick" />,
-          })}
-        />
-      </Stack.Navigator>
-    </LabelsProvider>
+        >
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{
+              title: "",
+              headerShadowVisible: false,
+              headerLeft: () => <></>,
+            }}
+          />
+          <Stack.Screen name="AddLabel" component={AddLabel} options={{ title: "Add Label" }} />
+          <Stack.Screen
+            name="ProfileLanding"
+            component={ProfileLanding}
+            options={{ title: "Profile" }}
+          />
+          <Stack.Screen
+            name="ProfileUserInfo"
+            component={ProfileUserInfo}
+            options={{ title: "User Info" }}
+          />
+          <Stack.Screen
+            name="ProfileNotifications"
+            component={ProfileNotifications}
+            options={{ title: "Notifications" }}
+          />
+          <Stack.Screen
+            name="ProfilePurchase"
+            component={ProfilePurchase}
+            options={{ title: "Purchase" }}
+          />
+          <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
+          <Stack.Screen name="ProfileRate" component={ProfileRate} options={{ title: "Rate" }} />
+          <Stack.Screen name="ProfileHelp" component={ProfileHelp} options={{ title: "Help" }} />
+          <Stack.Screen
+            name="ProfileSecurity"
+            component={ProfileSecurity}
+            options={{ title: "Security" }}
+          />
+          <Stack.Screen
+            name="FoundLabelScan"
+            component={FoundLabelScan}
+            options={{ title: "Found Label" }}
+          />
+          <Stack.Screen
+            name="FoundLabelDetails"
+            component={FoundLabelDetails}
+            options={({ navigation }) => ({
+              title: "Found Label",
+              gestureEnabled: false,
+              headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+            })}
+          />
+          <Stack.Screen
+            name="EditLabel"
+            component={EditLabel}
+            options={({ navigation }) => ({
+              title: "Edit Label",
+              gestureEnabled: false,
+              headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+              headerRight: () => <IconButton icon="trash-outline" color="firebrick" />,
+            })}
+          />
+        </Stack.Navigator>
+      </LabelsProvider>
+    </NotificationsProvider>
   );
 };
 
@@ -194,7 +197,7 @@ const AppStackNavigator: React.FC = () => {
   and verification status.
 */
 const RootStackNavigator: React.FC = () => {
-  const { loading, accessToken, user } = useAuth();
+  const { loading, user } = useAuth();
 
   if (loading) {
     return <></>;

@@ -1,16 +1,23 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
+import { useNavigation } from "@react-navigation/core";
 import { useMutation } from "@tanstack/react-query";
+import { Subscription } from "expo-modules-core";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 
 import { useAuth } from "@/contexts/Auth";
 
 import api from "@/api";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type NotificationsContextData = {
   enabled: boolean;
   loading: boolean;
   setStatus: (status: boolean) => void;
+};
+
+type RootStackParamList = {
+  EditLabel: { labelId: string } | undefined;
 };
 
 const NotificationsContext = createContext<NotificationsContextData>(
@@ -28,6 +35,7 @@ Notifications.setNotificationHandler({
 const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const { user, accessToken } = useAuth();
   const [enabled, setEnabled] = useState<boolean>(false);
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const mutation = useMutation({
     mutationFn: (values: UpdateUserInput) => {
@@ -37,10 +45,26 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
 
   useEffect(() => {
     registerForPostNotifications();
+
+    const subscription = Notifications.addNotificationResponseReceivedListener((response) => {
+      const { notification } = response;
+      const { data } = notification.request.content;
+
+      // Ensure a user is logged in
+      if (user && Object.keys(user).length > 0) {
+        // Ensure the notification is for a lost label
+        if (data.type === "labelLocated" && data.labelId) {
+          // Navigate to label
+          navigation.navigate("EditLabel", { labelId: data.labelId as string });
+        }
+      }
+    });
+
+    return () => subscription.remove();
   }, [user]);
 
   const registerForPostNotifications = async () => {
-    if (user) {
+    if (user && Object.keys(user).length > 0) {
       if (Device.isDevice) {
         const { status } = await Notifications.getPermissionsAsync();
         let finalStatus = status;
