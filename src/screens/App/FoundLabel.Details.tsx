@@ -71,11 +71,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
           icon="arrow-back"
           size={25}
           onPress={() => {
-            const hasChanged = Object.keys(editInput.values).some(
-              (key) =>
-                editInput.values[key as keyof FoundLabelDetailsInput] !==
-                editInput.initialValues[key as keyof FoundLabelDetailsInput]
-            );
+            const hasChanged = editInput.values !== editInput.initialValues;
 
             if (hasChanged) {
               setModalVisible(true);

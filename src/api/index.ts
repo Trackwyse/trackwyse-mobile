@@ -133,7 +133,7 @@ const checkEmail = (values: RegisterInput): Promise<CheckEmailAPIResponse> => {
     - user: User
 */
 const getUser = (accessToken: string): Promise<UserAPIResponse> => {
-  return apiClient.get("/auth/v1/me", {
+  return apiClient.get("/api/v1/user", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

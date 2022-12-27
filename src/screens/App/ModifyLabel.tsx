@@ -126,11 +126,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
           icon="arrow-back"
           size={25}
           onPress={() => {
-            const hasChanged = Object.keys(editInput.values).some(
-              (key) =>
-                editInput.values[key as keyof ModifyLabelInput] !==
-                editInput.initialValues[key as keyof ModifyLabelInput]
-            );
+            const hasChanged = editInput.values !== editInput.initialValues;
 
             if (hasChanged) {
               setIsUnsavedModalVisible(true);
