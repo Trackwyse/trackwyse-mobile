@@ -114,8 +114,8 @@ const AcceptTermsStackNavigator: React.FC = () => {
 */
 const AppStackNavigator: React.FC = () => {
   return (
-    <NotificationsProvider>
-      <LabelsProvider>
+    <LabelsProvider>
+      <NotificationsProvider>
         <Stack.Navigator
           screenOptions={({ navigation }) => ({
             gestureEnabled: false,
@@ -185,8 +185,8 @@ const AppStackNavigator: React.FC = () => {
             })}
           />
         </Stack.Navigator>
-      </LabelsProvider>
-    </NotificationsProvider>
+      </NotificationsProvider>
+    </LabelsProvider>
   );
 };
 

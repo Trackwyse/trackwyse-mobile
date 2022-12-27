@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/Auth";
 
 import api from "@/api";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useLabels } from "./Labels";
 
 type NotificationsContextData = {
   enabled: boolean;
@@ -33,6 +34,7 @@ Notifications.setNotificationHandler({
 });
 
 const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+  const { getLabels } = useLabels();
   const { user, accessToken } = useAuth();
   const [enabled, setEnabled] = useState<boolean>(false);
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -46,7 +48,7 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
   useEffect(() => {
     registerForPostNotifications();
 
-    const subscription = Notifications.addNotificationResponseReceivedListener((response) => {
+    const subscription = Notifications.addNotificationResponseReceivedListener(async (response) => {
       const { notification } = response;
       const { data } = notification.request.content;
 
@@ -54,7 +56,8 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
       if (user && Object.keys(user).length > 0) {
         // Ensure the notification is for a lost label
         if (data.type === "labelLocated" && data.labelId) {
-          // Navigate to label
+          await getLabels();
+
           navigation.navigate("EditLabel", { labelId: data.labelId as string });
         }
       }
