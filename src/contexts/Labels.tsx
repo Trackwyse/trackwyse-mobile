@@ -1,20 +1,13 @@
-import {
-  createContext,
-  useReducer,
-  useContext,
-  useState,
-  useEffect,
-} from "react";
+import { createContext, useReducer, useContext, useState, useEffect } from "react";
 
 import api from "../api";
-import { colors } from "../components/ColorSelector/ColorSelector";
 import { useAuth } from "./Auth";
 
 type LabelsContextData = {
   labels: Label[];
   loading: boolean;
   getLabels: () => Promise<void>;
-  createLabel: (id: string) => void;
+  createLabel: (label: Label) => void;
   updateLabel: (label: Label) => void;
   deleteLabel: (label: Label) => void;
 };
@@ -47,9 +40,7 @@ const labelsReducer = (state: Label[], action: LabelsAction) => {
   }
 };
 
-const LabelsProvider: React.FC<{ children?: React.ReactNode }> = ({
-  children,
-}) => {
+const LabelsProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const { accessToken } = useAuth();
   const [labels, dispatch] = useReducer(labelsReducer, []);
   const [loading, setLoading] = useState<boolean>(true);
@@ -65,12 +56,12 @@ const LabelsProvider: React.FC<{ children?: React.ReactNode }> = ({
     }
   };
 
-  const createLabel = async (id: string) => {
+  const createLabel = async (label: Label) => {
     setLoading(true);
     try {
       dispatch({
         type: "CREATE_LABEL",
-        payload: { _id: id, activated: true, isLost: false, color: colors[0] },
+        payload: label,
       });
     } catch (error) {
     } finally {

@@ -5,10 +5,6 @@ interface APIResponse {
   };
 }
 
-type AddLabelAPIResponse = APIResponse;
-
-type ModifyLabelAPIResponse = APIResponse;
-
 type DeleteLabelAPIResponse = APIResponse;
 
 type VerifyEmailAPIResponse = APIResponse;
@@ -34,6 +30,18 @@ type LoginAPIResponse = APIResponse & {
 type RegisterAPIResponse = APIResponse & {
   data: {
     accessToken: string;
+  };
+};
+
+type ModifyLabelAPIResponse = APIResponse & {
+  data: {
+    label: Label;
+  };
+};
+
+type AddLabelAPIResponse = APIResponse & {
+  data: {
+    label: Label;
   };
 };
 

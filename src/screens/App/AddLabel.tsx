@@ -49,16 +49,17 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
     mutation.mutate(
       { id: labelId },
       {
-        onSuccess: () => {
+        onSuccess: ({ data }) => {
           Toast.show({
             type: "success",
             text1: "Label Added",
             text2: "Your label has been added to your account",
           });
-          createLabel(labelId);
+          createLabel(data.label);
+
           navigation.navigate("EditLabel", { labelId });
         },
-        onError: (error) => {
+        onError: () => {
           Toast.show({
             type: "error",
             text1: "Error",

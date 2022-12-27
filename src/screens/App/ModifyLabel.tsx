@@ -67,18 +67,14 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
     validate: validateModifyLabelInput,
     onSubmit: (values) => {
       modificationMutation.mutate(values, {
-        onSuccess: () => {
+        onSuccess: ({ data }) => {
           Toast.show({
             type: "success",
             text1: "Label Updated",
             text2: "Your label has been updated successfully",
           });
 
-          updateLabel({
-            ...label,
-            ...values,
-            color: colors[values.color as number],
-          });
+          updateLabel(data.label);
           navigation.navigate("Home");
         },
         onError: (err) => {
