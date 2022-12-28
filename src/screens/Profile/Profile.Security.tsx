@@ -57,7 +57,11 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   });
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={tw`items-center`} style={tw`h-full w-full`}>
+    <KeyboardAwareScrollView
+      keyboardShouldPersistTaps="always"
+      contentContainerStyle={tw`items-center`}
+      style={tw`h-full w-full`}
+    >
       <View style={tw`w-11/12 pt-10`}>
         <Text style={tw`text-2xl font-bold`}>Update Password</Text>
         <Text style={tw`my-4 text-gray-400 text-base`}>

@@ -113,7 +113,11 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
         </View>
       </Modal>
 
-      <KeyboardAwareScrollView contentContainerStyle={tw`items-center`} style={tw`h-full w-full`}>
+      <KeyboardAwareScrollView
+        keyboardShouldPersistTaps="always"
+        contentContainerStyle={tw`items-center`}
+        style={tw`h-full w-full`}
+      >
         <View style={tw`w-full items-center`}>
           <View style={tw`w-11/12 pt-10`}>
             <Text style={tw`text-2xl font-bold`}>Label Details</Text>

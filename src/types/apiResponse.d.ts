@@ -45,6 +45,12 @@ type AddLabelAPIResponse = APIResponse & {
   };
 };
 
+type RecoverLabelAPIResponse = APIResponse & {
+  data: {
+    label: Label;
+  };
+};
+
 type UpdateUserAPIResponse = APIResponse & {
   data: {
     user: User;

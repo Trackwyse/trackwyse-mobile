@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://trackwyse.in-staging.space";
+const baseURL = __DEV__ ? "https://api.dev.trackwyse.com" : "https://api.trackwsyse.com";
 
 // Base API Client
 const apiClient = axios.create({
@@ -259,10 +259,11 @@ const getLabel = (values: GetLabelInput, accessToken?: string): Promise<GetLabel
   const { id } = values;
 
   return apiClient.get(`/api/v1/labels/${id}`, {
-    // Disable in order to allow users to find their own labels
-    // headers: {
-    //   Authorization: `Bearer ${accessToken}`,
-    // },
+    // In Production, the Authorization header is required
+    // In Development, the Authorization header should not be included
+    headers: {
+      Authorization: !__DEV__ ? `Bearer ${accessToken}` : undefined,
+    },
   });
 };
 
@@ -295,9 +296,10 @@ const updateFoundLabelDetails = (
       exactLocation,
     },
     {
-      // Disable in order to allow users to find their own labels
+      // In Production, the Authorization header is required
+      // In Development, the Authorization header should not be included
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: !__DEV__ ? `Bearer ${accessToken}` : undefined,
       },
     }
   );
@@ -440,6 +442,34 @@ const updateUserPassword = async (
   );
 };
 
+/*
+  POST /api/v1/labels/recovered/:id
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - label
+*/
+const recoverLabel = async (
+  values: RecoverLabelInput,
+  accessToken: string
+): Promise<RecoverLabelAPIResponse> => {
+  const { id } = values;
+
+  return apiClient.post(
+    `/api/v1/labels/recovered/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
 export default {
   login,
   register,
@@ -459,5 +489,6 @@ export default {
   getLabels,
   modifyLabel,
   deleteLabel,
+  recoverLabel,
   updateFoundLabelDetails,
 };

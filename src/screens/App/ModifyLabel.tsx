@@ -53,6 +53,12 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
     },
   });
 
+  const recoveryMutation = useMutation({
+    mutationFn: () => {
+      return api.recoverLabel({ id: labelId }, accessToken);
+    },
+  });
+
   const editInput = useFormik({
     initialValues: {
       id: labelId,
@@ -104,6 +110,27 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
           type: "error",
           text1: "Error",
           text2: "There was an error deleting your label",
+        });
+      },
+    });
+  };
+
+  const onRecoverLabel = () => {
+    recoveryMutation.mutate(undefined, {
+      onSuccess: ({ data }) => {
+        navigation.navigate("Home");
+        updateLabel(data.label);
+        Toast.show({
+          type: "success",
+          text1: "Label Recovered",
+          text2: "Your label has been recovered successfully",
+        });
+      },
+      onError: (err) => {
+        Toast.show({
+          type: "error",
+          text1: "Error",
+          text2: "There was an error recovering your label",
         });
       },
     });
@@ -197,6 +224,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
         </View>
       </Modal>
       <KeyboardAwareScrollView
+        keyboardShouldPersistTaps="always"
         contentContainerStyle={tw`items-center`}
         style={tw`h-full w-full`}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
@@ -244,6 +272,15 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
               position="bottom"
               textRight={label.foundRecoveryLocation ? label.foundRecoveryLocation : "Not provided"}
             />
+
+            <Button
+              style={tw`my-3`}
+              size="lg"
+              onPress={onRecoverLabel}
+              loading={recoveryMutation.isLoading}
+            >
+              Mark as recovered
+            </Button>
           </View>
         )}
 

@@ -34,6 +34,10 @@ interface GetLabelInput {
   id: string;
 }
 
+interface RecoverLabelInput {
+  id: string;
+}
+
 interface VerifyInput {
   verificationToken: string;
 }
