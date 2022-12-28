@@ -19,6 +19,7 @@ import { useAuth } from "@/contexts/Auth";
 import { useLabels } from "@/contexts/Labels";
 import HomeLoader from "@/components/Loaders/Home";
 import IconButton from "@/components/IconButton";
+import { trimToLength } from "@/lib/textUtil";
 
 interface HomeProps {
   navigation: NativeStackNavigationProp<any>;
@@ -41,7 +42,9 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
     <SafeAreaView>
       <View style={tw`items-center mb-4`}>
         <View style={tw`w-11/12 flex-row items-center justify-between`}>
-          <Text style={tw`font-bold text-3xl`}>Welcome {user?.firstName || ""}</Text>
+          <Text style={tw`font-bold text-3xl`}>
+            Welcome {trimToLength(user?.firstName, 8) || ""}
+          </Text>
           <IconButton
             icon="person"
             size={25}

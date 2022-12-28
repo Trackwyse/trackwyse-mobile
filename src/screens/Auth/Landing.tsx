@@ -25,23 +25,15 @@ const Landing: React.FC<LandingScreenProps> = ({ navigation }) => {
   return (
     <View>
       <TermsOfService innerRef={bottomSheetRef} />
-      <SafeAreaView
-        style={tw`flex justify-between items-center h-full bg-aqua-100`}
-      >
+      <SafeAreaView style={tw`flex justify-between items-center h-full bg-aqua-100`}>
         <View style={tw`items-center w-full`}>
           <Text style={tw`text-xl font-medium mt-4`}>trackwyse</Text>
         </View>
         <View style={tw`items-center w-full`}>
           <View style={tw`w-11/12 items-start`}>
-            <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>
-              Track items.
-            </Text>
-            <Text style={tw`max-w-4/5 text-4xl font-medium my-2`}>
-              Get notified when found.
-            </Text>
-            <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>
-              Save the day.
-            </Text>
+            <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Track items.</Text>
+            <Text style={tw`max-w-4/5 text-4xl font-medium my-2`}>Get notified when found.</Text>
+            <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Save the day.</Text>
           </View>
         </View>
         <View style={tw`bg-white w-full items-center rounded-t-3xl pt-4 pb-8`}>
