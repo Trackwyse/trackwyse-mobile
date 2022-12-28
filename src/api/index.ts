@@ -8,6 +8,18 @@ const apiClient = axios.create({
 });
 
 /*
+  GET /status/validClients
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - versions: string[]
+*/
+const getValidClients = (): Promise<ValidClientsAPIResponse> => {
+  return apiClient.get("/status/validClients");
+};
+
+/*
   POST /auth/v1/login
 
   Request Body:
@@ -486,6 +498,8 @@ const recoverLabel = async (
 };
 
 export default {
+  getValidClients,
+
   login,
   logout,
   register,
