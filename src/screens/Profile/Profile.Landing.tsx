@@ -1,4 +1,5 @@
-import { ScrollView, Share } from "react-native";
+import Constants from "expo-constants";
+import { ScrollView, Share, Text } from "react-native";
 
 import tw from "@/lib/tailwind";
 import { useAuth } from "@/contexts/Auth";
@@ -99,6 +100,10 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         position="alone"
         onPress={handleLogout}
       />
+
+      <Text style={tw`text-gray-400 text-xs mt-3`}>
+        App version: {Constants.manifest?.version}, {__DEV__ ? "development" : "production"}
+      </Text>
     </ScrollView>
   );
 };
