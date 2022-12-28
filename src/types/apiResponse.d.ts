@@ -5,6 +5,8 @@ interface APIResponse {
   };
 }
 
+type LogoutAPIResponse = APIResponse;
+
 type DeleteLabelAPIResponse = APIResponse;
 
 type VerifyEmailAPIResponse = APIResponse;

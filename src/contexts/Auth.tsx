@@ -75,6 +75,7 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
   // Remove the access token from storage
   const signOut = async () => {
     try {
+      await api.logout(accessToken);
       await AsyncStorage.removeItem("accessToken");
       setAccessToken("");
     } catch (error) {}

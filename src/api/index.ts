@@ -29,6 +29,21 @@ const login = (values: LoginInput): Promise<LoginAPIResponse> => {
 };
 
 /*
+  POST /auth/v1/logout
+*/
+const logout = (accessToken: string): Promise<LogoutAPIResponse> => {
+  return apiClient.post(
+    "/auth/v1/logout",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
+/*
   POST /auth/v1/register
 
   Request Body:
@@ -472,6 +487,7 @@ const recoverLabel = async (
 
 export default {
   login,
+  logout,
   register,
   acceptTerms,
   forgotPassword,
