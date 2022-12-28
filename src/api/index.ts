@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = __DEV__ ? "https://api.dev.trackwyse.com" : "https://api.trackwsyse.com";
+const baseURL = __DEV__ ? "https://api.dev.trackwyse.com" : "https://api.trackwyse.com";
 
 // Base API Client
 const apiClient = axios.create({
