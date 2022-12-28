@@ -1,36 +1,60 @@
 import tw from "@/lib/tailwind";
-import { View, Text, SafeAreaView } from "react-native";
+import Assets from "@/assets";
+import { View, Text, SafeAreaView, Image } from "react-native";
 import Swiper from "react-native-swiper";
 
 const LandingCarousel: React.FC = () => {
   return (
-    <Swiper loop activeDotColor={tw.color("primary-200")} autoplay autoplayTimeout={5.0}>
+    <Swiper loop activeDotColor={tw.color("primary-200")}>
       <LandingItem style={tw`justify-between bg-aqua-100`}>
         <View style={tw`w-11/12 items-start`}>
           <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Track items.</Text>
           <Text style={tw`max-w-4/5 text-4xl font-medium my-2`}>Get notified when found.</Text>
-          <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Save the day.</Text>
+          <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Save your day.</Text>
         </View>
       </LandingItem>
       <LandingItem style={tw`justify-between bg-lime-100`}>
-        <View style={tw`w-11/12 items-start`}>
+        <View style={tw`mb-10`}>
+          <Image
+            source={Assets.labelYellow}
+            style={{ width: 212, height: 212, resizeMode: "contain" }}
+          />
+        </View>
+        <View style={tw`w-11/12 items-center`}>
           <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Track items.</Text>
-          <Text style={tw`max-w-4/5 text-4xl font-medium my-2`}>Get notified when found.</Text>
-          <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Save the day.</Text>
+          <Text style={tw`text-lg font-medium my-2 text-center`}>
+            Track your items using QR code labels and easily scan them to add them to your account.
+          </Text>
         </View>
       </LandingItem>
       <LandingItem style={tw`justify-between bg-yellow-100`}>
-        <View style={tw`w-11/12 items-start`}>
-          <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Track items.</Text>
-          <Text style={tw`max-w-4/5 text-4xl font-medium my-2`}>Get notified when found.</Text>
-          <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Save the day.</Text>
+        <View style={tw`mb-10`}>
+          <Image
+            source={Assets.labelOrange}
+            style={{ width: 212, height: 212, resizeMode: "contain" }}
+          />
+        </View>
+        <View style={tw`w-11/12 items-center`}>
+          <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Find lost items.</Text>
+          <Text style={tw`text-lg font-medium my-2 text-center`}>
+            Get notified when your belongings are found by another user, and view the finder's
+            contact information.
+          </Text>
         </View>
       </LandingItem>
       <LandingItem style={tw`justify-between bg-indigo-100`}>
-        <View style={tw`w-11/12 items-start`}>
-          <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Track items.</Text>
-          <Text style={tw`max-w-4/5 text-4xl font-medium my-2`}>Get notified when found.</Text>
-          <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Save the day.</Text>
+        <View style={tw`mb-10`}>
+          <Image
+            source={Assets.labelPink}
+            style={{ width: 212, height: 212, resizeMode: "contain" }}
+          />
+        </View>
+        <View style={tw`w-11/12 items-center`}>
+          <Text style={tw` text-4xl font-medium my-2`}>Stay Organized.</Text>
+          <Text style={tw`text-lg font-medium my-2 text-center`}>
+            Add contact information and custom messages to each item's label for even better
+            organization.
+          </Text>
         </View>
       </LandingItem>
     </Swiper>
