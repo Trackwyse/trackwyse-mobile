@@ -1,41 +1,41 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Home from "../screens/App/Home";
-import Login from "../screens/Auth/Login";
-import Landing from "../screens/Auth/Landing";
+import Home from "@/screens/App/Home";
+import Login from "@/screens/Auth/Login";
+import Landing from "@/screens/Auth/Landing";
 
-import RegisterStep1 from "../screens/Auth/Register.Step1";
-import RegisterStep2 from "../screens/Auth/Register.Step2";
+import RegisterStep1 from "@/screens/Auth/Register.Step1";
+import RegisterStep2 from "@/screens/Auth/Register.Step2";
 
-import AddLabel from "../screens/App/AddLabel";
-import EditLabel from "../screens/App/ModifyLabel";
+import AddLabel from "@/screens/App/AddLabel";
+import EditLabel from "@/screens/App/ModifyLabel";
 
-import FoundLabelScan from "../screens/App/FoundLabel.Scan";
-import FoundLabelDetails from "../screens/App/FoundLabel.Details";
+import FoundLabelScan from "@/screens/App/FoundLabel.Scan";
+import FoundLabelDetails from "@/screens/App/FoundLabel.Details";
 
-import ProfileRate from "../screens/Profile/Profile.Rate";
-import ProfileHelp from "../screens/Profile/Profile.Help";
-import ProfileAbout from "../screens/Profile/Profile.About";
-import ProfileLanding from "../screens/Profile/Profile.Landing";
+import ProfileRate from "@/screens/Profile/Profile.Rate";
+import ProfileHelp from "@/screens/Profile/Profile.Help";
+import ProfileAbout from "@/screens/Profile/Profile.About";
+import ProfileLanding from "@/screens/Profile/Profile.Landing";
 import ProfileSecurity from "@/screens/Profile/Profile.Security";
-import ProfileUserInfo from "../screens/Profile/Profile.UserInfo";
-import ProfilePurchase from "../screens/Profile/Profile.Purchase";
+import ProfileUserInfo from "@/screens/Profile/Profile.UserInfo";
+import ProfilePurchase from "@/screens/Profile/Profile.Purchase";
 import ProfileNotifications from "@/screens/Profile/Profile.Notifications";
 
-import ForgotPasswordLanding from "../screens/Auth/ForgotPassword.Landing";
-import ForgotPasswordAction from "../screens/Auth/ForgotPassword.Action";
-import ForgotPasswordReset from "../screens/Auth/ForgotPassword.Reset";
+import ForgotPasswordLanding from "@/screens/Auth/ForgotPassword.Landing";
+import ForgotPasswordAction from "@/screens/Auth/ForgotPassword.Action";
+import ForgotPasswordReset from "@/screens/Auth/ForgotPassword.Reset";
 
-import AcceptTermsAction from "../screens/Terms/AcceptTerms.Action";
-import AcceptTermsLanding from "../screens/Terms/AcceptTerms.Landing";
+import AcceptTermsAction from "@/screens/Terms/AcceptTerms.Action";
+import AcceptTermsLanding from "@/screens/Terms/AcceptTerms.Landing";
 
-import VerificationAction from "../screens/Verification/Verification.Action";
-import VerificationLanding from "../screens/Verification/Verification.Landing";
+import VerificationAction from "@/screens/Verification/Verification.Action";
+import VerificationLanding from "@/screens/Verification/Verification.Landing";
 
-import { useAuth } from "../contexts/Auth";
-import IconButton from "../components/IconButton";
-import { LabelsProvider } from "../contexts/Labels";
-import NavigationWithBack from "../components/Navigation/NavigationBackArrow";
+import { useAuth } from "@/contexts/Auth";
+import IconButton from "@/components/IconButton";
+import { LabelsProvider } from "@/contexts/Labels";
+import NavigationWithBack from "@/components/Navigation/NavigationBackArrow";
 import NotificationsProvider from "@/contexts/Notifications";
 
 const Stack = createNativeStackNavigator();
@@ -200,7 +200,7 @@ const RootStackNavigator: React.FC = () => {
   const { loading, user } = useAuth();
 
   if (loading) {
-    return <></>;
+    return null;
   }
 
   if (!user || Object.keys(user).length === 0) {

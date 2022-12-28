@@ -1,6 +1,6 @@
 import { createContext, useReducer, useContext, useState, useEffect } from "react";
 
-import api from "../api";
+import api from "@/api";
 import { useAuth } from "./Auth";
 
 type LabelsContextData = {

@@ -4,7 +4,8 @@ import { useNavigation } from "@react-navigation/core";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import tw from "@/lib/tailwind";
-import Chip from "../Chip";
+import Chip from "@/components/Chip";
+import { trimToLength } from "@/lib/textUtil";
 
 interface LabelProps {
   label: Label;
@@ -28,7 +29,9 @@ const Label: React.FC<LabelProps> = ({ label }) => {
             <Ionicons name="ios-locate-outline" size={32} color="white" />
           </View>
         </View>
-        <Text style={tw`font-medium text-lg mt-3`}>{label.name ? label.name : "No Name"}</Text>
+        <Text style={tw`font-medium text-lg mt-3`}>
+          {label.name ? trimToLength(label.name, 12) : "No Name"}
+        </Text>
         <Text style={tw`text-gray-400 text-sm text-center`}>Click to view more information</Text>
         <Chip
           type="error"

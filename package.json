@@ -28,6 +28,7 @@
     "expo-linear-gradient": "^12.0.1",
     "expo-linking": "~3.3.0",
     "expo-notifications": "~0.17.0",
+    "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "formik": "^2.2.9",
     "react": "18.1.0",
