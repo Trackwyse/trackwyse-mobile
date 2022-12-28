@@ -8,8 +8,16 @@ import tw from "@/lib/tailwind";
 import AuthProvider from "./contexts/Auth";
 import queryClient from "./lib/queryClient";
 import RootStackNavigator from "./navigation";
-import NotificationsProvider from "./contexts/Notifications";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Text, TextInput } from "react-native";
+
+interface TextWithDefaultProps extends Text {
+  defaultProps?: { allowFontScaling?: boolean };
+}
+
+interface TextInputWithDefaultProps extends TextInput {
+  defaultProps?: { allowFontScaling?: boolean };
+}
 
 const theme = {
   ...DefaultTheme,
@@ -18,6 +26,13 @@ const theme = {
     background: "white",
   },
 };
+
+(Text as unknown as TextWithDefaultProps).defaultProps =
+  (Text as unknown as TextWithDefaultProps).defaultProps || {};
+(TextInput as unknown as TextInputWithDefaultProps).defaultProps =
+  (TextInput as unknown as TextInputWithDefaultProps).defaultProps || {};
+(Text as unknown as TextWithDefaultProps).defaultProps!.allowFontScaling = false;
+(TextInput as unknown as TextInputWithDefaultProps).defaultProps!.allowFontScaling = false;
 
 const App = () => {
   return (
