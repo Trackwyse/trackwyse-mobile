@@ -2,7 +2,7 @@
   "expo": {
     "name": "Trackwyse",
     "slug": "trackwyse",
-    "scheme": "trackwyse",
+    "scheme": "trw",
     "version": "1.0.7",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
