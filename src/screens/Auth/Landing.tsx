@@ -8,13 +8,15 @@ import Button from "@/components/Button";
 import tw from "@/lib/tailwind";
 import Swiper from "react-native-swiper";
 import LandingCarousel from "@/components/LandingCarousel";
+import PrivacyPolicy from "@/components/PrivacyPolicy";
 
 interface LandingScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
 const Landing: React.FC<LandingScreenProps> = ({ navigation }) => {
-  const { open, bottomSheetRef } = useBottomSheetRef();
+  const { open: openPrivacyPolicy, bottomSheetRef: privacyPolicyRef } = useBottomSheetRef();
+  const { open: openTermsOfService, bottomSheetRef: termsOfServiceRef } = useBottomSheetRef();
 
   const navigateToLogin = () => {
     navigation.navigate("Login");
@@ -26,7 +28,8 @@ const Landing: React.FC<LandingScreenProps> = ({ navigation }) => {
 
   return (
     <View>
-      <TermsOfService innerRef={bottomSheetRef} />
+      <PrivacyPolicy innerRef={privacyPolicyRef} />
+      <TermsOfService innerRef={termsOfServiceRef} />
       <View style={tw`flex justify-between items-center h-full `}>
         <LandingCarousel />
 
@@ -39,14 +42,21 @@ const Landing: React.FC<LandingScreenProps> = ({ navigation }) => {
             textStyle={tw`font-medium text-base`}
             onPress={navigateToLogin}
           >
-            Been here before? Login instead
+            Been here before? Login
           </Hyperlink>
           <Hyperlink
-            style={tw`pt-8`}
-            textStyle={tw`font-medium text-gray-300 no-underline`}
-            onPress={open}
+            style={tw`pt-3`}
+            textStyle={tw`font-medium text-gray-400 no-underline`}
+            onPress={openTermsOfService}
           >
             Terms of Service
+          </Hyperlink>
+          <Hyperlink
+            style={tw`my-2`}
+            textStyle={tw`font-medium text-gray-400 no-underline`}
+            onPress={openPrivacyPolicy}
+          >
+            Privacy Policy
           </Hyperlink>
         </View>
       </View>
