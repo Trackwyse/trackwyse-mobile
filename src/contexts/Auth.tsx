@@ -1,112 +1,126 @@
-import { createContext, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { createContext, useEffect, useState, useContext } from "react";
+import { useMutation } from "@tanstack/react-query";
 import api from "@/api";
 
-type AuthContextData = {
+interface AuthContextData {
   user: User;
-  accessToken: string;
   loading: boolean;
-  refreshAccessToken: () => Promise<void>;
-  updateAccessToken: (token: string) => void;
-  updateUser: (user: User) => void;
+  accessToken: string;
+  refreshToken: string;
+
   signOut: () => void;
-};
+  updateUser: (user: User) => void;
+  updateAccessToken: (token: string) => void;
+  updateRefreshToken: (token: string) => void;
+}
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User>({} as User);
-  const [loading, setLoading] = useState<boolean>(true);
   const [accessToken, setAccessToken] = useState<string>("");
+  const [refreshToken, setRefreshToken] = useState<string>("");
 
-  // Load the access token from storage, if it exists
-  // Only run once on mount
+  const fetchAccessTokenMutation = useMutation({
+    mutationFn: async () => {
+      return api.refreshAccessToken(refreshToken);
+    },
+  });
+
+  const fetchUserMutation = useMutation({
+    mutationFn: async () => {
+      return api.getUser(accessToken);
+    },
+  });
+
+  const signOutMutation = useMutation({
+    mutationFn: async () => {
+      return api.logout(accessToken);
+    },
+  });
+
   useEffect(() => {
-    loadAccessToken();
+    fetchRefreshToken();
   }, []);
 
-  // If the access token changes, load the user
   useEffect(() => {
-    loadUser();
+    fetchAccessToken();
+  }, [refreshToken]);
+
+  useEffect(() => {
+    fetchUser();
   }, [accessToken]);
 
-  // Load the access token from storage
-  const loadAccessToken = async () => {
-    try {
-      const token = await AsyncStorage.getItem("accessToken");
-      if (token) {
-        setAccessToken(token);
-      }
-    } catch (error) {
-    } finally {
-      setLoading(false);
+  const fetchRefreshToken = async () => {
+    const token = await AsyncStorage.getItem("refreshToken");
+
+    if (token) setRefreshToken(token);
+  };
+
+  const fetchAccessToken = async () => {
+    if (refreshToken) {
+      fetchAccessTokenMutation.mutate(undefined, {
+        onSuccess: ({ data }) => {
+          setAccessToken(data.accessToken);
+        },
+        onError: () => {
+          setAccessToken("");
+        },
+      });
     }
   };
 
-  // When access token changes, load the user
-  const loadUser = async () => {
+  const fetchUser = async () => {
     if (accessToken) {
-      setLoading(true);
-      try {
-        const response = await api.getUser(accessToken);
-        setUser(response.data.user);
-      } catch (error) {
-      } finally {
-        setLoading(false);
-      }
-    } else {
-      setUser({} as User);
+      fetchUserMutation.mutate(undefined, {
+        onSuccess: ({ data }) => {
+          setUser(data.user);
+        },
+        onError: () => {
+          setUser({} as User);
+        },
+      });
     }
-  };
-
-  // Refresh the access token
-  const refreshAccessToken = async () => {
-    try {
-      const response = await api.refreshAccessToken();
-      await AsyncStorage.setItem("accessToken", response.data.accessToken);
-
-      setAccessToken(response.data.accessToken);
-    } catch (error) {
-      setAccessToken("");
-    }
-  };
-
-  // Update the access token in storage
-  const updateAccessToken = async (token: string) => {
-    try {
-      await AsyncStorage.setItem("accessToken", token);
-
-      setAccessToken(token);
-    } catch (error) {}
   };
 
   const updateUser = async (user: User) => {
     setUser(user);
   };
 
-  // Remove the access token from storage
+  const updateRefreshToken = async (token: string) => {
+    await AsyncStorage.setItem("refreshToken", token);
+
+    setRefreshToken(token);
+  };
+
+  const updateAccessToken = async (token: string) => {
+    setAccessToken(token);
+  };
+
   const signOut = async () => {
-    try {
-      await api.logout(accessToken);
-      await AsyncStorage.removeItem("accessToken");
-      setAccessToken("");
-    } catch (error) {
-      await AsyncStorage.removeItem("accessToken");
-      setAccessToken("");
+    if (accessToken) {
+      signOutMutation.mutate(undefined, {
+        onSuccess: () => {
+          setUser({} as User);
+          updateAccessToken("");
+          updateRefreshToken("");
+        },
+      });
     }
   };
 
   return (
     <AuthContext.Provider
       value={{
-        accessToken,
         user,
-        loading,
-        updateAccessToken,
-        updateUser,
         signOut,
-        refreshAccessToken,
+        accessToken,
+        refreshToken,
+        updateUser,
+        updateAccessToken,
+        updateRefreshToken,
+        loading: fetchUserMutation.isLoading || fetchAccessTokenMutation.isLoading,
       }}
     >
       {children}
@@ -114,15 +128,8 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
   );
 };
 
-// Hook to use the auth context
 export const useAuth = () => {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-
-  return context;
+  return useContext(AuthContext);
 };
 
 export default AuthProvider;

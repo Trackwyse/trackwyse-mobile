@@ -137,8 +137,16 @@ const reverifyEmail = (accessToken: string): Promise<ReverifyEmailAPIResponse> =
     - message: string
     - accessToken: string
 */
-const refreshAccessToken = (): Promise<RefreshAccessTokenAPIResponse> => {
-  return apiClient.post("/auth/v1/refresh");
+const refreshAccessToken = (refreshToken: string): Promise<RefreshAccessTokenAPIResponse> => {
+  return apiClient.post(
+    "/auth/v1/refresh",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    }
+  );
 };
 
 /*

@@ -201,7 +201,7 @@ const AppStackNavigator: React.FC = () => {
   and verification status.
 */
 const RootStackNavigator: React.FC = () => {
-  const { loading, user } = useAuth();
+  const { loading, user, refreshToken } = useAuth();
   const { isLoading, isValidVersion, forceUpdateAlert } = useVersioning();
 
   // show the splash screen while useAuth is loading

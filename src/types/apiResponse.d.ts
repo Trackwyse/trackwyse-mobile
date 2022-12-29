@@ -38,12 +38,14 @@ type ValidClientsAPIResponse = APIResponse & {
 type LoginAPIResponse = APIResponse & {
   data: {
     accessToken: string;
+    refreshToken: string;
   };
 };
 
 type RegisterAPIResponse = APIResponse & {
   data: {
     accessToken: string;
+    refreshToken: string;
   };
 };
 
