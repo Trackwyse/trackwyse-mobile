@@ -130,6 +130,18 @@ const reverifyEmail = (accessToken: string): Promise<ReverifyEmailAPIResponse> =
 };
 
 /*
+  POST /auth/v1/refresh
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - accessToken: string
+*/
+const refreshAccessToken = (): Promise<RefreshAccessTokenAPIResponse> => {
+  return apiClient.post("/auth/v1/refresh");
+};
+
+/*
   POST /auth/v1/checkEmail
 
   Request Body:
@@ -509,6 +521,7 @@ export default {
   checkEmail,
   verifyEmail,
   reverifyEmail,
+  refreshAccessToken,
 
   getUser,
   updateUser,

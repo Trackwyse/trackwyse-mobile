@@ -35,18 +35,18 @@ const theme = {
 
 const App = () => {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
-        <BottomSheetModalProvider>
-          <AuthProvider>
-            <NavigationContainer theme={theme}>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <NavigationContainer theme={theme}>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <BottomSheetModalProvider>
               <RootStackNavigator />
               <Toast />
-            </NavigationContainer>
-          </AuthProvider>
-        </BottomSheetModalProvider>
-      </QueryClientProvider>
-    </GestureHandlerRootView>
+            </BottomSheetModalProvider>
+          </GestureHandlerRootView>
+        </NavigationContainer>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 };
 

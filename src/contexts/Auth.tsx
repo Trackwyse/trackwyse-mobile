@@ -7,6 +7,7 @@ type AuthContextData = {
   user: User;
   accessToken: string;
   loading: boolean;
+  refreshAccessToken: () => Promise<void>;
   updateAccessToken: (token: string) => void;
   updateUser: (user: User) => void;
   signOut: () => void;
@@ -31,7 +32,7 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
   }, [accessToken]);
 
   // Load the access token from storage
-  async function loadAccessToken() {
+  const loadAccessToken = async () => {
     try {
       const token = await AsyncStorage.getItem("accessToken");
       if (token) {
@@ -41,10 +42,10 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   // When access token changes, load the user
-  async function loadUser() {
+  const loadUser = async () => {
     if (accessToken) {
       setLoading(true);
       try {
@@ -57,7 +58,19 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
     } else {
       setUser({} as User);
     }
-  }
+  };
+
+  // Refresh the access token
+  const refreshAccessToken = async () => {
+    try {
+      const response = await api.refreshAccessToken();
+      await AsyncStorage.setItem("accessToken", response.data.accessToken);
+
+      setAccessToken(response.data.accessToken);
+    } catch (error) {
+      setAccessToken("");
+    }
+  };
 
   // Update the access token in storage
   const updateAccessToken = async (token: string) => {
@@ -78,12 +91,23 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
       await api.logout(accessToken);
       await AsyncStorage.removeItem("accessToken");
       setAccessToken("");
-    } catch (error) {}
+    } catch (error) {
+      await AsyncStorage.removeItem("accessToken");
+      setAccessToken("");
+    }
   };
 
   return (
     <AuthContext.Provider
-      value={{ accessToken, user, loading, updateAccessToken, updateUser, signOut }}
+      value={{
+        accessToken,
+        user,
+        loading,
+        updateAccessToken,
+        updateUser,
+        signOut,
+        refreshAccessToken,
+      }}
     >
       {children}
     </AuthContext.Provider>
