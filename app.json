@@ -3,7 +3,7 @@
     "name": "Trackwyse",
     "slug": "trackwyse",
     "scheme": "trw",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,7 +21,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.js00001.trackwyse",
-      "buildNumber": "1.0.7"
+      "buildNumber": "1.0.8"
     },
     "android": {
       "adaptiveIcon": {

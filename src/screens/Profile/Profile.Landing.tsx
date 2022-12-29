@@ -102,7 +102,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
       />
 
       <Text style={tw`text-gray-400 text-xs mt-3`}>
-        App version: {Constants.manifest?.version}, {__DEV__ ? "development" : "production"}
+        App version: {Constants.manifest?.version},{__DEV__ ? "development" : "production"} build
       </Text>
     </ScrollView>
   );

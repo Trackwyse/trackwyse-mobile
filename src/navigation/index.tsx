@@ -37,6 +37,9 @@ import IconButton from "@/components/IconButton";
 import { LabelsProvider } from "@/contexts/Labels";
 import NavigationWithBack from "@/components/Navigation/NavigationBackArrow";
 import NotificationsProvider from "@/contexts/Notifications";
+import HomeLoader from "@/components/Loaders/Home";
+import { useEffect } from "react";
+import * as SplashScreen from "expo-splash-screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -198,6 +201,15 @@ const AppStackNavigator: React.FC = () => {
 */
 const RootStackNavigator: React.FC = () => {
   const { loading, user } = useAuth();
+
+  // show the splash screen while useAuth is loading
+  useEffect(() => {
+    if (loading) {
+      SplashScreen.preventAutoHideAsync();
+    } else {
+      SplashScreen.hideAsync();
+    }
+  }, [loading]);
 
   if (loading) {
     return null;

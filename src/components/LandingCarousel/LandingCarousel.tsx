@@ -5,7 +5,7 @@ import Swiper from "react-native-swiper";
 
 const LandingCarousel: React.FC = () => {
   return (
-    <Swiper loop activeDotColor={tw.color("primary-200")}>
+    <Swiper activeDotColor={tw.color("primary-200")}>
       <LandingItem style={tw`justify-between bg-aqua-100`}>
         <View style={tw`w-11/12 items-start`}>
           <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Track items.</Text>

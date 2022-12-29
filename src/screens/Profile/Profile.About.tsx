@@ -45,7 +45,7 @@ const Profile: React.FC<ProfileScreenProps> = () => {
         title="Privacy Policy"
         iconLeft="ios-lock-closed-outline"
         position="alone"
-        style={tw`mt-5`}
+        style={tw`mt-2`}
         iconRight="md-chevron-forward-outline"
         onPress={openPrivacyPolicy}
       />
