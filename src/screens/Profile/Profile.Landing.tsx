@@ -1,9 +1,10 @@
-import Constants from "expo-constants";
 import { ScrollView, Share, Text } from "react-native";
 
 import tw from "@/lib/tailwind";
+import Constants from "@/lib/constants";
 import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
+import { stringifyVersion } from "@/lib/textUtil";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface ProfileScreenProps {
@@ -102,7 +103,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
       />
 
       <Text style={tw`text-gray-400 text-xs mt-3`}>
-        App version: {Constants.manifest?.version},{__DEV__ ? "development" : "production"} build
+        App version: {Constants.version} (v{stringifyVersion(Constants.versionInt)}),
+        {__DEV__ ? "development" : "production"} build
       </Text>
     </ScrollView>
   );

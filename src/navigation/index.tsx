@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Alert } from "react-native";
 
 import Home from "@/screens/App/Home";
 import Login from "@/screens/Auth/Login";
@@ -37,9 +38,9 @@ import IconButton from "@/components/IconButton";
 import { LabelsProvider } from "@/contexts/Labels";
 import NavigationWithBack from "@/components/Navigation/NavigationBackArrow";
 import NotificationsProvider from "@/contexts/Notifications";
-import HomeLoader from "@/components/Loaders/Home";
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
+import useVersioning from "@/hooks/useVersioning";
 
 const Stack = createNativeStackNavigator();
 
@@ -201,15 +202,20 @@ const AppStackNavigator: React.FC = () => {
 */
 const RootStackNavigator: React.FC = () => {
   const { loading, user } = useAuth();
+  const { isLoading, isValidVersion, forceUpdateAlert } = useVersioning();
 
   // show the splash screen while useAuth is loading
   useEffect(() => {
-    if (loading) {
+    if (loading || isLoading || !isValidVersion) {
       SplashScreen.preventAutoHideAsync();
+
+      if (!isValidVersion && !isLoading) {
+        forceUpdateAlert();
+      }
     } else {
       SplashScreen.hideAsync();
     }
-  }, [loading]);
+  }, [loading, isLoading, isValidVersion]);
 
   if (loading) {
     return null;

@@ -25,7 +25,7 @@ type UpdateUserPasswordAPIResponse = APIResponse;
 
 type ValidClientsAPIResponse = APIResponse & {
   data: {
-    versions: string[];
+    version: string;
   };
 };
 
