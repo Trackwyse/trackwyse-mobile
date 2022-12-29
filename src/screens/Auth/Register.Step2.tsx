@@ -15,9 +15,9 @@ interface RegisterScreenProps {
   route: any;
 }
 
-const Register: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
-  const { updateAccessToken } = useAuth();
+const Register: React.FC<RegisterScreenProps> = ({ route }) => {
   const { email, password } = route.params;
+  const { updateAccessToken, updateRefreshToken } = useAuth();
 
   const mutation = useMutation({
     mutationFn: (values: RegisterInput) => {
@@ -43,6 +43,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
         {
           onSuccess: ({ data }) => {
             updateAccessToken(data.accessToken);
+            updateRefreshToken(data.refreshToken);
           },
         }
       );

@@ -17,7 +17,7 @@ interface LoginScreenProps {
 }
 
 const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
-  const { updateAccessToken } = useAuth();
+  const { updateRefreshToken, updateAccessToken } = useAuth();
 
   const mutation = useMutation({
     mutationFn: (values: LoginInput) => {
@@ -37,6 +37,7 @@ const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
       mutation.mutate(values, {
         onSuccess: ({ data }) => {
           updateAccessToken(data.accessToken);
+          updateRefreshToken(data.refreshToken);
           Toast.show({
             type: "success",
             text1: "Success",

@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/core";
 import { useMutation } from "@tanstack/react-query";
-import { Subscription } from "expo-modules-core";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 
