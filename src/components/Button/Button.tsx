@@ -45,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const buttonClassNames = tw.style(
-    "flex flex-row justify-between font-medium relative ",
+    "flex flex-row justify-between font-medium relative rounded-2xl",
     !disabled && !loading ? buttonColorClasses[color] : "bg-gray-100",
     sizeClasses[size],
     style

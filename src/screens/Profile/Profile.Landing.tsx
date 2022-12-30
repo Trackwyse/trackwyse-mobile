@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import { stringifyVersion } from "@/lib/textUtil";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import Button from "@/components/Button";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -93,14 +94,9 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         onPress={() => handleItemPress("ProfileAbout")}
       />
 
-      <ListItem
-        pressable
-        title="Logout"
-        style={tw`justify-center mt-5`}
-        textColor="red"
-        position="alone"
-        onPress={handleLogout}
-      />
+      <Button size="lg" color="primary" style={tw`mt-5`}>
+        Logout
+      </Button>
 
       <Text style={tw`text-gray-400 text-xs mt-3`}>
         App version: {Constants.version} (v{stringifyVersion(Constants.versionInt)}),
