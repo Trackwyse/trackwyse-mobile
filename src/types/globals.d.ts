@@ -3,9 +3,13 @@ interface User {
   email: string;
   firstName: string;
   lastName: string;
+
   verified: boolean;
   termsAccepted: boolean;
   notificationsEnabled: boolean;
+
+  subscriptionActive: boolean;
+
   labels: Label[];
   createdAt: string;
 }
@@ -30,6 +34,21 @@ interface Label {
 
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+interface SubscriptionReceipt {
+  bundleId: string;
+  productId: string;
+  transactionId: string;
+  purchaseDate: number;
+  quantity: number;
+  expirationDate?: number;
+  isTrialPeriod?: boolean;
+  isIntroOfferPeriod?: boolean;
+  environment?: string;
+  originalPurchaseDate?: number;
+  applicationVersion?: string;
+  originalApplicationVersion?: string;
 }
 
 interface Color {

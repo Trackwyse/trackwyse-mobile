@@ -54,6 +54,26 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
       <ListItem
         pressable
+        title="Trackwyse Plus"
+        iconLeft="gift-outline"
+        iconLeftColor="gold"
+        position="top"
+        iconRight="md-chevron-forward-outline"
+        style={tw`mt-5`}
+        onPress={() => handleItemPress("ProfilePremium")}
+      />
+      <ListItem
+        pressable
+        title="Subscription Settings"
+        iconLeft="gift-outline"
+        iconLeftColor="gold"
+        position="bottom"
+        iconRight="md-chevron-forward-outline"
+        onPress={() => handleItemPress("ProfilePremiumSettings")}
+      />
+
+      <ListItem
+        pressable
         title="Purchase Trackers"
         iconLeft="cart-outline"
         position="top"

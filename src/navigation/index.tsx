@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Alert } from "react-native";
 
 import Home from "@/screens/App/Home";
 import Login from "@/screens/Auth/Login";
@@ -18,10 +17,12 @@ import ProfileRate from "@/screens/Profile/Profile.Rate";
 import ProfileHelp from "@/screens/Profile/Profile.Help";
 import ProfileAbout from "@/screens/Profile/Profile.About";
 import ProfileLanding from "@/screens/Profile/Profile.Landing";
-import ProfileSecurity from "@/screens/Profile/Profile.Security";
+import ProfilePremium from "@/screens/Profile/Profile.Premium";
+import ProfilePassword from "@/screens/Profile/Profile.Password";
 import ProfileUserInfo from "@/screens/Profile/Profile.UserInfo";
 import ProfilePurchase from "@/screens/Profile/Profile.Purchase";
 import ProfileNotifications from "@/screens/Profile/Profile.Notifications";
+import ProfilePremiumSettings from "@/screens/Profile/Profile.PremiumSettings";
 
 import ForgotPasswordLanding from "@/screens/Auth/ForgotPassword.Landing";
 import ForgotPasswordAction from "@/screens/Auth/ForgotPassword.Action";
@@ -41,6 +42,14 @@ import NotificationsProvider from "@/contexts/Notifications";
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import useVersioning from "@/hooks/useVersioning";
+import {
+  useFonts,
+  Syne_400Regular,
+  Syne_500Medium,
+  Syne_600SemiBold,
+  Syne_700Bold,
+  Syne_800ExtraBold,
+} from "@expo-google-fonts/syne";
 
 const Stack = createNativeStackNavigator();
 
@@ -137,34 +146,6 @@ const AppStackNavigator: React.FC = () => {
           />
           <Stack.Screen name="AddLabel" component={AddLabel} options={{ title: "Add Label" }} />
           <Stack.Screen
-            name="ProfileLanding"
-            component={ProfileLanding}
-            options={{ title: "Profile" }}
-          />
-          <Stack.Screen
-            name="ProfileUserInfo"
-            component={ProfileUserInfo}
-            options={{ title: "User Info" }}
-          />
-          <Stack.Screen
-            name="ProfileNotifications"
-            component={ProfileNotifications}
-            options={{ title: "Notifications" }}
-          />
-          <Stack.Screen
-            name="ProfilePurchase"
-            component={ProfilePurchase}
-            options={{ title: "Purchase" }}
-          />
-          <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
-          <Stack.Screen name="ProfileRate" component={ProfileRate} options={{ title: "Rate" }} />
-          <Stack.Screen name="ProfileHelp" component={ProfileHelp} options={{ title: "Help" }} />
-          <Stack.Screen
-            name="ProfileSecurity"
-            component={ProfileSecurity}
-            options={{ title: "Security" }}
-          />
-          <Stack.Screen
             name="FoundLabelScan"
             component={FoundLabelScan}
             options={{ title: "Found Label" }}
@@ -188,6 +169,47 @@ const AppStackNavigator: React.FC = () => {
               headerRight: () => <IconButton icon="trash-outline" color="firebrick" />,
             })}
           />
+
+          <Stack.Screen
+            name="ProfileLanding"
+            component={ProfileLanding}
+            options={{ title: "Profile" }}
+          />
+          <Stack.Screen
+            name="ProfileUserInfo"
+            component={ProfileUserInfo}
+            options={{ title: "User Info" }}
+          />
+          <Stack.Screen
+            name="ProfileNotifications"
+            component={ProfileNotifications}
+            options={{ title: "Notifications" }}
+          />
+
+          <Stack.Screen
+            name="ProfilePremium"
+            component={ProfilePremium}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ProfilePremiumSettings"
+            component={ProfilePremiumSettings}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            name="ProfilePurchase"
+            component={ProfilePurchase}
+            options={{ title: "Purchase" }}
+          />
+          <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
+          <Stack.Screen name="ProfileRate" component={ProfileRate} options={{ title: "Rate" }} />
+          <Stack.Screen name="ProfileHelp" component={ProfileHelp} options={{ title: "Help" }} />
+          <Stack.Screen
+            name="ProfileSecurity"
+            component={ProfilePassword}
+            options={{ title: "Security" }}
+          />
         </Stack.Navigator>
       </NotificationsProvider>
     </LabelsProvider>
@@ -201,18 +223,23 @@ const AppStackNavigator: React.FC = () => {
   and verification status.
 */
 const RootStackNavigator: React.FC = () => {
-  const { loading, user, refreshToken } = useAuth();
+  const { loading, user } = useAuth();
   const { isLoading, isValidVersion, forceUpdateAlert } = useVersioning();
+  const [fontsLoaded] = useFonts({
+    Syne_400Regular,
+    Syne_500Medium,
+    Syne_600SemiBold,
+    Syne_700Bold,
+    Syne_800ExtraBold,
+  });
 
   // show the splash screen while useAuth is loading
   useEffect(() => {
-    if (loading || isLoading || !isValidVersion) {
-      SplashScreen.preventAutoHideAsync();
+    if (!isValidVersion && !isLoading) {
+      forceUpdateAlert();
+    }
 
-      if (!isValidVersion && !isLoading) {
-        forceUpdateAlert();
-      }
-    } else {
+    if (!loading && !isLoading && isValidVersion && fontsLoaded) {
       SplashScreen.hideAsync();
     }
   }, [loading, isLoading, isValidVersion]);

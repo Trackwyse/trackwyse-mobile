@@ -16,7 +16,8 @@ interface ListItemProps {
   iconRight?: keyof typeof Ionicons.glyphMap;
   textRight?: string;
   textBottom?: string;
-  textColor?: string;
+  iconRightColor?: string;
+  iconLeftColor?: string;
   pressable?: boolean;
   onPress?: () => void;
   style?: any;
@@ -29,7 +30,8 @@ const ListItem: React.FC<ListItemProps> = ({
   iconRight,
   textRight,
   textBottom,
-  textColor,
+  iconRightColor = tw.color("gray-300"),
+  iconLeftColor = tw.color("black"),
   pressable = false,
   onPress,
   style,
@@ -50,17 +52,11 @@ const ListItem: React.FC<ListItemProps> = ({
     >
       <View style={tw`flex-row items-center`}>
         {iconLeft && (
-          <Ionicons
-            name={iconLeft}
-            size={22}
-            style={tw.style("mr-4", { color: textColor ? textColor : "#000" })}
-          />
+          <Ionicons name={iconLeft} size={22} style={tw.style("mr-4")} color={iconLeftColor} />
         )}
-        <Text style={tw.style(`font-medium text-base`, { color: textColor ? textColor : "#000" })}>
-          {title}
-        </Text>
+        <Text style={tw.style(`font-medium text-base text-black`)}>{title}</Text>
       </View>
-      {iconRight && <Ionicons name={iconRight} size={24} style={tw`text-gray-300`} />}
+      {iconRight && <Ionicons name={iconRight} size={24} color={iconRightColor} />}
       {textRight && <Text style={tw` text-gray-300 text-base`}>{textRight}</Text>}
       {textBottom && <Text style={tw`text-gray-300 text-base pt-2`}>{textBottom}</Text>}
     </TouchableOpacity>

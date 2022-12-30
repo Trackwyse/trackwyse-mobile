@@ -15,7 +15,8 @@ module.exports = {
         },
         aqua: {
           100: '#B0F0EA',
-          200: '#6ED0C6'
+          200: '#6ED0C6',
+          300: '#07D2C3'
         },
         gray: {
           100: '#F6F3F3',
