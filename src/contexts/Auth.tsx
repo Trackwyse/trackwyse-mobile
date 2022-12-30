@@ -19,6 +19,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User>({} as User);
+  const [loading, setLoading] = useState<boolean>(false);
   const [accessToken, setAccessToken] = useState<string>("");
   const [refreshToken, setRefreshToken] = useState<string>("");
 
@@ -53,9 +54,13 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
   }, [accessToken]);
 
   const fetchRefreshToken = async () => {
+    setLoading(true);
+
     const token = await AsyncStorage.getItem("refreshToken");
 
     if (token) setRefreshToken(token);
+
+    setLoading(false);
   };
 
   const fetchAccessToken = async () => {
@@ -120,7 +125,7 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
         updateUser,
         updateAccessToken,
         updateRefreshToken,
-        loading: fetchUserMutation.isLoading || fetchAccessTokenMutation.isLoading,
+        loading: fetchUserMutation.isLoading || fetchAccessTokenMutation.isLoading || loading,
       }}
     >
       {children}

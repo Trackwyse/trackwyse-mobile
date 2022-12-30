@@ -244,7 +244,7 @@ const RootStackNavigator: React.FC = () => {
     }
   }, [loading, isLoading, isValidVersion]);
 
-  if (loading) {
+  if (loading || isLoading || !fontsLoaded) {
     return null;
   }
 

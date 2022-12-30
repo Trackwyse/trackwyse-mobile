@@ -28,7 +28,7 @@ const Input: React.FC<InputProps> = ({
   const [isFocused, setIsFocused] = useState(false);
 
   const containerColorClasses = tw.style(
-    "flex-row items-center w-11/12 bg-gray-100 px-4 border-2",
+    "flex-row items-center w-11/12 bg-gray-100 px-4 border-2  rounded-2xl",
     error && "border-red",
     !error && isFocused && "border-black",
     !error && !isFocused && "border-gray-100",
