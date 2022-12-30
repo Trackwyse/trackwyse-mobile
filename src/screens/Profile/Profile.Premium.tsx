@@ -64,11 +64,11 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
       </ScrollView>
 
       <View
-        style={tw.style(`bg-white flex-grow w-full items-center h-2/5 pt-5 rounded-3xl`, {
+        style={tw.style(`bg-white flex-grow w-full items-center h-1/3 pt-6 rounded-3xl`, {
           shadowColor: "#171717",
           shadowOffset: { width: 0, height: -4 },
           shadowOpacity: 0.05,
-          shadowRadius: 2,
+          shadowRadius: 4,
         })}
       >
         <Button size="lg">Subscribe for $7.99/mo</Button>

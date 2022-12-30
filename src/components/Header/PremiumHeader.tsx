@@ -13,7 +13,7 @@ interface PremiumHeaderProps {
 const PremiumHeader: React.FC<PremiumHeaderProps> = ({ title, subtitle, navigation }) => {
   return (
     <LinearGradient
-      style={tw`items-center pb-14 w-full`}
+      style={tw`items-center pb-8 w-full`}
       start={[0, 0]}
       end={[1, 1]}
       locations={[0.1694, 0.6354, 0.93354]}
@@ -25,6 +25,7 @@ const PremiumHeader: React.FC<PremiumHeaderProps> = ({ title, subtitle, navigati
           color="white"
           icon="arrow-back"
           style={tw`my-4`}
+          size={22}
           fillColor={tw.color("primary-200")}
           onPress={() => navigation.goBack()}
         />
