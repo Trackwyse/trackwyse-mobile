@@ -517,6 +517,60 @@ const recoverLabel = async (
   );
 };
 
+/*
+  GET /api/v1/subscription
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - subscriptionActive: boolean
+    - subscriptionDate: string
+    - subscriptionReceipt: string
+*/
+const getSubscription = async (accessToken: string): Promise<GetSubscriptionAPIResponse> => {
+  return apiClient.get("/api/v1/subscription", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+/*
+  POST /api/v1/subscription/create
+
+  Request Body:
+    - receipt: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - user: User
+*/
+const createSubscription = async (
+  values: CreateSubscriptionInput,
+  accessToken: string
+): Promise<CreateSubscriptionAPIResponse> => {
+  const { receipt } = values;
+
+  return apiClient.post(
+    "/api/v1/subscription/create",
+    {
+      receipt,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
 export default {
   getValidClients,
 
@@ -542,4 +596,7 @@ export default {
   deleteLabel,
   recoverLabel,
   updateFoundLabelDetails,
+
+  createSubscription,
+  getSubscription,
 };

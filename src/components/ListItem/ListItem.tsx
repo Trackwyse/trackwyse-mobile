@@ -19,6 +19,7 @@ interface ListItemProps {
   iconRightColor?: string;
   iconLeftColor?: string;
   pressable?: boolean;
+  disabled?: boolean;
   onPress?: () => void;
   style?: any;
 }
@@ -33,12 +34,14 @@ const ListItem: React.FC<ListItemProps> = ({
   iconRightColor = tw.color("gray-300"),
   iconLeftColor = tw.color("black"),
   pressable = false,
+  disabled = false,
   onPress,
   style,
 }) => {
   const containerClasses = tw.style(
     "p-4 bg-gray-100 w-11/12",
     textBottom ? "flex-col" : "flex-row justify-between items-center",
+    disabled ? "opacity-40" : "",
     borderClasses[position],
     style
   );

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/App.tsx",
   "scripts": {
+    "dev": "expo start --dev-client",
     "start": "expo start",
     "tunnel:no-cache": "expo start --tunnel --clear",
     "tunnel": "expo start --tunnel",

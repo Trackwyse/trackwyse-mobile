@@ -82,7 +82,9 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
           return;
         }
 
-        const notificationPushToken = (await Notifications.getExpoPushTokenAsync()).data;
+        const notificationPushToken = (
+          await Notifications.getExpoPushTokenAsync({ experienceId: "@JS00001/trackwyse" })
+        ).data;
 
         // Update push token in API
         if (notificationPushToken) {

@@ -42,6 +42,10 @@ interface VerifyInput {
   verificationToken: string;
 }
 
+interface CreateSubscriptionInput {
+  receipt: string;
+}
+
 interface ModifyLabelInput {
   id?: string;
   name?: string;

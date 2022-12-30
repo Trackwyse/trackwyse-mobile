@@ -10,6 +10,7 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import AuthProvider from "./contexts/Auth";
 import queryClient from "./lib/queryClient";
 import RootStackNavigator from "./navigation";
+import InAppPurchasesProvider from "./contexts/InAppPurchases";
 
 interface TextWithDefaultProps extends Text {
   defaultProps?: { allowFontScaling?: boolean };
@@ -40,14 +41,16 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <NavigationContainer theme={theme}>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <BottomSheetModalProvider>
-              <RootStackNavigator />
-              <Toast />
-            </BottomSheetModalProvider>
-          </GestureHandlerRootView>
-        </NavigationContainer>
+        <InAppPurchasesProvider>
+          <NavigationContainer theme={theme}>
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              <BottomSheetModalProvider>
+                <RootStackNavigator />
+                <Toast />
+              </BottomSheetModalProvider>
+            </GestureHandlerRootView>
+          </NavigationContainer>
+        </InAppPurchasesProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

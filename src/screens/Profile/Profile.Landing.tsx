@@ -13,7 +13,7 @@ interface ProfileScreenProps {
 }
 
 const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
 
   const handleLogout = () => {
     signOut();
@@ -63,7 +63,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         onPress={() => handleItemPress("ProfilePremium")}
       />
       <ListItem
-        pressable
+        pressable={user?.subscriptionActive}
+        disabled={!user?.subscriptionActive}
         title="Subscription Settings"
         iconLeft="gift-outline"
         iconLeftColor="gold"
@@ -114,7 +115,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         onPress={() => handleItemPress("ProfileAbout")}
       />
 
-      <Button size="lg" color="primary" style={tw`mt-5`}>
+      <Button size="lg" color="primary" style={tw`mt-5`} onPress={handleLogout}>
         Logout
       </Button>
 

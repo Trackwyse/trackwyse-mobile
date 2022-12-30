@@ -96,3 +96,17 @@ type GetLabelAPIResponse = APIResponse & {
     label: Label;
   };
 };
+
+type GetSubscriptionAPIResponse = APIResponse & {
+  data: {
+    subscriptionActive: boolean;
+    subscriptionDate: string;
+    subscriptionReceipt: SubscriptionReceipt;
+  };
+};
+
+type CreateSubscriptionAPIResponse = APIResponse & {
+  data: {
+    user: User;
+  };
+};
