@@ -59,11 +59,11 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
             }
 
             // If the user is subscribed, finish the transaction
-            if (user?.subscriptionActive) {
-              finishTransaction({ purchase });
-              setProcessing(false);
-              return;
-            }
+            // if (user?.subscriptionActive) {
+            //   finishTransaction({ purchase });
+            //   setProcessing(false);
+            //   return;
+            // }
 
             createSubscriptionMutation.mutate(
               { receipt },
