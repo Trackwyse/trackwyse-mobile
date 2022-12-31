@@ -21,6 +21,7 @@ import ProfilePremium from "@/screens/Profile/Profile.Premium";
 import ProfilePassword from "@/screens/Profile/Profile.Password";
 import ProfileUserInfo from "@/screens/Profile/Profile.UserInfo";
 import ProfilePurchase from "@/screens/Profile/Profile.Purchase";
+import ProfileDeveloper from "@/screens/Profile/Profile.Developer";
 import ProfileNotifications from "@/screens/Profile/Profile.Notifications";
 import ProfilePremiumSettings from "@/screens/Profile/Profile.PremiumSettings";
 
@@ -196,12 +197,12 @@ const AppStackNavigator: React.FC = () => {
             component={ProfilePremiumSettings}
             options={{ headerShown: false }}
           />
-
           <Stack.Screen
             name="ProfilePurchase"
             component={ProfilePurchase}
             options={{ title: "Purchase" }}
           />
+
           <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
           <Stack.Screen name="ProfileRate" component={ProfileRate} options={{ title: "Rate" }} />
           <Stack.Screen name="ProfileHelp" component={ProfileHelp} options={{ title: "Help" }} />
@@ -210,6 +211,13 @@ const AppStackNavigator: React.FC = () => {
             component={ProfilePassword}
             options={{ title: "Security" }}
           />
+          {__DEV__ && (
+            <Stack.Screen
+              name="ProfileDeveloper"
+              component={ProfileDeveloper}
+              options={{ title: "Developer" }}
+            />
+          )}
         </Stack.Navigator>
       </NotificationsProvider>
     </LabelsProvider>

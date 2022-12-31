@@ -34,6 +34,18 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={tw`items-center`}>
+      {__DEV__ && (
+        <ListItem
+          pressable
+          title="Developer Menu"
+          iconLeft="code-outline"
+          position="alone"
+          iconRight="md-chevron-forward-outline"
+          style={tw`mt-5`}
+          onPress={() => handleItemPress("ProfileDeveloper")}
+        />
+      )}
+
       <ListItem
         pressable
         title="Trackwyse Plus"

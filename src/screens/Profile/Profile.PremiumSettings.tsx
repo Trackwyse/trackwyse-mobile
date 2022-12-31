@@ -66,16 +66,14 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           style={tw`mt-5`}
           title="Subscribed Since"
           textRight={convertDateToReadable(
-            new Date(subscriptionQuery.data?.data.subscriptionDate as string),
-            false
+            new Date(subscriptionQuery.data?.data.subscriptionDate as string)
           )}
         />
         <ListItem
           title="Next Payment"
           position="bottom"
           textRight={convertDateToReadable(
-            new Date(subscriptionQuery.data?.data.subscriptionReceipt.expirationDate as number),
-            false
+            new Date(subscriptionQuery.data?.data.subscriptionReceipt.expirationDate as number)
           )}
         />
 
