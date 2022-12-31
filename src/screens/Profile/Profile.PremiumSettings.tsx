@@ -8,23 +8,30 @@ import tw from "@/lib/tailwind";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, RefreshControl } from "react-native";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
 const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const { accessToken, user } = useAuth();
+  const { accessToken } = useAuth();
+  const [refreshing, setRefreshing] = useState(false);
 
-  const { isLoading, data } = useQuery({
+  const subscriptionQuery = useQuery({
     queryKey: ["subscription"],
     queryFn: () => {
       return api.getSubscription(accessToken);
     },
   });
 
-  if (isLoading)
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await subscriptionQuery.refetch();
+    setRefreshing(false);
+  };
+
+  if (subscriptionQuery.isLoading)
     return (
       <View>
         <PremiumHeader
@@ -44,7 +51,10 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         navigation={navigation}
       />
 
-      <ScrollView contentContainerStyle={tw`items-center pb-5`}>
+      <ScrollView
+        contentContainerStyle={tw`items-center pb-5`}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+      >
         <View style={tw`w-11/12 mt-10 `}>
           <Text style={tw`font-medium text-2xl`}>Subscription</Text>
           <Text style={tw`text-gray-400 text-base my-1`}>
@@ -55,13 +65,16 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         <ListItem
           style={tw`mt-5`}
           title="Subscribed Since"
-          textRight={convertDateToReadable(new Date(data?.data.subscriptionDate as string), false)}
+          textRight={convertDateToReadable(
+            new Date(subscriptionQuery.data?.data.subscriptionDate as string),
+            false
+          )}
         />
         <ListItem
           title="Next Payment"
           position="bottom"
           textRight={convertDateToReadable(
-            new Date(data?.data.subscriptionReceipt.expirationDate as number),
+            new Date(subscriptionQuery.data?.data.subscriptionReceipt.expirationDate as number),
             false
           )}
         />

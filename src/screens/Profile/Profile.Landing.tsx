@@ -36,24 +36,6 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
     <ScrollView contentContainerStyle={tw`items-center`}>
       <ListItem
         pressable
-        title="User Info"
-        iconLeft="person-outline"
-        position="top"
-        iconRight="md-chevron-forward-outline"
-        style={tw`mt-5`}
-        onPress={() => handleItemPress("ProfileUserInfo")}
-      />
-      <ListItem
-        pressable
-        title="Notifications"
-        iconLeft="notifications-outline"
-        position="bottom"
-        iconRight="md-chevron-forward-outline"
-        onPress={() => handleItemPress("ProfileNotifications")}
-      />
-
-      <ListItem
-        pressable
         title="Trackwyse Plus"
         iconLeft="gift-outline"
         iconLeftColor="gold"
@@ -71,6 +53,24 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         position="bottom"
         iconRight="md-chevron-forward-outline"
         onPress={() => handleItemPress("ProfilePremiumSettings")}
+      />
+
+      <ListItem
+        pressable
+        title="User Info"
+        iconLeft="person-outline"
+        position="top"
+        iconRight="md-chevron-forward-outline"
+        style={tw`mt-5`}
+        onPress={() => handleItemPress("ProfileUserInfo")}
+      />
+      <ListItem
+        pressable
+        title="Notifications"
+        iconLeft="notifications-outline"
+        position="bottom"
+        iconRight="md-chevron-forward-outline"
+        onPress={() => handleItemPress("ProfileNotifications")}
       />
 
       <ListItem

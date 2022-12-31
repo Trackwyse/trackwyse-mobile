@@ -6,6 +6,9 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import NetworkLogger from "react-native-network-logger";
+
+import { startNetworkLogging } from "react-native-network-logger";
 
 import AuthProvider from "./contexts/Auth";
 import queryClient from "./lib/queryClient";
@@ -36,6 +39,8 @@ const theme = {
 (TextInput as unknown as TextInputWithDefaultProps).defaultProps!.allowFontScaling = false;
 
 SplashScreen.preventAutoHideAsync();
+
+startNetworkLogging();
 
 const App = () => {
   return (

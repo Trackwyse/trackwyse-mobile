@@ -26,7 +26,7 @@ const InAppPurchasesContext = createContext<InAppPurchasesContextData>(
 );
 
 const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
-  const { accessToken, updateUser } = useAuth();
+  const { accessToken, updateUser, user } = useAuth();
   const [processing, setProcessing] = useState(false);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
 
@@ -45,15 +45,26 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
         const availableSubscriptions = await getSubscriptions({ skus: ["TRACKWYSE_PLUS"] });
 
         setSubscriptions(availableSubscriptions);
-      } catch (err) {
-        console.warn(err); // standardized err.code and err.message available
-      }
+      } catch (err) {}
 
       purchaseUpdateSubscription = purchaseUpdatedListener(
         (purchase: SubscriptionPurchase | ProductPurchase) => {
           const receipt = purchase.transactionReceipt;
 
           if (receipt) {
+            // make sure a user is logged in
+            if (!accessToken) {
+              setProcessing(false);
+              return;
+            }
+
+            // If the user is subscribed, finish the transaction
+            if (user?.subscriptionActive) {
+              finishTransaction({ purchase });
+              setProcessing(false);
+              return;
+            }
+
             createSubscriptionMutation.mutate(
               { receipt },
               {
@@ -65,7 +76,7 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
                 },
               }
             );
-          }
+          } else setProcessing(false);
         }
       );
 
@@ -85,7 +96,7 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
         purchaseErrorSubscription = null;
       }
     };
-  }, []);
+  }, [user, accessToken]);
 
   const createSubscription = async (sku: string) => {
     try {

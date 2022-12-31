@@ -3,12 +3,12 @@
     "name": "Trackwyse",
     "slug": "trackwyse",
     "scheme": "trw",
-    "version": "1.1.1",
+    "version": "1.1.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash.png", 
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +21,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.js00001.trackwyse",
-      "buildNumber": "1.1.1",
+      "buildNumber": "1.1.3",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
