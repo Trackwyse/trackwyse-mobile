@@ -33,7 +33,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={tw`items-center`}>
+    <ScrollView contentContainerStyle={tw`items-center pb-20`}>
       {__DEV__ && (
         <ListItem
           pressable

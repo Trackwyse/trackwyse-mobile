@@ -117,9 +117,17 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         pressable
         title="Update Password"
         iconRight="md-chevron-forward-outline"
-        position="alone"
+        position="top"
         style={tw`mt-2`}
-        onPress={() => navigation.navigate("ProfileSecurity")}
+        onPress={() => navigation.navigate("ProfilePassword")}
+      />
+      <ListItem
+        pressable
+        title="Update Address"
+        iconRight="md-chevron-forward-outline"
+        position="bottom"
+        style={tw`mb-10`}
+        onPress={() => navigation.navigate("ProfileAddress")}
       />
     </KeyboardAwareScrollView>
   );

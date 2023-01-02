@@ -3,6 +3,7 @@ interface User {
   email: string;
   firstName: string;
   lastName: string;
+  address: Address;
 
   verified: boolean;
   termsAccepted: boolean;
@@ -55,4 +56,12 @@ interface Color {
   bg: string;
   borderSelected: string;
   borderUnselected: string;
+}
+
+interface Address {
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zip5: string;
 }

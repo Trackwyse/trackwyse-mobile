@@ -18,6 +18,7 @@ import ProfileHelp from "@/screens/Profile/Profile.Help";
 import ProfileAbout from "@/screens/Profile/Profile.About";
 import ProfileLanding from "@/screens/Profile/Profile.Landing";
 import ProfilePremium from "@/screens/Profile/Profile.Premium";
+import ProfileAddress from "@/screens/Profile/Profile.Address";
 import ProfilePassword from "@/screens/Profile/Profile.Password";
 import ProfileUserInfo from "@/screens/Profile/Profile.UserInfo";
 import ProfilePurchase from "@/screens/Profile/Profile.Purchase";
@@ -207,9 +208,14 @@ const AppStackNavigator: React.FC = () => {
           <Stack.Screen name="ProfileRate" component={ProfileRate} options={{ title: "Rate" }} />
           <Stack.Screen name="ProfileHelp" component={ProfileHelp} options={{ title: "Help" }} />
           <Stack.Screen
-            name="ProfileSecurity"
+            name="ProfilePassword"
             component={ProfilePassword}
-            options={{ title: "Security" }}
+            options={{ title: "Password" }}
+          />
+          <Stack.Screen
+            name="ProfileAddress"
+            component={ProfileAddress}
+            options={{ title: "Address" }}
           />
           {__DEV__ && (
             <Stack.Screen

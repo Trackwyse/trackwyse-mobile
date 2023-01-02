@@ -67,6 +67,11 @@ interface UpdateUserInput {
   email?: string;
   notificationPushToken?: string;
   notificationsEnabled?: "true" | "false";
+  address1?: string;
+  address2?: string;
+  city?: string;
+  state?: string;
+  zip5?: string;
 }
 
 interface UpdateUserPasswordInput {

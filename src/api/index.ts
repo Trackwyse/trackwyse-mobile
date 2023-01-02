@@ -436,23 +436,11 @@ const updateUser = async (
   values: UpdateUserInput,
   accessToken: string
 ): Promise<UpdateUserAPIResponse> => {
-  const { firstName, lastName, email, notificationsEnabled, notificationPushToken } = values;
-
-  return apiClient.patch(
-    "/api/v1/user/update",
-    {
-      firstName,
-      lastName,
-      email,
-      notificationsEnabled,
-      notificationPushToken,
+  return apiClient.patch("/api/v1/user/update", values, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
     },
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
+  });
 };
 
 /*
