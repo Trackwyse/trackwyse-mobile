@@ -35,7 +35,7 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
         setSubscriptions(subscriptions);
       });
 
-      RNIAP.getAvailablePurchases().then((purchases) => {
+      RNIAP.getPurchaseHistory().then((purchases) => {
         const sortedAvailablePurchases = purchases.sort(
           (a, b) => b.transactionDate - a.transactionDate
         );
