@@ -57,7 +57,9 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
 
     return () => {
       purchaseUpdateSubscription.current?.remove();
+      purchaseUpdateSubscription.current = null;
       purchaseErrorSubscription.current?.remove();
+      purchaseErrorSubscription.current = null;
     };
   }, []);
 
@@ -72,6 +74,10 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
             updateUser(data.user);
             await RNIAP.finishTransaction({ purchase: pendingPurchase });
 
+            setProcessing(false);
+            setPendingPurchase(null);
+          },
+          onError: () => {
             setProcessing(false);
             setPendingPurchase(null);
           },

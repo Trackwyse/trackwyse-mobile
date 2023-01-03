@@ -16,7 +16,7 @@ const apiClient = axios.create({
     - versions: string[]
 */
 const getValidClients = (): Promise<ValidClientsAPIResponse> => {
-  return apiClient.get("/status/validClients");
+  return apiClient.get("/status/valid-clients");
 };
 
 /*
@@ -163,7 +163,7 @@ const refreshAccessToken = (refreshToken: string): Promise<RefreshAccessTokenAPI
 const checkEmail = (values: RegisterInput): Promise<CheckEmailAPIResponse> => {
   const { email } = values;
 
-  return apiClient.post("/auth/v1/checkEmail", {
+  return apiClient.post("/auth/v1/check-email", {
     email,
   });
 };
@@ -364,7 +364,7 @@ const updateFoundLabelDetails = (
 */
 const acceptTerms = (accessToken: string): Promise<AcceptTermsAPIResponse> => {
   return apiClient.post(
-    "/auth/v1/acceptTerms",
+    "/auth/v1/accept-terms",
     {},
     {
       headers: {
@@ -464,7 +464,7 @@ const updateUserPassword = async (
   const { currentPassword, newPassword } = values;
 
   return apiClient.post(
-    "/api/v1/user/updatePassword",
+    "/api/v1/user/update-password",
     {
       currentPassword,
       newPassword,
