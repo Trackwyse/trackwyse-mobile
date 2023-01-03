@@ -1,14 +1,15 @@
-import api from "@/api";
-import { PremiumHeader } from "@/components/Header";
-import ListItem from "@/components/ListItem";
-import LegalLoader from "@/components/Loaders/Legal";
-import { useAuth } from "@/contexts/Auth";
-import { convertDateToReadable } from "@/lib/dateUtil";
-import tw from "@/lib/tailwind";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { View, Text, ScrollView, RefreshControl } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import api from "@/api";
+import tw from "@/lib/tailwind";
+import { useAuth } from "@/contexts/Auth";
+import ListItem from "@/components/ListItem";
+import { PremiumHeader } from "@/components/Header";
+import { convertDateToReadable } from "@/lib/dateUtil";
+import PremiumLoader from "@/components/Loaders/Premium";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -39,7 +40,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           subtitle="Manage Your Subscription"
           navigation={navigation}
         />
-        <LegalLoader />
+        <PremiumLoader />
       </View>
     );
 

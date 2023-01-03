@@ -52,6 +52,14 @@ interface SubscriptionReceipt {
   originalApplicationVersion?: string;
 }
 
+interface SubscriptionPerks {
+  freeLabelsRedeemed: number;
+  freeLabelsLastRedeemed: Date;
+  freeLabelsNextRedeemable: Date;
+
+  secureRecoveriesEnabled: boolean;
+}
+
 interface Color {
   bg: string;
   borderSelected: string;
@@ -59,6 +67,7 @@ interface Color {
 }
 
 interface Address {
+  isValid: boolean;
   address1: string;
   address2: string;
   city: string;

@@ -1,8 +1,8 @@
-import { BlurView } from "expo-blur";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { View, TouchableOpacity, Text, ActivityIndicator } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 
 import tw from "@/lib/tailwind";
+import LoadingRect from "../LoadingRect";
 
 interface MultiselectProps {
   title: string;
@@ -31,7 +31,11 @@ const Multiselect: React.FC<MultiselectProps> = ({
 
   return (
     <View style={containerClasses}>
-      <TouchableOpacity style={tw`p-5`} disabled={disabled || loading} onPress={onPress}>
+      <TouchableOpacity
+        style={tw.style(`p-5`, loading && "opacity-0")}
+        disabled={disabled || loading}
+        onPress={onPress}
+      >
         <View style={tw`mb-2 flex-row justify-between items-center`}>
           <Text style={tw`font-medium text-xl`}>{title}</Text>
           {selected && <Ionicons name="checkmark-circle" size={22} />}
@@ -39,12 +43,10 @@ const Multiselect: React.FC<MultiselectProps> = ({
         <Text style={tw`text-gray-400 text-base`}>{description}</Text>
       </TouchableOpacity>
       {loading && (
-        <BlurView
-          intensity={2}
-          style={tw`absolute w-full h-full rounded-md  items-center justify-center`}
-        >
-          <ActivityIndicator size="large" color="black" />
-        </BlurView>
+        <View style={tw`absolute w-full h-full rounded-md p-5`}>
+          <LoadingRect width={150} height={20} />
+          <LoadingRect height={40} />
+        </View>
       )}
     </View>
   );

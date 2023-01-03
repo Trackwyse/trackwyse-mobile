@@ -102,6 +102,7 @@ type GetSubscriptionAPIResponse = APIResponse & {
     subscriptionActive: boolean;
     subscriptionDate: string;
     subscriptionReceipt: SubscriptionReceipt;
+    subscriptionPerks: SubscriptionPerks;
   };
 };
 

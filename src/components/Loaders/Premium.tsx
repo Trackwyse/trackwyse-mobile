@@ -12,18 +12,18 @@ import * as Animatable from "react-native-animatable";
 import tw from "@/lib/tailwind";
 import LoadingRect from "../LoadingRect";
 
-const LegalLoader: React.FC = () => {
+const PremiumLoader: React.FC = () => {
   return (
     <SafeAreaView style={tw`mx-6 my-5`}>
       <Animatable.View animation="pulse" easing="ease-out" iterationCount="infinite">
         <LoadingRect height={50} width={250} style={tw`mb-5`} />
-        {/* Render 10 loading icons */}
-        {new Array(10).fill(0).map((_, i) => (
-          <LoadingRect key={i} />
-        ))}
+        <LoadingRect height={100} />
+        <LoadingRect height={50} width={250} style={tw`mt-5 mb-2`} />
+        <LoadingRect height={25} />
+        <LoadingRect height={100} style={tw`mt-5`} />
       </Animatable.View>
     </SafeAreaView>
   );
 };
 
-export default LegalLoader;
+export default PremiumLoader;
