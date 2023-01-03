@@ -59,7 +59,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         <View style={tw`w-11/12 mt-10 `}>
           <Text style={tw`font-medium text-2xl`}>Subscription</Text>
           <Text style={tw`text-gray-400 text-base my-1`}>
-            You can also manage your subscription through your iCloud subscriptions page.
+            You can manage your subscription through your iCloud subscriptions page.
           </Text>
         </View>
 
@@ -86,11 +86,13 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         </View>
 
         <ListItem
+          pressable
           style={tw`mt-5`}
+          position="alone"
           title="Redeem Free Tracking Labels"
           iconRight="md-chevron-forward-outline"
+          onPress={() => navigation.navigate("ProfilePremiumClaim")}
         />
-        <ListItem title="Next Payment" position="bottom" />
       </ScrollView>
     </View>
   );

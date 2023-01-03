@@ -23,6 +23,8 @@ type FoundLabelDetailsAPIResponse = APIResponse;
 
 type UpdateUserPasswordAPIResponse = APIResponse;
 
+type ClaimFreeLabelsAPIResponse = APIResponse;
+
 type RefreshAccessTokenAPIResponse = APIResponse & {
   data: {
     accessToken: string;

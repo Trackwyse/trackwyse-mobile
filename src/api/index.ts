@@ -559,6 +559,28 @@ const createSubscription = async (
   );
 };
 
+/*
+  POST /api/v1/subscription/claim/free-labels
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const claimFreeLabels = async (accessToken: string): Promise<ClaimFreeLabelsAPIResponse> => {
+  return apiClient.post(
+    "/api/v1/subscription/claim/free-labels",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
 export default {
   getValidClients,
 
@@ -587,4 +609,5 @@ export default {
 
   createSubscription,
   getSubscription,
+  claimFreeLabels,
 };

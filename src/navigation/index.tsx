@@ -23,6 +23,7 @@ import ProfilePassword from "@/screens/Profile/Profile.Password";
 import ProfileUserInfo from "@/screens/Profile/Profile.UserInfo";
 import ProfilePurchase from "@/screens/Profile/Profile.Purchase";
 import ProfileDeveloper from "@/screens/Profile/Profile.Developer";
+import ProfilePremiumClaim from "@/screens/Profile/Profile.PremiumClaim";
 import ProfileNotifications from "@/screens/Profile/Profile.Notifications";
 import ProfilePremiumSettings from "@/screens/Profile/Profile.PremiumSettings";
 
@@ -199,6 +200,11 @@ const AppStackNavigator: React.FC = () => {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="ProfilePremiumClaim"
+            component={ProfilePremiumClaim}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="ProfilePurchase"
             component={ProfilePurchase}
             options={{ title: "Purchase" }}
@@ -256,7 +262,7 @@ const RootStackNavigator: React.FC = () => {
     if (!loading && !isLoading && isValidVersion && fontsLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [loading, isLoading, isValidVersion]);
+  }, [loading, isLoading, isValidVersion, fontsLoaded]);
 
   if (loading || isLoading || !fontsLoaded) {
     return null;

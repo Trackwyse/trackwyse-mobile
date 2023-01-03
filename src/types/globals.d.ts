@@ -55,6 +55,7 @@ interface SubscriptionReceipt {
 interface SubscriptionPerks {
   freeLabelsRedeemed: number;
   freeLabelsLastRedeemed: Date;
+  freeLabelsRedeemable: boolean;
   freeLabelsNextRedeemable: Date;
 
   secureRecoveriesEnabled: boolean;
