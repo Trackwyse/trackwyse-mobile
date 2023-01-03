@@ -1,5 +1,6 @@
 import api from "@/api";
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { EmitterSubscription } from "react-native";
 import * as RNIAP from "react-native-iap";
@@ -52,7 +53,7 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
     });
 
     purchaseErrorSubscription.current = RNIAP.purchaseErrorListener((error) => {
-      console.log(error);
+      setProcessing(false);
     });
 
     return () => {
@@ -77,7 +78,15 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
             setProcessing(false);
             setPendingPurchase(null);
           },
-          onError: () => {
+          onError: (err) => {
+            if (err instanceof AxiosError) {
+              const message = err.response?.data?.message;
+
+              if (message && message == "INVALID_SUBSCRIPTION") {
+                RNIAP.finishTransaction({ purchase: pendingPurchase });
+              }
+            }
+
             setProcessing(false);
             setPendingPurchase(null);
           },
