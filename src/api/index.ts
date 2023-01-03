@@ -8,7 +8,7 @@ const apiClient = axios.create({
 });
 
 /*
-  GET /status/validClients
+  GET /status/valid-clients
 
   Response Body:
     - error: boolean
@@ -150,7 +150,7 @@ const refreshAccessToken = (refreshToken: string): Promise<RefreshAccessTokenAPI
 };
 
 /*
-  POST /auth/v1/checkEmail
+  POST /auth/v1/check-email
 
   Request Body:
     - email: string
@@ -353,7 +353,7 @@ const updateFoundLabelDetails = (
 };
 
 /*
-  POST /auth/v1/acceptTerms
+  POST /auth/v1/accept-terms
 
   Request Headers:
     - Authorization: Bearer <accessToken>
@@ -444,7 +444,7 @@ const updateUser = async (
 };
 
 /*
-  POST /api/v1/user/updatePassword
+  POST /api/v1/user/update-password
 
   Request Body:
     - currentPassword: string
