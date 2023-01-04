@@ -56,7 +56,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           Toast.show({
             type: "error",
             text1: "Error",
-            text2: error.message,
+            text2: error.response?.data.message,
           });
         } else {
           Toast.show({

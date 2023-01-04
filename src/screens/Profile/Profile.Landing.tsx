@@ -1,4 +1,4 @@
-import { ScrollView, Share, Text } from "react-native";
+import { ScrollView, Share, Text, View } from "react-native";
 
 import tw from "@/lib/tailwind";
 import Constants from "@/lib/constants";
@@ -7,6 +7,7 @@ import ListItem from "@/components/ListItem";
 import { stringifyVersion } from "@/lib/textUtil";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Button from "@/components/Button";
+import { useInAppPurchases } from "@/contexts/InAppPurchases";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -14,6 +15,7 @@ interface ProfileScreenProps {
 
 const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { signOut, user } = useAuth();
+  const { restorePurchases } = useInAppPurchases();
 
   const handleLogout = () => {
     signOut();
@@ -34,46 +36,13 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={tw`items-center pb-20`}>
-      {__DEV__ && (
-        <ListItem
-          pressable
-          title="Developer Menu"
-          iconLeft="code-outline"
-          position="alone"
-          iconRight="md-chevron-forward-outline"
-          style={tw`mt-5`}
-          onPress={() => handleItemPress("ProfileDeveloper")}
-        />
-      )}
-
-      <ListItem
-        pressable
-        title="Trackwyse Plus"
-        iconLeft="gift-outline"
-        iconLeftColor="gold"
-        position="top"
-        iconRight="md-chevron-forward-outline"
-        style={tw`mt-5`}
-        onPress={() => handleItemPress("ProfilePremium")}
-      />
-      <ListItem
-        pressable={user?.subscriptionActive}
-        disabled={!user?.subscriptionActive}
-        title="Subscription Settings"
-        iconLeft="gift-outline"
-        iconLeftColor="gold"
-        position="bottom"
-        iconRight="md-chevron-forward-outline"
-        onPress={() => handleItemPress("ProfilePremiumSettings")}
-      />
-
+      <Text style={tw`w-11/12 mb-3 mt-6 text-base text-gray-400 uppercase`}>User Settings</Text>
       <ListItem
         pressable
         title="User Info"
         iconLeft="person-outline"
         position="top"
         iconRight="md-chevron-forward-outline"
-        style={tw`mt-5`}
         onPress={() => handleItemPress("ProfileUserInfo")}
       />
       <ListItem
@@ -85,12 +54,41 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         onPress={() => handleItemPress("ProfileNotifications")}
       />
 
+      <Text style={tw`w-11/12 mb-3 mt-6 text-base text-gray-400 uppercase`}>Subscription</Text>
+      <ListItem
+        pressable
+        title="Trackwyse Plus"
+        iconLeft="gift-outline"
+        iconLeftColor="gold"
+        position="top"
+        iconRight="md-chevron-forward-outline"
+        onPress={() => handleItemPress("ProfilePremium")}
+      />
+      <ListItem
+        pressable={user?.subscriptionActive}
+        disabled={!user?.subscriptionActive}
+        title="Subscription Settings"
+        iconLeft="gift-outline"
+        iconLeftColor="gold"
+        position="middle"
+        iconRight="md-chevron-forward-outline"
+        onPress={() => handleItemPress("ProfilePremiumSettings")}
+      />
+      <ListItem
+        pressable
+        title="Restore Purchases"
+        iconLeft="gift-outline"
+        iconLeftColor="gold"
+        position="bottom"
+        onPress={restorePurchases}
+      />
+
+      <Text style={tw`w-11/12 mb-3 mt-6 text-base text-gray-400 uppercase`}>Support</Text>
       <ListItem
         pressable
         title="Purchase Trackers"
         iconLeft="cart-outline"
         position="top"
-        style={tw`mt-5`}
         iconRight="md-chevron-forward-outline"
         onPress={() => handleItemPress("ProfilePurchase")}
       />
@@ -126,6 +124,20 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         iconRight="md-chevron-forward-outline"
         onPress={() => handleItemPress("ProfileAbout")}
       />
+
+      {__DEV__ && (
+        <View style={tw`w-full items-center`}>
+          <Text style={tw`w-11/12 mb-3 mt-6 text-base text-gray-400 uppercase`}>Developer</Text>
+          <ListItem
+            pressable
+            title="Network Logs"
+            iconLeft="code-outline"
+            position="alone"
+            iconRight="md-chevron-forward-outline"
+            onPress={() => handleItemPress("ProfileDeveloper")}
+          />
+        </View>
+      )}
 
       <Button size="lg" color="primary" style={tw`mt-5`} onPress={handleLogout}>
         Logout

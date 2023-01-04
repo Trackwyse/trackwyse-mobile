@@ -20,6 +20,7 @@ import { useLabels } from "@/contexts/Labels";
 import HomeLoader from "@/components/Loaders/Home";
 import IconButton from "@/components/IconButton";
 import { trimToLength } from "@/lib/textUtil";
+import Banner from "@/components/Banner/Banner";
 
 interface HomeProps {
   navigation: NativeStackNavigationProp<any>;
@@ -46,7 +47,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
             Welcome {trimToLength(user?.firstName, 8) || ""}
           </Text>
           <IconButton
-            icon="person"
+            icon="ios-settings-sharp"
             size={25}
             filled
             onPress={() => navigation.navigate("ProfileLanding")}
@@ -78,25 +79,14 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation }) => {
   return (
     <View>
       {/* TODO: Move to component */}
-      <View style={tw`items-center`}>
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1.2, y: 1.2 }}
-          colors={[tw.color("aqua-100") as string, "#A6FFF6", tw.color("aqua-200") as string]}
-          style={tw`flex-row justify-between rounded-3xl w-full mt-5 mb-7 p-7`}
-        >
-          <View style={tw`max-w-1/2`}>
-            <Text style={tw`text-xl font-medium`}>Save 15% with your first order.</Text>
-            <Text style={tw`mt-8 text-primary-100 text-base`}>Order Now</Text>
-          </View>
-          <View>
-            <Image
-              source={Assets.tag}
-              style={{ flex: 1, width: 110, height: 110, resizeMode: "contain" }}
-            />
-          </View>
-        </LinearGradient>
-      </View>
+      <Banner
+        title="Level up with Trackwyse Plus"
+        subtitle="Learn More"
+        image={Assets.diamond}
+        gradient={["#FFE245", "#FFE245"]}
+        gradientBorder={["#EED23A", "#FFE86D"]}
+        onPress={() => navigation.navigate("ProfilePremium")}
+      />
       {/* END TODO */}
 
       <View style={tw`flex-2 flex-row justify-between`}>

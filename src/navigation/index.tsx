@@ -134,7 +134,6 @@ const AppStackNavigator: React.FC = () => {
       <NotificationsProvider>
         <Stack.Navigator
           screenOptions={({ navigation }) => ({
-            gestureEnabled: false,
             headerLeft: () => <NavigationWithBack navigation={navigation} />,
           })}
         >

@@ -1,14 +1,16 @@
-import api from "@/api";
-import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { EmitterSubscription } from "react-native";
 import * as RNIAP from "react-native-iap";
-import { useAuth } from "./Auth";
+import { EmitterSubscription } from "react-native";
+import { useMutation } from "@tanstack/react-query";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
+
+import api from "@/api";
+import { useAuth } from "@/contexts/Auth";
 
 interface InAppPurchasesData {
   processing: boolean;
   subscriptions: RNIAP.Subscription[];
+  restorePurchases: () => Promise<void>;
   createSubscription: (sku: string) => Promise<void>;
 }
 
@@ -33,26 +35,6 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
     RNIAP.initConnection().then(() => {
       RNIAP.getSubscriptions({ skus: ["TRACKWYSE_PLUS"] }).then((subscriptions) => {
         setSubscriptions(subscriptions);
-      });
-
-      RNIAP.getPurchaseHistory().then((purchases) => {
-        const sortedAvailablePurchases = purchases.sort(
-          (a, b) => b.transactionDate - a.transactionDate
-        );
-
-        // if there is only one purchase, send it to the server
-        if (sortedAvailablePurchases.length == 1) {
-          setPendingPurchase(sortedAvailablePurchases[0]);
-        }
-
-        // if there are more than one purchase, send the most recent one to the server, and finish the rest
-        if (sortedAvailablePurchases.length > 1) {
-          setPendingPurchase(sortedAvailablePurchases[0]);
-
-          sortedAvailablePurchases.slice(1).forEach(async (purchase) => {
-            await RNIAP.finishTransaction({ purchase });
-          });
-        }
       });
     });
 
@@ -125,11 +107,42 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
     }
   };
 
+  const restorePurchases = async () => {
+    setProcessing(true);
+
+    RNIAP.getPurchaseHistory({ onlyIncludeActiveItems: true })
+      .then((purchases) => {
+        const sortedAvailablePurchases = purchases.sort(
+          (a, b) => b.transactionDate - a.transactionDate
+        );
+
+        // if there is only one purchase, send it to the server
+        if (sortedAvailablePurchases.length == 1) {
+          setPendingPurchase(sortedAvailablePurchases[0]);
+        }
+
+        // if there are more than one purchase, send the most recent one to the server, and finish the rest
+        if (sortedAvailablePurchases.length > 1) {
+          setPendingPurchase(sortedAvailablePurchases[0]);
+
+          sortedAvailablePurchases.slice(1).forEach(async (purchase) => {
+            await RNIAP.finishTransaction({ purchase });
+          });
+
+          setProcessing(false);
+        }
+      })
+      .catch(() => {
+        setProcessing(false);
+      });
+  };
+
   return (
     <InAppPurchasesContext.Provider
       value={{
         processing,
         subscriptions,
+        restorePurchases,
         createSubscription,
       }}
     >
