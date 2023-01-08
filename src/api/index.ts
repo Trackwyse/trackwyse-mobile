@@ -292,29 +292,6 @@ const deleteLabel = (
 };
 
 /*
-  GET /api/v1/labels/:id
-
-  Request Headers:
-    - Authorization: Bearer <accessToken> (optional)
-
-  Response Body:
-    - error: boolean
-    - message: string
-    - label: Label
-*/
-const getLabel = (values: GetLabelInput, accessToken?: string): Promise<GetLabelAPIResponse> => {
-  const { id } = values;
-
-  return apiClient.get(`/api/v1/labels/${id}`, {
-    // In Production, the Authorization header is required
-    // In Development, the Authorization header should not be included
-    headers: {
-      Authorization: !__DEV__ ? `Bearer ${accessToken}` : undefined,
-    },
-  });
-};
-
-/*
   POST /api/v1/labels/found/:id
 
   Request Body:
@@ -600,7 +577,6 @@ export default {
   updateUserPassword,
 
   addLabel,
-  getLabel,
   getLabels,
   modifyLabel,
   deleteLabel,

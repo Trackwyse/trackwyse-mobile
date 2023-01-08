@@ -30,10 +30,6 @@ interface DeleteLabelInput {
   id: string;
 }
 
-interface GetLabelInput {
-  id: string;
-}
-
 interface RecoverLabelInput {
   id: string;
 }

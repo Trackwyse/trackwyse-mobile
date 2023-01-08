@@ -1,20 +1,19 @@
-import { createContext, useContext, useState, useEffect, useRef } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
 import { useMutation } from "@tanstack/react-query";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 
-import { useAuth } from "@/contexts/Auth";
-
 import api from "@/api";
+import { useAuth } from "@/contexts/Auth";
+import { useLabels } from "@/contexts/Labels";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useLabels } from "./Labels";
 
-type NotificationsContextData = {
+interface NotificationsContextData {
   enabled: boolean;
   loading: boolean;
   setStatus: (status: boolean) => void;
-};
+}
 
 type RootStackParamList = {
   EditLabel: { labelId: string } | undefined;

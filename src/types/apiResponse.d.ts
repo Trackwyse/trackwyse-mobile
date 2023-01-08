@@ -19,8 +19,6 @@ type ResetPasswordAPIResponse = APIResponse;
 
 type AcceptTermsAPIResponse = APIResponse;
 
-type FoundLabelDetailsAPIResponse = APIResponse;
-
 type UpdateUserPasswordAPIResponse = APIResponse;
 
 type ClaimFreeLabelsAPIResponse = APIResponse;
@@ -69,6 +67,12 @@ type RecoverLabelAPIResponse = APIResponse & {
   };
 };
 
+type FoundLabelDetailsAPIResponse = APIResponse & {
+  data: {
+    label: Label;
+  };
+};
+
 type UpdateUserAPIResponse = APIResponse & {
   data: {
     user: User;
@@ -90,12 +94,6 @@ type CheckEmailAPIResponse = APIResponse & {
 type GetLabelsAPIResponse = APIResponse & {
   data: {
     labels: Label[];
-  };
-};
-
-type GetLabelAPIResponse = APIResponse & {
-  data: {
-    label: Label;
   };
 };
 

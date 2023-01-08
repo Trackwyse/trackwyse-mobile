@@ -12,6 +12,7 @@ import { useAuth } from "@/contexts/Auth";
 import BadgeButton from "@/components/BadgeButton";
 import Permissions from "@/components/Permissions";
 import { validateLabelUrl } from "@/lib/validators";
+import { useDynamicLabels } from "@/contexts/DynamicLabels";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface FoundLabelScreenProps {
@@ -20,12 +21,13 @@ interface FoundLabelScreenProps {
 
 const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
   const { accessToken } = useAuth();
+  const { setFoundLabel } = useDynamicLabels();
   const [hasBeenScanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
   const mutation = useMutation({
-    mutationFn: (values: GetLabelInput) => {
-      return api.getLabel(values, accessToken);
+    mutationFn: (values: FoundLabelDetailsInput) => {
+      return api.updateFoundLabelDetails(values, accessToken);
     },
   });
 
@@ -54,6 +56,7 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
             text1: "Label Found",
             text2: "The owner of this label has been notified",
           });
+          setFoundLabel(data.label);
           navigation.navigate("FoundLabelDetails", {
             label: data.label,
           });

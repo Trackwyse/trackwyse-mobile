@@ -14,6 +14,7 @@ import { useAuth } from "@/contexts/Auth";
 import Button from "@/components/Button";
 import ListItem from "@/components/ListItem";
 import IconButton from "@/components/IconButton";
+import { useDynamicLabels } from "@/contexts/DynamicLabels";
 import { validateFoundLabelDetailsInput } from "@/lib/validators";
 
 interface FoundLabelDetailsScreenProps {
@@ -23,7 +24,7 @@ interface FoundLabelDetailsScreenProps {
 
 const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navigation }) => {
   const { accessToken } = useAuth();
-  const { label }: { label: Label } = route.params;
+  const { foundLabel, setFoundLabel } = useDynamicLabels();
   const [isModalVisible, setModalVisible] = useState(false);
 
   const modificationMutation = useMutation({
@@ -34,33 +35,36 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
 
   const editInput = useFormik({
     initialValues: {
-      id: label._id,
-      phoneNumber: label.finderPhoneNumber || "",
-      exactLocation: label.foundExactLocation || "",
-      recoveryLocation: label.foundRecoveryLocation || "",
+      phoneNumber: foundLabel?.finderPhoneNumber || "",
+      exactLocation: foundLabel?.foundExactLocation || "",
+      recoveryLocation: foundLabel?.foundRecoveryLocation || "",
     },
     validateOnBlur: false,
     validateOnChange: false,
     validate: validateFoundLabelDetailsInput,
     onSubmit: (values) => {
-      modificationMutation.mutate(values, {
-        onSuccess: () => {
-          Toast.show({
-            type: "success",
-            text1: "Label updated",
-            text2: "Thank you for recovering this label",
-          });
+      modificationMutation.mutate(
+        { ...values, id: foundLabel?._id },
+        {
+          onSuccess: () => {
+            Toast.show({
+              type: "success",
+              text1: "Label updated",
+              text2: "Thank you for recovering this label",
+            });
 
-          navigation.navigate("Home");
-        },
-        onError: () => {
-          Toast.show({
-            type: "error",
-            text1: "Error",
-            text2: "There was an error updating the label",
-          });
-        },
-      });
+            // update the found label to the new values
+            setFoundLabel({ ...(foundLabel as Label), ...values });
+          },
+          onError: () => {
+            Toast.show({
+              type: "error",
+              text1: "Error",
+              text2: "There was an error updating the label",
+            });
+          },
+        }
+      );
     },
   });
 
@@ -127,16 +131,21 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
             </Text>
           </View>
 
-          <ListItem title="Item Name" textRight={label.name ? label.name : "Not provided"} />
+          <ListItem
+            title="Item Name"
+            textRight={foundLabel?.name ? foundLabel?.name : "Not provided"}
+          />
           <ListItem
             title="Contact Number"
             position="middle"
-            textRight={label.phoneNumber ? label.phoneNumber : "Not provided"}
+            textRight={foundLabel?.phoneNumber ? foundLabel?.phoneNumber : "Not provided"}
           />
           <ListItem
             title="Message"
             position="bottom"
-            {...(label.message ? { textBottom: label.message } : { textRight: "Not provided" })}
+            {...(foundLabel?.message
+              ? { textBottom: foundLabel?.message }
+              : { textRight: "Not provided" })}
           />
         </View>
 
@@ -189,7 +198,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
           <ListItem
             title="Approximate Location"
             position="alone"
-            textRight={label.foundNear ? label.foundNear : "Not provided"}
+            textRight={foundLabel?.foundNear ? foundLabel?.foundNear : "Not provided"}
           />
         </View>
 

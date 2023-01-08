@@ -1,16 +1,23 @@
+/*
+  * This file is named in an odd way as a temporary solution.
+
+  * This file serves the following purposes:
+  * - Manage OWNED labels by logged in users
+*/
+
 import { createContext, useReducer, useContext, useState, useEffect } from "react";
 
 import api from "@/api";
-import { useAuth } from "./Auth";
+import { useAuth } from "@/contexts/Auth";
 
-type LabelsContextData = {
+interface LabelsContextData {
   labels: Label[];
   loading: boolean;
   getLabels: () => Promise<void>;
   createLabel: (label: Label) => void;
   updateLabel: (label: Label) => void;
   deleteLabel: (label: Label) => void;
-};
+}
 
 const LabelsContext = createContext<LabelsContextData>({} as LabelsContextData);
 
