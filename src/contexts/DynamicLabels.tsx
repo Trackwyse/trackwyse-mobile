@@ -8,17 +8,17 @@
 import { useReducer, useContext, createContext } from "react";
 
 interface DynamicLabelsContextData {
-  foundLabel: Label | null;
-  setFoundLabel: (label: Label | null) => void;
+  foundLabel: Label;
+  setFoundLabel: (label: Label) => void;
 }
 
 const DynamicLabelsContext = createContext<DynamicLabelsContextData>(
   {} as DynamicLabelsContextData
 );
 
-type DynamicLabelsAction = { type: "SET_FOUND_LABEL"; payload: Label | null };
+type DynamicLabelsAction = { type: "SET_FOUND_LABEL"; payload: Label };
 
-const dynamicLabelsReducer = (state: Label | null, action: DynamicLabelsAction) => {
+const dynamicLabelsReducer = (state: Label, action: DynamicLabelsAction) => {
   switch (action.type) {
     case "SET_FOUND_LABEL":
       return action.payload;
@@ -28,9 +28,9 @@ const dynamicLabelsReducer = (state: Label | null, action: DynamicLabelsAction) 
 };
 
 const DynamicLabelsProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
-  const [foundLabel, dispatch] = useReducer(dynamicLabelsReducer, null);
+  const [foundLabel, dispatch] = useReducer(dynamicLabelsReducer, {} as Label);
 
-  const setFoundLabel = (label: Label | null) => {
+  const setFoundLabel = (label: Label) => {
     dispatch({ type: "SET_FOUND_LABEL", payload: label });
   };
 

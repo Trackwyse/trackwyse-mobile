@@ -24,6 +24,7 @@ interface FoundLabelDetailsScreenProps {
 
 const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navigation }) => {
   const { accessToken } = useAuth();
+  const [isSaved, setIsSaved] = useState(false);
   const { foundLabel, setFoundLabel } = useDynamicLabels();
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -35,16 +36,16 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
 
   const editInput = useFormik({
     initialValues: {
-      phoneNumber: foundLabel?.finderPhoneNumber || "",
-      exactLocation: foundLabel?.foundExactLocation || "",
-      recoveryLocation: foundLabel?.foundRecoveryLocation || "",
+      phoneNumber: foundLabel.finderPhoneNumber || "",
+      exactLocation: foundLabel.foundExactLocation || "",
+      recoveryLocation: foundLabel.foundRecoveryLocation || "",
     },
     validateOnBlur: false,
     validateOnChange: false,
     validate: validateFoundLabelDetailsInput,
     onSubmit: (values) => {
       modificationMutation.mutate(
-        { ...values, id: foundLabel?._id },
+        { ...values, id: foundLabel._id },
         {
           onSuccess: () => {
             Toast.show({
@@ -54,7 +55,8 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
             });
 
             // update the found label to the new values
-            setFoundLabel({ ...(foundLabel as Label), ...values });
+            setIsSaved(true);
+            setFoundLabel({ ...foundLabel, ...values });
           },
           onError: () => {
             Toast.show({
@@ -75,7 +77,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
           icon="arrow-back"
           size={25}
           onPress={() => {
-            const hasChanged = editInput.values !== editInput.initialValues;
+            const hasChanged = editInput.values !== editInput.initialValues && !isSaved;
 
             if (hasChanged) {
               setModalVisible(true);
@@ -86,13 +88,15 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
         />
       ),
     });
-  }, [navigation, editInput.values, editInput.initialValues]);
+  }, [navigation, editInput.values, editInput.initialValues, isSaved]);
 
   return (
     <View>
       <Modal
         animationInTiming={1}
         animationOutTiming={1}
+        backdropTransitionInTiming={1}
+        backdropTransitionOutTiming={1}
         isVisible={isModalVisible}
         backdropOpacity={0.4}
         onBackdropPress={() => setModalVisible(false)}

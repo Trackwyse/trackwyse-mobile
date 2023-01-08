@@ -11,7 +11,7 @@ import tw from "@/lib/tailwind";
 
 const buttonColorClasses = {
   primary: "bg-primary-200 text-white",
-  secondary: "bg-gray-200 text-black",
+  secondary: "bg-gray-100 text-black",
 };
 
 const textColorClasses = {
