@@ -19,6 +19,8 @@ import { convertDateToReadable } from "@/lib/dateUtil";
 import ColorSelector from "@/components/ColorSelector";
 import { validateModifyLabelInput } from "@/lib/validators";
 import { colors } from "@/components/ColorSelector/ColorSelector";
+import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
+import { getAddressString } from "@/lib/textUtil";
 
 interface ModifyLabelScreenProps {
   route: any;
@@ -168,35 +170,12 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
 
   return (
     <View>
-      <Modal
-        animationInTiming={1}
-        animationOutTiming={1}
+      <UnsavedChangesModal
         isVisible={isUnsavedModalVisible}
-        backdropOpacity={0.4}
-        onBackdropPress={() => setIsUnsavedModalVisible(false)}
-      >
-        <View style={tw`items-center justify-center flex-1`}>
-          <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
-            <Text style={tw`text-2xl font-bold`}>Wait!</Text>
-            <Text style={tw`my-4 text-gray-400 text-base`}>
-              You have unsaved changes. Are you sure you want to leave this page?
-            </Text>
-            <Button
-              style={tw`w-full rounded-md my-1 py-2`}
-              color="secondary"
-              onPress={() => navigation.navigate("Home")}
-            >
-              Leave Page
-            </Button>
-            <Button
-              style={tw`w-full rounded-md py-2 my-1`}
-              onPress={() => setIsUnsavedModalVisible(false)}
-            >
-              Go Back
-            </Button>
-          </View>
-        </View>
-      </Modal>
+        setVisible={setIsUnsavedModalVisible}
+        onReturnPress={() => setIsUnsavedModalVisible(false)}
+        onLeavePress={() => navigation.navigate("Home")}
+      />
       <Modal
         animationInTiming={1}
         animationOutTiming={1}
@@ -241,11 +220,6 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
 
             <ListItem title="Currently Lost" iconRight="checkmark-outline" />
             <ListItem
-              title="Recoverable"
-              position="middle"
-              iconRight={label.foundRecoveryPossible ? "checkmark-outline" : "close-outline"}
-            />
-            <ListItem
               title="Found On"
               position="middle"
               textRight={
@@ -263,14 +237,20 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
               textRight={label.foundNear ? label.foundNear : "Not provided"}
             />
             <ListItem
+              pressable
               title="Found At"
               position="middle"
-              textRight={label.foundExactLocation ? label.foundExactLocation : "Not provided"}
+              {...(label.foundExactLocation
+                ? { iconRight: "md-chevron-forward" }
+                : { textRight: "Not provided" })}
             />
             <ListItem
+              pressable
               title="Recovery Location"
               position="bottom"
-              textRight={label.foundRecoveryLocation ? label.foundRecoveryLocation : "Not provided"}
+              {...(label.foundRecoveryLocation
+                ? { iconRight: "md-chevron-forward" }
+                : { textRight: "Not provided" })}
             />
 
             <Button

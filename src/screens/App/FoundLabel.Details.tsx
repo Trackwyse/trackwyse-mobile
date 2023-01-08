@@ -16,6 +16,8 @@ import ListItem from "@/components/ListItem";
 import IconButton from "@/components/IconButton";
 import { useDynamicLabels } from "@/contexts/DynamicLabels";
 import { validateFoundLabelDetailsInput } from "@/lib/validators";
+import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
+import { getAddressString } from "@/lib/textUtil";
 
 interface FoundLabelDetailsScreenProps {
   route: any;
@@ -37,8 +39,6 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
   const editInput = useFormik({
     initialValues: {
       phoneNumber: foundLabel.finderPhoneNumber || "",
-      exactLocation: foundLabel.foundExactLocation || "",
-      recoveryLocation: foundLabel.foundRecoveryLocation || "",
     },
     validateOnBlur: false,
     validateOnChange: false,
@@ -92,34 +92,12 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
 
   return (
     <View>
-      <Modal
-        animationInTiming={1}
-        animationOutTiming={1}
-        backdropTransitionInTiming={1}
-        backdropTransitionOutTiming={1}
+      <UnsavedChangesModal
         isVisible={isModalVisible}
-        backdropOpacity={0.4}
-        onBackdropPress={() => setModalVisible(false)}
-      >
-        <View style={tw`items-center justify-center flex-1`}>
-          <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
-            <Text style={tw`text-2xl font-bold`}>Wait!</Text>
-            <Text style={tw`my-4 text-gray-400 text-base`}>
-              You have unsaved changes. Are you sure you want to leave this page?
-            </Text>
-            <Button
-              style={tw`w-full rounded-md my-1 py-2`}
-              color="secondary"
-              onPress={() => navigation.navigate("Home")}
-            >
-              Leave Page
-            </Button>
-            <Button style={tw`w-full rounded-md py-2 my-1`} onPress={() => setModalVisible(false)}>
-              Go Back
-            </Button>
-          </View>
-        </View>
-      </Modal>
+        setVisible={setModalVisible}
+        onReturnPress={() => setModalVisible(false)}
+        onLeavePress={() => navigation.navigate("Home")}
+      />
 
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="always"
@@ -172,23 +150,49 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
           onChangeText={editInput.handleChange("phoneNumber")}
         />
 
-        <Input
-          placeholder="Found At"
-          size="lg"
-          style={tw`my-1`}
-          value={editInput.values.exactLocation}
-          disabled={modificationMutation.isLoading}
-          onChangeText={editInput.handleChange("exactLocation")}
-        />
+        {foundLabel?.foundExactLocation ? (
+          <ListItem
+            pressable
+            style={tw`my-1`}
+            position="alone"
+            title="Exact Location"
+            iconRight="md-chevron-forward"
+            textBottom={getAddressString(foundLabel?.foundExactLocation)}
+            onPress={() => navigation.navigate("FoundLabelExactLocation")}
+          />
+        ) : (
+          <Button
+            color="secondary"
+            size="lg"
+            style={tw`my-1 justify-start`}
+            textStyle={tw`text-lg font-normal text-gray-400`}
+            onPress={() => navigation.navigate("FoundLabelExactLocation")}
+          >
+            Exact Location
+          </Button>
+        )}
 
-        <Input
-          placeholder="Recovery Location"
-          size="lg"
-          style={tw`my-1`}
-          value={editInput.values.recoveryLocation}
-          disabled={modificationMutation.isLoading}
-          onChangeText={editInput.handleChange("recoveryLocation")}
-        />
+        {foundLabel?.foundRecoveryLocation ? (
+          <ListItem
+            pressable
+            style={tw`my-1`}
+            position="alone"
+            title="Recovery Location"
+            iconRight="md-chevron-forward"
+            textBottom={getAddressString(foundLabel?.foundRecoveryLocation)}
+            onPress={() => navigation.navigate("FoundLabelRecoveryLocation")}
+          />
+        ) : (
+          <Button
+            color="secondary"
+            size="lg"
+            style={tw`my-1 justify-start`}
+            textStyle={tw`text-lg font-normal text-gray-400`}
+            onPress={() => navigation.navigate("FoundLabelRecoveryLocation")}
+          >
+            Recovery Location
+          </Button>
+        )}
 
         <View style={tw`w-full items-center`}>
           <View style={tw`w-11/12 pt-10`}>

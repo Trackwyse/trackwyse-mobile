@@ -31,7 +31,7 @@ const ListItem: React.FC<ListItemProps> = ({
   iconRight,
   textRight,
   textBottom,
-  iconRightColor = tw.color("gray-300"),
+  iconRightColor = tw.color("gray-400"),
   iconLeftColor = tw.color("black"),
   pressable = false,
   disabled = false,
@@ -53,15 +53,17 @@ const ListItem: React.FC<ListItemProps> = ({
       onPress={onPress}
       activeOpacity={0.5}
     >
-      <View style={tw`flex-row items-center`}>
-        {iconLeft && (
-          <Ionicons name={iconLeft} size={22} style={tw.style("mr-4")} color={iconLeftColor} />
-        )}
-        <Text style={tw.style(`font-medium text-base text-black`)}>{title}</Text>
+      <View style={tw`flex-row justify-between w-full`}>
+        <View style={tw`flex-row items-center`}>
+          {iconLeft && (
+            <Ionicons name={iconLeft} size={22} style={tw.style("mr-4")} color={iconLeftColor} />
+          )}
+          <Text style={tw.style(`font-medium text-base text-black`)}>{title}</Text>
+        </View>
+        {iconRight && <Ionicons name={iconRight} size={20} color={iconRightColor} />}
+        {textRight && <Text style={tw` text-gray-400 text-base`}>{textRight}</Text>}
       </View>
-      {iconRight && <Ionicons name={iconRight} size={24} color={iconRightColor} />}
-      {textRight && <Text style={tw` text-gray-300 text-base`}>{textRight}</Text>}
-      {textBottom && <Text style={tw`text-gray-300 text-base pt-2`}>{textBottom}</Text>}
+      {textBottom && <Text style={tw`text-gray-400 text-base pt-2`}>{textBottom}</Text>}
     </TouchableOpacity>
   );
 };

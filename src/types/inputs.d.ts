@@ -53,8 +53,8 @@ interface ModifyLabelInput {
 interface FoundLabelDetailsInput {
   id?: string;
   phoneNumber?: string;
-  exactLocation?: string;
-  recoveryLocation?: string;
+  exactLocation?: AddressInput;
+  recoveryLocation?: AddressInput;
 }
 
 interface UpdateUserInput {
@@ -74,4 +74,12 @@ interface UpdateUserPasswordInput {
   currentPassword: string;
   newPassword: string;
   confirmPassword: string;
+}
+
+interface AddressInput {
+  address1?: string;
+  address2?: string;
+  city?: string;
+  state?: string;
+  zip5?: string;
 }

@@ -10,8 +10,8 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import tw from "@/lib/tailwind";
 
 const buttonColorClasses = {
-  primary: "bg-primary-200 text-white",
-  secondary: "bg-gray-100 text-black",
+  primary: "bg-primary-200",
+  secondary: "bg-gray-100",
 };
 
 const textColorClasses = {
@@ -30,6 +30,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   iconLeft?: keyof typeof Ionicons.glyphMap;
   iconRight?: keyof typeof Ionicons.glyphMap;
   style?: any;
+  textStyle?: any;
   loading?: boolean;
   disabled?: boolean;
 }
@@ -38,6 +39,7 @@ const Button: React.FC<ButtonProps> = ({
   iconLeft,
   iconRight,
   style, // This is to prevent the style prop from being passed to the TouchableOpacity
+  textStyle,
   color = "primary",
   size = "sm",
   loading = false,
@@ -53,7 +55,8 @@ const Button: React.FC<ButtonProps> = ({
 
   const textClassNames = tw.style(
     "text-base font-medium",
-    !disabled ? textColorClasses[color] : "text-gray-300"
+    !disabled ? textColorClasses[color] : "text-gray-300",
+    textStyle
   );
 
   return (

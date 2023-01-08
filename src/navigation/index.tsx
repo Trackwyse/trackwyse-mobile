@@ -12,6 +12,8 @@ import EditLabel from "@/screens/App/ModifyLabel";
 
 import FoundLabelScan from "@/screens/App/FoundLabel.Scan";
 import FoundLabelDetails from "@/screens/App/FoundLabel.Details";
+import FoundLabelExactLocation from "@/screens/App/FoundLabel.ExactLocation";
+import FoundLabelRecoveryLocation from "@/screens/App/FoundLabel.RecoveryLocation";
 
 import ProfileRate from "@/screens/Profile/Profile.Rate";
 import ProfileHelp from "@/screens/Profile/Profile.Help";
@@ -160,6 +162,22 @@ const AppStackNavigator: React.FC = () => {
               gestureEnabled: false,
               headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
             })}
+          />
+          <Stack.Screen
+            name="FoundLabelExactLocation"
+            component={FoundLabelExactLocation}
+            options={{
+              title: "Exact Location",
+              gestureEnabled: false,
+            }}
+          />
+          <Stack.Screen
+            name="FoundLabelRecoveryLocation"
+            component={FoundLabelRecoveryLocation}
+            options={{
+              title: "Recovery Location",
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="EditLabel"
