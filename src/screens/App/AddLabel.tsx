@@ -8,11 +8,12 @@ import { View, Text, ActivityIndicator } from "react-native";
 import api from "@/api";
 import tw from "@/lib/tailwind";
 import { useAuth } from "@/contexts/Auth";
+import { useLabels } from "@/contexts/Labels";
+import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import Permissions from "@/components/Permissions";
 import { validateLabelUrl } from "@/lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useLabels } from "@/contexts/Labels";
 
 interface AddLabelScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -100,22 +101,20 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
         )}
       </Camera>
 
-      <View style={tw`flex items-center`}>
-        <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Add a Label</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
-            To get started, scan the QR code on one of your labels.
-          </Text>
-        </View>
-      </View>
+      <Container>
+        <Text style={tw`text-2xl font-bold pt-10`}>Add a Label</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          To get started, scan the QR code on one of your labels.
+        </Text>
+      </Container>
 
-      <View style={tw`mt-auto flex-row-reverse mb-10 w-11/12`}>
+      <Container outerStyle={tw`mt-auto mb-10`} style={tw`flex-row-reverse`}>
         {mutation.isError && hasBeenScanned && (
           <BadgeButton iconRight="camera-outline" size="lg" onPress={() => setScanned(false)}>
             Retry Scan
           </BadgeButton>
         )}
-      </View>
+      </Container>
     </View>
   );
 };

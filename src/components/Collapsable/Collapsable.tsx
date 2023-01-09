@@ -13,10 +13,7 @@ interface CollapsableProps {
 const Collapsable: React.FC<CollapsableProps> = ({ title, content, style }) => {
   const [expanded, setExpanded] = useState(false);
 
-  const containerClasses = tw.style(
-    "w-11/12 bg-gray-100 p-5 rounded-2xl",
-    style
-  );
+  const containerClasses = tw.style("w-full bg-gray-100 p-5 rounded-2xl", style);
 
   const onPress = () => {
     setExpanded(!expanded);

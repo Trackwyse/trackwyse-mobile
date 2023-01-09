@@ -9,6 +9,7 @@ import { View, Text, ActivityIndicator } from "react-native";
 import api from "@/api";
 import tw from "@/lib/tailwind";
 import { useAuth } from "@/contexts/Auth";
+import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import Permissions from "@/components/Permissions";
 import { validateLabelUrl } from "@/lib/validators";
@@ -105,23 +106,21 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
         )}
       </Camera>
 
-      <View style={tw`flex items-center`}>
-        <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Found a Label</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
-            Found a lost item with a label? Scan the QR code to alert the owner, and optionally
-            provide your contact information.
-          </Text>
-        </View>
-      </View>
+      <Container>
+        <Text style={tw`text-2xl font-bold pt-10`}>Found a Label</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          Found a lost item with a label? Scan the QR code to alert the owner, and optionally
+          provide your contact information.
+        </Text>
+      </Container>
 
-      <View style={tw`mt-auto flex-row-reverse mb-10 w-11/12`}>
+      <Container outerStyle={tw`mt-auto mb-10`} style={tw`flex-row-reverse`}>
         {mutation.isError && hasBeenScanned && (
           <BadgeButton iconRight="camera-outline" size="lg" onPress={() => setScanned(false)}>
             Retry Scan
           </BadgeButton>
         )}
-      </View>
+      </Container>
     </View>
   );
 };

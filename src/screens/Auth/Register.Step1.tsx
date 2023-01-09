@@ -8,6 +8,7 @@ import tw from "@/lib/tailwind";
 import Input from "@/components/Input";
 import BadgeButton from "@/components/BadgeButton";
 import { validateRegisterInput } from "@/lib/validators";
+import Container from "@/components/Container";
 
 interface RegisterScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -61,14 +62,13 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={tw`h-full`}>
-      <KeyboardAvoidingView style={tw`items-center justify-end flex-1`}>
-        <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Register</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
-            Welcome to Trackwyse. Enter an email and password to get started.
-          </Text>
-        </View>
+    <Container style={tw`h-full`}>
+      <KeyboardAvoidingView style={tw`justify-end flex-1`}>
+        <Text style={tw`text-2xl font-bold pt-10`}>Register</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          Welcome to Trackwyse. Enter an email and password to get started.
+        </Text>
+
         <Input
           size="lg"
           placeholder="Email"
@@ -103,7 +103,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
       </KeyboardAvoidingView>
 
       <KeyboardAvoidingView
-        style={tw`flex-row-reverse w-11/12 mt-auto mb-10  `}
+        style={tw`flex-row-reverse mt-auto mb-10`}
         behavior="padding"
         keyboardVerticalOffset={100}
       >
@@ -117,7 +117,7 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
           Next
         </BadgeButton>
       </KeyboardAvoidingView>
-    </View>
+    </Container>
   );
 };
 

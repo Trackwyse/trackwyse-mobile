@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import tw from "@/lib/tailwind";
+import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 
 interface VerifyProps {
@@ -14,22 +15,18 @@ const Verify: React.FC<VerifyProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={tw`h-full`}>
-      <View style={tw`items-center`}>
-        <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Verification</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
-            It looks like your email is unverified. Let's get you verified.
-          </Text>
-        </View>
-      </View>
+    <Container style={tw`h-full`}>
+      <Text style={tw`text-2xl font-bold pt-10`}>Verification</Text>
+      <Text style={tw`my-4 text-gray-400 text-base`}>
+        It looks like your email is unverified. Let's get you verified.
+      </Text>
 
-      <View style={tw`flex-row-reverse w-11/12 mt-auto mb-10`}>
+      <View style={tw`flex-row-reverse mt-auto mb-10`}>
         <BadgeButton size="lg" iconRight="arrow-forward" onPress={onPress}>
           Next
         </BadgeButton>
       </View>
-    </View>
+    </Container>
   );
 };
 

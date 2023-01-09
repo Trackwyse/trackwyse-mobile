@@ -11,6 +11,7 @@ import { useAuth } from "@/contexts/Auth";
 import Hyperlink from "@/components/Hyperlink";
 import { validateLoginInput } from "@/lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import Container from "@/components/Container";
 
 interface LoginScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -59,14 +60,13 @@ const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={tw`h-full`}>
-      <KeyboardAvoidingView style={tw`items-center justify-end flex-1`}>
-        <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Log In</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
-            Welcome back! Enter your email below to access your account.
-          </Text>
-        </View>
+    <Container style={tw`h-full`}>
+      <KeyboardAvoidingView style={tw`justify-end flex-1`}>
+        <Text style={tw`text-2xl font-bold pt-10`}>Log In</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          Welcome back! Enter your email below to access your account.
+        </Text>
+
         <Input
           size="lg"
           placeholder="Email"
@@ -95,7 +95,7 @@ const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
       </KeyboardAvoidingView>
 
       <KeyboardAvoidingView
-        style={tw`w-full items-center mt-auto mb-10 `}
+        style={tw`mt-auto mb-10`}
         behavior="padding"
         keyboardVerticalOffset={100}
       >
@@ -103,7 +103,7 @@ const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
           Login
         </Button>
       </KeyboardAvoidingView>
-    </View>
+    </Container>
   );
 };
 

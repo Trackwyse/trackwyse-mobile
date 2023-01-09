@@ -39,7 +39,7 @@ interface ColorSelectorProps {
 const ColorSelector: React.FC<ColorSelectorProps> = ({ style, value = 0, onChange }) => {
   return (
     <View style={tw.style(`flex-row`, style)}>
-      <View style={tw`flex-row w-11/12 justify-between`}>
+      <View style={tw`flex-row w-full justify-between`}>
         {colors.map((color, index) => (
           <ColorItem
             key={index}

@@ -20,8 +20,8 @@ const textColorClasses = {
 };
 
 const sizeClasses = {
-  sm: "p-3 w-11/12",
-  lg: "p-5 w-11/12",
+  sm: "p-3 w-full",
+  lg: "p-5 w-full",
 };
 
 export interface ButtonProps extends TouchableOpacityProps {

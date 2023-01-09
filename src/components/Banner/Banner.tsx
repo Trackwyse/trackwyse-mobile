@@ -23,7 +23,7 @@ const Banner: React.FC<BannerProps> = ({
   return (
     <TouchableOpacity onPress={onPress}>
       <LinearGradient
-        style={tw` p-1 mt-5 mb-7 rounded-[28px]`}
+        style={tw`p-1 mt-5 mb-7 rounded-[28px]`}
         start={{ x: 0, y: 0 }}
         end={{ x: 1.2, y: 1.2 }}
         colors={gradientBorder}

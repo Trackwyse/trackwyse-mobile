@@ -9,6 +9,7 @@ import Input from "@/components/Input";
 import { useAuth } from "@/contexts/Auth";
 import BadgeButton from "@/components/BadgeButton";
 import { validateRegisterInput } from "@/lib/validators";
+import Container from "@/components/Container";
 
 interface RegisterScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -58,14 +59,13 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
   };
 
   return (
-    <View style={tw`h-full`}>
-      <KeyboardAvoidingView style={tw`items-center justify-end flex-1`}>
-        <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>What's your name?</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
-            Tell us how we should properly address you.
-          </Text>
-        </View>
+    <Container style={tw`h-full`}>
+      <KeyboardAvoidingView style={tw`flex-1 justify-end`}>
+        <Text style={tw`text-2xl font-bold pt-10`}>What's your name?</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          Tell us how we should properly address you.
+        </Text>
+
         <Input
           size="lg"
           placeholder="First Name"
@@ -88,7 +88,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
       </KeyboardAvoidingView>
 
       <KeyboardAvoidingView
-        style={tw`flex-row-reverse w-11/12 mt-auto mb-10  `}
+        style={tw`flex-row-reverse mt-auto mb-10  `}
         behavior="padding"
         keyboardVerticalOffset={100}
       >
@@ -102,7 +102,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
           Next
         </BadgeButton>
       </KeyboardAvoidingView>
-    </View>
+    </Container>
   );
 };
 

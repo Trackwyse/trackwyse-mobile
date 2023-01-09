@@ -18,6 +18,7 @@ import { useDynamicLabels } from "@/contexts/DynamicLabels";
 import { validateFoundLabelDetailsInput } from "@/lib/validators";
 import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
 import { getAddressString } from "@/lib/textUtil";
+import Container from "@/components/Container";
 
 interface FoundLabelDetailsScreenProps {
   route: any;
@@ -91,7 +92,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
   }, [navigation, editInput.values, editInput.initialValues, isSaved]);
 
   return (
-    <View>
+    <Container>
       <UnsavedChangesModal
         isVisible={isModalVisible}
         setVisible={setModalVisible}
@@ -100,44 +101,38 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
       />
 
       <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="always"
-        contentContainerStyle={tw`items-center`}
         style={tw`h-full w-full`}
       >
-        <View style={tw`w-full items-center`}>
-          <View style={tw`w-11/12 pt-10`}>
-            <Text style={tw`text-2xl font-bold`}>Label Details</Text>
-            <Text style={tw`my-4 text-gray-400 text-base`}>
-              Thank you for finding this label. The owner has been notified and has provided the
-              following information.
-            </Text>
-          </View>
+        <Text style={tw`text-2xl font-bold pt-10`}>Label Details</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          Thank you for finding this label. The owner has been notified and has provided the
+          following information.
+        </Text>
 
-          <ListItem
-            title="Item Name"
-            textRight={foundLabel?.name ? foundLabel?.name : "Not provided"}
-          />
-          <ListItem
-            title="Contact Number"
-            position="middle"
-            textRight={foundLabel?.phoneNumber ? foundLabel?.phoneNumber : "Not provided"}
-          />
-          <ListItem
-            title="Message"
-            position="bottom"
-            {...(foundLabel?.message
-              ? { textBottom: foundLabel?.message }
-              : { textRight: "Not provided" })}
-          />
-        </View>
+        <ListItem
+          title="Item Name"
+          textRight={foundLabel?.name ? foundLabel?.name : "Not provided"}
+        />
+        <ListItem
+          title="Contact Number"
+          position="middle"
+          textRight={foundLabel?.phoneNumber ? foundLabel?.phoneNumber : "Not provided"}
+        />
+        <ListItem
+          title="Message"
+          position="bottom"
+          {...(foundLabel?.message
+            ? { textBottom: foundLabel?.message }
+            : { textRight: "Not provided" })}
+        />
 
-        <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Update Information</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
-            Would you like to provide your contact information or a recovery address to the owner?
-            If so, please fill out the form below.
-          </Text>
-        </View>
+        <Text style={tw`text-2xl font-bold pt-10`}>Update Information</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          Would you like to provide your contact information or a recovery address to the owner? If
+          so, please fill out the form below.
+        </Text>
 
         <Input
           placeholder="Phone Number"
@@ -194,21 +189,17 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
           </Button>
         )}
 
-        <View style={tw`w-full items-center`}>
-          <View style={tw`w-11/12 pt-10`}>
-            <Text style={tw`text-2xl font-bold`}>Privacy Details</Text>
-            <Text style={tw`my-4 text-gray-400 text-base`}>
-              Your approximate location has been shared with the owner. You can view what
-              information is being shared with the owner below.
-            </Text>
-          </View>
+        <Text style={tw`text-2xl font-bold pt-10`}>Privacy Details</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          Your approximate location has been shared with the owner. You can view what information is
+          being shared with the owner below.
+        </Text>
 
-          <ListItem
-            title="Approximate Location"
-            position="alone"
-            textRight={foundLabel?.foundNear ? foundLabel?.foundNear : "Not provided"}
-          />
-        </View>
+        <ListItem
+          title="Approximate Location"
+          position="alone"
+          textRight={foundLabel?.foundNear ? foundLabel?.foundNear : "Not provided"}
+        />
 
         <Button
           size="lg"
@@ -219,7 +210,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
           Send Information
         </Button>
       </KeyboardAwareScrollView>
-    </View>
+    </Container>
   );
 };
 

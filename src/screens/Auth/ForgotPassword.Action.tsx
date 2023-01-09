@@ -7,6 +7,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import api from "@/api";
 import tw from "@/lib/tailwind";
 import Input from "@/components/Input";
+import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import { validateForgotPasswordInput } from "@/lib/validators";
 
@@ -49,15 +50,14 @@ const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation }) => 
   };
 
   return (
-    <View style={tw`h-full items-center`}>
-      <KeyboardAvoidingView style={tw` w-full items-center justify-end flex-1`}>
-        <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Forgot Password</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
-            Enter the email address associated with your account and we'll send you a code to reset
-            your password.
-          </Text>
-        </View>
+    <Container style={tw`h-full`}>
+      <KeyboardAvoidingView style={tw` justify-end flex-1`}>
+        <Text style={tw`text-2xl font-bold pt-10`}>Forgot Password</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          Enter the email address associated with your account and we'll send you a code to reset
+          your password.
+        </Text>
+
         <Input
           size="lg"
           placeholder="Email"
@@ -70,7 +70,7 @@ const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation }) => 
       </KeyboardAvoidingView>
 
       <KeyboardAvoidingView
-        style={tw`flex-row-reverse w-11/12 mt-auto mb-10  `}
+        style={tw`flex-row-reverse mt-auto mb-10  `}
         behavior="padding"
         keyboardVerticalOffset={100}
       >
@@ -84,7 +84,7 @@ const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation }) => 
           Next
         </BadgeButton>
       </KeyboardAvoidingView>
-    </View>
+    </Container>
   );
 };
 

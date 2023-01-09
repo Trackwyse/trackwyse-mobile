@@ -1,14 +1,14 @@
+import { View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { View, Text, SafeAreaView } from "react-native";
 
-import TermsOfService from "@/components/TermsOfService/TermsOfService";
-import useBottomSheetRef from "@/hooks/useBottomSheetRef";
-import Hyperlink from "@/components/Hyperlink";
-import Button from "@/components/Button";
 import tw from "@/lib/tailwind";
-import Swiper from "react-native-swiper";
-import LandingCarousel from "@/components/LandingCarousel";
+import Button from "@/components/Button";
+import Container from "@/components/Container";
+import Hyperlink from "@/components/Hyperlink";
 import PrivacyPolicy from "@/components/PrivacyPolicy";
+import useBottomSheetRef from "@/hooks/useBottomSheetRef";
+import LandingCarousel from "@/components/LandingCarousel";
+import TermsOfService from "@/components/TermsOfService/TermsOfService";
 
 interface LandingScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -30,10 +30,10 @@ const Landing: React.FC<LandingScreenProps> = ({ navigation }) => {
     <View>
       <PrivacyPolicy innerRef={privacyPolicyRef} />
       <TermsOfService innerRef={termsOfServiceRef} />
-      <View style={tw`flex justify-between items-center h-full `}>
+      <View style={tw`flex h-full `}>
         <LandingCarousel />
 
-        <View style={tw`bg-white w-full items-center rounded-t-3xl pt-4 pb-8`}>
+        <Container style={tw`bg-white items-center pt-4 pb-8`}>
           <Button size="lg" onPress={navigateToRegister}>
             Create Account
           </Button>
@@ -58,7 +58,7 @@ const Landing: React.FC<LandingScreenProps> = ({ navigation }) => {
           >
             Privacy Policy
           </Hyperlink>
-        </View>
+        </Container>
       </View>
     </View>
   );

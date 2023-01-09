@@ -24,7 +24,7 @@ const Multiselect: React.FC<MultiselectProps> = ({
   onPress,
 }) => {
   const containerClasses = tw.style(
-    "rounded-md w-11/12",
+    "rounded-md w-full",
     selected ? "border-black border-2" : "border border-gray-100",
     style
   );

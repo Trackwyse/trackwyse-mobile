@@ -13,6 +13,7 @@ import { PremiumHeader } from "@/components/Header";
 import { convertDateToReadable } from "@/lib/dateUtil";
 import PremiumLoader from "@/components/Loaders/Premium";
 import { AxiosError } from "axios";
+import Container from "@/components/Container";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -106,54 +107,52 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         subtitle="Redeem Subscription Benefits"
         navigation={navigation}
       />
-
-      <ScrollView
-        contentContainerStyle={tw`items-center pb-5`}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-      >
-        <View style={tw`w-11/12 mt-10 `}>
-          <Text style={tw`font-medium text-2xl`}>Previous Redemptions</Text>
+      <Container>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={tw`pb-5`}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        >
+          <Text style={tw`font-medium text-2xl pt-10`}>Previous Redemptions</Text>
           <Text style={tw`text-gray-400 text-base my-1`}>
             View the details of when your next redeemable benefit will be available.
           </Text>
-        </View>
 
-        <ListItem
-          style={tw`mt-5`}
-          title="Last Redeemed"
-          textRight={subscriptionPerks.freeLabelsLastRedeemed}
-        />
-        <ListItem
-          title="Time Until Redeem"
-          position="bottom"
-          textRight={subscriptionPerks.freeLabelsNextRedeemable}
-        />
+          <ListItem
+            style={tw`mt-5`}
+            title="Last Redeemed"
+            textRight={subscriptionPerks.freeLabelsLastRedeemed}
+          />
+          <ListItem
+            title="Time Until Redeem"
+            position="bottom"
+            textRight={subscriptionPerks.freeLabelsNextRedeemable}
+          />
 
-        <View style={tw`w-11/12 mt-10`}>
-          <Text style={tw`font-medium text-2xl`}>Redeem</Text>
+          <Text style={tw`font-medium text-2xl pt-10`}>Redeem</Text>
           <Text style={tw`text-gray-400 text-base my-1`}>
             Claim your free tracking labels below.
           </Text>
-        </View>
 
-        <ListItem
-          pressable
-          style={tw`my-5`}
-          position="alone"
-          title="Update Address"
-          iconRight="md-chevron-forward-outline"
-          onPress={() => navigation.navigate("ProfileAddress")}
-        />
+          <ListItem
+            pressable
+            style={tw`my-5`}
+            position="alone"
+            title="Update Address"
+            iconRight="md-chevron-forward-outline"
+            onPress={() => navigation.navigate("ProfileAddress")}
+          />
 
-        <Button
-          size="lg"
-          loading={claimMutation.isLoading}
-          onPress={onClaim}
-          disabled={!subscriptionPerks.freeLabelsRedeemable}
-        >
-          {subscriptionPerks.freeLabelsRedeemable ? "Claim" : "Not Available"}
-        </Button>
-      </ScrollView>
+          <Button
+            size="lg"
+            loading={claimMutation.isLoading}
+            onPress={onClaim}
+            disabled={!subscriptionPerks.freeLabelsRedeemable}
+          >
+            {subscriptionPerks.freeLabelsRedeemable ? "Claim" : "Not Available"}
+          </Button>
+        </ScrollView>
+      </Container>
     </View>
   );
 };

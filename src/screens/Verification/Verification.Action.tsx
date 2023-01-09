@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/Auth";
 import Hyperlink from "@/components/Hyperlink";
 import BadgeButton from "@/components/BadgeButton";
 import { validateVerifyInput } from "@/lib/validators";
+import Container from "@/components/Container";
 
 const Verify: React.FC = () => {
   const { user, updateUser, accessToken } = useAuth();
@@ -75,14 +76,13 @@ const Verify: React.FC = () => {
   };
 
   return (
-    <View style={tw`h-full items-center`}>
-      <KeyboardAvoidingView style={tw`w-full items-center justify-end flex-1`}>
-        <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Verification</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
-            We sent a verification code to your email address. Please enter it
-          </Text>
-        </View>
+    <Container style={tw`h-full`}>
+      <KeyboardAvoidingView style={tw`justify-end flex-1`}>
+        <Text style={tw`text-2xl font-bold pt-10`}>Verification</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          We sent a verification code to your email address. Please enter it
+        </Text>
+
         <Input
           size="lg"
           placeholder="Verification Code"
@@ -101,7 +101,7 @@ const Verify: React.FC = () => {
       </KeyboardAvoidingView>
 
       <KeyboardAvoidingView
-        style={tw`flex-row-reverse w-11/12 mt-auto mb-10  `}
+        style={tw`flex-row-reverse mt-auto mb-10  `}
         behavior="padding"
         keyboardVerticalOffset={100}
       >
@@ -115,7 +115,7 @@ const Verify: React.FC = () => {
           Next
         </BadgeButton>
       </KeyboardAvoidingView>
-    </View>
+    </Container>
   );
 };
 

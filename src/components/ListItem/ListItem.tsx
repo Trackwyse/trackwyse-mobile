@@ -39,7 +39,7 @@ const ListItem: React.FC<ListItemProps> = ({
   style,
 }) => {
   const containerClasses = tw.style(
-    "p-4 bg-gray-100 w-11/12",
+    "p-4 bg-gray-100",
     textBottom ? "flex-col" : "flex-row justify-between items-center",
     disabled ? "opacity-50" : "",
     borderClasses[position],

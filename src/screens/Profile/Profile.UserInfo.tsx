@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -11,6 +11,7 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
+import Container from "@/components/Container";
 import { validateUpdateUserInput } from "@/lib/validators";
 
 interface ProfileScreenProps {
@@ -58,78 +59,76 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   });
 
   return (
-    <KeyboardAwareScrollView
-      keyboardShouldPersistTaps="always"
-      contentContainerStyle={tw`items-center`}
-      style={tw`h-full w-full`}
-    >
-      <View style={tw`w-11/12 pt-10`}>
-        <Text style={tw`text-2xl font-bold`}>User Info</Text>
+    <Container>
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="always"
+        style={tw`h-full w-full`}
+      >
+        <Text style={tw`text-2xl font-bold pt-10`}>User Info</Text>
         <Text style={tw`my-4 text-gray-400 text-base`}>
           Update your personal information. Only you can view this data.
         </Text>
-      </View>
 
-      <Input
-        placeholder="First Name"
-        size="lg"
-        style={tw`my-1`}
-        value={userInfoInput.values.firstName}
-        disabled={mutation.isLoading}
-        error={userInfoInput.errors.firstName}
-        onChangeText={userInfoInput.handleChange("firstName")}
-      />
-      <Input
-        placeholder="Last Name"
-        size="lg"
-        style={tw`my-1`}
-        value={userInfoInput.values.lastName}
-        disabled={mutation.isLoading}
-        error={userInfoInput.errors.lastName}
-        onChangeText={userInfoInput.handleChange("lastName")}
-      />
-      <Input
-        placeholder="Email"
-        size="lg"
-        style={tw`my-1`}
-        value={userInfoInput.values.email}
-        disabled={mutation.isLoading}
-        error={userInfoInput.errors.email}
-        onChangeText={userInfoInput.handleChange("email")}
-      />
-      <Button
-        size="lg"
-        style={tw`mt-2`}
-        loading={mutation.isLoading}
-        onPress={() => userInfoInput.handleSubmit()}
-      >
-        Update
-      </Button>
+        <Input
+          placeholder="First Name"
+          size="lg"
+          style={tw`my-1`}
+          value={userInfoInput.values.firstName}
+          disabled={mutation.isLoading}
+          error={userInfoInput.errors.firstName}
+          onChangeText={userInfoInput.handleChange("firstName")}
+        />
+        <Input
+          placeholder="Last Name"
+          size="lg"
+          style={tw`my-1`}
+          value={userInfoInput.values.lastName}
+          disabled={mutation.isLoading}
+          error={userInfoInput.errors.lastName}
+          onChangeText={userInfoInput.handleChange("lastName")}
+        />
+        <Input
+          placeholder="Email"
+          size="lg"
+          style={tw`my-1`}
+          value={userInfoInput.values.email}
+          disabled={mutation.isLoading}
+          error={userInfoInput.errors.email}
+          onChangeText={userInfoInput.handleChange("email")}
+        />
+        <Button
+          size="lg"
+          style={tw`mt-2`}
+          loading={mutation.isLoading}
+          onPress={() => userInfoInput.handleSubmit()}
+        >
+          Update
+        </Button>
 
-      <View style={tw`w-11/12 pt-10 `}>
-        <Text style={tw`text-2xl font-bold`}>Security</Text>
+        <Text style={tw`text-2xl font-bold pt-10`}>Security</Text>
         <Text style={tw`my-4 text-gray-400 text-base`}>
           Update your secure information. Only you can view this data.
         </Text>
-      </View>
 
-      <ListItem
-        pressable
-        title="Update Password"
-        iconRight="md-chevron-forward-outline"
-        position="top"
-        style={tw`mt-2`}
-        onPress={() => navigation.navigate("ProfilePassword")}
-      />
-      <ListItem
-        pressable
-        title="Update Address"
-        iconRight="md-chevron-forward-outline"
-        position="bottom"
-        style={tw`mb-10`}
-        onPress={() => navigation.navigate("ProfileAddress")}
-      />
-    </KeyboardAwareScrollView>
+        <ListItem
+          pressable
+          title="Update Password"
+          iconRight="md-chevron-forward-outline"
+          position="top"
+          style={tw`mt-2`}
+          onPress={() => navigation.navigate("ProfilePassword")}
+        />
+        <ListItem
+          pressable
+          title="Update Address"
+          iconRight="md-chevron-forward-outline"
+          position="bottom"
+          style={tw`mb-10`}
+          onPress={() => navigation.navigate("ProfileAddress")}
+        />
+      </KeyboardAwareScrollView>
+    </Container>
   );
 };
 

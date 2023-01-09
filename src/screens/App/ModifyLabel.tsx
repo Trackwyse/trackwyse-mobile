@@ -20,7 +20,7 @@ import ColorSelector from "@/components/ColorSelector";
 import { validateModifyLabelInput } from "@/lib/validators";
 import { colors } from "@/components/ColorSelector/ColorSelector";
 import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
-import { getAddressString } from "@/lib/textUtil";
+import Container from "@/components/Container";
 
 interface ModifyLabelScreenProps {
   route: any;
@@ -169,7 +169,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
   }, [navigation, editInput.values, editInput.initialValues]);
 
   return (
-    <View>
+    <Container>
       <UnsavedChangesModal
         isVisible={isUnsavedModalVisible}
         setVisible={setIsUnsavedModalVisible}
@@ -203,20 +203,18 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
         </View>
       </Modal>
       <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="always"
-        contentContainerStyle={tw`items-center`}
         style={tw`h-full w-full`}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
         {label.isLost && (
-          <View style={tw`w-full items-center`}>
-            <View style={tw`w-11/12 pt-10`}>
-              <Text style={tw`text-2xl font-bold`}>Label Recovered</Text>
-              <Text style={tw`my-4 text-gray-400 text-base`}>
-                Your label has been located by another user. Make sure that your information is up
-                to date.
-              </Text>
-            </View>
+          <View style={tw`w-full`}>
+            <Text style={tw`text-2xl font-bold pt-10`}>Label Recovered</Text>
+            <Text style={tw`my-4 text-gray-400 text-base`}>
+              Your label has been located by another user. Make sure that your information is up to
+              date.
+            </Text>
 
             <ListItem title="Currently Lost" iconRight="checkmark-outline" />
             <ListItem
@@ -264,12 +262,10 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
           </View>
         )}
 
-        <View style={tw`w-11/12 pt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Edit Label</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
-            Update details about your label in order to have the best chance of finding a lost item.
-          </Text>
-        </View>
+        <Text style={tw`text-2xl font-bold pt-10`}>Edit Label</Text>
+        <Text style={tw`my-4 text-gray-400 text-base`}>
+          Update details about your label in order to have the best chance of finding a lost item.
+        </Text>
 
         <Input
           placeholder="Tracker Name"
@@ -314,7 +310,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
           Update
         </Button>
       </KeyboardAwareScrollView>
-    </View>
+    </Container>
   );
 };
 

@@ -1,12 +1,14 @@
+import { ScrollView, View, Text } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import tw from "@/lib/tailwind";
 import Button from "@/components/Button";
-import { PremiumHeader } from "@/components/Header";
+import { useAuth } from "@/contexts/Auth";
+import Container from "@/components/Container";
 import Hyperlink from "@/components/Hyperlink";
 import IconButton from "@/components/IconButton";
-import { useAuth } from "@/contexts/Auth";
+import { PremiumHeader } from "@/components/Header";
 import { useInAppPurchases } from "@/contexts/InAppPurchases";
-import tw from "@/lib/tailwind";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { ScrollView, View, Text } from "react-native";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -78,18 +80,23 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           shadowRadius: 4,
         })}
       >
-        <Button
-          size="lg"
-          disabled={user.subscriptionActive}
-          loading={processing}
-          onPress={() => createSubscription("TRACKWYSE_PLUS")}
-        >
-          {user.subscriptionActive ? "Already Subscribed" : "Subscribe for $7.99/mo"}
-        </Button>
-        <Hyperlink style={tw`w-11/12 mt-3`} textStyle={tw`no-underline text-center text-gray-400`}>
-          By {user.subscriptionActive ? "being subscribed" : "subscribing"} to Trackwyse Plus, you
-          have read and agree to our Terms and Conditions
-        </Hyperlink>
+        <Container>
+          <Button
+            size="lg"
+            disabled={user.subscriptionActive}
+            loading={processing}
+            onPress={() => createSubscription("TRACKWYSE_PLUS")}
+          >
+            {user.subscriptionActive ? "Already Subscribed" : "Subscribe for $7.99/mo"}
+          </Button>
+          <Hyperlink
+            style={tw`w-11/12 mt-3`}
+            textStyle={tw`no-underline text-center text-gray-400`}
+          >
+            By {user.subscriptionActive ? "being subscribed" : "subscribing"} to Trackwyse Plus, you
+            have read and agree to our Terms and Conditions
+          </Hyperlink>
+        </Container>
       </View>
     </View>
   );
