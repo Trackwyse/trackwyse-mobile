@@ -1,5 +1,7 @@
-import { TouchableOpacity, TouchableOpacityProps, Text } from "react-native";
+import { TouchableOpacity, TouchableOpacityProps } from "react-native";
+
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 
 interface HyperlinkProps extends TouchableOpacityProps {
   textStyle?: any;

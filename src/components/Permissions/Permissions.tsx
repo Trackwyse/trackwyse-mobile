@@ -1,5 +1,5 @@
-import { View, Text } from "react-native";
-import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
+import Container from "@/components/Container";
 
 interface PermissionsProps {
   title?: string;
@@ -8,12 +8,10 @@ interface PermissionsProps {
 
 const Permissions: React.FC<PermissionsProps> = ({ title, description }) => {
   return (
-    <View style={tw`flex items-center`}>
-      <View style={tw`w-11/12 pt-10`}>
-        <Text style={tw`text-2xl font-bold`}>{title}</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>{description}</Text>
-      </View>
-    </View>
+    <Container>
+      <Text variant="title">{title}</Text>
+      <Text variant="subtitle">{description}</Text>
+    </Container>
   );
 };
 

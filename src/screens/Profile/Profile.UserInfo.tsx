@@ -1,5 +1,4 @@
 import { useFormik } from "formik";
-import { Text } from "react-native";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -7,6 +6,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
@@ -65,8 +65,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         keyboardShouldPersistTaps="always"
         style={tw`h-full w-full`}
       >
-        <Text style={tw`text-2xl font-bold pt-10`}>User Info</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">User Info</Text>
+        <Text variant="subtitle">
           Update your personal information. Only you can view this data.
         </Text>
 
@@ -106,10 +106,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           Update
         </Button>
 
-        <Text style={tw`text-2xl font-bold pt-10`}>Security</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
-          Update your secure information. Only you can view this data.
-        </Text>
+        <Text variant="title">Security</Text>
+        <Text variant="subtitle">Update your secure information. Only you can view this data.</Text>
 
         <ListItem
           pressable

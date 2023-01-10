@@ -1,8 +1,8 @@
+import { View } from "react-native";
 import Modal from "react-native-modal";
-import { View, Text } from "react-native";
 
 import tw from "@/lib/tailwind";
-import navigation from "@/navigation";
+import Text from "@/components/Text";
 import Button from "@/components/Button";
 
 interface UnsavedChangesModalProps {
@@ -30,8 +30,10 @@ const UnsavedChangesModal: React.FC<UnsavedChangesModalProps> = ({
     >
       <View style={tw`items-center justify-center flex-1`}>
         <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
-          <Text style={tw`text-2xl font-bold`}>Wait!</Text>
-          <Text style={tw`my-4 text-gray-400 text-base`}>
+          <Text variant="title" disableDefaultPadding>
+            Wait!
+          </Text>
+          <Text variant="subtitle">
             You have unsaved changes. Are you sure you want to leave this page?
           </Text>
           <Button style={tw`w-full rounded-md my-1 py-2`} color="secondary" onPress={onLeavePress}>

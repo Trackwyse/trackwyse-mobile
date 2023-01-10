@@ -4,11 +4,12 @@ import {
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
 import { useMemo } from "react";
+import { Animated, View } from "react-native";
 import { useQuery } from "@tanstack/react-query";
-import { Animated, Text, View } from "react-native";
 
-import tw from "@/lib/tailwind";
-import cmsApi from "@/api/content";
+import CMSApi from "@/api/content";
+import Text from "@/components/Text";
+import Container from "@/components/Container";
 import LegalLoader from "@/components/Loaders/Legal";
 
 interface PrivacyPolicyProps {
@@ -19,7 +20,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ innerRef }) => {
   const query = useQuery({
     queryKey: ["privacy-policy"],
     queryFn: () => {
-      return cmsApi.getPrivacyPolicy();
+      return CMSApi.getPrivacyPolicy();
     },
   });
 
@@ -27,16 +28,16 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ innerRef }) => {
 
   return (
     <BottomSheetModal ref={innerRef} snapPoints={snapPoints} backdropComponent={CustomBackdrop}>
-      <BottomSheetScrollView contentContainerStyle={tw`items-center`}>
-        {query.isLoading ? <LegalLoader /> : null}
-        {!query.isLoading ? (
-          <View style={tw`w-11/12 h-full pt-10`}>
-            <Text style={tw`text-2xl font-bold`}>{query.data?.data.data.attributes.title}</Text>
-            <Text style={tw`my-4 text-gray-400 text-base`}>
-              {query.data?.data.data.attributes.content}
-            </Text>
-          </View>
-        ) : null}
+      <BottomSheetScrollView>
+        <Container>
+          {query.isLoading ? <LegalLoader /> : null}
+          {!query.isLoading ? (
+            <View>
+              <Text variant="title">{query.data?.data.data.attributes.title}</Text>
+              <Text variant="subtitle">{query.data?.data.data.attributes.content}</Text>
+            </View>
+          ) : null}
+        </Container>
       </BottomSheetScrollView>
     </BottomSheetModal>
   );

@@ -1,8 +1,9 @@
+import { ScrollView } from "react-native";
 import { useQuery } from "@tanstack/react-query";
-import { ScrollView, View, Text } from "react-native";
 
 import tw from "@/lib/tailwind";
 import cmsApi from "@/api/content";
+import Text from "@/components/Text";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
 import LegalLoader from "@/components/Loaders/Legal";
@@ -28,9 +29,7 @@ const Profile: React.FC<ProfileScreenProps> = () => {
   return (
     <Container>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={tw`w-11/12 mt-10`}>
-          <Text style={tw`text-2xl font-bold`}>Links</Text>
-        </View>
+        <Text variant="title">Links</Text>
 
         <ListItem
           pressable
@@ -52,10 +51,8 @@ const Profile: React.FC<ProfileScreenProps> = () => {
           onPress={openPrivacyPolicy}
         />
 
-        <Text style={tw`text-2xl font-bold pt-10`}>{query.data?.data.data.attributes.title}</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
-          {query.data?.data.data.attributes.content}
-        </Text>
+        <Text variant="title">{query.data?.data.data.attributes.title}</Text>
+        <Text variant="subtitle">{query.data?.data.data.attributes.content}</Text>
 
         <TermsOfService innerRef={termsOfServiceRef} />
         <PrivacyPolicy innerRef={privacyPolicyRef} />

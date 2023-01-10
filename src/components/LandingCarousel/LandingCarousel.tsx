@@ -1,8 +1,10 @@
-import tw from "@/lib/tailwind";
-import Assets from "@/assets";
-import { View, Text, SafeAreaView, Image } from "react-native";
 import Swiper from "react-native-swiper";
-import Container from "../Container";
+import { View, SafeAreaView, Image } from "react-native";
+
+import Assets from "@/assets";
+import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
+import Container from "@/components/Container";
 
 const LandingCarousel: React.FC = () => {
   return (

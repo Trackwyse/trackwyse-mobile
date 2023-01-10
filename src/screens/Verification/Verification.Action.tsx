@@ -1,16 +1,17 @@
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
-import { KeyboardAvoidingView, Text, View } from "react-native";
+import { KeyboardAvoidingView, View } from "react-native";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Input from "@/components/Input";
 import { useAuth } from "@/contexts/Auth";
 import Hyperlink from "@/components/Hyperlink";
+import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import { validateVerifyInput } from "@/lib/validators";
-import Container from "@/components/Container";
 
 const Verify: React.FC = () => {
   const { user, updateUser, accessToken } = useAuth();
@@ -78,8 +79,8 @@ const Verify: React.FC = () => {
   return (
     <Container style={tw`h-full`}>
       <KeyboardAvoidingView style={tw`justify-end flex-1`}>
-        <Text style={tw`text-2xl font-bold pt-10`}>Verification</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">Verification</Text>
+        <Text variant="subtitle">
           We sent a verification code to your email address. Please enter it
         </Text>
 

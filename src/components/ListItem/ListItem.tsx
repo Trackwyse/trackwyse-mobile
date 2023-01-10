@@ -1,6 +1,8 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
+
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 
 const borderClasses = {
   top: "rounded-t-md border-b border-zinc-200",
@@ -61,9 +63,17 @@ const ListItem: React.FC<ListItemProps> = ({
           <Text style={tw.style(`font-medium text-base text-black`)}>{title}</Text>
         </View>
         {iconRight && <Ionicons name={iconRight} size={20} color={iconRightColor} />}
-        {textRight && <Text style={tw` text-gray-400 text-base`}>{textRight}</Text>}
+        {textRight && (
+          <Text variant="subtitle" disableDefaultPadding>
+            {textRight}
+          </Text>
+        )}
       </View>
-      {textBottom && <Text style={tw`text-gray-400 text-base pt-2`}>{textBottom}</Text>}
+      {textBottom && (
+        <Text disableDefaultPadding variant="subtitle" style={tw`pt-2`}>
+          {textBottom}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };

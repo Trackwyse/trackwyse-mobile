@@ -2,11 +2,12 @@ import { useFormik } from "formik";
 import { AxiosError } from "axios";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
-import { View, Text, KeyboardAvoidingView } from "react-native";
+import { View, KeyboardAvoidingView } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
@@ -64,8 +65,8 @@ const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation, route
   return (
     <Container style={tw`h-full`}>
       <KeyboardAvoidingView style={tw`justify-end flex-1`}>
-        <Text style={tw`text-2xl font-bold pt-10`}>Forgot Password</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">Forgot Password</Text>
+        <Text variant="subtitle">
           We've sent you an email with a one-time code to reset your password. Enter the code below
           along with your new password.
         </Text>

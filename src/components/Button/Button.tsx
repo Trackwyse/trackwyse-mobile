@@ -1,13 +1,8 @@
-import {
-  TouchableOpacity,
-  TouchableOpacityProps,
-  Text,
-  View,
-  ActivityIndicator,
-} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { TouchableOpacity, TouchableOpacityProps, View, ActivityIndicator } from "react-native";
 
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 
 const buttonColorClasses = {
   primary: "bg-primary-200",

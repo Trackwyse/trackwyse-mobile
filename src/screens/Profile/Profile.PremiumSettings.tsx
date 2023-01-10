@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { View, Text, ScrollView, RefreshControl } from "react-native";
+import { View, ScrollView, RefreshControl } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
@@ -59,8 +60,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           contentContainerStyle={tw` pb-5`}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
-          <Text style={tw`font-medium text-2xl pt-10`}>Subscription</Text>
-          <Text style={tw`text-gray-400 text-base my-1`}>
+          <Text variant="premium_title">Subscription</Text>
+          <Text variant="premium_subtitle">
             You can manage your subscription through your iCloud subscriptions page.
           </Text>
 
@@ -79,12 +80,10 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
             )}
           />
 
-          <View style={tw`w-11/12 mt-10`}>
-            <Text style={tw`font-medium text-2xl`}>Features</Text>
-            <Text style={tw`text-gray-400 text-base my-1`}>
-              You can enable/disable certain premium benefits below.
-            </Text>
-          </View>
+          <Text variant="premium_title">Features</Text>
+          <Text variant="premium_subtitle">
+            You can enable/disable certain premium benefits below.
+          </Text>
 
           <ListItem
             pressable

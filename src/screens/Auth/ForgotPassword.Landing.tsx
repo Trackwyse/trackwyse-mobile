@@ -1,7 +1,8 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 
@@ -16,8 +17,8 @@ const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation }) => 
 
   return (
     <Container style={tw`h-full`}>
-      <Text style={tw`text-2xl font-bold pt-10`}>Forgot Password</Text>
-      <Text style={tw`my-4 text-gray-400 text-base`}>
+      <Text variant="title">Forgot Password</Text>
+      <Text variant="subtitle">
         Forgot your password? No worries. We'll guide you through the process of resetting it.
       </Text>
 

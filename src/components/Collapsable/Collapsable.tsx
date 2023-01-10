@@ -1,8 +1,9 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { View, TouchableOpacity } from "react-native";
 
 import tw from "@/lib/tailwind";
-import { useState } from "react";
+import Text from "@/components/Text";
 
 interface CollapsableProps {
   title: string;
@@ -30,7 +31,7 @@ const Collapsable: React.FC<CollapsableProps> = ({ title, content, style }) => {
         />
       </View>
       <View style={tw.style(expanded ? "" : "hidden")}>
-        <Text style={tw`text-gray-400 text-base mt-3`}>{content}</Text>
+        <Text variant="subtitle">{content}</Text>
       </View>
     </TouchableOpacity>
   );

@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
-import { View, Text } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-import Container from "../Container";
+import Container from "@/components/Container";
 
 interface AddressInputProps {
   title: string;
@@ -44,8 +44,8 @@ const AddressInput: React.FC<AddressInputProps> = ({
         keyboardShouldPersistTaps="always"
         style={tw`h-full w-full`}
       >
-        <Text style={tw`text-2xl font-bold pt-10`}>{title}</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>{description}</Text>
+        <Text variant="title">{title}</Text>
+        <Text variant="subtitle">{description}</Text>
 
         <Input
           placeholder="Address 1"

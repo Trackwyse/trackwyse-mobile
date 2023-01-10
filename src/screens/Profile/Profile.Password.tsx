@@ -1,6 +1,5 @@
 import { AxiosError } from "axios";
 import { useFormik } from "formik";
-import { View, Text } from "react-native";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -8,6 +7,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
@@ -64,8 +64,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         keyboardShouldPersistTaps="always"
         style={tw`h-full w-full`}
       >
-        <Text style={tw`text-2xl font-bold pt-10`}>Update Password</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">Update Password</Text>
+        <Text variant="subtitle">
           Update your password. Make sure to choose a strong password that you don't use anywhere
           else.
         </Text>

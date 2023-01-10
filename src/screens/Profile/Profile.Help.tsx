@@ -1,11 +1,12 @@
+import { ScrollView } from "react-native";
 import { useQuery } from "@tanstack/react-query";
-import { ScrollView, View, Text } from "react-native";
 
 import tw from "@/lib/tailwind";
 import cmsApi from "@/api/content";
+import Text from "@/components/Text";
+import Container from "@/components/Container";
 import Collapsable from "@/components/Collapsable";
 import LegalLoader from "@/components/Loaders/Legal";
-import Container from "@/components/Container";
 
 interface ProfileScreenProps {}
 
@@ -22,8 +23,8 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
   return (
     <Container>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text style={tw`text-2xl font-bold pt-10`}>Frequently Asked</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">Frequently Asked</Text>
+        <Text variant="subtitle">
           View frequently asked questions and get started with Trackwyse.
         </Text>
 

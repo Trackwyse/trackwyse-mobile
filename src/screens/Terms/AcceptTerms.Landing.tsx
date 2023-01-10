@@ -1,7 +1,8 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 
@@ -16,8 +17,8 @@ const AcceptTerms: React.FC<AcceptTermsProps> = ({ navigation }) => {
 
   return (
     <Container style={tw`h-full`}>
-      <Text style={tw`text-2xl font-bold pt-10`}>Terms and Conditions</Text>
-      <Text style={tw`my-4 text-gray-400 text-base`}>
+      <Text variant="title">Terms and Conditions</Text>
+      <Text variant="subtitle">
         It looks like you haven't accepted our terms and conditions yet. Let's get you up to speed.
       </Text>
 

@@ -1,6 +1,5 @@
-import { Text } from "react-native";
-
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Container from "@/components/Container";
 import Multiselect from "@/components/Multiselect";
 import { useNotifications } from "@/contexts/Notifications";
@@ -12,10 +11,8 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
 
   return (
     <Container>
-      <Text style={tw`text-2xl font-bold pt-10`}>Notifications</Text>
-      <Text style={tw`my-4 text-gray-400 text-base`}>
-        Update your notification preferences. You're in control.
-      </Text>
+      <Text variant="title">Notifications</Text>
+      <Text variant="subtitle">Update your notification preferences. You're in control.</Text>
 
       <Multiselect
         title="Notifications Enabled"

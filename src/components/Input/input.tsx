@@ -1,7 +1,9 @@
-import { TextInput, Text, TextInputProps, TouchableWithoutFeedback, View } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import tw from "@/lib/tailwind";
 import { useRef, useState } from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { TextInput, TextInputProps, TouchableWithoutFeedback, View } from "react-native";
+
+import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 
 const sizeClasses = {
   sm: "h-12",

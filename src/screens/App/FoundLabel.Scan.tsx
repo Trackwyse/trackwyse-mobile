@@ -4,17 +4,18 @@ import Toast from "react-native-toast-message";
 import { Camera, CameraType } from "expo-camera";
 import { useMutation } from "@tanstack/react-query";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import { useAuth } from "@/contexts/Auth";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import Permissions from "@/components/Permissions";
 import { validateLabelUrl } from "@/lib/validators";
 import { useDynamicLabels } from "@/contexts/DynamicLabels";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface FoundLabelScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -107,8 +108,8 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
       </Camera>
 
       <Container>
-        <Text style={tw`text-2xl font-bold pt-10`}>Found a Label</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">Found a Label</Text>
+        <Text variant="subtitle">
           Found a lost item with a label? Scan the QR code to alert the owner, and optionally
           provide your contact information.
         </Text>

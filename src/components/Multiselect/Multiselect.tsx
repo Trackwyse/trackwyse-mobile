@@ -1,8 +1,9 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 
 import tw from "@/lib/tailwind";
-import LoadingRect from "../LoadingRect";
+import Text from "@/components/Text";
+import LoadingRect from "@/components/LoadingRect";
 
 interface MultiselectProps {
   title: string;
@@ -40,7 +41,9 @@ const Multiselect: React.FC<MultiselectProps> = ({
           <Text style={tw`font-medium text-xl`}>{title}</Text>
           {selected && <Ionicons name="checkmark-circle" size={22} />}
         </View>
-        <Text style={tw`text-gray-400 text-base`}>{description}</Text>
+        <Text variant="subtitle" disableDefaultPadding>
+          {description}
+        </Text>
       </TouchableOpacity>
       {loading && (
         <View style={tw`absolute w-full h-full rounded-md p-5`}>

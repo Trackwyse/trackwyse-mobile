@@ -1,7 +1,8 @@
-import { ScrollView, Share, Text, View } from "react-native";
+import { ScrollView, Share, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Constants from "@/lib/constants";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";

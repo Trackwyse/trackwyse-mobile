@@ -1,15 +1,16 @@
 import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
-import { KeyboardAvoidingView, Text, View } from "react-native";
+import { KeyboardAvoidingView, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Input from "@/components/Input";
 import { useAuth } from "@/contexts/Auth";
+import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import { validateRegisterInput } from "@/lib/validators";
-import Container from "@/components/Container";
 
 interface RegisterScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -61,10 +62,8 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
   return (
     <Container style={tw`h-full`}>
       <KeyboardAvoidingView style={tw`flex-1 justify-end`}>
-        <Text style={tw`text-2xl font-bold pt-10`}>What's your name?</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
-          Tell us how we should properly address you.
-        </Text>
+        <Text variant="title">What's your name?</Text>
+        <Text variant="subtitle">Tell us how we should properly address you.</Text>
 
         <Input
           size="lg"

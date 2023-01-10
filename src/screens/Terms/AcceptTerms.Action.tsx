@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import { useAuth } from "@/contexts/Auth";
-import BadgeButton from "@/components/BadgeButton";
+import Container from "@/components/Container";
 import Hyperlink from "@/components/Hyperlink";
-import useBottomSheetRef from "@/hooks/useBottomSheetRef";
+import BadgeButton from "@/components/BadgeButton";
 import PrivacyPolicy from "@/components/PrivacyPolicy";
 import TermsOfService from "@/components/TermsOfService";
-import Container from "@/components/Container";
+import useBottomSheetRef from "@/hooks/useBottomSheetRef";
 
 const AcceptTerms: React.FC = () => {
   const { user, updateUser, accessToken } = useAuth();
@@ -58,8 +59,8 @@ const AcceptTerms: React.FC = () => {
       <PrivacyPolicy innerRef={privacyPolicyRef} />
       <TermsOfService innerRef={termsOfServiceRef} />
 
-      <Text style={tw`text-2xl font-bold pt-10`}>Terms and Conditions</Text>
-      <Text style={tw`my-4 text-gray-400 text-base`}>
+      <Text variant="title">Terms and Conditions</Text>
+      <Text variant="subtitle">
         By selecting "I Agree" below, I have read and agree to the terms and conditions and
         acknowledge the privacy notice. I am at least 13 years of age.
       </Text>

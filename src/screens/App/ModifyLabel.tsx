@@ -3,24 +3,25 @@ import Modal from "react-native-modal";
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
-import { View, Text, RefreshControl } from "react-native";
+import { View, RefreshControl } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import { useLabels } from "@/contexts/Labels";
+import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
 import { convertDateToReadable } from "@/lib/dateUtil";
 import ColorSelector from "@/components/ColorSelector";
 import { validateModifyLabelInput } from "@/lib/validators";
 import { colors } from "@/components/ColorSelector/ColorSelector";
 import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
-import Container from "@/components/Container";
 
 interface ModifyLabelScreenProps {
   route: any;
@@ -185,8 +186,10 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
       >
         <View style={tw`items-center justify-center flex-1`}>
           <View style={tw`bg-white rounded-lg p-5 w-7/8`}>
-            <Text style={tw`text-2xl font-bold`}>Delete Label</Text>
-            <Text style={tw`my-4 text-gray-400 text-base`}>
+            <Text variant="title" disableDefaultPadding>
+              Delete Label
+            </Text>
+            <Text variant="subtitle">
               This action is irreversible. Are you sure you want to delete this label?
             </Text>
             <Button
@@ -210,8 +213,8 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
       >
         {label.isLost && (
           <View style={tw`w-full`}>
-            <Text style={tw`text-2xl font-bold pt-10`}>Label Recovered</Text>
-            <Text style={tw`my-4 text-gray-400 text-base`}>
+            <Text variant="title">Label Recovered</Text>
+            <Text variant="subtitle">
               Your label has been located by another user. Make sure that your information is up to
               date.
             </Text>
@@ -262,8 +265,8 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
           </View>
         )}
 
-        <Text style={tw`text-2xl font-bold pt-10`}>Edit Label</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">Edit Label</Text>
+        <Text variant="subtitle">
           Update details about your label in order to have the best chance of finding a lost item.
         </Text>
 

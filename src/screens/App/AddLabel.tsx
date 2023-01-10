@@ -3,10 +3,11 @@ import Toast from "react-native-toast-message";
 import { Camera, CameraType } from "expo-camera";
 import { useMutation } from "@tanstack/react-query";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import { useAuth } from "@/contexts/Auth";
 import { useLabels } from "@/contexts/Labels";
 import Container from "@/components/Container";
@@ -102,10 +103,8 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
       </Camera>
 
       <Container>
-        <Text style={tw`text-2xl font-bold pt-10`}>Add a Label</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
-          To get started, scan the QR code on one of your labels.
-        </Text>
+        <Text variant="title">Add a Label</Text>
+        <Text variant="subtitle">To get started, scan the QR code on one of your labels.</Text>
       </Container>
 
       <Container outerStyle={tw`mt-auto mb-10`} style={tw`flex-row-reverse`}>

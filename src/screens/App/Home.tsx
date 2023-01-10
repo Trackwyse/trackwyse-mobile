@@ -1,18 +1,19 @@
-import { Text, View, SafeAreaView, FlatList, TouchableOpacity, RefreshControl } from "react-native";
 import { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { View, SafeAreaView, FlatList, TouchableOpacity, RefreshControl } from "react-native";
 
 import Assets from "@/assets";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Label from "@/components/Label";
 import { useAuth } from "@/contexts/Auth";
 import { useLabels } from "@/contexts/Labels";
 import { trimToLength } from "@/lib/textUtil";
+import Container from "@/components/Container";
 import Banner from "@/components/Banner/Banner";
 import IconButton from "@/components/IconButton";
 import HomeLoader from "@/components/Loaders/Home";
-import Container from "@/components/Container";
 
 interface HomeProps {
   navigation: NativeStackNavigationProp<any>;

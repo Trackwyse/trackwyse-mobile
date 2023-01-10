@@ -1,19 +1,20 @@
 import { useState } from "react";
+import { AxiosError } from "axios";
 import Toast from "react-native-toast-message";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { View, Text, ScrollView, RefreshControl } from "react-native";
+import { View, ScrollView, RefreshControl } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
+import Container from "@/components/Container";
 import { PremiumHeader } from "@/components/Header";
 import { convertDateToReadable } from "@/lib/dateUtil";
 import PremiumLoader from "@/components/Loaders/Premium";
-import { AxiosError } from "axios";
-import Container from "@/components/Container";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -113,8 +114,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           contentContainerStyle={tw`pb-5`}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
-          <Text style={tw`font-medium text-2xl pt-10`}>Previous Redemptions</Text>
-          <Text style={tw`text-gray-400 text-base my-1`}>
+          <Text variant="premium_title">Previous Redemptions</Text>
+          <Text variant="premium_subtitle">
             View the details of when your next redeemable benefit will be available.
           </Text>
 
@@ -129,10 +130,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
             textRight={subscriptionPerks.freeLabelsNextRedeemable}
           />
 
-          <Text style={tw`font-medium text-2xl pt-10`}>Redeem</Text>
-          <Text style={tw`text-gray-400 text-base my-1`}>
-            Claim your free tracking labels below.
-          </Text>
+          <Text variant="premium_title">Redeem</Text>
+          <Text variant="premium_subtitle">Claim your free tracking labels below.</Text>
 
           <ListItem
             pressable

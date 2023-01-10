@@ -1,17 +1,18 @@
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
-import { KeyboardAvoidingView, Text, View } from "react-native";
+import { KeyboardAvoidingView, View } from "react-native";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
+import Container from "@/components/Container";
 import Hyperlink from "@/components/Hyperlink";
 import { validateLoginInput } from "@/lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import Container from "@/components/Container";
 
 interface LoginScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -62,10 +63,8 @@ const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
   return (
     <Container style={tw`h-full`}>
       <KeyboardAvoidingView style={tw`justify-end flex-1`}>
-        <Text style={tw`text-2xl font-bold pt-10`}>Log In</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
-          Welcome back! Enter your email below to access your account.
-        </Text>
+        <Text variant="title">Log In</Text>
+        <Text variant="subtitle">Welcome back! Enter your email below to access your account.</Text>
 
         <Input
           size="lg"

@@ -1,9 +1,10 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { View, TouchableOpacity, Text } from "react-native";
-import { useNavigation } from "@react-navigation/core";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { View, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/core";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Chip from "@/components/Chip";
 import { trimToLength } from "@/lib/textUtil";
 

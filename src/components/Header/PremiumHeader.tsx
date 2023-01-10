@@ -1,8 +1,10 @@
-import tw from "@/lib/tailwind";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { SafeAreaView, Text } from "react-native";
-import IconButton from "../IconButton";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
+import IconButton from "@/components/IconButton";
 
 interface PremiumHeaderProps {
   title: string;

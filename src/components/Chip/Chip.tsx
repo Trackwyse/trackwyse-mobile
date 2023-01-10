@@ -1,5 +1,7 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
+
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 
 const typeClasses = {
   error: "bg-red",

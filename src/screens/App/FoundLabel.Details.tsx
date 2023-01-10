@@ -1,6 +1,4 @@
 import { useFormik } from "formik";
-import Modal from "react-native-modal";
-import { View, Text } from "react-native";
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
@@ -9,16 +7,17 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Input from "@/components/Input";
-import { useAuth } from "@/contexts/Auth";
 import Button from "@/components/Button";
+import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
+import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
+import { getAddressString } from "@/lib/textUtil";
 import { useDynamicLabels } from "@/contexts/DynamicLabels";
 import { validateFoundLabelDetailsInput } from "@/lib/validators";
 import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
-import { getAddressString } from "@/lib/textUtil";
-import Container from "@/components/Container";
 
 interface FoundLabelDetailsScreenProps {
   route: any;
@@ -105,8 +104,8 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
         keyboardShouldPersistTaps="always"
         style={tw`h-full w-full`}
       >
-        <Text style={tw`text-2xl font-bold pt-10`}>Label Details</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">Label Details</Text>
+        <Text variant="subtitle">
           Thank you for finding this label. The owner has been notified and has provided the
           following information.
         </Text>
@@ -128,8 +127,8 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
             : { textRight: "Not provided" })}
         />
 
-        <Text style={tw`text-2xl font-bold pt-10`}>Update Information</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">Update Information</Text>
+        <Text variant="subtitle">
           Would you like to provide your contact information or a recovery address to the owner? If
           so, please fill out the form below.
         </Text>
@@ -189,8 +188,8 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
           </Button>
         )}
 
-        <Text style={tw`text-2xl font-bold pt-10`}>Privacy Details</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">Privacy Details</Text>
+        <Text variant="subtitle">
           Your approximate location has been shared with the owner. You can view what information is
           being shared with the owner below.
         </Text>

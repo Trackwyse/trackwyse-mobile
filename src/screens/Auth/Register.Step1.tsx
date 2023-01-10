@@ -1,14 +1,15 @@
 import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
-import { KeyboardAvoidingView, Text, View } from "react-native";
+import { KeyboardAvoidingView, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Input from "@/components/Input";
+import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import { validateRegisterInput } from "@/lib/validators";
-import Container from "@/components/Container";
 
 interface RegisterScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -64,8 +65,8 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
   return (
     <Container style={tw`h-full`}>
       <KeyboardAvoidingView style={tw`justify-end flex-1`}>
-        <Text style={tw`text-2xl font-bold pt-10`}>Register</Text>
-        <Text style={tw`my-4 text-gray-400 text-base`}>
+        <Text variant="title">Register</Text>
+        <Text variant="subtitle">
           Welcome to Trackwyse. Enter an email and password to get started.
         </Text>
 

@@ -1,7 +1,8 @@
-import { ScrollView, View, Text } from "react-native";
+import { ScrollView, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import Container from "@/components/Container";
@@ -29,13 +30,13 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
       />
 
       <ScrollView style={tw`w-11/12 `} contentContainerStyle={tw`pb-5`}>
-        <Text style={tw`mt-10 font-medium text-2xl`}>Whats Included:</Text>
+        <Text variant="premium_title">Whats Included:</Text>
 
         <View style={tw`flex-row mt-5`}>
           <IconButton icon="cash-outline" filled pressable={false} size={30} />
           <View style={tw`ml-5 shrink`}>
             <Text style={tw`text-lg font-medium`}>Free Tracking Labels</Text>
-            <Text style={tw`text-gray-400 text-base`}>
+            <Text variant="premium_subtitle">
               Request additional tracking labels every month at no extra cost.
             </Text>
           </View>
@@ -45,7 +46,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           <IconButton icon="map-outline" filled pressable={false} size={30} />
           <View style={tw`ml-5 shrink`}>
             <Text style={tw`text-lg font-medium`}>Advanced Mapping</Text>
-            <Text style={tw`text-gray-400 text-base`}>
+            <Text variant="subtitle" disableDefaultPadding>
               View item recovery information such as distance, fastest routes, and more.
             </Text>
           </View>
@@ -55,7 +56,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           <IconButton icon="refresh-circle-outline" filled pressable={false} size={30} />
           <View style={tw`ml-5 shrink`}>
             <Text style={tw`text-lg font-medium`}>Recovery History</Text>
-            <Text style={tw`text-gray-400 text-base`}>
+            <Text variant="subtitle" disableDefaultPadding>
               View the recovery history of your labels and previous finders contact information.
             </Text>
           </View>
@@ -65,7 +66,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           <IconButton icon="shield-checkmark-outline" filled pressable={false} size={30} />
           <View style={tw`ml-5 shrink`}>
             <Text style={tw`text-lg font-medium`}>Secure Recoveries</Text>
-            <Text style={tw`text-gray-400 text-base`}>
+            <Text variant="subtitle" disableDefaultPadding>
               Get added protection against fraud, with additional recovery location verification.
             </Text>
           </View>

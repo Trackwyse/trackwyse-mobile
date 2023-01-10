@@ -1,7 +1,9 @@
-import tw from "@/lib/tailwind";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Image, TouchableOpacity } from "react-native";
+
+import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
 
 interface BannerProps {
   title: string;
