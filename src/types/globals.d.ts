@@ -74,4 +74,6 @@ interface Address {
   city: string;
   state: string;
   zip5: string;
+  longitude: number;
+  latitude: number;
 }

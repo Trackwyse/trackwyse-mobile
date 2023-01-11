@@ -238,19 +238,27 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
               textRight={label.foundNear ? label.foundNear : "Not provided"}
             />
             <ListItem
-              pressable
               title="Found At"
               position="middle"
               {...(label.foundExactLocation
-                ? { iconRight: "md-chevron-forward" }
+                ? {
+                    iconRight: "md-chevron-forward",
+                    pressable: true,
+                    onPress: () =>
+                      navigation.navigate("MapView", { address: label.foundExactLocation }),
+                  }
                 : { textRight: "Not provided" })}
             />
             <ListItem
-              pressable
               title="Recovery Location"
               position="bottom"
               {...(label.foundRecoveryLocation
-                ? { iconRight: "md-chevron-forward" }
+                ? {
+                    iconRight: "md-chevron-forward",
+                    pressable: true,
+                    onPress: () =>
+                      navigation.navigate("MapView", { address: label.foundRecoveryLocation }),
+                  }
                 : { textRight: "Not provided" })}
             />
 

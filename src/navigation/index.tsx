@@ -7,6 +7,7 @@ import Landing from "@/screens/Auth/Landing";
 import RegisterStep1 from "@/screens/Auth/Register.Step1";
 import RegisterStep2 from "@/screens/Auth/Register.Step2";
 
+import MapView from "@/screens/App/MapView";
 import AddLabel from "@/screens/App/AddLabel";
 import EditLabel from "@/screens/App/ModifyLabel";
 
@@ -148,6 +149,7 @@ const AppStackNavigator: React.FC = () => {
               headerLeft: () => <></>,
             }}
           />
+          <Stack.Screen name="MapView" component={MapView} options={{ headerShown: false }} />
           <Stack.Screen name="AddLabel" component={AddLabel} options={{ title: "Add Label" }} />
           <Stack.Screen
             name="FoundLabelScan"
