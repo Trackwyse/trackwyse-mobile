@@ -46,6 +46,7 @@ const MapView: React.FC<MapViewProps> = ({ route, navigation }) => {
     <View style={tw`w-full h-full`}>
       <RNMapView
         style={tw`absolute w-full h-2/3`}
+        showsUserLocation
         region={{
           latitude: address.latitude,
           longitude: address.longitude,
