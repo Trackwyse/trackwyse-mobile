@@ -1,8 +1,9 @@
+import { useState } from "react";
+import { Alert } from "react-native";
+
 import api from "@/api";
 import Constants from "@/lib/constants";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { Alert } from "react-native";
 
 const useVersioning = () => {
   const [isValidVersion, setIsValidVersion] = useState(true);

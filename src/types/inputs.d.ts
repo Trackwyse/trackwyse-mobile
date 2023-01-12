@@ -83,3 +83,8 @@ interface AddressInput {
   state?: string;
   zip5?: string;
 }
+
+interface GetDistanceInput {
+  origin: string;
+  destination: string;
+}

@@ -83,3 +83,14 @@ interface LabelAddress extends Address {
   latitude: number;
   longitude: number;
 }
+
+interface Distance {
+  destination: {
+    latitude: number;
+    longitude: number;
+  };
+  distanceMeters: number;
+  expectedTravelTimeSeconds: number;
+  staticTravelTimeSeconds: number;
+  transportType: "Automobile" | "Transit" | "Walking";
+}

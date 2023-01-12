@@ -558,6 +558,39 @@ const claimFreeLabels = async (accessToken: string): Promise<ClaimFreeLabelsAPIR
   );
 };
 
+/*
+  POST /api/v1/location/distance
+
+  Request Body:
+    - origin: string
+    - destination: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - distance: Distance
+*/
+const getDistance = async (
+  values: GetDistanceInput,
+  accessToken: string
+): Promise<GetDistanceAPIResponse> => {
+  return apiClient.post(
+    "/api/v1/location/distance",
+    {
+      origin: values.origin,
+      destination: values.destination,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
 export default {
   getValidClients,
 
@@ -586,4 +619,6 @@ export default {
   createSubscription,
   getSubscription,
   claimFreeLabels,
+
+  getDistance,
 };

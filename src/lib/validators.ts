@@ -217,8 +217,6 @@ const validateModifyLabelInput = (modifyLabelInput: ModifyLabelInput) => {
 const validateFoundLabelDetailsInput = (foundLabelDetailsInput: FoundLabelDetailsInput) => {
   const errors: FoundLabelDetailsInput = {
     phoneNumber: "",
-    exactLocation: "",
-    recoveryLocation: "",
   };
 
   // Verify the phone number is valid, only if it is not empty

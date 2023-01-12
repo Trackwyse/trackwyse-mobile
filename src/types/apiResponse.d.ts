@@ -111,3 +111,9 @@ type CreateSubscriptionAPIResponse = APIResponse & {
     user: User;
   };
 };
+
+type GetDistanceAPIResponse = APIResponse & {
+  data: {
+    distance: Distance;
+  };
+};
