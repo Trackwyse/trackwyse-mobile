@@ -3,7 +3,7 @@ interface User {
   email: string;
   firstName: string;
   lastName: string;
-  address: Address;
+  address: UserAddress;
 
   verified: boolean;
   termsAccepted: boolean;
@@ -28,8 +28,8 @@ interface Label {
 
   foundNear?: string; // Based on IP address
   foundDate?: Date; // When the label was found
-  foundExactLocation?: Address; // Exact location of where the label was, if user provided it
-  foundRecoveryLocation?: Address; // Where the user can recover the label, if user provided it
+  foundExactLocation?: LabelAddress; // Exact location of where the label was, if user provided it
+  foundRecoveryLocation?: LabelAddress; // Where the user can recover the label, if user provided it
   foundRecoveryPossible?: boolean; // If the user can recover the label
   finderPhoneNumber?: string; // Phone number of the person who found the label
 
@@ -68,12 +68,18 @@ interface Color {
 }
 
 interface Address {
-  isValid: boolean;
   address1: string;
   address2: string;
   city: string;
   state: string;
   zip5: string;
-  longitude: number;
+}
+
+interface UserAddress extends Address {
+  isValid: boolean;
+}
+
+interface LabelAddress extends Address {
   latitude: number;
+  longitude: number;
 }
