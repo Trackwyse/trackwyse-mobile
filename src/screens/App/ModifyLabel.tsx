@@ -313,15 +313,15 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
           onChangeText={editInput.handleChange("message")}
         />
 
-        <ColorSelector
+        {/* <ColorSelector
           style={tw`my-5`}
           onChange={(value: number) => editInput.setFieldValue("color", value)}
           value={editInput.values.color}
-        />
+        /> */}
 
         <Button
           size="lg"
-          style={tw`mb-10`}
+          style={tw`mb-10 mt-5`}
           loading={modificationMutation.isLoading}
           onPress={() => editInput.handleSubmit()}
         >

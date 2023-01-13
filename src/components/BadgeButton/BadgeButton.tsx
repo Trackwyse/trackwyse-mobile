@@ -33,6 +33,7 @@ export interface BadgeButtonProps extends TouchableOpacityProps {
   iconRight?: keyof typeof Ionicons.glyphMap;
   loading?: boolean;
   disabled?: boolean;
+  style?: any;
 }
 
 const BadgeButton: React.FC<BadgeButtonProps> = ({
@@ -42,12 +43,14 @@ const BadgeButton: React.FC<BadgeButtonProps> = ({
   size = "sm",
   loading = false,
   disabled = false,
+  style,
   ...props
 }) => {
   const buttonClassNames = tw.style(
     "flex self-start flex-row justify-between font-medium rounded-full", // Default classes
     !disabled && !loading ? buttonColorClasses[color] : "bg-gray-100", // Background colors
-    sizeClasses[size] // Size
+    sizeClasses[size], // Size
+    style
   );
 
   const textClassNames = tw.style("text-lg", !disabled ? textColorClasses[color] : "text-gray-300");

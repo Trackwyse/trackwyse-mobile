@@ -37,11 +37,13 @@ const IconButton: React.FC<IconButtonProps> = ({
   );
 
   return (
-    <TouchableOpacity disabled={!pressable} style={containerClasses} {...props}>
-      <View style={tw.style(`items-center justify-center`, { width: size, height: size })}>
-        <Ionicons name={icon} size={size} color={color} />
-      </View>
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity disabled={!pressable} style={containerClasses} {...props}>
+        <View style={tw.style(`items-center justify-center`, { width: size, height: size })}>
+          <Ionicons name={icon} size={size} color={color} />
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 };
 

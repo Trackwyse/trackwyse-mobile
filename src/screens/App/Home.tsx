@@ -6,11 +6,9 @@
  */
 
 import { useState } from "react";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { View, SafeAreaView, FlatList, TouchableOpacity, RefreshControl } from "react-native";
 
-import Assets from "@/assets";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Label from "@/components/Label";
@@ -42,7 +40,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
   return (
     <SafeAreaView>
       <Container>
-        <View style={tw`flex-row justify-between mb-4`}>
+        <View style={tw`flex-row justify-between items-center mb-8`}>
           <Text style={tw`font-bold text-3xl`}>
             Welcome {trimToLength(user?.firstName, 8) || ""}
           </Text>
@@ -55,12 +53,10 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
         </View>
 
         <FlatList
-          numColumns={2}
           style={tw`mb-32`}
           data={labels}
           ListHeaderComponent={<ListHeader navigation={navigation} firstLabel={labels[0]} />}
           showsVerticalScrollIndicator={false}
-          columnWrapperStyle={tw`flex-1 justify-between`}
           renderItem={({ item: label }) => <Label label={label} />}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           ListFooterComponent={<View style={tw`h-20`} />} // Add padding to bottom of list
@@ -80,49 +76,64 @@ const ListHeader: React.FC<ListHeaderProps> = ({ navigation }) => {
     <View>
       {/* TODO: Move to component */}
       <Banner
-        title="Level up with Trackwyse Plus"
-        subtitle="Learn More"
-        image={Assets.diamond}
-        gradient={["#FFE245", "#FFE245"]}
-        gradientBorder={["#EED23A", "#FFE86D"]}
+        title="Do more with Trackwyse Plus"
+        cta="Learn More"
         onPress={() => navigation.navigate("ProfilePremium")}
       />
       {/* END TODO */}
 
-      <View style={tw`flex-2 flex-row justify-between`}>
-        <View style={tw`max-w-1/2 flex-1 p-1`}>
+      <View style={tw`mt-8`}>
+        <Text variant="title" disableDefaultPadding>
+          Actions
+        </Text>
+
+        <View style={tw`mt-4 justify-between flex-row`}>
           <TouchableOpacity
+            style={tw`items-center w-28`}
             onPress={() => navigation.navigate("AddLabel")}
-            style={tw`py-12 border border-dashed border-gray-200 rounded-lg items-center`}
           >
-            <View style={tw`bg-primary-200 rounded-full p-8`}>
-              <View style={tw`absolute inset-0  items-center justify-center`}>
-                <Ionicons name="camera-outline" size={32} color="white" />
-              </View>
-            </View>
-            <Text style={tw`font-medium text-lg mt-3`}>Add Label</Text>
-            <Text style={tw`text-gray-400 text-sm text-center`}>
-              Add and customize your tracking labels
-            </Text>
+            <IconButton
+              pressable={false}
+              icon="camera"
+              filled
+              size={35}
+              fillColor={tw.color("green-100")}
+            />
+            <Text style={tw`font-medium text-base mt-4 `}>Add Label</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={tw`items-center w-28`}
+            onPress={() => navigation.navigate("FoundLabelScan")}
+          >
+            <IconButton
+              pressable={false}
+              icon="location-sharp"
+              filled
+              size={35}
+              fillColor={tw.color("purple-100")}
+            />
+            <Text style={tw`font-medium text-base mt-4`}>Found Label</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={tw`items-center w-28`}
+            onPress={() => navigation.navigate("ProfilePremium")}
+          >
+            <IconButton
+              pressable={false}
+              icon="gift-sharp"
+              filled
+              size={35}
+              fillColor={tw.color("yellow-100")}
+            />
+            <Text style={tw`font-medium text-base mt-4`}>Trackwyse+</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={tw`max-w-1/2 flex-1 p-1`}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("FoundLabelScan")}
-            style={tw`py-12 border border-dashed border-gray-200 rounded-lg items-center`}
-          >
-            <View style={tw`bg-primary-200 rounded-full p-8`}>
-              <View style={tw`absolute inset-0  items-center justify-center`}>
-                <Ionicons name="search-outline" size={32} color="white" />
-              </View>
-            </View>
-            <Text style={tw`font-medium text-lg mt-3`}>Found Label</Text>
-            <Text style={tw`text-gray-400 text-sm text-center`}>
-              Found a lost item? Alert the owner
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <Text variant="title" style={tw`mt-8`} disableDefaultPadding>
+          Your Labels
+        </Text>
       </View>
     </View>
   );

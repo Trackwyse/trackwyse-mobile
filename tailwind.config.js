@@ -30,7 +30,20 @@ module.exports = {
           300: '#3C68FF',
           400: '#3454CC'
         },
-      }
+        purple: {
+          100: '#C5C2F9',
+          200: '#B5B0FF'
+        }
+      },
+      fontFamily: {
+        'regular': 'Poppins_400Regular',
+        'medium': 'Poppins_500Medium',
+        'semibold': 'Poppins_600SemiBold',
+        'bold': 'Poppins_700Bold',
+        'extrabold': 'Poppins_800ExtraBold',
+      },
+
+
     }
   },
   plugins: [],

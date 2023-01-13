@@ -14,6 +14,7 @@ import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Chip from "@/components/Chip";
 import { trimToLength } from "@/lib/textUtil";
+import IconButton from "../IconButton";
 
 interface LabelProps {
   label: Label;
@@ -27,25 +28,25 @@ const Label: React.FC<LabelProps> = ({ label }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
-    <View style={tw`max-w-1/2 flex-1 p-1`}>
+    <View style={tw`mt-4`}>
       <TouchableOpacity
-        style={tw.style(`pt-12 border  border-gray-100 rounded-lg items-center pb-5`)}
+        style={tw`justify-between flex-row items-center`}
         onPress={() => navigation.navigate("EditLabel", { labelId: label._id })}
       >
-        <View style={tw.style(`rounded-full p-8`, label.color?.bg)}>
-          <View style={tw`absolute inset-0  items-center justify-center`}>
-            <Ionicons name="ios-locate-outline" size={32} color="white" />
+        <View style={tw`flex-row items-center`}>
+          <IconButton pressable={false} filled size={32} icon="locate-outline" />
+          <View style={tw`ml-4`}>
+            <Text style={tw`text-base font-semibold`}>
+              {label.name ? trimToLength(label.name, 12) : "No Name"}
+            </Text>
+            <View style={tw`flex-row items-center`}>
+              <Text style={tw`text-gray-400 `}>View Details</Text>
+              <Ionicons name="chevron-forward" style={tw`text-gray-400 ml-1`} size={14} />
+            </View>
           </View>
         </View>
-        <Text style={tw`font-medium text-lg mt-3`}>
-          {label.name ? trimToLength(label.name, 12) : "No Name"}
-        </Text>
-        <Text style={tw`text-gray-400 text-sm text-center`}>Click to view more information</Text>
-        <Chip
-          type="error"
-          label="Item Missing"
-          style={tw`mt-1 ${label.isLost ? "opacity-100" : "opacity-0"}`}
-        />
+
+        <Chip label="Missing" style={tw.style(label.isLost ? `bg-primary-200` : "opacity-0")} />
       </TouchableOpacity>
     </View>
   );

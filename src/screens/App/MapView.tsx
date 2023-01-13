@@ -71,7 +71,7 @@ const MapView: React.FC<MapViewProps> = ({ route, navigation }) => {
             color="white"
             icon="arrow-back"
             style={tw`my-4`}
-            size={22}
+            size={24}
             fillColor={tw.color("primary-200")}
             onPress={() => navigation.goBack()}
           />

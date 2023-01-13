@@ -9,7 +9,7 @@ import tw from "@/lib/tailwind";
 import { TextPropsIOS, Text as RNText } from "react-native";
 
 const textVariantStyles = {
-  default: "",
+  default: "font-regular",
   title: "text-2xl font-bold",
   subtitle: "text-gray-400 text-base",
   premium_title: "text-2xl font-medium",

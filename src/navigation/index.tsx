@@ -13,6 +13,14 @@ import {
   Syne_700Bold,
   Syne_800ExtraBold,
 } from "@expo-google-fonts/syne";
+import {
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_800ExtraBold,
+  Poppins_900Black,
+} from "@expo-google-fonts/poppins";
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -277,6 +285,11 @@ const RootStackNavigator: React.FC = () => {
     Syne_600SemiBold,
     Syne_700Bold,
     Syne_800ExtraBold,
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+    Poppins_800ExtraBold,
   });
 
   // show the splash screen while useAuth is loading

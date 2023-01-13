@@ -23,11 +23,11 @@ interface ChipProps {
 }
 
 const Chip: React.FC<ChipProps> = ({ style, label, type = "success" }) => {
-  const chipClasses = tw.style("rounded-full px-4 py-1", typeClasses[type], style);
+  const chipClasses = tw.style("rounded-full px-3 py-1", typeClasses[type], style);
 
   return (
     <View style={chipClasses}>
-      <Text style={tw`text-white`}>{label}</Text>
+      <Text style={tw`text-white font-medium`}>{label}</Text>
     </View>
   );
 };
