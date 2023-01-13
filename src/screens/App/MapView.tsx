@@ -14,9 +14,9 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
-import Text from "@/components/Text";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
+import InfoCard from "@/components/InfoCard";
 import useLocation from "@/hooks/useLocation";
 import Container from "@/components/Container";
 import { formatSeconds } from "@/lib/textUtil";
@@ -94,27 +94,22 @@ const MapView: React.FC<MapViewProps> = ({ route, navigation }) => {
           ) : (
             <View style={tw`h-full justify-between`}>
               <View>
-                <View style={tw`flex-row mt-3`}>
-                  <IconButton icon="globe-outline" filled pressable={false} size={30} />
-                  <View style={tw`ml-5 shrink`}>
-                    <Text style={tw`text-lg font-medium`}>{address.address1}</Text>
-                    <Text variant="subtitle" disableDefaultPadding>
-                      {address.city + ", " + address.state + " " + address.zip5}
-                    </Text>
-                  </View>
-                </View>
+                <InfoCard
+                  title={address.address1}
+                  subtitle={address.city + ", " + address.state + " " + address.zip5}
+                  icon="globe-outline"
+                  style={tw`mt-3`}
+                />
+
                 {distanceMutation.data?.data.distance && (
-                  <View style={tw`flex-row mt-4`}>
-                    <IconButton icon="navigate-circle-outline" filled pressable={false} size={30} />
-                    <View style={tw`ml-5 shrink`}>
-                      <Text style={tw`text-lg font-medium`}>Distance to Location</Text>
-                      <Text variant="subtitle" disableDefaultPadding>
-                        {formatSeconds(
-                          distanceMutation.data?.data.distance.expectedTravelTimeSeconds
-                        )}
-                      </Text>
-                    </View>
-                  </View>
+                  <InfoCard
+                    title="Distance to Location"
+                    subtitle={formatSeconds(
+                      distanceMutation.data?.data.distance.expectedTravelTimeSeconds
+                    )}
+                    icon="navigate-circle-outline"
+                    style={tw`mt-4`}
+                  />
                 )}
               </View>
               <View>

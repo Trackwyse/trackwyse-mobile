@@ -12,9 +12,9 @@ import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
+import InfoCard from "@/components/InfoCard";
 import Container from "@/components/Container";
 import Hyperlink from "@/components/Hyperlink";
-import IconButton from "@/components/IconButton";
 import { PremiumHeader } from "@/components/Header";
 import { useInAppPurchases } from "@/contexts/InAppPurchases";
 
@@ -39,45 +39,30 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
       <ScrollView style={tw`w-11/12 `} contentContainerStyle={tw`pb-5`}>
         <Text variant="premium_title">Whats Included:</Text>
 
-        <View style={tw`flex-row mt-5`}>
-          <IconButton icon="cash-outline" filled pressable={false} size={30} />
-          <View style={tw`ml-5 shrink`}>
-            <Text style={tw`text-lg font-medium`}>Free Tracking Labels</Text>
-            <Text variant="premium_subtitle">
-              Request additional tracking labels every month at no extra cost.
-            </Text>
-          </View>
-        </View>
-
-        <View style={tw`flex-row mt-3`}>
-          <IconButton icon="map-outline" filled pressable={false} size={30} />
-          <View style={tw`ml-5 shrink`}>
-            <Text style={tw`text-lg font-medium`}>Advanced Mapping</Text>
-            <Text variant="subtitle" disableDefaultPadding>
-              View item recovery information such as distance, fastest routes, and more.
-            </Text>
-          </View>
-        </View>
-
-        <View style={tw`flex-row mt-3`}>
-          <IconButton icon="refresh-circle-outline" filled pressable={false} size={30} />
-          <View style={tw`ml-5 shrink`}>
-            <Text style={tw`text-lg font-medium`}>Recovery History</Text>
-            <Text variant="subtitle" disableDefaultPadding>
-              View the recovery history of your labels and previous finders contact information.
-            </Text>
-          </View>
-        </View>
-
-        <View style={tw`flex-row mt-3`}>
-          <IconButton icon="shield-checkmark-outline" filled pressable={false} size={30} />
-          <View style={tw`ml-5 shrink`}>
-            <Text style={tw`text-lg font-medium`}>Secure Recoveries</Text>
-            <Text variant="subtitle" disableDefaultPadding>
-              Get added protection against fraud, with additional recovery location verification.
-            </Text>
-          </View>
-        </View>
+        <InfoCard
+          style={tw`mt-5`}
+          title="Free Tracking Labels"
+          subtitle="Request additional tracking labels every month at no extra cost."
+          icon="cash-outline"
+        />
+        <InfoCard
+          style={tw`mt-2`}
+          title="Advanced Mapping"
+          subtitle="View item recovery information such as distance, fastest routes, and more."
+          icon="map-outline"
+        />
+        <InfoCard
+          style={tw`mt-2`}
+          title="Recovery History"
+          subtitle="View the recovery history of your labels and previous finders contact information."
+          icon="refresh-circle-outline"
+        />
+        <InfoCard
+          style={tw`mt-2`}
+          title="Secure Recoveries"
+          subtitle="Get added protection against fraud, with additional recovery location verification."
+          icon="shield-checkmark-outline"
+        />
       </ScrollView>
 
       <View
