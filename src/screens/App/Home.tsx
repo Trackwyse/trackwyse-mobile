@@ -59,7 +59,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           renderItem={({ item: label }) => <Label label={label} />}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-          ListFooterComponent={<View style={tw`h-20`} />} // Add padding to bottom of list
+          ListFooterComponent={<View style={tw`h-32`} />} // Add padding to bottom of list
         />
       </Container>
     </SafeAreaView>

@@ -5,74 +5,33 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { useEffect, useRef } from "react";
-import { Animated, Easing, SafeAreaView, StyleProp, View, ViewStyle } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 
 import tw from "@/lib/tailwind";
+import LoadingRect from "@/components/LoadingRect";
+import Container from "../Container";
 
 const HomeLoader: React.FC = () => {
   return (
-    <SafeAreaView style={tw`mx-3 my-5`}>
-      <Animatable.View animation="pulse" easing="ease-out" iterationCount="infinite">
-        <View style={tw` justify-between flex-row`}>
-          <LoadingRect />
-          <LoadingRect />
-        </View>
-        <View style={tw` justify-between flex-row`}>
-          <LoadingRect />
-          <LoadingRect />
-        </View>
-        <View style={tw` justify-between flex-row`}>
-          <LoadingRect />
-          <LoadingRect />
-        </View>
-      </Animatable.View>
+    <SafeAreaView style={tw`h-full w-full`}>
+      <Container>
+        <Animatable.View animation="pulse" easing="ease-out" iterationCount="infinite">
+          <LoadingRect height={50} />
+          <LoadingRect height={225} style={tw`my-4`} />
+          <LoadingRect height={25} style={tw`mt-4`} width={150} />
+          <View style={tw`justify-between flex-row`}>
+            <LoadingRect height={125} width={110} />
+            <LoadingRect height={125} width={110} />
+            <LoadingRect height={125} width={110} />
+          </View>
+          <LoadingRect height={25} style={tw`mt-4`} width={150} />
+          <LoadingRect height={55} />
+          <LoadingRect height={55} />
+          <LoadingRect height={55} />
+        </Animatable.View>
+      </Container>
     </SafeAreaView>
-  );
-};
-
-export const LoadingRect = (props: { style?: StyleProp<ViewStyle> }) => {
-  const pulseAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    const sharedAnimationConfig = {
-      duration: 1000,
-      useNativeDriver: true,
-    };
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(pulseAnim, {
-          ...sharedAnimationConfig,
-          toValue: 1,
-          easing: Easing.out(Easing.ease),
-        }),
-        Animated.timing(pulseAnim, {
-          ...sharedAnimationConfig,
-          toValue: 0,
-          easing: Easing.in(Easing.ease),
-        }),
-      ])
-    ).start();
-
-    return () => {
-      pulseAnim.stopAnimation();
-    };
-  }, []);
-
-  const opacityAnim = pulseAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.05, 0.15],
-  });
-
-  return (
-    <Animated.View
-      style={[
-        { opacity: opacityAnim },
-        tw`max-w-1/2 flex-1 m-1 py-28 bg-gray-400 rounded-md`,
-        props.style,
-      ]}
-    />
   );
 };
 
