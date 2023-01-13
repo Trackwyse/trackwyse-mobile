@@ -7,7 +7,7 @@ import { useNotifications } from "@/contexts/Notifications";
 interface ProfileScreenProps {}
 
 const Profile: React.FC<ProfileScreenProps> = ({}) => {
-  const { enabled, setStatus, loading } = useNotifications();
+  const { notificationsEnabled, setNotificationsEnabled, loading } = useNotifications();
 
   return (
     <Container>
@@ -18,17 +18,17 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
         title="Notifications Enabled"
         description="You will receive a push notification if your tracked items are located."
         style={tw`my-1`}
-        selected={enabled}
+        selected={notificationsEnabled}
         loading={loading}
-        onPress={() => setStatus(true)}
+        onPress={() => setNotificationsEnabled(true)}
       />
       <Multiselect
         title="Notifications Disabled"
         description="You will not receive a push notification if your tracked items are located."
         style={tw`my-1`}
-        selected={!enabled}
+        selected={!notificationsEnabled}
         loading={loading}
-        onPress={() => setStatus(false)}
+        onPress={() => setNotificationsEnabled(false)}
       />
     </Container>
   );

@@ -1,29 +1,28 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { useNavigation } from "@react-navigation/core";
 import { useMutation } from "@tanstack/react-query";
-import * as Notifications from "expo-notifications";
-import * as Device from "expo-device";
+import * as RNNotifications from "expo-notifications";
+import { useNavigation } from "@react-navigation/native";
+import { createContext, useContext, useEffect } from "react";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import { useAuth } from "@/contexts/Auth";
 import { useLabels } from "@/contexts/Labels";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
-interface NotificationsContextData {
-  enabled: boolean;
-  loading: boolean;
-  setStatus: (status: boolean) => void;
-}
 
 type RootStackParamList = {
   EditLabel: { labelId: string } | undefined;
 };
 
+interface NotificationsContextData {
+  notificationsEnabled: boolean;
+  loading: boolean;
+  setNotificationsEnabled: (status: boolean) => void;
+}
+
 const NotificationsContext = createContext<NotificationsContextData>(
   {} as NotificationsContextData
 );
 
-Notifications.setNotificationHandler({
+RNNotifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: false,
@@ -33,8 +32,8 @@ Notifications.setNotificationHandler({
 
 const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const { getLabels } = useLabels();
-  const { user, accessToken } = useAuth();
-  const [enabled, setEnabled] = useState<boolean>(false);
+  const { user, accessToken, updateUser } = useAuth();
+
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const mutation = useMutation({
@@ -44,72 +43,120 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
   });
 
   useEffect(() => {
-    registerForPostNotifications();
+    const subscription = RNNotifications.addNotificationResponseReceivedListener(
+      async (response) => {
+        const { notification } = response;
+        const { data } = notification.request.content;
 
-    const subscription = Notifications.addNotificationResponseReceivedListener(async (response) => {
-      const { notification } = response;
-      const { data } = notification.request.content;
+        // Check if the user is logged in
+        if (!user || Object.keys(user).length <= 0) {
+          return;
+        }
 
-      // Ensure a user is logged in
-      if (user && Object.keys(user).length > 0) {
-        // Ensure the notification is for a lost label
+        // Check the notification type
         if (data.type === "labelLocated" && data.labelId) {
           await getLabels();
 
           navigation.navigate("EditLabel", { labelId: data.labelId as string });
         }
+
+        // Add other notification types here
       }
-    });
+    );
 
     return () => subscription.remove();
-  }, [user]);
+  });
 
-  const registerForPostNotifications = async () => {
-    if (user && Object.keys(user).length > 0) {
-      if (Device.isDevice) {
-        const { status } = await Notifications.getPermissionsAsync();
-        let finalStatus = status;
-
-        // If the user does not already have permission, ask for it
-        if (status !== "granted") {
-          const { status: askStatus } = await Notifications.requestPermissionsAsync();
-          finalStatus = askStatus;
-        }
-
-        // If the user does not agree to the permissions, exit
-        if (finalStatus !== "granted") {
-          return;
-        }
-
-        const notificationPushToken = (
-          await Notifications.getExpoPushTokenAsync({ experienceId: "@js00001/trackwyse" })
-        ).data;
-
-        // Update push token in API
-        if (notificationPushToken) {
-          mutation.mutate(
-            { notificationPushToken, notificationsEnabled: "true" },
-            {
-              onSuccess: () => {
-                setEnabled(true);
-              },
-            }
-          );
-        }
+  useEffect(() => {
+    (async () => {
+      if (!user || Object.keys(user).length <= 0) {
+        return;
       }
+
+      const hasPermission = await hasNotificationPermission();
+
+      if (hasPermission) {
+        await setPushToken();
+        return;
+      }
+
+      const status = await requestNotificationPermission();
+
+      if (status === "granted") {
+        await setPushToken();
+        await setNotificationStatus(true);
+        return;
+      }
+
+      await setNotificationStatus(false);
+    })();
+  }, [accessToken]);
+
+  const hasNotificationPermission = async () => {
+    const { status } = await RNNotifications.getPermissionsAsync();
+
+    return status === "granted";
+  };
+
+  const requestNotificationPermission = async () => {
+    const { status } = await RNNotifications.requestPermissionsAsync();
+
+    return status;
+  };
+
+  const setPushToken = async () => {
+    if (!user || Object.keys(user).length <= 0) {
+      return;
+    }
+
+    const notificationPushToken = (
+      await RNNotifications.getExpoPushTokenAsync({ experienceId: "@js00001/trackwyse" })
+    ).data;
+
+    if (notificationPushToken) {
+      mutation.mutate({ notificationPushToken });
     }
   };
 
-  const setStatus = (status: boolean) => {
-    if (status) {
-      registerForPostNotifications();
-    } else {
-      // Send to API
+  const setNotificationStatus = async (status: boolean) => {
+    if (!user || Object.keys(user).length <= 0) {
+      return;
+    }
+
+    const hasPermision = await hasNotificationPermission();
+
+    if (!status) {
       mutation.mutate(
         { notificationsEnabled: "false" },
         {
-          onSuccess: () => {
-            setEnabled(false);
+          onSuccess: ({ data }) => {
+            updateUser(data.user);
+          },
+        }
+      );
+    }
+
+    if (status && !hasPermision) {
+      const status = await requestNotificationPermission();
+
+      if (status === "granted") {
+        mutation.mutate(
+          { notificationsEnabled: "true" },
+          {
+            onSuccess: ({ data }) => {
+              updateUser(data.user);
+            },
+          }
+        );
+      }
+    }
+
+    if (status && hasPermision) {
+      mutation.mutate(
+        { notificationsEnabled: "true" },
+        {
+          onSuccess: ({ data }) => {
+            updateUser(data.user);
           },
         }
       );
@@ -117,7 +164,13 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
   };
 
   return (
-    <NotificationsContext.Provider value={{ enabled, setStatus, loading: mutation.isLoading }}>
+    <NotificationsContext.Provider
+      value={{
+        notificationsEnabled: user?.notificationsEnabled,
+        loading: mutation.isLoading,
+        setNotificationsEnabled: setNotificationStatus,
+      }}
+    >
       {children}
     </NotificationsContext.Provider>
   );
