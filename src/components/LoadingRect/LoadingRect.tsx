@@ -1,4 +1,11 @@
 /*
+ * Created on Fri Jan 13 2023
+ * Created by JS00001
+ *
+ * Copyright (c) 2023 Trackwyse
+ */
+
+/*
   NOTE: This file is not well documented because it is a temporary solution
 
   This file should be used for the following loading screens:

@@ -1,3 +1,10 @@
+/*
+ * Created on Fri Jan 13 2023
+ * Created by JS00001
+ *
+ * Copyright (c) 2023 Trackwyse
+ */
+
 import tw from "@/lib/tailwind";
 import { TextPropsIOS, Text as RNText } from "react-native";
 

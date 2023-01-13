@@ -1,3 +1,10 @@
+/*
+ * Created on Fri Jan 13 2023
+ * Created by JS00001
+ *
+ * Copyright (c) 2023 Trackwyse
+ */
+
 interface LoginInput {
   email: string;
   password: string;
@@ -68,6 +75,10 @@ interface UpdateUserInput {
   city?: string;
   state?: string;
   zip5?: string;
+}
+
+interface DeleteUserAccountInput {
+  password: string;
 }
 
 interface UpdateUserPasswordInput {

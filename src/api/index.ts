@@ -1,3 +1,10 @@
+/*
+ * Created on Fri Jan 13 2023
+ * Created by JS00001
+ *
+ * Copyright (c) 2023 Trackwyse
+ */
+
 import axios from "axios";
 
 const baseURL = __DEV__ ? "https://api.dev.trackwyse.com" : "https://api.trackwyse.com";
@@ -455,6 +462,35 @@ const updateUserPassword = async (
 };
 
 /*
+  DELETE /api/v1/user/delete-account
+
+  Request Body:
+    - password: string
+  
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const deleteUserAccount = async (
+  values: DeleteUserAccountInput,
+  accessToken: string
+): Promise<DeleteUserAccountAPIResponse> => {
+  const { password } = values;
+
+  return apiClient.delete("/api/v1/user/delete-account", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    data: {
+      password,
+    },
+  });
+};
+
+/*
   POST /api/v1/labels/recovered/:id
 
   Request Headers:
@@ -608,6 +644,7 @@ export default {
   getUser,
   updateUser,
   updateUserPassword,
+  deleteUserAccount,
 
   addLabel,
   getLabels,

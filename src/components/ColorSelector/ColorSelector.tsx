@@ -1,3 +1,10 @@
+/*
+ * Created on Fri Jan 13 2023
+ * Created by JS00001
+ *
+ * Copyright (c) 2023 Trackwyse
+ */
+
 import { TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import tw from "@/lib/tailwind";

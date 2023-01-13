@@ -5,6 +5,6 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import LoadingRect from "./LoadingRect";
+import Banner from "./Banner";
 
-export default LoadingRect;
+export default Banner;

@@ -1,3 +1,10 @@
+/*
+ * Created on Fri Jan 13 2023
+ * Created by JS00001
+ *
+ * Copyright (c) 2023 Trackwyse
+ */
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState, useContext } from "react";
 import { useMutation } from "@tanstack/react-query";

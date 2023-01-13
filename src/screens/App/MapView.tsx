@@ -1,3 +1,10 @@
+/*
+ * Created on Fri Jan 13 2023
+ * Created by JS00001
+ *
+ * Copyright (c) 2023 Trackwyse
+ */
+
 import BottomSheet from "@gorhom/bottom-sheet";
 import { View, SafeAreaView } from "react-native";
 import { useRef, useMemo, useEffect } from "react";

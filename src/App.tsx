@@ -1,3 +1,10 @@
+/*
+ * Created on Fri Jan 13 2023
+ * Created by JS00001
+ *
+ * Copyright (c) 2023 Trackwyse
+ */
+
 import { registerRootComponent } from "expo";
 import Toast from "react-native-toast-message";
 import { Text, TextInput } from "react-native";
