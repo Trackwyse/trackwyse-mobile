@@ -1,3 +1,13 @@
+import {
+  useFonts,
+  Syne_400Regular,
+  Syne_500Medium,
+  Syne_600SemiBold,
+  Syne_700Bold,
+  Syne_800ExtraBold,
+} from "@expo-google-fonts/syne";
+import { useEffect } from "react";
+import * as SplashScreen from "expo-splash-screen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Home from "@/screens/App/Home";
@@ -42,20 +52,10 @@ import VerificationLanding from "@/screens/Verification/Verification.Landing";
 
 import { useAuth } from "@/contexts/Auth";
 import IconButton from "@/components/IconButton";
-import { LabelsProvider } from "@/contexts/Labels";
-import NavigationWithBack from "@/components/Navigation/NavigationBackArrow";
-import NotificationsProvider from "@/contexts/Notifications";
-import { useEffect } from "react";
-import * as SplashScreen from "expo-splash-screen";
 import useVersioning from "@/hooks/useVersioning";
-import {
-  useFonts,
-  Syne_400Regular,
-  Syne_500Medium,
-  Syne_600SemiBold,
-  Syne_700Bold,
-  Syne_800ExtraBold,
-} from "@expo-google-fonts/syne";
+import { LabelsProvider } from "@/contexts/Labels";
+import NotificationsProvider from "@/contexts/Notifications";
+import NavigationWithBack from "@/components/Navigation/NavigationBackArrow";
 
 const Stack = createNativeStackNavigator();
 

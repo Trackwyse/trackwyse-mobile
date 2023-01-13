@@ -121,9 +121,16 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           pressable
           title="Update Address"
           iconRight="md-chevron-forward-outline"
-          position="bottom"
-          style={tw`mb-10`}
+          position="middle"
           onPress={() => navigation.navigate("ProfileAddress")}
+        />
+        <ListItem
+          pressable
+          title="Delete Account"
+          iconRight="md-chevron-forward-outline"
+          position="bottom"
+          textColor="red"
+          style={tw`mb-10`}
         />
       </KeyboardAwareScrollView>
     </Container>

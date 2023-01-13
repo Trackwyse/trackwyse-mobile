@@ -18,6 +18,7 @@ interface ListItemProps {
   iconRight?: keyof typeof Ionicons.glyphMap;
   textRight?: string;
   textBottom?: string;
+  textColor?: string;
   iconRightColor?: string;
   iconLeftColor?: string;
   pressable?: boolean;
@@ -33,6 +34,7 @@ const ListItem: React.FC<ListItemProps> = ({
   iconRight,
   textRight,
   textBottom,
+  textColor = tw.color("black"),
   iconRightColor = tw.color("gray-400"),
   iconLeftColor = tw.color("black"),
   pressable = false,
@@ -60,7 +62,7 @@ const ListItem: React.FC<ListItemProps> = ({
           {iconLeft && (
             <Ionicons name={iconLeft} size={22} style={tw.style("mr-4")} color={iconLeftColor} />
           )}
-          <Text style={tw.style(`font-medium text-base text-black`)}>{title}</Text>
+          <Text style={tw.style(`font-medium text-base`, { color: textColor })}>{title}</Text>
         </View>
         {iconRight && <Ionicons name={iconRight} size={20} color={iconRightColor} />}
         {textRight && (
