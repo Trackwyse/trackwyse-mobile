@@ -14,25 +14,26 @@ import BadgeButton from "@/components/BadgeButton";
 interface BannerProps {
   title: string;
   cta: string;
+  bgColor?: string;
   onPress?: () => void;
 }
 
-const Banner: React.FC<BannerProps> = ({ title, cta, onPress }) => {
+const Banner: React.FC<BannerProps> = ({ title, cta, onPress, bgColor = "bg-purple-200" }) => {
   return (
-    <View style={tw` bg-purple-100 rounded-[40px] relative overflow-hidden`}>
-      <View style={tw`p-8`}>
+    <View style={tw.style(`rounded-[30px] relative overflow-hidden bg-opacity-65 ${bgColor}`)}>
+      <View style={tw`px-8 py-6`}>
         <Text style={tw` text-2xl max-w-2/3 leading-normal `}>{title}</Text>
         <BadgeButton size="sm" style={tw`px-10 py-3 mt-10`} onPress={onPress}>
           {cta}
         </BadgeButton>
       </View>
       <View
-        style={tw.style(`absolute w-16 h-44 -top-10 right-6 bg-purple-200`, {
+        style={tw.style(`absolute w-16 h-44 -top-10 right-8 bg-purple-200 ${bgColor}`, {
           transform: [{ rotate: "30deg" }],
         })}
       />
       <View
-        style={tw.style(`absolute w-16 h-44 -bottom-10 right-4 bg-purple-200`, {
+        style={tw.style(`absolute w-16 h-44 -bottom-10 right-4 ${bgColor}`, {
           transform: [{ rotate: "30deg" }],
         })}
       />

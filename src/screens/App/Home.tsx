@@ -5,14 +5,16 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { View, SafeAreaView, FlatList, TouchableOpacity, RefreshControl } from "react-native";
 
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
+
 import Label from "@/components/Label";
 import { useAuth } from "@/contexts/Auth";
+import { getRandomColor } from "@/lib/random";
 import { useLabels } from "@/contexts/Labels";
 import { trimToLength } from "@/lib/textUtil";
 import Container from "@/components/Container";
@@ -72,12 +74,15 @@ interface ListHeaderProps {
 }
 
 const ListHeader: React.FC<ListHeaderProps> = ({ navigation }) => {
+  const bannerColor = useMemo(() => getRandomColor(), []);
+
   return (
     <View>
       {/* TODO: Move to component */}
       <Banner
         title="Do more with Trackwyse Plus"
         cta="Learn More"
+        bgColor={bannerColor}
         onPress={() => navigation.navigate("ProfilePremium")}
       />
       {/* END TODO */}
