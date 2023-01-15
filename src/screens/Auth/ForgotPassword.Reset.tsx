@@ -47,7 +47,7 @@ const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation, route
     onSubmit: (values) => {
       mutation.mutate(values, {
         onSuccess: () => {
-          navigation.navigate("Landing");
+          navigation.navigate("Home");
           Toast.show({
             type: "success",
             text1: "Password Reset",

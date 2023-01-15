@@ -9,17 +9,15 @@ import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 
 import api from "@/api";
-import { useAuth } from "@/contexts/Auth";
 import AddressInput from "@/components/AddressInput";
 import { useDynamicLabels } from "@/contexts/DynamicLabels";
 
 const FoundLabel: React.FC = () => {
-  const { accessToken } = useAuth();
   const { foundLabel, setFoundLabel } = useDynamicLabels();
 
   const mutation = useMutation({
     mutationFn: async (values: FoundLabelDetailsInput) => {
-      return api.updateFoundLabelDetails(values, accessToken);
+      return api.updateFoundLabelDetails(values);
     },
   });
 

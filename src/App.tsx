@@ -15,6 +15,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 import AuthProvider from "@/contexts/Auth";
+import useLinking from "@/hooks/useLinking";
 import queryClient from "@/lib/queryClient";
 import RootStackNavigator from "@/navigation";
 import { InAppPurchasesProvider } from "@/contexts/InAppPurchases";
@@ -33,12 +34,14 @@ SplashScreen.preventAutoHideAsync();
 if (__DEV__) startNetworkLogging();
 
 const App = () => {
+  const linking = useLinking();
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <DynamicLabelsProvider>
           <InAppPurchasesProvider>
-            <NavigationContainer theme={theme}>
+            <NavigationContainer linking={linking} theme={theme}>
               <GestureHandlerRootView style={{ flex: 1 }}>
                 <BottomSheetModalProvider>
                   <RootStackNavigator />

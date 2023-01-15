@@ -314,26 +314,15 @@ const deleteLabel = (
     - message: string
 */
 const updateFoundLabelDetails = (
-  values: FoundLabelDetailsInput,
-  accessToken: string
+  values: FoundLabelDetailsInput
 ): Promise<FoundLabelDetailsAPIResponse> => {
   const { id, phoneNumber, recoveryLocation, exactLocation } = values;
 
-  return apiClient.post(
-    `/api/v1/labels/found/${id}`,
-    {
-      phoneNumber,
-      recoveryLocation,
-      exactLocation,
-    },
-    {
-      // In Production, the Authorization header is required
-      // In Development, the Authorization header should not be included
-      headers: {
-        Authorization: !__DEV__ ? `Bearer ${accessToken}` : undefined,
-      },
-    }
-  );
+  return apiClient.post(`/api/v1/labels/found/${id}`, {
+    phoneNumber,
+    recoveryLocation,
+    exactLocation,
+  });
 };
 
 /*

@@ -101,7 +101,7 @@ const Verify: React.FC = () => {
           onChangeText={verifyInput.handleChange("verificationToken")}
         />
 
-        <Hyperlink style={tw`w-11/12 mt-2`} onPress={onReverifyPress}>
+        <Hyperlink style={tw`mt-2`} onPress={onReverifyPress}>
           Request another code
         </Hyperlink>
 

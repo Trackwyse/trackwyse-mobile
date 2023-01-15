@@ -12,15 +12,19 @@ import { TouchableOpacity } from "react-native";
 interface NavigationBackArrowProps {
   navigation: NativeStackNavigationProp<any>;
   returnHome?: boolean;
+  navigateTo?: string;
 }
 
 const NavigationWithBack: React.FC<NavigationBackArrowProps> = ({
   navigation,
+  navigateTo,
   returnHome = false,
 }) => {
   const onPress = () => {
     if (returnHome) {
       return navigation.navigate("Home");
+    } else if (navigateTo) {
+      return navigation.navigate(navigateTo);
     }
 
     navigation.goBack();

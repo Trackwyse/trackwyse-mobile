@@ -88,13 +88,40 @@ const AuthStackNavigator: React.FC = () => {
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
-      <Stack.Screen name="Landing" component={Landing} options={{ headerShown: false }} />
+      <Stack.Screen name="Home" component={Landing} options={{ headerShown: false }} />
       <Stack.Screen name="RegisterStep1" component={RegisterStep1} />
       <Stack.Screen name="RegisterStep2" component={RegisterStep2} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="ForgotPasswordLanding" component={ForgotPasswordLanding} />
       <Stack.Screen name="ForgotPasswordAction" component={ForgotPasswordAction} />
       <Stack.Screen name="ForgotPasswordReset" component={ForgotPasswordReset} />
+      <Stack.Screen
+        name="FoundLabelDetails"
+        component={FoundLabelDetails}
+        options={({ navigation }) => ({
+          title: "Found Label",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+        })}
+      />
+      <Stack.Screen
+        name="FoundLabelExactLocation"
+        component={FoundLabelExactLocation}
+        options={({ navigation }) => ({
+          title: "Exact Location",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} />,
+        })}
+      />
+      <Stack.Screen
+        name="FoundLabelRecoveryLocation"
+        component={FoundLabelRecoveryLocation}
+        options={({ navigation }) => ({
+          title: "Recovery Location",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} />,
+        })}
+      />
     </Stack.Navigator>
   );
 };
@@ -113,8 +140,35 @@ const VerificationStackNavigator: React.FC = () => {
         headerLeft: () => <></>,
       }}
     >
-      <Stack.Screen name="VerificationLanding" component={VerificationLanding} />
+      <Stack.Screen name="Home" component={VerificationLanding} />
       <Stack.Screen name="VerificationAction" component={VerificationAction} />
+      <Stack.Screen
+        name="FoundLabelDetails"
+        component={FoundLabelDetails}
+        options={({ navigation }) => ({
+          title: "Found Label",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+        })}
+      />
+      <Stack.Screen
+        name="FoundLabelExactLocation"
+        component={FoundLabelExactLocation}
+        options={({ navigation }) => ({
+          title: "Exact Location",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} />,
+        })}
+      />
+      <Stack.Screen
+        name="FoundLabelRecoveryLocation"
+        component={FoundLabelRecoveryLocation}
+        options={({ navigation }) => ({
+          title: "Recovery Location",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} />,
+        })}
+      />
     </Stack.Navigator>
   );
 };
@@ -134,8 +188,35 @@ const AcceptTermsStackNavigator: React.FC = () => {
         headerLeft: () => <></>,
       }}
     >
-      <Stack.Screen name="AcceptTermsLanding" component={AcceptTermsLanding} />
+      <Stack.Screen name="Home" component={AcceptTermsLanding} />
       <Stack.Screen name="AcceptTermsAction" component={AcceptTermsAction} />
+      <Stack.Screen
+        name="FoundLabelDetails"
+        component={FoundLabelDetails}
+        options={({ navigation }) => ({
+          title: "Found Label",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+        })}
+      />
+      <Stack.Screen
+        name="FoundLabelExactLocation"
+        component={FoundLabelExactLocation}
+        options={({ navigation }) => ({
+          title: "Exact Location",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} />,
+        })}
+      />
+      <Stack.Screen
+        name="FoundLabelRecoveryLocation"
+        component={FoundLabelRecoveryLocation}
+        options={({ navigation }) => ({
+          title: "Recovery Location",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} />,
+        })}
+      />
     </Stack.Navigator>
   );
 };
@@ -179,6 +260,7 @@ const AppStackNavigator: React.FC = () => {
               gestureEnabled: false,
               headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
             })}
+            initialParams={{ navigateTo: "Home" }}
           />
           <Stack.Screen
             name="FoundLabelExactLocation"
@@ -290,6 +372,7 @@ const RootStackNavigator: React.FC = () => {
     Poppins_600SemiBold,
     Poppins_700Bold,
     Poppins_800ExtraBold,
+    Poppins_900Black,
   });
 
   // show the splash screen while useAuth is loading

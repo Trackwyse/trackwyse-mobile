@@ -17,7 +17,6 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
-import { useAuth } from "@/contexts/Auth";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import Permissions from "@/components/Permissions";
@@ -29,14 +28,13 @@ interface FoundLabelScreenProps {
 }
 
 const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
-  const { accessToken } = useAuth();
   const { setFoundLabel } = useDynamicLabels();
   const [hasBeenScanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
   const mutation = useMutation({
     mutationFn: (values: FoundLabelDetailsInput) => {
-      return api.updateFoundLabelDetails(values, accessToken);
+      return api.updateFoundLabelDetails(values);
     },
   });
 

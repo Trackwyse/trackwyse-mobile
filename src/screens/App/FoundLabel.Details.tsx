@@ -17,7 +17,6 @@ import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
@@ -32,14 +31,15 @@ interface FoundLabelDetailsScreenProps {
 }
 
 const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navigation }) => {
-  const { accessToken } = useAuth();
+  const { id } = route.params;
+
   const [isSaved, setIsSaved] = useState(false);
   const { foundLabel, setFoundLabel } = useDynamicLabels();
   const [isModalVisible, setModalVisible] = useState(false);
 
   const modificationMutation = useMutation({
     mutationFn: (values: FoundLabelDetailsInput) => {
-      return api.updateFoundLabelDetails(values, accessToken);
+      return api.updateFoundLabelDetails(values);
     },
   });
 
@@ -77,6 +77,27 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
     },
   });
 
+  /*
+    If there is an Id passed in, then "foundLabel" does not exist and will be undefined.
+    This means that the user navigated to this screen using a link. In this case, we need to
+    fetch the label from the server, and then set it in the context.
+    
+    If there is no Id passed in, then "foundLabel" exists and we can use it.
+    We cannot render the screen until we have the label, so we need to wait for it to be set.
+  */
+  useEffect(() => {
+    if (id) {
+      modificationMutation.mutate(
+        { id },
+        {
+          onSuccess: ({ data }) => {
+            setFoundLabel(data.label);
+          },
+        }
+      );
+    }
+  }, []);
+
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -96,6 +117,10 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
       ),
     });
   }, [navigation, editInput.values, editInput.initialValues, isSaved]);
+
+  if (!foundLabel) {
+    // Setup a loading screen
+  }
 
   return (
     <Container>
