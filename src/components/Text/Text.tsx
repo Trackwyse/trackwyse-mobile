@@ -8,10 +8,19 @@
 import tw from "@/lib/tailwind";
 import { TextPropsIOS, Text as RNText } from "react-native";
 
+// Disable font scaling on all Text components
+interface TextWithDefaultProps extends RNText {
+  defaultProps?: { allowFontScaling?: boolean };
+}
+
+(RNText as unknown as TextWithDefaultProps).defaultProps =
+  (RNText as unknown as TextWithDefaultProps).defaultProps || {};
+(RNText as unknown as TextWithDefaultProps).defaultProps!.allowFontScaling = false;
+
 const textVariantStyles = {
   default: "font-regular",
   title: "text-2xl font-bold",
-  subtitle: "text-gray-400 text-base",
+  subtitle: "text-gray-400 text-base ",
   premium_title: "text-2xl font-medium",
   premium_subtitle: "text-gray-400 text-base",
 };

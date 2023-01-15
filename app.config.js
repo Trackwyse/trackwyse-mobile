@@ -24,7 +24,10 @@ export default {
       bundleIdentifier: IS_DEV ? "dev.js00001.trackwyse" :"com.js00001.trackwyse",
       buildNumber: "1.1.9",
       infoPlist: {
-        ITSAppUsesNonExemptEncryption: false
+        ITSAppUsesNonExemptEncryption: false,
+        LSApplicationQueriesSchemes: [
+          'comgooglemaps'
+        ]
       }
     },
     android: {

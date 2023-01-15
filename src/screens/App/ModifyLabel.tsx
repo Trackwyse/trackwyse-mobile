@@ -25,7 +25,7 @@ import { useLabels } from "@/contexts/Labels";
 import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
 import { convertDateToReadable } from "@/lib/dateUtil";
-import ColorSelector from "@/components/ColorSelector";
+// import ColorSelector from "@/components/ColorSelector";
 import { validateModifyLabelInput } from "@/lib/validators";
 import { colors } from "@/components/ColorSelector/ColorSelector";
 import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";

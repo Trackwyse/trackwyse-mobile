@@ -141,6 +141,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
         </Text>
 
         <Input
+          returnKeyType="done"
           placeholder="Phone Number"
           size="lg"
           style={tw`my-1`}
@@ -166,7 +167,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
             color="secondary"
             size="lg"
             style={tw`my-1 justify-start`}
-            textStyle={tw`text-lg font-normal text-gray-400`}
+            textStyle={tw`text-lg font-regular text-gray-400`}
             onPress={() => navigation.navigate("FoundLabelExactLocation")}
           >
             Exact Location
@@ -188,7 +189,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
             color="secondary"
             size="lg"
             style={tw`my-1 justify-start`}
-            textStyle={tw`text-lg font-normal text-gray-400`}
+            textStyle={tw`text-lg font-regular text-gray-400`}
             onPress={() => navigation.navigate("FoundLabelRecoveryLocation")}
           >
             Recovery Location

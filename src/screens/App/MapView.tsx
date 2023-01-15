@@ -5,6 +5,7 @@
  * Copyright (c) 2023 Trackwyse
  */
 
+import * as RNLinking from "expo-linking";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { View, SafeAreaView } from "react-native";
 import { useRef, useMemo, useEffect } from "react";
@@ -42,6 +43,16 @@ const MapView: React.FC<MapViewProps> = ({ route, navigation }) => {
       return api.getDistance({ origin, destination }, accessToken);
     },
   });
+
+  const onGoogleMapsPress = () => {
+    const url = `comgooglemaps://?api=1&daddr=${address.latitude},${address.longitude}`;
+    RNLinking.openURL(url);
+  };
+
+  const onAppleMapsPress = () => {
+    const url = `http://maps.apple.com/?daddr=${address.latitude},${address.longitude}`;
+    RNLinking.openURL(url);
+  };
 
   useEffect(() => {
     if (!loading) {
@@ -113,10 +124,10 @@ const MapView: React.FC<MapViewProps> = ({ route, navigation }) => {
                 )}
               </View>
               <View>
-                <Button color="secondary" size="lg">
+                <Button color="secondary" size="lg" onPress={onGoogleMapsPress}>
                   Open in Google Maps
                 </Button>
-                <Button size="lg" style={tw`mt-4 mb-8`}>
+                <Button size="lg" style={tw`mt-4 mb-8`} onPress={onAppleMapsPress}>
                   Open in Apple Maps
                 </Button>
               </View>

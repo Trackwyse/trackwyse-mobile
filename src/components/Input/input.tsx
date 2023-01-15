@@ -17,6 +17,15 @@ const sizeClasses = {
   lg: "h-16",
 };
 
+// Disable font scaling on all TextInput components
+interface TextInputWithDefaultProps extends TextInput {
+  defaultProps?: { allowFontScaling?: boolean };
+}
+
+(TextInput as unknown as TextInputWithDefaultProps).defaultProps =
+  (TextInput as unknown as TextInputWithDefaultProps).defaultProps || {};
+(TextInput as unknown as TextInputWithDefaultProps).defaultProps!.allowFontScaling = false;
+
 export interface InputProps extends TextInputProps {
   size?: "sm" | "lg";
   icon?: keyof typeof Ionicons.glyphMap;
@@ -63,7 +72,7 @@ const Input: React.FC<InputProps> = ({
             ref={inputRef}
             editable={!disabled}
             style={tw.style(
-              `px-2 text-lg leading-[22px] w-full`,
+              `px-2 text-lg leading-[26px] w-full font-regular`,
               sizeClasses[size],
               textColorClasses
             )}
