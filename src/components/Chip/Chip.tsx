@@ -11,9 +11,9 @@ import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 
 const typeClasses = {
-  error: "bg-red",
-  success: "bg-green-400",
-  warning: "bg-orange-400",
+  error: "bg-red-700",
+  success: "bg-green-700",
+  warning: "bg-yellow-700",
 };
 
 interface ChipProps {

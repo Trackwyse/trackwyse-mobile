@@ -616,6 +616,25 @@ const getDistance = async (
   );
 };
 
+/*
+  GET /api/v1/transactions
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - transactions: Transaction[]
+*/
+const getTransactions = async (accessToken: string): Promise<GetTransactionsAPIResponse> => {
+  return apiClient.get("/api/v1/transactions", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
 export default {
   getValidClients,
 
@@ -647,4 +666,6 @@ export default {
   claimFreeLabels,
 
   getDistance,
+
+  getTransactions,
 };

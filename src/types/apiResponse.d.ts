@@ -126,3 +126,9 @@ type GetDistanceAPIResponse = APIResponse & {
     distance: Distance;
   };
 };
+
+type GetTransactionsAPIResponse = APIResponse & {
+  data: {
+    transactions: Transaction[];
+  };
+};

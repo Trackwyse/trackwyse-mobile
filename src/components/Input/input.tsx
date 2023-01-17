@@ -47,7 +47,7 @@ const Input: React.FC<InputProps> = ({
 
   const containerColorClasses = tw.style(
     "flex-row items-center w-full bg-gray-100 px-4 border-2  rounded-2xl",
-    error && "border-red",
+    error && "border-red-700",
     !error && isFocused && "border-black",
     !error && !isFocused && "border-gray-100",
     style
@@ -83,7 +83,7 @@ const Input: React.FC<InputProps> = ({
           />
         </View>
       </TouchableWithoutFeedback>
-      {error && <Text style={tw`text-red mt-1 mb-2`}>{error}</Text>}
+      {error && <Text style={tw`text-red-700 mt-1 mb-2`}>{error}</Text>}
     </View>
   );
 };

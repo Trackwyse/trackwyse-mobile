@@ -59,9 +59,17 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           pressable
           title="Notifications"
           iconLeft="notifications-outline"
-          position="bottom"
+          position="middle"
           iconRight="md-chevron-forward-outline"
           onPress={() => handleItemPress("ProfileNotifications")}
+        />
+        <ListItem
+          pressable
+          title="Transactions"
+          iconLeft="wallet-outline"
+          position="bottom"
+          iconRight="md-chevron-forward-outline"
+          onPress={() => handleItemPress("ProfileTransactions")}
         />
 
         <Text style={tw`mb-3 mt-6 text-base text-gray-400 uppercase`}>Subscription</Text>

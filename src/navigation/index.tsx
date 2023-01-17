@@ -51,6 +51,7 @@ import ProfilePassword from "@/screens/Profile/Profile.Password";
 import ProfileUserInfo from "@/screens/Profile/Profile.UserInfo";
 import ProfilePurchase from "@/screens/Profile/Profile.Purchase";
 import ProfileDeveloper from "@/screens/Profile/Profile.Developer";
+import ProfileTransactions from "@/screens/Profile/Profile.Transactions";
 import ProfilePremiumClaim from "@/screens/Profile/Profile.PremiumClaim";
 import ProfileNotifications from "@/screens/Profile/Profile.Notifications";
 import ProfilePremiumSettings from "@/screens/Profile/Profile.PremiumSettings";
@@ -303,6 +304,11 @@ const AppStackNavigator: React.FC = () => {
             name="ProfileNotifications"
             component={ProfileNotifications}
             options={{ title: "Notifications" }}
+          />
+          <Stack.Screen
+            name="ProfileTransactions"
+            component={ProfileTransactions}
+            options={{ title: "Transactions" }}
           />
 
           <Stack.Screen

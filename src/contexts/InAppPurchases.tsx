@@ -112,6 +112,7 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
       setProcessing(true);
       await RNIAP.requestSubscription({ sku });
     } catch (err) {
+      console.log(err);
       setProcessing(false);
     }
   };
