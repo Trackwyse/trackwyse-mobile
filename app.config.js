@@ -4,7 +4,7 @@ export default {
     name: IS_DEV ? "Trackwyse (DEV)" :"Trackwyse",
     slug: "trackwyse",
     scheme: "trw",
-    version: "1.1.9",
+    version: "1.2.0",
     orientation: "portrait",
     icon: IS_DEV ? "./assets/icon-dev.png" :"./assets/icon.png",
     userInterfaceStyle: "light",
@@ -22,7 +22,7 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: IS_DEV ? "dev.js00001.trackwyse" :"com.js00001.trackwyse",
-      buildNumber: "1.1.9",
+      buildNumber: "1.2.0",
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
         LSApplicationQueriesSchemes: [

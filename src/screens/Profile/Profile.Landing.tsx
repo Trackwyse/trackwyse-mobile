@@ -24,7 +24,7 @@ interface ProfileScreenProps {
 
 const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { signOut, user } = useAuth();
-  const { restorePurchases } = useInAppPurchases();
+  const { restorePurchases, restoring } = useInAppPurchases();
 
   const handleLogout = () => {
     signOut();
@@ -91,6 +91,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           iconLeftColor="gold"
           position="bottom"
           onPress={restorePurchases}
+          disabled={restoring || user?.subscriptionActive}
         />
 
         <Text style={tw`mb-3 mt-6 text-base text-gray-400 uppercase`}>Support</Text>

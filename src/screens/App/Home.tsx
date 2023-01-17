@@ -5,7 +5,7 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { View, SafeAreaView, FlatList, TouchableOpacity, RefreshControl } from "react-native";
 

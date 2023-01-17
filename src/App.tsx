@@ -8,6 +8,7 @@
 import { registerRootComponent } from "expo";
 import Toast from "react-native-toast-message";
 import * as SplashScreen from "expo-splash-screen";
+import { PostHogProvider } from "posthog-react-native";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { startNetworkLogging } from "react-native-network-logger";
@@ -42,12 +43,19 @@ const App = () => {
         <DynamicLabelsProvider>
           <InAppPurchasesProvider>
             <NavigationContainer linking={linking} theme={theme}>
-              <GestureHandlerRootView style={{ flex: 1 }}>
-                <BottomSheetModalProvider>
-                  <RootStackNavigator />
-                  <Toast />
-                </BottomSheetModalProvider>
-              </GestureHandlerRootView>
+              <PostHogProvider
+                apiKey="phc_AkDMJVw4fkcAjjGrWRclPzYIfnwEJLvOjQJwg2FxncU"
+                options={{
+                  host: "https://app.posthog.com",
+                }}
+              >
+                <GestureHandlerRootView style={{ flex: 1 }}>
+                  <BottomSheetModalProvider>
+                    <RootStackNavigator />
+                    <Toast />
+                  </BottomSheetModalProvider>
+                </GestureHandlerRootView>
+              </PostHogProvider>
             </NavigationContainer>
           </InAppPurchasesProvider>
         </DynamicLabelsProvider>

@@ -15,6 +15,7 @@ import api from "@/api";
 import { useAuth } from "@/contexts/Auth";
 
 interface InAppPurchasesData {
+  restoring: boolean;
   processing: boolean;
   subscriptions: RNIAP.Subscription[];
   restorePurchases: () => Promise<void>;
@@ -25,7 +26,9 @@ const InAppPurchasesContext = createContext<InAppPurchasesData>({} as InAppPurch
 
 const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const { accessToken, updateUser } = useAuth();
+  const [restoring, setRestoring] = useState(false);
   const [processing, setProcessing] = useState(false);
+
   const [subscriptions, setSubscriptions] = useState<RNIAP.Subscription[]>([]);
   const [pendingPurchase, setPendingPurchase] = useState<RNIAP.SubscriptionPurchase | null>(null);
 
@@ -110,12 +113,11 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
       await RNIAP.requestSubscription({ sku });
     } catch (err) {
       setProcessing(false);
-      console.error(err);
     }
   };
 
   const restorePurchases = async () => {
-    setProcessing(true);
+    setRestoring(true);
 
     RNIAP.getPurchaseHistory({ onlyIncludeActiveItems: true })
       .then((purchases) => {
@@ -136,17 +138,18 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
             await RNIAP.finishTransaction({ purchase });
           });
 
-          setProcessing(false);
+          setRestoring(false);
         }
       })
       .catch(() => {
-        setProcessing(false);
+        setRestoring(false);
       });
   };
 
   return (
     <InAppPurchasesContext.Provider
       value={{
+        restoring,
         processing,
         subscriptions,
         restorePurchases,
