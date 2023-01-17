@@ -635,6 +635,40 @@ const getTransactions = async (accessToken: string): Promise<GetTransactionsAPIR
   });
 };
 
+/*
+  POST /api/v1/admin/set-premium
+
+  Request Body:
+    - id: string
+    - expiresIn: number
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const setPremium = async (
+  input: SetPremiumInput,
+  accessToken: string
+): Promise<SetPremiumAPIResponse> => {
+  const { id, expiresIn } = input;
+
+  return apiClient.post(
+    "/api/v1/admin/set-premium",
+    {
+      id,
+      expiresIn,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
 export default {
   getValidClients,
 
@@ -668,4 +702,6 @@ export default {
   getDistance,
 
   getTransactions,
+
+  setPremium,
 };

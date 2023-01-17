@@ -44,6 +44,7 @@ import FoundLabelRecoveryLocation from "@/screens/App/FoundLabel.RecoveryLocatio
 import ProfileRate from "@/screens/Profile/Profile.Rate";
 import ProfileHelp from "@/screens/Profile/Profile.Help";
 import ProfileAbout from "@/screens/Profile/Profile.About";
+import ProfileAdmin from "@/screens/Profile/Profile.Admin";
 import ProfileLanding from "@/screens/Profile/Profile.Landing";
 import ProfilePremium from "@/screens/Profile/Profile.Premium";
 import ProfileAddress from "@/screens/Profile/Profile.Address";
@@ -350,6 +351,13 @@ const AppStackNavigator: React.FC = () => {
               name="ProfileDeveloper"
               component={ProfileDeveloper}
               options={{ title: "Developer" }}
+            />
+          )}
+          {__DEV__ && (
+            <Stack.Screen
+              name="ProfileAdmin"
+              component={ProfileAdmin}
+              options={{ title: "Admin" }}
             />
           )}
         </Stack.Navigator>

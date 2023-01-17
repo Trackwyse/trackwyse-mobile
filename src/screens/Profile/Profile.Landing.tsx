@@ -149,11 +149,19 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
             <Text style={tw`mb-3 mt-6 text-base text-gray-400 uppercase`}>Developer</Text>
             <ListItem
               pressable
-              title="Network Logs"
+              title="Developer Panel"
               iconLeft="code-outline"
-              position="alone"
+              position="top"
               iconRight="md-chevron-forward-outline"
               onPress={() => handleItemPress("ProfileDeveloper")}
+            />
+            <ListItem
+              pressable
+              title="Admin Panel"
+              iconLeft="md-shield-checkmark-outline"
+              position="bottom"
+              iconRight="md-chevron-forward-outline"
+              onPress={() => handleItemPress("ProfileAdmin")}
             />
           </View>
         )}

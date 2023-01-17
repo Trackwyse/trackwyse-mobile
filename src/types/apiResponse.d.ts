@@ -32,6 +32,8 @@ type ClaimFreeLabelsAPIResponse = APIResponse;
 
 type DeleteUserAccountAPIResponse = APIResponse;
 
+type SetPremiumAPIResponse = APIResponse;
+
 type RefreshAccessTokenAPIResponse = APIResponse & {
   data: {
     accessToken: string;

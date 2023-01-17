@@ -99,3 +99,8 @@ interface GetDistanceInput {
   origin: string;
   destination: string;
 }
+
+interface SetPremiumInput {
+  id: string;
+  expiresIn?: number;
+}
