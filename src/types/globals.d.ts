@@ -59,21 +59,6 @@ interface SubscriptionReceipt {
   originalApplicationVersion?: string;
 }
 
-interface Transaction {
-  transactionID: string;
-  created: Date;
-  status: string;
-  billingAddress: Address;
-  shippingAddress: Address;
-  items: TransactionItem[];
-  events: TransactionEvent[];
-  total: {
-    gross: number;
-    net: number;
-    tax: number;
-  };
-}
-
 interface SubscriptionPerks {
   freeLabelsLastRedeemed: Date;
   freeLabelsRedeemable: boolean;
@@ -101,16 +86,6 @@ interface UserAddress extends Address {
 interface LabelAddress extends Address {
   latitude: number;
   longitude: number;
-}
-
-interface TransactionEvent {
-  date: Date;
-  type: string;
-}
-
-interface TransactionItem {
-  name: string;
-  quantity: number;
 }
 
 interface Distance {
