@@ -45,7 +45,7 @@ export const TransactionStatusMessages = {
   },
 };
 
-export const EventStatusMessages = {
+export const EventStatusMessages: { [key: string]: string } = {
   DRAFT_CREATED: "Draft order created",
   DRAFT_CREATED_FROM_REPLACE: "Draft order created from replace",
   ADDED_PRODUCTS: "Products were added to the order",

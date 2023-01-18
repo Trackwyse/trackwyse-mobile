@@ -115,7 +115,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ route }) => {
                   key={index}
                   title={"Order Update"}
                   textRight={convertDateToTimePassed(event.date)}
-                  textBottom={EventStatusMessages[event.type as keyof typeof EventStatusMessages]}
+                  textBottom={event.type}
                   position="alone"
                 />
               );
@@ -125,7 +125,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ route }) => {
                   key={index}
                   title={"Order Update"}
                   textRight={convertDateToTimePassed(event.date)}
-                  textBottom={EventStatusMessages[event.type as keyof typeof EventStatusMessages]}
+                  textBottom={EventStatusMessages[event.type]}
                   position="top"
                 />
               );
@@ -135,7 +135,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ route }) => {
                   key={index}
                   title={"Order Update"}
                   textRight={convertDateToTimePassed(event.date)}
-                  textBottom={EventStatusMessages[event.type as keyof typeof EventStatusMessages]}
+                  textBottom={EventStatusMessages[event.type]}
                   position="bottom"
                 />
               );
@@ -145,7 +145,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ route }) => {
                   key={index}
                   title={"Order Update"}
                   textRight={convertDateToTimePassed(event.date)}
-                  textBottom={EventStatusMessages[event.type as keyof typeof EventStatusMessages]}
+                  textBottom={EventStatusMessages[event.type]}
                   position="middle"
                 />
               );
