@@ -29,32 +29,26 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
     },
   });
 
-  if (transactionsQuery.isLoading)
-    return (
-      <View>
-        <TransactionsLoader />
-      </View>
-    );
+  if (transactionsQuery.isLoading) return <TransactionsLoader />;
 
   return (
-    <View>
-      <Container>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={tw`pb-5 h-full`}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={() => onRefresh(transactionsQuery.refetch)}
-            />
-          }
-        >
-          {transactionsQuery.data?.data?.transactions.map((transaction, index) => (
-            <Transaction key={index} transaction={transaction} />
-          ))}
-        </ScrollView>
-      </Container>
-    </View>
+    <Container>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={tw`h-full`}
+        contentContainerStyle={tw`pb-20`}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => onRefresh(transactionsQuery.refetch)}
+          />
+        }
+      >
+        {transactionsQuery.data?.data?.transactions.map((transaction, index) => (
+          <Transaction key={index} transaction={transaction} />
+        ))}
+      </ScrollView>
+    </Container>
   );
 };
 

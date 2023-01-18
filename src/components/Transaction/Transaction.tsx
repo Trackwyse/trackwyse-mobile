@@ -28,7 +28,7 @@ type RootStackParamList = {
 const Transaction: React.FC<TransactionProps> = ({ transaction }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const { message, chipType } =
+  const { chipMessage, chipType } =
     TransactionStatusMessages[transaction.status as keyof typeof TransactionStatusMessages];
 
   return (
@@ -50,7 +50,7 @@ const Transaction: React.FC<TransactionProps> = ({ transaction }) => {
           </View>
         </View>
 
-        <Chip type={chipType as any} label={message} />
+        <Chip type={chipType as any} label={chipMessage} />
       </TouchableOpacity>
     </View>
   );
