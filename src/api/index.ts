@@ -642,6 +642,30 @@ const getUserTransactions = async (
 };
 
 /*
+  GET /api/v1/transactions/:id
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - transaction: TransactionDetails
+*/
+const getUserTransaction = async (
+  input: GetUserTransactionInput,
+  accessToken: string
+): Promise<GetUserTransactionAPIResponse> => {
+  const { id } = input;
+
+  return apiClient.get(`/api/v1/transactions/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+/*
   POST /api/v1/admin/set-premium
 
   Request Body:
@@ -708,6 +732,7 @@ export default {
   getDistance,
 
   getUserTransactions,
+  getUserTransaction,
 
   setPremium,
 };

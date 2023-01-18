@@ -111,3 +111,7 @@ interface GetUserTransactionsInput {
   last?: number;
   before?: string;
 }
+
+interface GetUserTransactionInput {
+  id: string;
+}

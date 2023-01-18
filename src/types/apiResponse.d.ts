@@ -134,3 +134,9 @@ type GetUserTransactionsAPIResponse = APIResponse & {
     transactions: Transaction[];
   };
 };
+
+type GetUserTransactionAPIResponse = APIResponse & {
+  data: {
+    transaction: TransactionDetails;
+  };
+};

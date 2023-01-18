@@ -2,6 +2,9 @@ interface Transaction {
   id: string;
   created: Date;
   status: string;
+}
+
+interface TransactionDetails extends Transaction {
   billingAddress: SaleorAddress;
   shippingAddress: SaleorAddress;
   total: {

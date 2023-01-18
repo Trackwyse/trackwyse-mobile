@@ -7,6 +7,8 @@
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { View, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
@@ -19,13 +21,24 @@ interface TransactionProps {
   transaction: Transaction;
 }
 
+type RootStackParamList = {
+  ProfileTransactionDetails: { transactionID: string } | undefined;
+};
+
 const Transaction: React.FC<TransactionProps> = ({ transaction }) => {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const { message, chipType } =
     TransactionStatusMessages[transaction.status as keyof typeof TransactionStatusMessages];
 
   return (
     <View style={tw`mt-4`}>
-      <TouchableOpacity style={tw`justify-between flex-row items-center`}>
+      <TouchableOpacity
+        style={tw`justify-between flex-row items-center`}
+        onPress={() =>
+          navigation.navigate("ProfileTransactionDetails", { transactionID: transaction.id })
+        }
+      >
         <View style={tw`flex-row items-center`}>
           <IconButton pressable={false} filled size={32} icon="qr-code-outline" />
           <View style={tw`ml-4`}>
