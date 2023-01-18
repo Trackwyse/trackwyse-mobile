@@ -24,7 +24,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
   const transactionsQuery = useQuery({
     queryKey: ["transactions"],
     queryFn: () => {
-      return api.getTransactions(accessToken);
+      return api.getUserTransactions({}, accessToken);
     },
   });
 

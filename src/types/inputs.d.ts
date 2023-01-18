@@ -104,3 +104,10 @@ interface SetPremiumInput {
   id: string;
   expiresIn?: number;
 }
+
+interface GetUserTransactionsInput {
+  first?: number;
+  after?: string;
+  last?: number;
+  before?: string;
+}

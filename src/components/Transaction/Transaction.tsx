@@ -31,7 +31,7 @@ const Transaction: React.FC<TransactionProps> = ({ transaction }) => {
           <View style={tw`ml-4`}>
             <Text style={tw`text-base font-semibold`}>Order #</Text>
             <View style={tw`flex-row items-center`}>
-              <Text style={tw`text-gray-400`}>{trimToLength(transaction.transactionID, 10)}</Text>
+              <Text style={tw`text-gray-400`}>{trimToLength(transaction.id, 10)}</Text>
               <Ionicons name="chevron-forward" style={tw`text-gray-400 ml-1`} size={14} />
             </View>
           </View>

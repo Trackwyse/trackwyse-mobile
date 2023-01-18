@@ -129,7 +129,7 @@ type GetDistanceAPIResponse = APIResponse & {
   };
 };
 
-type GetTransactionsAPIResponse = APIResponse & {
+type GetUserTransactionsAPIResponse = APIResponse & {
   data: {
     transactions: Transaction[];
   };

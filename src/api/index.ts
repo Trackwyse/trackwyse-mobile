@@ -627,10 +627,16 @@ const getDistance = async (
     - message: string
     - transactions: Transaction[]
 */
-const getTransactions = async (accessToken: string): Promise<GetTransactionsAPIResponse> => {
+const getUserTransactions = async (
+  input: GetUserTransactionsInput,
+  accessToken: string
+): Promise<GetUserTransactionsAPIResponse> => {
   return apiClient.get("/api/v1/transactions", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+    },
+    params: {
+      ...input,
     },
   });
 };
@@ -701,7 +707,7 @@ export default {
 
   getDistance,
 
-  getTransactions,
+  getUserTransactions,
 
   setPremium,
 };
