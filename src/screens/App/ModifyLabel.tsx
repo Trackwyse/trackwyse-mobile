@@ -26,6 +26,7 @@ import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
 import { convertDateToReadable } from "@/lib/dateUtil";
 // import ColorSelector from "@/components/ColorSelector";
+import useRefreshControl from "@/hooks/useRefreshControl";
 import { validateModifyLabelInput } from "@/lib/validators";
 import { colors } from "@/components/ColorSelector/ColorSelector";
 import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
@@ -38,18 +39,12 @@ interface ModifyLabelScreenProps {
 const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) => {
   const { labelId } = route.params;
   const { accessToken } = useAuth();
-  const [refreshing, setRefreshing] = useState(false);
+  const { refreshing, onRefresh } = useRefreshControl();
   const { labels, updateLabel, deleteLabel, getLabels } = useLabels();
   const [isUnsavedModalVisible, setIsUnsavedModalVisible] = useState(false);
   const [isDeletionModalVisible, setIsDeletionModalVisible] = useState(false);
 
   const label = labels.find((label) => label._id === labelId) as Label;
-
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await getLabels();
-    setRefreshing(false);
-  };
 
   const modificationMutation = useMutation({
     mutationFn: (values: ModifyLabelInput) => {
@@ -216,7 +211,9 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="always"
         style={tw`h-full w-full`}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={() => onRefresh(getLabels)} />
+        }
       >
         {label.isLost && (
           <View style={tw`w-full`}>

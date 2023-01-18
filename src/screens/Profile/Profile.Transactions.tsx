@@ -4,7 +4,7 @@
  *
  * Copyright (c) 2023 Trackwyse
  */
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { RefreshControl, ScrollView, View } from "react-native";
 
@@ -13,13 +13,14 @@ import tw from "@/lib/tailwind";
 import { useAuth } from "@/contexts/Auth";
 import Container from "@/components/Container";
 import Transaction from "@/components/Transaction";
+import useRefreshControl from "@/hooks/useRefreshControl";
 import TransactionsLoader from "@/components/Loaders/Transactions";
 
 interface ProfileScreenProps {}
 
 const Profile: React.FC<ProfileScreenProps> = ({}) => {
   const { accessToken } = useAuth();
-  const [refreshing, setRefreshing] = useState(false);
+  const { refreshing, onRefresh } = useRefreshControl();
 
   const transactionsQuery = useQuery({
     queryKey: ["transactions"],
@@ -27,12 +28,6 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
       return api.getUserTransactions({}, accessToken);
     },
   });
-
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await transactionsQuery.refetch();
-    setRefreshing(false);
-  };
 
   if (transactionsQuery.isLoading)
     return (
@@ -47,7 +42,12 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={tw`pb-5 h-full`}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={() => onRefresh(transactionsQuery.refetch)}
+            />
+          }
         >
           {transactionsQuery.data?.data?.transactions.map((transaction, index) => (
             <Transaction key={index} transaction={transaction} />

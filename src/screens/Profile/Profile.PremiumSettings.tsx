@@ -5,7 +5,6 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { View, ScrollView, RefreshControl } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -19,6 +18,7 @@ import Container from "@/components/Container";
 import { PremiumHeader } from "@/components/Header";
 import { convertDateToReadable } from "@/lib/dateUtil";
 import PremiumLoader from "@/components/Loaders/Premium";
+import useRefreshControl from "@/hooks/useRefreshControl";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -26,7 +26,7 @@ interface ProfileScreenProps {
 
 const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { accessToken } = useAuth();
-  const [refreshing, setRefreshing] = useState(false);
+  const { refreshing, onRefresh } = useRefreshControl();
 
   const subscriptionQuery = useQuery({
     queryKey: ["subscription"],
@@ -34,12 +34,6 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
       return api.getSubscription(accessToken);
     },
   });
-
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await subscriptionQuery.refetch();
-    setRefreshing(false);
-  };
 
   if (subscriptionQuery.isLoading)
     return (
@@ -65,7 +59,12 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={tw` pb-5`}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={() => onRefresh(subscriptionQuery.refetch)}
+            />
+          }
         >
           <Text variant="premium_title">Subscription</Text>
           <Text variant="premium_subtitle">

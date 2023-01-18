@@ -21,6 +21,7 @@ import Container from "@/components/Container";
 import Banner from "@/components/Banner/Banner";
 import IconButton from "@/components/IconButton";
 import HomeLoader from "@/components/Loaders/Home";
+import useRefreshControl from "@/hooks/useRefreshControl";
 
 interface HomeProps {
   navigation: NativeStackNavigationProp<any>;
@@ -29,13 +30,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ navigation }) => {
   const { user } = useAuth();
   const { loading, labels, getLabels } = useLabels();
-  const [refreshing, setRefreshing] = useState(false);
-
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await getLabels();
-    setRefreshing(false);
-  };
+  const { refreshing, onRefresh } = useRefreshControl();
 
   if (loading && !refreshing) return <HomeLoader />;
 
@@ -60,8 +55,10 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
           ListHeaderComponent={<ListHeader navigation={navigation} firstLabel={labels[0]} />}
           showsVerticalScrollIndicator={false}
           renderItem={({ item: label }) => <Label label={label} />}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           ListFooterComponent={<View style={tw`h-32`} />} // Add padding to bottom of list
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={() => onRefresh(getLabels)} />
+          }
         />
       </Container>
     </SafeAreaView>
