@@ -16,7 +16,7 @@ import Label from "@/components/Label";
 import { useAuth } from "@/contexts/Auth";
 import { getRandomColor } from "@/lib/random";
 import { useLabels } from "@/contexts/Labels";
-import { trimToLength } from "@/lib/textUtil";
+import { trimToLength } from "@/lib/util/string";
 import Container from "@/components/Container";
 import Banner from "@/components/Banner/Banner";
 import IconButton from "@/components/IconButton";

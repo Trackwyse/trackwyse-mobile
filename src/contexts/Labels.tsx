@@ -42,13 +42,13 @@ const labelsReducer = (state: Label[], action: LabelsAction) => {
       return [...state, action.payload];
     case "UPDATE_LABEL":
       return state.map((label) => {
-        if (label._id === action.payload._id) {
+        if (label.uniqueID === action.payload.uniqueID) {
           return action.payload;
         }
         return label;
       });
     case "DELETE_LABEL":
-      return state.filter((label) => label._id !== action.payload._id);
+      return state.filter((label) => label.uniqueID !== action.payload.uniqueID);
     default:
       return state;
   }

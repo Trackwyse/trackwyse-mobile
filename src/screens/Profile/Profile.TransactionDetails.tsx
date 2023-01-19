@@ -14,10 +14,10 @@ import Text from "@/components/Text";
 import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
-import { getSaleorAddressString } from "@/lib/textUtil";
+import { getAddressString } from "@/lib/util/string";
 import useRefreshControl from "@/hooks/useRefreshControl";
 import TransactionsLoader from "@/components/Loaders/Transactions";
-import { convertDateToReadable, convertDateToTimePassed } from "@/lib/dateUtil";
+import { convertDateToReadable, convertDateToTimePassed } from "@/lib/util/date";
 import { EventStatusMessages, TransactionStatusMessages } from "@/lib/constants";
 
 interface ProfileScreenProps {
@@ -37,6 +37,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ route }) => {
   });
 
   const transaction = transactionDetailsQuery.data?.data.transaction;
+
+  console.log(transaction);
 
   if (transactionDetailsQuery.isLoading) return <TransactionsLoader />;
 
@@ -83,24 +85,20 @@ const Profile: React.FC<ProfileScreenProps> = ({ route }) => {
           position="middle"
           textRight={convertDateToReadable(transaction.created, false)}
         />
-        <ListItem
-          title="Subtotal"
-          position="middle"
-          textRight={`$${transaction.total.gross.amount}`}
-        />
-        <ListItem title="Taxes" position="middle" textRight={`$${transaction.total.tax.amount}`} />
-        <ListItem title="Total" position="bottom" textRight={`$${transaction.total.net.amount}`} />
+        <ListItem title="Subtotal" position="middle" textRight={`$${transaction.total.gross}`} />
+        <ListItem title="Taxes" position="middle" textRight={`$${transaction.total.tax}`} />
+        <ListItem title="Total" position="bottom" textRight={`$${transaction.total.net}`} />
 
         <Text variant="title">Billing Information</Text>
         <Text variant="subtitle">View the billing information provided</Text>
         <ListItem
           title="Billing Address"
-          textBottom={getSaleorAddressString(transaction.billingAddress)}
+          textBottom={getAddressString(transaction.billingAddress)}
         />
         <ListItem
           title="Shipping Address"
           position="bottom"
-          textBottom={getSaleorAddressString(transaction.shippingAddress)}
+          textBottom={getAddressString(transaction.shippingAddress)}
         />
 
         <Text variant="title">Order Updates</Text>

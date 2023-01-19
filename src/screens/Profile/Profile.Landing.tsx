@@ -15,7 +15,7 @@ import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
-import { stringifyVersion } from "@/lib/textUtil";
+import { stringifyVersion } from "@/lib/util/string";
 import { useInAppPurchases } from "@/contexts/InAppPurchases";
 
 interface ProfileScreenProps {

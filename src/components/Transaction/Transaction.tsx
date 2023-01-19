@@ -13,7 +13,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Chip from "@/components/Chip";
-import { trimToLength } from "@/lib/textUtil";
+import { trimToLength } from "@/lib/util/string";
 import IconButton from "@/components/IconButton";
 import { TransactionStatusMessages } from "@/lib/constants";
 

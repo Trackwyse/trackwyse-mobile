@@ -13,7 +13,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Chip from "@/components/Chip";
-import { trimToLength } from "@/lib/textUtil";
+import { trimToLength } from "@/lib/util/string";
 import IconButton from "../IconButton";
 
 interface LabelProps {
@@ -31,7 +31,7 @@ const Label: React.FC<LabelProps> = ({ label }) => {
     <View style={tw`mt-4`}>
       <TouchableOpacity
         style={tw`justify-between flex-row items-center`}
-        onPress={() => navigation.navigate("EditLabel", { labelId: label._id })}
+        onPress={() => navigation.navigate("EditLabel", { labelId: label.uniqueID })}
       >
         <View style={tw`flex-row items-center`}>
           <IconButton pressable={false} filled size={32} icon="locate-outline" />

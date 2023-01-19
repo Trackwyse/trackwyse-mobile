@@ -20,7 +20,7 @@ import Button from "@/components/Button";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
-import { getAddressString } from "@/lib/textUtil";
+import { getAddressString } from "@/lib/util/string";
 import { useDynamicLabels } from "@/contexts/DynamicLabels";
 import { validateFoundLabelDetailsInput } from "@/lib/validators";
 import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
@@ -52,7 +52,7 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
     validate: validateFoundLabelDetailsInput,
     onSubmit: (values) => {
       modificationMutation.mutate(
-        { ...values, id: foundLabel._id },
+        { ...values, id: foundLabel.uniqueID },
         {
           onSuccess: () => {
             Toast.show({

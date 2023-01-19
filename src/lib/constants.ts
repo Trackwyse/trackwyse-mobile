@@ -7,7 +7,7 @@
 
 import ExpoConstants from "expo-constants";
 
-import { stringifyVersion } from "@/lib/textUtil";
+import { stringifyVersion } from "@/lib/util/string";
 
 const AppConstants = {
   version: ExpoConstants.manifest?.version,

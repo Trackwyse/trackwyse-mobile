@@ -5,18 +5,12 @@ interface Transaction {
 }
 
 interface TransactionDetails extends Transaction {
-  billingAddress: SaleorAddress;
-  shippingAddress: SaleorAddress;
+  billingAddress: Address;
+  shippingAddress: Address;
   total: {
-    gross: {
-      amount: number;
-    };
-    net: {
-      amount: number;
-    };
-    tax: {
-      amount: number;
-    };
+    gross: number;
+    net: number;
+    tax: number;
   };
   lines: {
     productName: string;
@@ -26,14 +20,6 @@ interface TransactionDetails extends Transaction {
     date: Date;
     type: EventType;
   }[];
-}
-
-interface SaleorAddress {
-  streetAddress1: string;
-  streetAddress2: string;
-  city: string;
-  postalCode: string;
-  countryArea: string;
 }
 
 type EventType =

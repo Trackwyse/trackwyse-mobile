@@ -465,7 +465,8 @@ const validateUpdateUserPasswordInput = (updateUserPasswordInput: UpdateUserPass
   labelUrl must be in the format of trw://<labelId>
 */
 const validateLabelUrl = (labelUrl: string) => {
-  const labelUrlRegex = /^trw:\/\/[a-f\d]{24}$/i;
+  // const labelUrlRegex = /^trw:\/\/[a-f\d]{24}$/i;
+  const labelUrlRegex = /^trw:\/\/[a-f\d]{8}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{12}$/i;
 
   if (!labelUrlRegex.test(labelUrl)) {
     return false;

@@ -29,7 +29,7 @@ const FoundLabel: React.FC = () => {
       initialAddress={foundLabel.foundExactLocation}
       onSubmit={(values: AddressInput, addressInput: any) => {
         mutation.mutate(
-          { id: foundLabel._id, exactLocation: values },
+          { id: foundLabel.uniqueID, exactLocation: values },
           {
             onSuccess: ({ data }) => {
               setFoundLabel(data.label);

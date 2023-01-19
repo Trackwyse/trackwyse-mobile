@@ -19,7 +19,7 @@ import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
 import { PremiumHeader } from "@/components/Header";
-import { convertDateToReadable } from "@/lib/dateUtil";
+import { convertDateToReadable } from "@/lib/util/date";
 import PremiumLoader from "@/components/Loaders/Premium";
 import useRefreshControl from "@/hooks/useRefreshControl";
 

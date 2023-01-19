@@ -24,7 +24,7 @@ import ListItem from "@/components/ListItem";
 import { useLabels } from "@/contexts/Labels";
 import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
-import { convertDateToReadable } from "@/lib/dateUtil";
+import { convertDateToReadable } from "@/lib/util/date";
 // import ColorSelector from "@/components/ColorSelector";
 import useRefreshControl from "@/hooks/useRefreshControl";
 import { validateModifyLabelInput } from "@/lib/validators";
@@ -44,7 +44,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
   const [isUnsavedModalVisible, setIsUnsavedModalVisible] = useState(false);
   const [isDeletionModalVisible, setIsDeletionModalVisible] = useState(false);
 
-  const label = labels.find((label) => label._id === labelId) as Label;
+  const label = labels.find((label) => label.uniqueID === labelId) as Label;
 
   const modificationMutation = useMutation({
     mutationFn: (values: ModifyLabelInput) => {

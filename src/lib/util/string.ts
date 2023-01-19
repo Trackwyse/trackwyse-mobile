@@ -55,16 +55,6 @@ export const getAddressString = (address: Address) => {
   }, ${address.state} ${address.zip5}`;
 };
 
-export const getSaleorAddressString = (address: SaleorAddress) => {
-  // This function returns a string representation of the address
-  // convert the city tp title case
-  const city = address.city.charAt(0).toUpperCase() + address.city.slice(1).toLowerCase();
-
-  return `${address.streetAddress1}, ${
-    address.streetAddress2 ? `${address.streetAddress2}, ` : ""
-  }${city}, ${address.countryArea} ${address.postalCode}`;
-};
-
 // formats a number of seconds into a string of days, hours, and minutes
 // e.g. 3661 => "1 hour, 1 minute"
 export const formatSeconds = (seconds: number) => {

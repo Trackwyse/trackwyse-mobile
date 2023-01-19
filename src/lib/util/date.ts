@@ -23,6 +23,7 @@ export const convertDateToReadable = (date: Date | string, withTime: boolean = t
   });
 };
 
+//  Converts a given date to a string representing how long ago that date was.
 export const convertDateToTimePassed = (date: Date | string): string => {
   if (typeof date === "string") {
     date = new Date(date);

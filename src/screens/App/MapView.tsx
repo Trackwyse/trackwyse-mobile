@@ -20,7 +20,7 @@ import { useAuth } from "@/contexts/Auth";
 import InfoCard from "@/components/InfoCard";
 import useLocation from "@/hooks/useLocation";
 import Container from "@/components/Container";
-import { formatSeconds } from "@/lib/textUtil";
+import { formatSeconds } from "@/lib/util/string";
 import IconButton from "@/components/IconButton";
 import MapsLoader from "@/components/Loaders/Maps";
 
