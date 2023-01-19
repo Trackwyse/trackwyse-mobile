@@ -5,11 +5,13 @@
  * Copyright (c) 2023 Trackwyse
  */
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { RefreshControl, ScrollView, View } from "react-native";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
+import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import Container from "@/components/Container";
 import Transaction from "@/components/Transaction";
@@ -22,10 +24,13 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
   const { accessToken } = useAuth();
   const { refreshing, onRefresh } = useRefreshControl();
 
-  const transactionsQuery = useQuery({
+  const transactionsQuery = useInfiniteQuery({
     queryKey: ["transactions"],
-    queryFn: () => {
-      return api.getUserTransactions({}, accessToken);
+    queryFn: ({ pageParam }) => {
+      return api.getUserTransactions({ after: pageParam }, accessToken);
+    },
+    getNextPageParam: (lastPage) => {
+      return lastPage.data.pageInfo.hasNextPage ? lastPage.data.pageInfo.endCursor : undefined;
     },
   });
 
@@ -44,9 +49,28 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
           />
         }
       >
-        {transactionsQuery.data?.data?.transactions.map((transaction, index) => (
-          <Transaction key={index} transaction={transaction} />
-        ))}
+        {!transactionsQuery.data?.pages[0].data.transactions.length && (
+          <View>
+            <Text variant="title">No Transactions</Text>
+            <Text variant="subtitle">You have not completed any purchases yet</Text>
+          </View>
+        )}
+
+        {transactionsQuery.data?.pages.map((page, index) => {
+          return page.data.transactions.map((transaction, index) => (
+            <Transaction key={index} transaction={transaction} />
+          ));
+        })}
+
+        {transactionsQuery.hasNextPage && (
+          <Button
+            loading={transactionsQuery.isFetchingNextPage}
+            style={tw`mt-5`}
+            onPress={() => transactionsQuery.fetchNextPage()}
+          >
+            Load More
+          </Button>
+        )}
       </ScrollView>
     </Container>
   );

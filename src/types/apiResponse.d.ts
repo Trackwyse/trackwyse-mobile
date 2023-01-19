@@ -131,6 +131,7 @@ type GetDistanceAPIResponse = APIResponse & {
 
 type GetUserTransactionsAPIResponse = APIResponse & {
   data: {
+    pageInfo: PageInfo;
     transactions: Transaction[];
   };
 };

@@ -4,6 +4,11 @@ interface Transaction {
   status: string;
 }
 
+interface PageInfo {
+  hasNextPage: boolean;
+  endCursor: string;
+}
+
 interface TransactionDetails extends Transaction {
   billingAddress: Address;
   shippingAddress: Address;
