@@ -406,7 +406,12 @@ const RootStackNavigator: React.FC = () => {
     }
   }, [loading, isLoading, isValidVersion, fontsLoaded]);
 
-  if (loading || isLoading || !fontsLoaded) {
+  // This prevents the app from re-rendering after the user is loaded
+  if (loading && Object.keys(user).length === 0) {
+    return null;
+  }
+
+  if (isLoading || !fontsLoaded) {
     return null;
   }
 

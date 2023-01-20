@@ -25,7 +25,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
   const { refreshing, onRefresh } = useRefreshControl();
 
   const transactionsQuery = useInfiniteQuery({
-    queryKey: ["transactions"],
+    queryKey: ["transactions", accessToken],
     queryFn: ({ pageParam }) => {
       return api.getUserTransactions({ after: pageParam }, accessToken);
     },

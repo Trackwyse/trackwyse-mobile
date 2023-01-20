@@ -32,7 +32,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { refreshing, onRefresh } = useRefreshControl();
 
   const subscriptionQuery = useQuery({
-    queryKey: ["subscription"],
+    queryKey: ["subscription", accessToken],
     queryFn: () => {
       return api.getSubscription(accessToken);
     },

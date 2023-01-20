@@ -30,7 +30,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ route }) => {
   const { refreshing, onRefresh } = useRefreshControl();
 
   const transactionDetailsQuery = useQuery({
-    queryKey: ["transactionDetails", transactionID],
+    queryKey: ["transactionDetails", transactionID, accessToken],
     queryFn: () => {
       return api.getUserTransaction({ id: transactionID }, accessToken);
     },

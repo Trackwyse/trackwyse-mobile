@@ -19,18 +19,27 @@ import { PremiumHeader } from "@/components/Header";
 import { convertDateToReadable } from "@/lib/util/date";
 import PremiumLoader from "@/components/Loaders/Premium";
 import useRefreshControl from "@/hooks/useRefreshControl";
+import useAuthenticatedQuery from "@/hooks/useAuthenticatedQuery";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
 const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const { accessToken } = useAuth();
   const { refreshing, onRefresh } = useRefreshControl();
 
-  const subscriptionQuery = useQuery({
+  // const subscriptionQuery = useQuery({
+  //   queryKey: ["subscription", accessToken],
+  //   queryFn: () => {
+  //     return api.getSubscription(accessToken);
+  //   },
+  // });
+
+  const subscriptionQuery = useAuthenticatedQuery({
     queryKey: ["subscription"],
-    queryFn: () => {
+    queryFn: ({ queryKey }) => {
+      const [accessToken] = queryKey;
+
       return api.getSubscription(accessToken);
     },
   });

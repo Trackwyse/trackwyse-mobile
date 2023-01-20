@@ -17,6 +17,7 @@ interface AuthContextData {
   refreshToken: string;
 
   signOut: () => void;
+  fetchAccessToken: () => void;
   updateUser: (user: User) => void;
   updateAccessToken: (token: string) => void;
   updateRefreshToken: (token: string) => void;
@@ -129,6 +130,7 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
         signOut,
         accessToken,
         refreshToken,
+        fetchAccessToken,
         updateUser,
         updateAccessToken,
         updateRefreshToken,

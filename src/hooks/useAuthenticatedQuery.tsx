@@ -5,24 +5,49 @@
  * Copyright (c) 2023 Trackwyse
  */
 import { useAuth } from "@/contexts/Auth";
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { QueryKey, useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 
-const useAuthenticatedQuery = (options: UseQueryOptions) => {
-  const { accessToken } = useAuth();
+type MyQueryKey = [string, QueryKey];
 
-  const query = useQuery({
+const useAuthenticatedQuery = <
+  TQueryFnData = unknown,
+  TError = unknown,
+  TData = TQueryFnData,
+  TQueryKey extends QueryKey = MyQueryKey
+>(
+  options: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>
+) => {
+  const { accessToken, fetchAccessToken } = useAuth();
+
+  const queryKey = [accessToken, options.queryKey] as unknown as TQueryKey;
+
+  return useQuery({
     ...options,
-    queryFn: (queryCTX) => {
-      const newQueryCTX = {
-        ...queryCTX,
-        accessToken,
-      };
+    queryKey: queryKey,
+    retry: (failureCount, error) => {
+      if (failureCount > 2) {
+        return false;
+      }
 
-      return options.queryFn && options.queryFn(newQueryCTX);
+      if (!(error instanceof AxiosError)) {
+        return false;
+      }
+
+      if (error.response?.status != 401) {
+        return false;
+      }
+
+      if (error.response?.data?.message === "EXPIRED_TOKEN") {
+        // fetch access token and retry
+        fetchAccessToken();
+
+        return true;
+      }
+
+      return false;
     },
   });
-
-  return query;
 };
 
 export default useAuthenticatedQuery;
