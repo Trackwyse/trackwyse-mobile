@@ -56,7 +56,7 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     if (!refreshToken) {
-      return;
+      return setLoading(false);
     }
 
     fetchAccessToken();
@@ -64,7 +64,7 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     if (!accessToken) {
-      return;
+      return setLoading(false);
     }
 
     fetchUser();
