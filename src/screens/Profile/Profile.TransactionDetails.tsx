@@ -5,17 +5,16 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { useQuery } from "@tanstack/react-query";
 import { RefreshControl, ScrollView } from "react-native";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
-import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
 import { getAddressString } from "@/lib/util/string";
 import useRefreshControl from "@/hooks/useRefreshControl";
+import useAuthenticatedQuery from "@/hooks/useAuthenticatedQuery";
 import TransactionsLoader from "@/components/Loaders/Transactions";
 import { convertDateToReadable, convertDateToTimePassed } from "@/lib/util/date";
 import { EventStatusMessages, TransactionStatusMessages } from "@/lib/constants";
@@ -25,20 +24,19 @@ interface ProfileScreenProps {
 }
 
 const Profile: React.FC<ProfileScreenProps> = ({ route }) => {
-  const { accessToken } = useAuth();
   const { transactionID } = route.params;
   const { refreshing, onRefresh } = useRefreshControl();
 
-  const transactionDetailsQuery = useQuery({
-    queryKey: ["transactionDetails", transactionID, accessToken],
-    queryFn: () => {
+  const transactionDetailsQuery = useAuthenticatedQuery({
+    queryKey: ["transactionDetails", transactionID],
+    queryFn: ({ queryKey }) => {
+      const [accessToken] = queryKey;
+
       return api.getUserTransaction({ id: transactionID }, accessToken);
     },
   });
 
   const transaction = transactionDetailsQuery.data?.data.transaction;
-
-  console.log(transaction);
 
   if (transactionDetailsQuery.isLoading) return <TransactionsLoader />;
 

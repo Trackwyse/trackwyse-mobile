@@ -30,6 +30,7 @@ import useRefreshControl from "@/hooks/useRefreshControl";
 import { validateModifyLabelInput } from "@/lib/validators";
 import { colors } from "@/components/ColorSelector/ColorSelector";
 import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 interface ModifyLabelScreenProps {
   route: any;
@@ -51,6 +52,11 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
       return api.modifyLabel(values, accessToken);
     },
   });
+  // const modificationMutation = useAuthenticatedMutation({
+  //   mutationFn: (values: ModifyLabelInput) => {
+  //     return api.modifyLabel(values, accessToken);
+  //   },
+  // })
 
   const deletionMutation = useMutation({
     mutationFn: () => {

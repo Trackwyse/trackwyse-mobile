@@ -5,14 +5,12 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { useQuery } from "@tanstack/react-query";
 import { View, ScrollView, RefreshControl } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
-import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
 import { PremiumHeader } from "@/components/Header";
@@ -27,13 +25,6 @@ interface ProfileScreenProps {
 
 const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { refreshing, onRefresh } = useRefreshControl();
-
-  // const subscriptionQuery = useQuery({
-  //   queryKey: ["subscription", accessToken],
-  //   queryFn: () => {
-  //     return api.getSubscription(accessToken);
-  //   },
-  // });
 
   const subscriptionQuery = useAuthenticatedQuery({
     queryKey: ["subscription"],
