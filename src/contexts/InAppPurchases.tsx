@@ -8,11 +8,11 @@
 import { AxiosError } from "axios";
 import * as RNIAP from "react-native-iap";
 import { EmitterSubscription } from "react-native";
-import { useMutation } from "@tanstack/react-query";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 import api from "@/api";
 import { useAuth } from "@/contexts/Auth";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 interface InAppPurchasesData {
   restoring: boolean;
@@ -35,9 +35,9 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
   const purchaseUpdateSubscription = useRef<EmitterSubscription | null>(null);
   const purchaseErrorSubscription = useRef<EmitterSubscription | null>(null);
 
-  const createSubscriptionMutation = useMutation({
+  const createSubscriptionMutation = useAuthenticatedMutation({
     mutationFn: async (values: CreateSubscriptionInput) => {
-      return api.createSubscription(values, accessToken);
+      return api.createSubscription(values);
     },
   });
 

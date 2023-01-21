@@ -71,10 +71,12 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
     if (refreshToken) {
       fetchAccessTokenMutation.mutate(undefined, {
         onSuccess: ({ data }) => {
+          console.log("Access token fetched successfully");
           setAccessToken(data.accessToken);
         },
-        onError: () => {
+        onError: (e) => {
           setAccessToken("");
+          console.log(e);
         },
       });
     } else {

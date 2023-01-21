@@ -32,7 +32,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ route }) => {
     queryFn: ({ queryKey }) => {
       const [accessToken] = queryKey;
 
-      return api.getUserTransaction({ id: transactionID }, accessToken);
+      return api.getUserTransaction({ id: transactionID, accessToken });
     },
   });
 

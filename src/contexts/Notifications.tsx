@@ -14,6 +14,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import api from "@/api";
 import { useAuth } from "@/contexts/Auth";
 import { useLabels } from "@/contexts/Labels";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 type RootStackParamList = {
   EditLabel: { labelId: string } | undefined;
@@ -39,13 +40,13 @@ RNNotifications.setNotificationHandler({
 
 const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const { getLabels } = useLabels();
-  const { user, accessToken, updateUser } = useAuth();
+  const { accessToken, user, updateUser } = useAuth();
 
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const mutation = useMutation({
+  const mutation = useAuthenticatedMutation({
     mutationFn: (values: UpdateUserInput) => {
-      return api.updateUser(values, accessToken);
+      return api.updateUser(values);
     },
   });
 

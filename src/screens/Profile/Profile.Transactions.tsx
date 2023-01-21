@@ -27,7 +27,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
   const transactionsQuery = useInfiniteQuery({
     queryKey: ["transactions", accessToken],
     queryFn: ({ pageParam }) => {
-      return api.getUserTransactions({ after: pageParam }, accessToken);
+      return api.getUserTransactions({ after: pageParam, accessToken });
     },
     getNextPageParam: (lastPage) => {
       return lastPage.data.pageInfo.hasNextPage ? lastPage.data.pageInfo.endCursor : undefined;

@@ -5,42 +5,45 @@
  * Copyright (c) 2023 Trackwyse
  */
 import Toast from "react-native-toast-message";
-import { useMutation } from "@tanstack/react-query";
 
 import api from "@/api";
 import Text from "@/components/Text";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import Container from "@/components/Container";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 interface ProfileScreenProps {}
 
 const Profile: React.FC<ProfileScreenProps> = ({}) => {
   const { user, accessToken } = useAuth();
 
-  const setPremiumMutation = useMutation({
-    mutationFn: () => {
-      return api.setPremium({ id: user.id }, accessToken);
+  const setPremiumMutation = useAuthenticatedMutation({
+    mutationFn: (values) => {
+      return api.setPremium({ id: user.id, ...values });
     },
   });
 
   const handleSetPremium = () => {
-    setPremiumMutation.mutate(undefined, {
-      onSuccess: () => {
-        Toast.show({
-          type: "success",
-          text1: "Success",
-          text2: "User is now premium",
-        });
-      },
-      onError: () => {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "Something went wrong",
-        });
-      },
-    });
+    setPremiumMutation.mutate(
+      {},
+      {
+        onSuccess: () => {
+          Toast.show({
+            type: "success",
+            text1: "Success",
+            text2: "User is now premium",
+          });
+        },
+        onError: () => {
+          Toast.show({
+            type: "error",
+            text1: "Error",
+            text2: "Something went wrong",
+          });
+        },
+      }
+    );
   };
 
   return (

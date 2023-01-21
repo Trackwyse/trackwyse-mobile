@@ -9,7 +9,6 @@ import { useFormik } from "formik";
 import Modal from "react-native-modal";
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
-import { useMutation } from "@tanstack/react-query";
 import { View, RefreshControl } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -19,7 +18,6 @@ import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import { useLabels } from "@/contexts/Labels";
 import Container from "@/components/Container";
@@ -39,7 +37,6 @@ interface ModifyLabelScreenProps {
 
 const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) => {
   const { labelId } = route.params;
-  const { accessToken } = useAuth();
   const { refreshing, onRefresh } = useRefreshControl();
   const { labels, updateLabel, deleteLabel, getLabels } = useLabels();
   const [isUnsavedModalVisible, setIsUnsavedModalVisible] = useState(false);
@@ -47,26 +44,21 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
 
   const label = labels.find((label) => label.uniqueID === labelId) as Label;
 
-  const modificationMutation = useMutation({
+  const modificationMutation = useAuthenticatedMutation({
     mutationFn: (values: ModifyLabelInput) => {
-      return api.modifyLabel(values, accessToken);
-    },
-  });
-  // const modificationMutation = useAuthenticatedMutation({
-  //   mutationFn: (values: ModifyLabelInput) => {
-  //     return api.modifyLabel(values, accessToken);
-  //   },
-  // })
-
-  const deletionMutation = useMutation({
-    mutationFn: () => {
-      return api.deleteLabel({ id: labelId }, accessToken);
+      return api.modifyLabel(values);
     },
   });
 
-  const recoveryMutation = useMutation({
-    mutationFn: () => {
-      return api.recoverLabel({ id: labelId }, accessToken);
+  const deletionMutation = useAuthenticatedMutation({
+    mutationFn: (values: DeleteLabelInput) => {
+      return api.deleteLabel(values);
+    },
+  });
+
+  const recoveryMutation = useAuthenticatedMutation({
+    mutationFn: (values: RecoverLabelInput) => {
+      return api.recoverLabel(values);
     },
   });
 
@@ -106,45 +98,51 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
   });
 
   const onDeleteLabel = () => {
-    deletionMutation.mutate(undefined, {
-      onSuccess: () => {
-        navigation.navigate("Home");
-        deleteLabel(label);
-        Toast.show({
-          type: "success",
-          text1: "Label Deleted",
-          text2: "Your label has been deleted successfully",
-        });
-      },
-      onError: (err) => {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "There was an error deleting your label",
-        });
-      },
-    });
+    deletionMutation.mutate(
+      { id: labelId },
+      {
+        onSuccess: () => {
+          navigation.navigate("Home");
+          deleteLabel(label);
+          Toast.show({
+            type: "success",
+            text1: "Label Deleted",
+            text2: "Your label has been deleted successfully",
+          });
+        },
+        onError: (err) => {
+          Toast.show({
+            type: "error",
+            text1: "Error",
+            text2: "There was an error deleting your label",
+          });
+        },
+      }
+    );
   };
 
   const onRecoverLabel = () => {
-    recoveryMutation.mutate(undefined, {
-      onSuccess: ({ data }) => {
-        navigation.navigate("Home");
-        updateLabel(data.label);
-        Toast.show({
-          type: "success",
-          text1: "Label Recovered",
-          text2: "Your label has been recovered successfully",
-        });
-      },
-      onError: (err) => {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "There was an error recovering your label",
-        });
-      },
-    });
+    recoveryMutation.mutate(
+      { id: labelId },
+      {
+        onSuccess: ({ data }) => {
+          navigation.navigate("Home");
+          updateLabel(data.label);
+          Toast.show({
+            type: "success",
+            text1: "Label Recovered",
+            text2: "Your label has been recovered successfully",
+          });
+        },
+        onError: (err) => {
+          Toast.show({
+            type: "error",
+            text1: "Error",
+            text2: "There was an error recovering your label",
+          });
+        },
+      }
+    );
   };
 
   // Update the header to include a deletion button

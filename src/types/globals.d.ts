@@ -99,3 +99,7 @@ interface Distance {
   staticTravelTimeSeconds: number;
   transportType: "Automobile" | "Transit" | "Walking";
 }
+
+interface AccessToken {
+  accessToken?: string;
+}

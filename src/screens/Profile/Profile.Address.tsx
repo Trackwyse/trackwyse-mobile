@@ -6,18 +6,18 @@
  */
 
 import Toast from "react-native-toast-message";
-import { useMutation } from "@tanstack/react-query";
 
 import api from "@/api";
 import { useAuth } from "@/contexts/Auth";
 import AddressInput from "@/components/AddressInput";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 const Profile: React.FC = () => {
-  const { user, accessToken, updateUser } = useAuth();
+  const { user, updateUser } = useAuth();
 
-  const mutation = useMutation({
+  const mutation = useAuthenticatedMutation({
     mutationFn: async (values: UpdateUserInput) => {
-      return api.updateUser(values, accessToken);
+      return api.updateUser(values);
     },
   });
 

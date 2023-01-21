@@ -7,7 +7,6 @@
 
 import { AxiosError } from "axios";
 import Toast from "react-native-toast-message";
-import { useMutation } from "@tanstack/react-query";
 import { View, ScrollView, RefreshControl } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -15,7 +14,6 @@ import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Button from "@/components/Button";
-import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
 import { PremiumHeader } from "@/components/Header";
@@ -23,13 +21,13 @@ import { convertDateToReadable } from "@/lib/util/date";
 import PremiumLoader from "@/components/Loaders/Premium";
 import useRefreshControl from "@/hooks/useRefreshControl";
 import useAuthenticatedQuery from "@/hooks/useAuthenticatedQuery";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
 const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const { accessToken } = useAuth();
   const { refreshing, onRefresh } = useRefreshControl();
 
   const subscriptionQuery = useAuthenticatedQuery({
@@ -41,38 +39,41 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
     },
   });
 
-  const claimMutation = useMutation({
-    mutationFn: () => {
-      return api.claimFreeLabels(accessToken);
+  const claimMutation = useAuthenticatedMutation({
+    mutationFn: (values) => {
+      return api.claimFreeLabels(values.accessToken as string);
     },
   });
 
   const onClaim = async () => {
-    claimMutation.mutate(undefined, {
-      onSuccess: () => {
-        subscriptionQuery.refetch();
-        Toast.show({
-          type: "success",
-          text1: "Success",
-          text2: "You have successfully claimed your free labels.",
-        });
-      },
-      onError: (error) => {
-        if (error instanceof AxiosError) {
+    claimMutation.mutate(
+      {},
+      {
+        onSuccess: () => {
+          subscriptionQuery.refetch();
           Toast.show({
-            type: "error",
-            text1: "Error",
-            text2: error.response?.data.message,
+            type: "success",
+            text1: "Success",
+            text2: "You have successfully claimed your free labels.",
           });
-        } else {
-          Toast.show({
-            type: "error",
-            text1: "Error",
-            text2: "Something went wrong. Please try again later.",
-          });
-        }
-      },
-    });
+        },
+        onError: (error) => {
+          if (error instanceof AxiosError) {
+            Toast.show({
+              type: "error",
+              text1: "Error",
+              text2: error.response?.data.message,
+            });
+          } else {
+            Toast.show({
+              type: "error",
+              text1: "Error",
+              text2: "Something went wrong. Please try again later.",
+            });
+          }
+        },
+      }
+    );
   };
 
   const { freeLabelsLastRedeemed, freeLabelsNextRedeemable, freeLabelsRedeemable } =

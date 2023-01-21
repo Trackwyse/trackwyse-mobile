@@ -7,7 +7,6 @@
 
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
-import { useMutation } from "@tanstack/react-query";
 import { KeyboardAvoidingView, View } from "react-native";
 
 import api from "@/api";
@@ -19,19 +18,20 @@ import Hyperlink from "@/components/Hyperlink";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import { validateVerifyInput } from "@/lib/validators";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 const Verify: React.FC = () => {
-  const { user, updateUser, accessToken } = useAuth();
+  const { user, updateUser } = useAuth();
 
-  const verificationMutation = useMutation({
+  const verificationMutation = useAuthenticatedMutation({
     mutationFn: (values: VerifyInput) => {
-      return api.verifyEmail(values, accessToken);
+      return api.verifyEmail(values);
     },
   });
 
-  const reverificationMutation = useMutation({
-    mutationFn: () => {
-      return api.reverifyEmail(accessToken);
+  const reverificationMutation = useAuthenticatedMutation({
+    mutationFn: (values) => {
+      return api.reverifyEmail(values.accessToken as string);
     },
   });
 
@@ -44,13 +44,13 @@ const Verify: React.FC = () => {
     validate: validateVerifyInput,
     onSubmit: (values) => {
       verificationMutation.mutate(values, {
-        onSuccess: ({ data }) => {
+        onSuccess: () => {
           updateUser({
             ...user,
             verified: true,
           });
         },
-        onError: (error) => {
+        onError: () => {
           verifyInput.setErrors({
             verificationToken: "Invalid verification code",
           });
@@ -63,20 +63,23 @@ const Verify: React.FC = () => {
   });
 
   const onReverifyPress = () => {
-    reverificationMutation.mutate(undefined, {
-      onSuccess: () => {
-        Toast.show({
-          type: "success",
-          text1: "Reverification email sent",
-          text2: "Please check your email for the verification code",
-        });
-      },
-      onError: () => {
-        verifyInput.setErrors({
-          verificationToken: "Verification code already sent. Please wait 5 minutes.",
-        });
-      },
-    });
+    reverificationMutation.mutate(
+      {},
+      {
+        onSuccess: () => {
+          Toast.show({
+            type: "success",
+            text1: "Reverification email sent",
+            text2: "Please check your email for the verification code",
+          });
+        },
+        onError: () => {
+          verifyInput.setErrors({
+            verificationToken: "Verification code already sent. Please wait 5 minutes.",
+          });
+        },
+      }
+    );
   };
 
   const onSubmit = () => {

@@ -8,34 +8,32 @@
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { Camera, CameraType } from "expo-camera";
-import { useMutation } from "@tanstack/react-query";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { View, ActivityIndicator } from "react-native";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
-import { useAuth } from "@/contexts/Auth";
 import { useLabels } from "@/contexts/Labels";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import Permissions from "@/components/Permissions";
 import { validateLabelUrl } from "@/lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 interface AddLabelScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
 const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
-  const { accessToken } = useAuth();
   const { createLabel } = useLabels();
   const [hasBeenScanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
-  const mutation = useMutation({
+  const mutation = useAuthenticatedMutation({
     mutationFn: (values: AddLabelInput) => {
-      return api.addLabel(values, accessToken);
+      return api.addLabel(values);
     },
   });
 

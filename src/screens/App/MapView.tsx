@@ -9,20 +9,19 @@ import * as RNLinking from "expo-linking";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { View, SafeAreaView } from "react-native";
 import { useRef, useMemo, useEffect } from "react";
-import { useMutation } from "@tanstack/react-query";
 import RNMapView, { Marker } from "react-native-maps";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
 import Button from "@/components/Button";
-import { useAuth } from "@/contexts/Auth";
 import InfoCard from "@/components/InfoCard";
 import useLocation from "@/hooks/useLocation";
 import Container from "@/components/Container";
 import { formatSeconds } from "@/lib/util/string";
 import IconButton from "@/components/IconButton";
 import MapsLoader from "@/components/Loaders/Maps";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 interface MapViewProps {
   route: any;
@@ -30,17 +29,16 @@ interface MapViewProps {
 }
 
 const MapView: React.FC<MapViewProps> = ({ route, navigation }) => {
-  const { accessToken } = useAuth();
   const { location, loading } = useLocation();
   const snapPoints = useMemo(() => ["45%"], []);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { address }: { address: LabelAddress } = route.params;
 
-  const distanceMutation = useMutation({
-    mutationFn: () => {
+  const distanceMutation = useAuthenticatedMutation({
+    mutationFn: (variables) => {
       const origin = `${location?.coords.latitude},${location?.coords.longitude}`;
       const destination = `${address.latitude},${address.longitude}`;
-      return api.getDistance({ origin, destination }, accessToken);
+      return api.getDistance({ origin, destination, accessToken: variables.accessToken });
     },
   });
 
@@ -56,7 +54,7 @@ const MapView: React.FC<MapViewProps> = ({ route, navigation }) => {
 
   useEffect(() => {
     if (!loading) {
-      distanceMutation.mutate();
+      distanceMutation.mutate({});
     }
   }, [loading]);
 

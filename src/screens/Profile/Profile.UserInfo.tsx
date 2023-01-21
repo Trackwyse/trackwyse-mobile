@@ -7,7 +7,6 @@
 
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
-import { useMutation } from "@tanstack/react-query";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -20,17 +19,18 @@ import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
 import { validateUpdateUserInput } from "@/lib/validators";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
 const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const { user, accessToken, updateUser } = useAuth();
+  const { user, updateUser } = useAuth();
 
-  const mutation = useMutation({
+  const mutation = useAuthenticatedMutation({
     mutationFn: async (values: UpdateUserInput) => {
-      return api.updateUser(values, accessToken);
+      return api.updateUser(values);
     },
   });
 

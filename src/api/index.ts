@@ -100,8 +100,8 @@ const register = (value: RegisterInput): Promise<RegisterAPIResponse> => {
     - error: boolean
     - message: string
 */
-const verifyEmail = (values: VerifyInput, accessToken: string): Promise<VerifyEmailAPIResponse> => {
-  const { verificationToken } = values;
+const verifyEmail = (values: VerifyInput): Promise<VerifyEmailAPIResponse> => {
+  const { verificationToken, accessToken } = values;
 
   return apiClient.post(
     "/auth/v1/verify",
@@ -204,8 +204,8 @@ const getUser = (accessToken: string): Promise<UserAPIResponse> => {
     - error: boolean
     - message: string
 */
-const addLabel = (values: AddLabelInput, accessToken: string): Promise<AddLabelAPIResponse> => {
-  const { id } = values;
+const addLabel = (values: AddLabelInput): Promise<AddLabelAPIResponse> => {
+  const { id, accessToken } = values;
 
   return apiClient.post(
     `/api/v1/labels/add/${id}`,
@@ -253,11 +253,8 @@ const getLabels = (accessToken: string): Promise<GetLabelsAPIResponse> => {
     - error: boolean
     - message: string
 */
-const modifyLabel = (
-  values: ModifyLabelInput,
-  accessToken: string
-): Promise<ModifyLabelAPIResponse> => {
-  const { id, name, color, message, phoneNumber } = values;
+const modifyLabel = (values: ModifyLabelInput): Promise<ModifyLabelAPIResponse> => {
+  const { id, name, color, message, phoneNumber, accessToken } = values;
 
   return apiClient.patch(
     `/api/v1/labels/modify/${id}`,
@@ -285,11 +282,8 @@ const modifyLabel = (
     - error: boolean
     - message: string
 */
-const deleteLabel = (
-  values: DeleteLabelInput,
-  accessToken: string
-): Promise<DeleteLabelAPIResponse> => {
-  const { id } = values;
+const deleteLabel = (values: DeleteLabelInput): Promise<DeleteLabelAPIResponse> => {
+  const { id, accessToken } = values;
 
   return apiClient.delete(`/api/v1/labels/delete/${id}`, {
     headers: {
@@ -405,10 +399,9 @@ const resetPassword = (values: ResetPasswordInput): Promise<ResetPasswordAPIResp
     - message: string
     - user: User
 */
-const updateUser = async (
-  values: UpdateUserInput,
-  accessToken: string
-): Promise<UpdateUserAPIResponse> => {
+const updateUser = async (values: UpdateUserInput): Promise<UpdateUserAPIResponse> => {
+  const { accessToken } = values;
+
   return apiClient.patch("/api/v1/user/update", values, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -431,10 +424,9 @@ const updateUser = async (
     - message: string
 */
 const updateUserPassword = async (
-  values: UpdateUserPasswordInput,
-  accessToken: string
+  values: UpdateUserPasswordInput
 ): Promise<UpdateUserPasswordAPIResponse> => {
-  const { currentPassword, newPassword } = values;
+  const { currentPassword, newPassword, accessToken } = values;
 
   return apiClient.post(
     "/api/v1/user/update-password",
@@ -464,10 +456,9 @@ const updateUserPassword = async (
     - message: string
 */
 const deleteUserAccount = async (
-  values: DeleteUserAccountInput,
-  accessToken: string
+  values: DeleteUserAccountInput
 ): Promise<DeleteUserAccountAPIResponse> => {
-  const { password } = values;
+  const { password, accessToken } = values;
 
   return apiClient.delete("/api/v1/user/delete-account", {
     headers: {
@@ -490,11 +481,8 @@ const deleteUserAccount = async (
     - message: string
     - label
 */
-const recoverLabel = async (
-  values: RecoverLabelInput,
-  accessToken: string
-): Promise<RecoverLabelAPIResponse> => {
-  const { id } = values;
+const recoverLabel = async (values: RecoverLabelInput): Promise<RecoverLabelAPIResponse> => {
+  const { id, accessToken } = values;
 
   return apiClient.post(
     `/api/v1/labels/recovered/${id}`,
@@ -543,10 +531,9 @@ const getSubscription = async (accessToken: string): Promise<GetSubscriptionAPIR
     - user: User
 */
 const createSubscription = async (
-  values: CreateSubscriptionInput,
-  accessToken: string
+  values: CreateSubscriptionInput
 ): Promise<CreateSubscriptionAPIResponse> => {
-  const { receipt } = values;
+  const { receipt, accessToken } = values;
 
   return apiClient.post(
     "/api/v1/subscription/create",
@@ -598,15 +585,14 @@ const claimFreeLabels = async (accessToken: string): Promise<ClaimFreeLabelsAPIR
     - message: string
     - distance: Distance
 */
-const getDistance = async (
-  values: GetDistanceInput,
-  accessToken: string
-): Promise<GetDistanceAPIResponse> => {
+const getDistance = async (values: GetDistanceInput): Promise<GetDistanceAPIResponse> => {
+  const { origin, destination, accessToken } = values;
+
   return apiClient.post(
     "/api/v1/location/distance",
     {
-      origin: values.origin,
-      destination: values.destination,
+      origin,
+      destination,
     },
     {
       headers: {
@@ -628,9 +614,10 @@ const getDistance = async (
     - transactions: Transaction[]
 */
 const getUserTransactions = async (
-  input: GetUserTransactionsInput,
-  accessToken: string
+  input: GetUserTransactionsInput
 ): Promise<GetUserTransactionsAPIResponse> => {
+  const { accessToken } = input;
+
   return apiClient.get("/api/v1/transactions", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -653,10 +640,9 @@ const getUserTransactions = async (
     - transaction: TransactionDetails
 */
 const getUserTransaction = async (
-  input: GetUserTransactionInput,
-  accessToken: string
+  input: GetUserTransactionInput
 ): Promise<GetUserTransactionAPIResponse> => {
-  const { id } = input;
+  const { id, accessToken } = input;
 
   return apiClient.get(`/api/v1/transactions/${id}`, {
     headers: {
@@ -679,11 +665,8 @@ const getUserTransaction = async (
     - error: boolean
     - message: string
 */
-const setPremium = async (
-  input: SetPremiumInput,
-  accessToken: string
-): Promise<SetPremiumAPIResponse> => {
-  const { id, expiresIn } = input;
+const setPremium = async (input: SetPremiumInput): Promise<SetPremiumAPIResponse> => {
+  const { id, expiresIn, accessToken } = input;
 
   return apiClient.post(
     "/api/v1/admin/set-premium",

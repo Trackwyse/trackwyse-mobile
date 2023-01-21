@@ -8,7 +8,6 @@
 import { useState } from "react";
 import { View } from "react-native";
 import Toast from "react-native-toast-message";
-import { useMutation } from "@tanstack/react-query";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
@@ -20,16 +19,17 @@ import BadgeButton from "@/components/BadgeButton";
 import PrivacyPolicy from "@/components/PrivacyPolicy";
 import TermsOfService from "@/components/TermsOfService";
 import useBottomSheetRef from "@/hooks/useBottomSheetRef";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 const AcceptTerms: React.FC = () => {
-  const { user, updateUser, accessToken } = useAuth();
+  const { user, updateUser } = useAuth();
   const [selected, setSelected] = useState<boolean>(false);
   const { open: openPrivacyPolicy, bottomSheetRef: privacyPolicyRef } = useBottomSheetRef();
   const { open: openTermsOfService, bottomSheetRef: termsOfServiceRef } = useBottomSheetRef();
 
-  const mutation = useMutation({
-    mutationFn: () => {
-      return api.acceptTerms(accessToken);
+  const mutation = useAuthenticatedMutation({
+    mutationFn: (values) => {
+      return api.acceptTerms(values.accessToken as string);
     },
   });
 
@@ -38,27 +38,30 @@ const AcceptTerms: React.FC = () => {
   };
 
   const onSubmit = () => {
-    mutation.mutate(undefined, {
-      onSuccess: () => {
-        updateUser({
-          ...user,
-          termsAccepted: true,
-        });
+    mutation.mutate(
+      {},
+      {
+        onSuccess: () => {
+          updateUser({
+            ...user,
+            termsAccepted: true,
+          });
 
-        Toast.show({
-          type: "success",
-          text1: "Success",
-          text2: "Thank you for accepting our terms and conditions",
-        });
-      },
-      onError: () => {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "Something went wrong",
-        });
-      },
-    });
+          Toast.show({
+            type: "success",
+            text1: "Success",
+            text2: "Thank you for accepting our terms and conditions",
+          });
+        },
+        onError: () => {
+          Toast.show({
+            type: "error",
+            text1: "Error",
+            text2: "Something went wrong",
+          });
+        },
+      }
+    );
   };
 
   return (

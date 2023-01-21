@@ -29,27 +29,27 @@ interface ResetPasswordInput {
   resetToken: string;
 }
 
-interface AddLabelInput {
+interface AddLabelInput extends AccessToken {
   id: string;
 }
 
-interface DeleteLabelInput {
+interface DeleteLabelInput extends AccessToken {
   id: string;
 }
 
-interface RecoverLabelInput {
+interface RecoverLabelInput extends AccessToken {
   id: string;
 }
 
-interface VerifyInput {
+interface VerifyInput extends AccessToken {
   verificationToken: string;
 }
 
-interface CreateSubscriptionInput {
+interface CreateSubscriptionInput extends AccessToken {
   receipt: string;
 }
 
-interface ModifyLabelInput {
+interface ModifyLabelInput extends AccessToken {
   id?: string;
   name?: string;
   color?: number;
@@ -64,7 +64,7 @@ interface FoundLabelDetailsInput {
   recoveryLocation?: AddressInput;
 }
 
-interface UpdateUserInput {
+interface UpdateUserInput extends AccessToken {
   firstName?: string;
   lastName?: string;
   email?: string;
@@ -77,11 +77,11 @@ interface UpdateUserInput {
   zip5?: string;
 }
 
-interface DeleteUserAccountInput {
+interface DeleteUserAccountInput extends AccessToken {
   password: string;
 }
 
-interface UpdateUserPasswordInput {
+interface UpdateUserPasswordInput extends AccessToken {
   currentPassword: string;
   newPassword: string;
   confirmPassword: string;
@@ -95,23 +95,23 @@ interface AddressInput {
   zip5?: string;
 }
 
-interface GetDistanceInput {
+interface GetDistanceInput extends AccessToken {
   origin: string;
   destination: string;
 }
 
-interface SetPremiumInput {
+interface SetPremiumInput extends AccessToken {
   id: string;
   expiresIn?: number;
 }
 
-interface GetUserTransactionsInput {
+interface GetUserTransactionsInput extends AccessToken {
   first?: number;
   after?: string;
   last?: number;
   before?: string;
 }
 
-interface GetUserTransactionInput {
+interface GetUserTransactionInput extends AccessToken {
   id: string;
 }

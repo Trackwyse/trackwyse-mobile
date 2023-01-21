@@ -8,7 +8,6 @@
 import { AxiosError } from "axios";
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
-import { useMutation } from "@tanstack/react-query";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -17,20 +16,18 @@ import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-import { useAuth } from "@/contexts/Auth";
 import Container from "@/components/Container";
 import { validateUpdateUserPasswordInput } from "@/lib/validators";
+import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
 const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const { accessToken } = useAuth();
-
-  const mutation = useMutation({
+  const mutation = useAuthenticatedMutation({
     mutationFn: async (values: UpdateUserPasswordInput) => {
-      return api.updateUserPassword(values, accessToken);
+      return api.updateUserPassword(values);
     },
   });
 
