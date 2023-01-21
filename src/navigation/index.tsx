@@ -45,6 +45,7 @@ import ProfileRate from "@/screens/Profile/Profile.Rate";
 import ProfileHelp from "@/screens/Profile/Profile.Help";
 import ProfileAbout from "@/screens/Profile/Profile.About";
 import ProfileAdmin from "@/screens/Profile/Profile.Admin";
+import ProfileDelete from "@/screens/Profile/Profile.Delete";
 import ProfileLanding from "@/screens/Profile/Profile.Landing";
 import ProfilePremium from "@/screens/Profile/Profile.Premium";
 import ProfileAddress from "@/screens/Profile/Profile.Address";
@@ -301,6 +302,11 @@ const AppStackNavigator: React.FC = () => {
             name="ProfileUserInfo"
             component={ProfileUserInfo}
             options={{ title: "User Info" }}
+          />
+          <Stack.Screen
+            name="ProfileDelete"
+            component={ProfileDelete}
+            options={{ title: "Delete Account" }}
           />
           <Stack.Screen
             name="ProfileNotifications"

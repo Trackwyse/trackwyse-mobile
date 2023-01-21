@@ -17,6 +17,7 @@ interface AuthContextData {
   refreshToken: string;
 
   signOut: () => void;
+  removeAllData: () => void;
   fetchAccessToken: () => void;
   updateUser: (user: User) => void;
   updateAccessToken: (token: string) => void;
@@ -123,6 +124,13 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
     }
   };
 
+  const removeAllData = async () => {
+    await AsyncStorage.clear();
+    updateAccessToken("");
+    updateRefreshToken("");
+    updateUser({} as User);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -130,6 +138,7 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
         signOut,
         accessToken,
         refreshToken,
+        removeAllData,
         fetchAccessToken,
         updateUser,
         updateAccessToken,

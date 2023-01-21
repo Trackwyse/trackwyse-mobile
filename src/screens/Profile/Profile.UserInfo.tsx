@@ -138,6 +138,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           position="bottom"
           textColor="red"
           style={tw`mb-10`}
+          onPress={() => navigation.navigate("ProfileDelete")}
         />
       </KeyboardAwareScrollView>
     </Container>
