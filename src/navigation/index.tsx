@@ -53,7 +53,6 @@ import ProfilePremium from "@/screens/Profile/Profile.Premium";
 import ProfileAddress from "@/screens/Profile/Profile.Address";
 import ProfilePassword from "@/screens/Profile/Profile.Password";
 import ProfileUserInfo from "@/screens/Profile/Profile.UserInfo";
-import ProfilePurchase from "@/screens/Profile/Profile.Purchase";
 import ProfileDeveloper from "@/screens/Profile/Profile.Developer";
 import ProfileTransactions from "@/screens/Profile/Profile.Transactions";
 import ProfilePremiumClaim from "@/screens/Profile/Profile.PremiumClaim";
@@ -459,11 +458,6 @@ const ProfileStackNavigator: React.FC = () => {
         name="ProfilePremiumClaim"
         component={ProfilePremiumClaim}
         options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ProfilePurchase"
-        component={ProfilePurchase}
-        options={{ title: "Purchase" }}
       />
 
       <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
