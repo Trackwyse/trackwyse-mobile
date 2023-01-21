@@ -63,6 +63,8 @@ import ProfileTransactionDetails from "@/screens/Profile/Profile.TransactionDeta
 
 import StoreLanding from "@/screens/Store/Store.Landing";
 
+import CheckoutCart from "@/screens/Checkout/Checkout.Cart";
+
 import ForgotPasswordLanding from "@/screens/Auth/ForgotPassword.Landing";
 import ForgotPasswordAction from "@/screens/Auth/ForgotPassword.Action";
 import ForgotPasswordReset from "@/screens/Auth/ForgotPassword.Reset";
@@ -73,14 +75,13 @@ import AcceptTermsLanding from "@/screens/Terms/AcceptTerms.Landing";
 import VerificationAction from "@/screens/Verification/Verification.Action";
 import VerificationLanding from "@/screens/Verification/Verification.Landing";
 
+import tw from "@/lib/tailwind";
 import { useAuth } from "@/contexts/Auth";
 import IconButton from "@/components/IconButton";
 import useVersioning from "@/hooks/useVersioning";
 import { LabelsProvider } from "@/contexts/Labels";
 import NotificationsProvider from "@/contexts/Notifications";
 import NavigationWithBack from "@/components/Navigation/NavigationBackArrow";
-import tw from "@/lib/tailwind";
-import { View } from "react-native-animatable";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -270,8 +271,8 @@ const AppTabNavigator: React.FC = () => {
             }}
           />
           <Tab.Screen
-            name="Cart"
-            component={StoreStackNavigator}
+            name="Checkout"
+            component={CheckoutStackNavigator}
             options={{
               tabBarLabel: "Cart",
               tabBarIcon: ({ color, focused }) => {
@@ -365,6 +366,11 @@ const AppStackNavigator: React.FC = () => {
   );
 };
 
+/*
+  Stack navigator for the store screens.
+  This is a stack navigator that is part of the
+  AppTabNavigator.
+*/
 const StoreStackNavigator: React.FC = () => {
   return (
     <Stack.Navigator
@@ -373,6 +379,23 @@ const StoreStackNavigator: React.FC = () => {
       })}
     >
       <Stack.Screen name="StoreLanding" component={StoreLanding} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+};
+
+/*
+  Stack navigator for the checkout screens.
+  This is a stack navigator that is part of the
+  AppTabNavigator.
+*/
+const CheckoutStackNavigator: React.FC = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={({ navigation }) => ({
+        headerLeft: () => <NavigationWithBack navigation={navigation} />,
+      })}
+    >
+      <Stack.Screen name="CheckoutCart" component={CheckoutCart} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
