@@ -23,6 +23,8 @@ import {
 } from "@expo-google-fonts/poppins";
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Home from "@/screens/App/Home";
@@ -59,6 +61,8 @@ import ProfileNotifications from "@/screens/Profile/Profile.Notifications";
 import ProfilePremiumSettings from "@/screens/Profile/Profile.PremiumSettings";
 import ProfileTransactionDetails from "@/screens/Profile/Profile.TransactionDetails";
 
+import StoreLanding from "@/screens/Store/Store.Landing";
+
 import ForgotPasswordLanding from "@/screens/Auth/ForgotPassword.Landing";
 import ForgotPasswordAction from "@/screens/Auth/ForgotPassword.Action";
 import ForgotPasswordReset from "@/screens/Auth/ForgotPassword.Reset";
@@ -75,7 +79,10 @@ import useVersioning from "@/hooks/useVersioning";
 import { LabelsProvider } from "@/contexts/Labels";
 import NotificationsProvider from "@/contexts/Notifications";
 import NavigationWithBack from "@/components/Navigation/NavigationBackArrow";
+import tw from "@/lib/tailwind";
+import { View } from "react-native-animatable";
 
+const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 /*
@@ -226,10 +233,72 @@ const AcceptTermsStackNavigator: React.FC = () => {
 };
 
 /*
-  Stack navigator for the app screens.
-  This is a separate stack navigator because the user
-  must be authenticated and verified before they can use
-  the app.
+  Tab navigator for the app screens.
+  This is a tab navigator that is the root navigator
+*/
+const AppTabNavigator: React.FC = () => {
+  return (
+    <LabelsProvider>
+      <NotificationsProvider>
+        <Tab.Navigator
+          screenOptions={{
+            headerShown: false,
+
+            tabBarStyle: { paddingTop: 10 },
+            tabBarActiveTintColor: tw.color("primary-200"),
+            tabBarInactiveTintColor: tw.color("gray-400"),
+          }}
+        >
+          <Tab.Screen
+            name="App"
+            component={AppStackNavigator}
+            options={{
+              tabBarLabel: "Home",
+              tabBarIcon: ({ color, focused }) => {
+                return <Ionicons name="home" size={26} color={color} />;
+              },
+            }}
+          />
+          <Tab.Screen
+            name="Store"
+            component={StoreStackNavigator}
+            options={{
+              tabBarLabel: "Store",
+              tabBarIcon: ({ color, focused }) => {
+                return <Ionicons name="pricetags" size={26} color={color} />;
+              },
+            }}
+          />
+          <Tab.Screen
+            name="Cart"
+            component={StoreStackNavigator}
+            options={{
+              tabBarLabel: "Cart",
+              tabBarIcon: ({ color, focused }) => {
+                return <Ionicons name="cart" size={26} color={color} />;
+              },
+            }}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={ProfileStackNavigator}
+            options={{
+              tabBarLabel: "Profile",
+              tabBarIcon: ({ color }) => {
+                return <Ionicons name="person" size={26} color={color} />;
+              },
+            }}
+          />
+        </Tab.Navigator>
+      </NotificationsProvider>
+    </LabelsProvider>
+  );
+};
+
+/*
+  Stack navigator for the home screens.
+  This is a stack navigator that is part of the 
+  AppTabNavigator.
 */
 const AppStackNavigator: React.FC = () => {
   return (
@@ -244,9 +313,7 @@ const AppStackNavigator: React.FC = () => {
             name="Home"
             component={Home}
             options={{
-              title: "",
-              headerShadowVisible: false,
-              headerLeft: () => <></>,
+              headerShown: false,
             }}
           />
           <Stack.Screen name="MapView" component={MapView} options={{ headerShown: false }} />
@@ -292,89 +359,114 @@ const AppStackNavigator: React.FC = () => {
               headerRight: () => <IconButton icon="trash-outline" color="firebrick" />,
             })}
           />
-
-          <Stack.Screen
-            name="ProfileLanding"
-            component={ProfileLanding}
-            options={{ title: "Profile" }}
-          />
-          <Stack.Screen
-            name="ProfileUserInfo"
-            component={ProfileUserInfo}
-            options={{ title: "User Info" }}
-          />
-          <Stack.Screen
-            name="ProfileDelete"
-            component={ProfileDelete}
-            options={{ title: "Delete Account" }}
-          />
-          <Stack.Screen
-            name="ProfileNotifications"
-            component={ProfileNotifications}
-            options={{ title: "Notifications" }}
-          />
-          <Stack.Screen
-            name="ProfileTransactions"
-            component={ProfileTransactions}
-            options={{ title: "Transactions" }}
-          />
-          <Stack.Screen
-            name="ProfileTransactionDetails"
-            component={ProfileTransactionDetails}
-            options={{ title: "Transaction Details" }}
-          />
-
-          <Stack.Screen
-            name="ProfilePremium"
-            component={ProfilePremium}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ProfilePremiumSettings"
-            component={ProfilePremiumSettings}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ProfilePremiumClaim"
-            component={ProfilePremiumClaim}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ProfilePurchase"
-            component={ProfilePurchase}
-            options={{ title: "Purchase" }}
-          />
-
-          <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
-          <Stack.Screen name="ProfileRate" component={ProfileRate} options={{ title: "Rate" }} />
-          <Stack.Screen name="ProfileHelp" component={ProfileHelp} options={{ title: "Help" }} />
-          <Stack.Screen
-            name="ProfilePassword"
-            component={ProfilePassword}
-            options={{ title: "Password" }}
-          />
-          <Stack.Screen
-            name="ProfileAddress"
-            component={ProfileAddress}
-            options={{ title: "Address" }}
-          />
-          {__DEV__ && (
-            <Stack.Screen
-              name="ProfileDeveloper"
-              component={ProfileDeveloper}
-              options={{ title: "Developer" }}
-            />
-          )}
-          {__DEV__ && (
-            <Stack.Screen
-              name="ProfileAdmin"
-              component={ProfileAdmin}
-              options={{ title: "Admin" }}
-            />
-          )}
         </Stack.Navigator>
       </NotificationsProvider>
     </LabelsProvider>
+  );
+};
+
+const StoreStackNavigator: React.FC = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={({ navigation }) => ({
+        headerLeft: () => <NavigationWithBack navigation={navigation} />,
+      })}
+    >
+      <Stack.Screen name="StoreLanding" component={StoreLanding} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+};
+
+/*
+  Stack navigator for the profile screens.
+  This is a stack navigator that is part of the 
+  AppTabNavigator.
+*/
+const ProfileStackNavigator: React.FC = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={({ navigation }) => ({
+        headerLeft: () => <NavigationWithBack navigation={navigation} />,
+      })}
+    >
+      <Stack.Screen
+        name="ProfileLanding"
+        component={ProfileLanding}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ProfileUserInfo"
+        component={ProfileUserInfo}
+        options={{ title: "User Info" }}
+      />
+      <Stack.Screen
+        name="ProfileDelete"
+        component={ProfileDelete}
+        options={{ title: "Delete Account" }}
+      />
+      <Stack.Screen
+        name="ProfileNotifications"
+        component={ProfileNotifications}
+        options={{ title: "Notifications" }}
+      />
+      <Stack.Screen
+        name="ProfileTransactions"
+        component={ProfileTransactions}
+        options={{ title: "Transactions" }}
+      />
+      <Stack.Screen
+        name="ProfileTransactionDetails"
+        component={ProfileTransactionDetails}
+        options={{ title: "Transaction Details" }}
+      />
+
+      <Stack.Screen
+        name="ProfilePremium"
+        component={ProfilePremium}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ProfilePremiumSettings"
+        component={ProfilePremiumSettings}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ProfilePremiumClaim"
+        component={ProfilePremiumClaim}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ProfilePurchase"
+        component={ProfilePurchase}
+        options={{ title: "Purchase" }}
+      />
+
+      <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
+      <Stack.Screen name="ProfileRate" component={ProfileRate} options={{ title: "Rate" }} />
+      <Stack.Screen name="ProfileHelp" component={ProfileHelp} options={{ title: "Help" }} />
+      <Stack.Screen
+        name="ProfilePassword"
+        component={ProfilePassword}
+        options={{ title: "Password" }}
+      />
+      <Stack.Screen
+        name="ProfileAddress"
+        component={ProfileAddress}
+        options={{ title: "Address" }}
+      />
+      {__DEV__ && (
+        <Stack.Screen
+          name="ProfileDeveloper"
+          component={ProfileDeveloper}
+          options={{ title: "Developer" }}
+        />
+      )}
+      {__DEV__ && (
+        <Stack.Screen name="ProfileAdmin" component={ProfileAdmin} options={{ title: "Admin" }} />
+      )}
+    </Stack.Navigator>
   );
 };
 
@@ -433,7 +525,7 @@ const RootStackNavigator: React.FC = () => {
     return <AcceptTermsStackNavigator />;
   }
 
-  return <AppStackNavigator />;
+  return <AppTabNavigator />;
 };
 
 export default RootStackNavigator;

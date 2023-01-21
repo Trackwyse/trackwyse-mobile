@@ -37,22 +37,9 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
   return (
     <SafeAreaView>
       <Container>
-        <View style={tw`flex-row justify-between items-center mb-8`}>
-          <Text style={tw`font-bold text-3xl`}>
-            Welcome {trimToLength(user?.firstName, 8) || ""}
-          </Text>
-          <IconButton
-            icon="ios-settings-sharp"
-            size={25}
-            filled
-            onPress={() => navigation.navigate("ProfileLanding")}
-          />
-        </View>
-
         <FlatList
-          style={tw`mb-32`}
           data={labels}
-          ListHeaderComponent={<ListHeader navigation={navigation} firstLabel={labels[0]} />}
+          ListHeaderComponent={<ListHeader navigation={navigation} user={user} />}
           showsVerticalScrollIndicator={false}
           renderItem={({ item: label }) => <Label label={label} />}
           ListFooterComponent={<View style={tw`h-32`} />} // Add padding to bottom of list
@@ -66,15 +53,18 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
 };
 
 interface ListHeaderProps {
-  firstLabel: Label | undefined;
+  user: User;
   navigation: NativeStackNavigationProp<any>;
 }
 
-const ListHeader: React.FC<ListHeaderProps> = ({ navigation }) => {
+const ListHeader: React.FC<ListHeaderProps> = ({ user, navigation }) => {
   const bannerColor = useMemo(() => getRandomColor(), []);
 
   return (
     <View>
+      <View style={tw`my-8`}>
+        <Text style={tw`font-bold text-3xl`}>Welcome {trimToLength(user?.firstName, 8) || ""}</Text>
+      </View>
       {/* TODO: Move to component */}
       <Banner
         title="Do more with Trackwyse Plus"
