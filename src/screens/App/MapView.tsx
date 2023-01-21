@@ -124,10 +124,10 @@ const MapView: React.FC<MapViewProps> = ({ route, navigation }) => {
                 )}
               </View>
               <View>
-                <Button color="secondary" size="lg" onPress={onGoogleMapsPress}>
+                <Button color="secondary" onPress={onGoogleMapsPress}>
                   Open in Google Maps
                 </Button>
-                <Button size="lg" style={tw`mt-4 mb-8`} onPress={onAppleMapsPress}>
+                <Button style={tw`mt-4 mb-4`} onPress={onAppleMapsPress}>
                   Open in Apple Maps
                 </Button>
               </View>

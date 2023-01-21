@@ -5,7 +5,6 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { useMemo } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { View, SafeAreaView, FlatList, TouchableOpacity, RefreshControl } from "react-native";
 
@@ -14,7 +13,6 @@ import Text from "@/components/Text";
 
 import Label from "@/components/Label";
 import { useAuth } from "@/contexts/Auth";
-import { getRandomColor } from "@/lib/random";
 import { useLabels } from "@/contexts/Labels";
 import { trimToLength } from "@/lib/util/string";
 import Container from "@/components/Container";
@@ -22,6 +20,7 @@ import Banner from "@/components/Banner/Banner";
 import IconButton from "@/components/IconButton";
 import HomeLoader from "@/components/Loaders/Home";
 import useRefreshControl from "@/hooks/useRefreshControl";
+import useRandomBannerColor from "@/hooks/useRandomBannerColor";
 
 interface HomeProps {
   navigation: NativeStackNavigationProp<any>;
@@ -39,10 +38,10 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
       <Container>
         <FlatList
           data={labels}
+          contentContainerStyle={tw`pb-10`}
           ListHeaderComponent={<ListHeader navigation={navigation} user={user} />}
           showsVerticalScrollIndicator={false}
           renderItem={({ item: label }) => <Label label={label} />}
-          ListFooterComponent={<View style={tw`h-32`} />} // Add padding to bottom of list
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={() => onRefresh(getLabels)} />
           }
@@ -58,11 +57,11 @@ interface ListHeaderProps {
 }
 
 const ListHeader: React.FC<ListHeaderProps> = ({ user, navigation }) => {
-  const bannerColor = useMemo(() => getRandomColor(), []);
+  const bannerColor = useRandomBannerColor();
 
   return (
     <View>
-      <View style={tw`my-8`}>
+      <View style={tw`mt-12 mb-8`}>
         <Text style={tw`font-bold text-3xl`}>Welcome {trimToLength(user?.firstName, 8) || ""}</Text>
       </View>
       {/* TODO: Move to component */}
