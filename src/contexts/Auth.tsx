@@ -55,10 +55,18 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
   }, []);
 
   useEffect(() => {
+    if (!refreshToken) {
+      return;
+    }
+
     fetchAccessToken();
   }, [refreshToken]);
 
   useEffect(() => {
+    if (!accessToken) {
+      return;
+    }
+
     fetchUser();
   }, [accessToken]);
 
