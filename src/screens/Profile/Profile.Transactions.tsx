@@ -17,6 +17,7 @@ import Container from "@/components/Container";
 import Transaction from "@/components/Transaction";
 import useRefreshControl from "@/hooks/useRefreshControl";
 import TransactionsLoader from "@/components/Loaders/Transactions";
+import EmptyState from "@/components/EmptyState";
 
 interface ProfileScreenProps {}
 
@@ -41,7 +42,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={tw`h-full`}
-        contentContainerStyle={tw`pb-20`}
+        contentContainerStyle={tw`pb-20 min-h-full`}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -50,10 +51,10 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
         }
       >
         {!transactionsQuery.data?.pages[0].data.transactions.length && (
-          <View>
-            <Text variant="title">No Transactions</Text>
-            <Text variant="subtitle">You have not completed any purchases yet</Text>
-          </View>
+          <EmptyState
+            title="No Purchases"
+            subtitle="You have not created any purchases yet. Checkout our Store!"
+          />
         )}
 
         {transactionsQuery.data?.pages.map((page, index) => {

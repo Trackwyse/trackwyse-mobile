@@ -18,7 +18,7 @@ const Checkout: React.FC<CheckoutScreenProps> = ({}) => {
       <Container>
         <ScrollView showsVerticalScrollIndicator={false} style={tw`w-full h-full`}>
           <View style={tw`mt-12 mb-8`}>
-            <Text style={tw`font-bold text-3xl`}>Cart</Text>
+            <Text style={tw`font-bold text-3xl`}>Checkout</Text>
           </View>
         </ScrollView>
       </Container>

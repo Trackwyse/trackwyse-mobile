@@ -46,7 +46,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView>
       <Container>
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={tw`pb-20`}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={tw`pb-10`}>
           <Text style={tw`mb-3 mt-6 text-base text-gray-400 uppercase`}>User Settings</Text>
           <ListItem
             pressable
@@ -104,19 +104,12 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           />
 
           <Text style={tw`mb-3 mt-6 text-base text-gray-400 uppercase`}>Support</Text>
-          <ListItem
-            pressable
-            title="Purchase Trackers"
-            iconLeft="cart-outline"
-            position="top"
-            iconRight="md-chevron-forward-outline"
-            onPress={() => handleItemPress("ProfilePurchase")}
-          />
+
           <ListItem
             pressable
             title="Rate Trackwyse"
             iconLeft="star-outline"
-            position="middle"
+            position="top"
             iconRight="md-chevron-forward-outline"
             onPress={() => handleItemPress("ProfileRate")}
           />

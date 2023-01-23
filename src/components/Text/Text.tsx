@@ -19,7 +19,7 @@ interface TextWithDefaultProps extends RNText {
 
 const textVariantStyles = {
   default: "font-regular",
-  title: "text-2xl font-bold",
+  title: "text-2xl font-semibold",
   subtitle: "text-gray-400 text-base ",
   premium_title: "text-2xl font-medium",
   premium_subtitle: "text-gray-400 text-base",

@@ -53,7 +53,6 @@ import ProfilePremium from "@/screens/Profile/Profile.Premium";
 import ProfileAddress from "@/screens/Profile/Profile.Address";
 import ProfilePassword from "@/screens/Profile/Profile.Password";
 import ProfileUserInfo from "@/screens/Profile/Profile.UserInfo";
-import ProfilePurchase from "@/screens/Profile/Profile.Purchase";
 import ProfileDeveloper from "@/screens/Profile/Profile.Developer";
 import ProfileTransactions from "@/screens/Profile/Profile.Transactions";
 import ProfilePremiumClaim from "@/screens/Profile/Profile.PremiumClaim";
@@ -255,7 +254,7 @@ const AppTabNavigator: React.FC = () => {
             component={AppStackNavigator}
             options={{
               tabBarLabel: "Home",
-              tabBarIcon: ({ color, focused }) => {
+              tabBarIcon: ({ color }) => {
                 return <Ionicons name="home" size={26} color={color} />;
               },
             }}
@@ -265,7 +264,7 @@ const AppTabNavigator: React.FC = () => {
             component={StoreStackNavigator}
             options={{
               tabBarLabel: "Store",
-              tabBarIcon: ({ color, focused }) => {
+              tabBarIcon: ({ color }) => {
                 return <Ionicons name="pricetags" size={26} color={color} />;
               },
             }}
@@ -274,8 +273,8 @@ const AppTabNavigator: React.FC = () => {
             name="Checkout"
             component={CheckoutStackNavigator}
             options={{
-              tabBarLabel: "Cart",
-              tabBarIcon: ({ color, focused }) => {
+              tabBarLabel: "Checkout",
+              tabBarIcon: ({ color }) => {
                 return <Ionicons name="cart" size={26} color={color} />;
               },
             }}
@@ -459,11 +458,6 @@ const ProfileStackNavigator: React.FC = () => {
         name="ProfilePremiumClaim"
         component={ProfilePremiumClaim}
         options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ProfilePurchase"
-        component={ProfilePurchase}
-        options={{ title: "Purchase" }}
       />
 
       <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
