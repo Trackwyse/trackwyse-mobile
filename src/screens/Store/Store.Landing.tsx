@@ -4,6 +4,7 @@
  *
  * Copyright (c) 2023 Trackwyse
  */
+
 import { SafeAreaView, ScrollView, View } from "react-native";
 
 import tw from "@/lib/tailwind";

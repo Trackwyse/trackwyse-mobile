@@ -60,9 +60,12 @@ import ProfileNotifications from "@/screens/Profile/Profile.Notifications";
 import ProfilePremiumSettings from "@/screens/Profile/Profile.PremiumSettings";
 import ProfileTransactionDetails from "@/screens/Profile/Profile.TransactionDetails";
 
+import StoreProduct from "@/screens/Store/Store.Product";
 import StoreLanding from "@/screens/Store/Store.Landing";
 
-import CheckoutCart from "@/screens/Checkout/Checkout.Cart";
+import CheckoutLanding from "@/screens/Checkout/Checkout.Landing";
+import CheckoutAddress from "@/screens/Checkout/Checkout.Address";
+import CheckoutBilling from "@/screens/Checkout/Checkout.Billing";
 
 import ForgotPasswordLanding from "@/screens/Auth/ForgotPassword.Landing";
 import ForgotPasswordAction from "@/screens/Auth/ForgotPassword.Action";
@@ -378,6 +381,7 @@ const StoreStackNavigator: React.FC = () => {
       })}
     >
       <Stack.Screen name="StoreLanding" component={StoreLanding} options={{ headerShown: false }} />
+      <Stack.Screen name="StoreProduct" component={StoreProduct} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
@@ -394,7 +398,21 @@ const CheckoutStackNavigator: React.FC = () => {
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
-      <Stack.Screen name="CheckoutCart" component={CheckoutCart} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="CheckoutLanding"
+        component={CheckoutLanding}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CheckoutAddress"
+        component={CheckoutAddress}
+        options={{ title: "Address" }}
+      />
+      <Stack.Screen
+        name="CheckoutBilling"
+        component={CheckoutBilling}
+        options={{ title: "Billing" }}
+      />
     </Stack.Navigator>
   );
 };
