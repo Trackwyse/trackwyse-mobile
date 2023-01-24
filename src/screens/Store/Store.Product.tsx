@@ -9,13 +9,10 @@ import { SafeAreaView, ScrollView } from "react-native";
 
 import tw from "@/lib/tailwind";
 import Container from "@/components/Container";
-import useRandomBannerColor from "@/hooks/useRandomBannerColor";
 
 interface StoreScreenProps {}
 
 const Store: React.FC<StoreScreenProps> = ({}) => {
-  const bannerColor = useRandomBannerColor();
-
   return (
     <SafeAreaView>
       <Container>
