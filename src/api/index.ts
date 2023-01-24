@@ -652,10 +652,16 @@ const getUserTransactions = async (
     - message: string
     - products: Product[]
 */
-const getStoreProducts = async (accessToken: string): Promise<GetStoreProductsAPIResponse> => {
+const getStoreProducts = async (
+  input: GetStoreProductsInput,
+  accessToken: string
+): Promise<GetStoreProductsAPIResponse> => {
   return apiClient.get("/api/v1/store/products", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+    },
+    params: {
+      ...input,
     },
   });
 };

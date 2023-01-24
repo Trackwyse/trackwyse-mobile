@@ -1,0 +1,177 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2023-01-23 23:21:00
+count workspace : c:\Users\Jack\Desktop\Current\trackwyse-mobile
+total files : 153
+total code lines : 40270
+total comment lines : 1442
+total blank lines : 4302
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |          .json|          21562|              0|              3|     54|
+   |            .js|            104|              2|              6|   0.26|
+   |            .ts|           1333|            620|            271|    3.3|
+   |           .tsx|           5498|            779|            870|     14|
+   |          .lock|           6127|             21|           1647|     15|
+   |               |             13|              0|              1|  0.032|
+   |           .log|           5625|             20|           1504|     14|
+   |            .md|              8|              0|              0|  0.020|
+   -------------------------------------------------------------------------
+.expo\devices.json, code is 44, comment is 0, blank is 0.
+.expo\packager-info.json, code is 3, comment is 0, blank is 0.
+.expo\README.md, code is 8, comment is 0, blank is 0.
+.expo\settings.json, code is 10, comment is 0, blank is 0.
+.gitignore, code is 13, comment is 0, blank is 1.
+app.config.js, code is 45, comment is 0, blank is 3.
+assets\adaptive-icon.png, it is a binary file.
+assets\favicon.png, it is a binary file.
+assets\icon-dev.png, it is a binary file.
+assets\icon.png, it is a binary file.
+assets\splash-dev.png, it is a binary file.
+assets\splash.png, it is a binary file.
+babel.config.js, code is 14, comment is 0, blank is 1.
+eas.json, code is 21, comment is 0, blank is 0.
+package-lock.json, code is 21399, comment is 0, blank is 3.
+package.json, code is 74, comment is 0, blank is 0.
+src\api\content.ts, code is 37, comment is 58, blank is 13.
+src\api\index.ts, code is 362, comment is 346, blank is 56.
+src\App.tsx, code is 49, comment is 6, blank is 9.
+src\assets\diamond.png, it is a binary file.
+src\assets\index.ts, code is 8, comment is 6, blank is 2.
+src\assets\labelOrange.png, it is a binary file.
+src\assets\labelPink.png, it is a binary file.
+src\assets\labelYellow.png, it is a binary file.
+src\assets\tag.png, it is a binary file.
+src\components\AddressInput\AddressInput.tsx, code is 102, comment is 6, blank is 7.
+src\components\AddressInput\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\BadgeButton\BadgeButton.tsx, code is 54, comment is 9, blank is 13.
+src\components\BadgeButton\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Banner\Banner.tsx, code is 33, comment is 6, blank is 5.
+src\components\Banner\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Button\Button.tsx, code is 60, comment is 7, blank is 10.
+src\components\Button\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Chip\Chip.tsx, code is 22, comment is 6, blank is 7.
+src\components\Chip\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Collapsable\Collapsable.tsx, code is 33, comment is 6, blank is 8.
+src\components\Collapsable\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\ColorSelector\ColorSelector.tsx, code is 81, comment is 6, blank is 7.
+src\components\ColorSelector\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Container\Container.tsx, code is 18, comment is 6, blank is 5.
+src\components\Container\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\EmptyState\EmptyState.tsx, code is 20, comment is 6, blank is 5.
+src\components\EmptyState\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Header\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Header\PremiumHeader.tsx, code is 37, comment is 6, blank is 5.
+src\components\Hyperlink\Hyperlink.tsx, code is 19, comment is 6, blank is 6.
+src\components\Hyperlink\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\IconButton\IconButton.tsx, code is 38, comment is 6, blank is 6.
+src\components\IconButton\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\InfoCard\index.tsx, code is 2, comment is 0, blank is 1.
+src\components\InfoCard\InfoCard.tsx, code is 24, comment is 0, blank is 5.
+src\components\Input\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Input\input.tsx, code is 71, comment is 7, blank is 13.
+src\components\Label\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Label\Label.tsx, code is 41, comment is 6, blank is 8.
+src\components\LandingCarousel\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\LandingCarousel\LandingCarousel.tsx, code is 64, comment is 6, blank is 6.
+src\components\ListItem\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\ListItem\ListItem.tsx, code is 77, comment is 6, blank is 7.
+src\components\Loaders\Home.tsx, code is 28, comment is 6, blank is 4.
+src\components\Loaders\Legal.tsx, code is 18, comment is 14, blank is 4.
+src\components\Loaders\Maps.tsx, code is 14, comment is 14, blank is 5.
+src\components\Loaders\Premium.tsx, code is 18, comment is 14, blank is 4.
+src\components\Loaders\Store.tsx, code is 34, comment is 6, blank is 4.
+src\components\Loaders\Transactions.tsx, code is 23, comment is 14, blank is 4.
+src\components\LoadingRect\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\LoadingRect\LoadingRect.tsx, code is 51, comment is 14, blank is 9.
+src\components\Modals\UnsavedChanges.tsx, code is 47, comment is 6, blank is 5.
+src\components\Multiselect\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Multiselect\Multiselect.tsx, code is 53, comment is 6, blank is 6.
+src\components\Navigation\NavigationBackArrow.tsx, code is 28, comment is 6, blank is 6.
+src\components\Permissions\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Permissions\Permissions.tsx, code is 15, comment is 6, blank is 4.
+src\components\PrivacyPolicy\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\PrivacyPolicy\PrivacyPolicy.tsx, code is 53, comment is 6, blank is 9.
+src\components\Product\index.tsx, code is 0, comment is 0, blank is 0.
+src\components\Product\Product.tsx, code is 0, comment is 0, blank is 0.
+src\components\TermsOfService\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\TermsOfService\TermsOfService.tsx, code is 53, comment is 6, blank is 9.
+src\components\Text\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Text\Text.tsx, code is 47, comment is 11, blank is 9.
+src\components\Transaction\index.tsx, code is 2, comment is 6, blank is 2.
+src\components\Transaction\Transaction.tsx, code is 45, comment is 6, blank is 8.
+src\contexts\Auth.tsx, code is 134, comment is 6, blank is 26.
+src\contexts\DynamicLabels.tsx, code is 30, comment is 13, blank is 10.
+src\contexts\InAppPurchases.tsx, code is 132, comment is 8, blank is 28.
+src\contexts\Labels.tsx, code is 100, comment is 12, blank is 16.
+src\contexts\Notifications.tsx, code is 142, comment is 9, blank is 37.
+src\contexts\PostHog.tsx, code is 14, comment is 0, blank is 2.
+src\hooks\useAuthenticatedQuery.tsx, code is 36, comment is 7, blank is 10.
+src\hooks\useBottomSheetRef.tsx, code is 17, comment is 6, blank is 6.
+src\hooks\useLinking.tsx, code is 20, comment is 0, blank is 4.
+src\hooks\useLocation.tsx, code is 22, comment is 6, blank is 8.
+src\hooks\useRandomBannerColor.tsx, code is 7, comment is 0, blank is 3.
+src\hooks\useRefreshControl.tsx, code is 14, comment is 6, blank is 5.
+src\hooks\useVersioning.tsx, code is 36, comment is 6, blank is 9.
+src\lib\constants.ts, code is 89, comment is 6, blank is 6.
+src\lib\queryClient.ts, code is 36, comment is 6, blank is 5.
+src\lib\random.ts, code is 14, comment is 0, blank is 2.
+src\lib\tailwind.ts, code is 3, comment is 6, blank is 3.
+src\lib\util\date.ts, code is 43, comment is 11, blank is 6.
+src\lib\util\string.ts, code is 37, comment is 25, blank is 9.
+src\lib\validators.ts, code is 269, comment is 126, blank is 94.
+src\navigation\index.tsx, code is 478, comment is 54, blank is 34.
+src\screens\App\AddLabel.tsx, code is 103, comment is 6, blank is 18.
+src\screens\App\FoundLabel.Details.tsx, code is 210, comment is 16, blank is 23.
+src\screens\App\FoundLabel.ExactLocation.tsx, code is 54, comment is 7, blank is 9.
+src\screens\App\FoundLabel.RecoveryLocation.tsx, code is 54, comment is 7, blank is 9.
+src\screens\App\FoundLabel.Scan.tsx, code is 110, comment is 6, blank is 17.
+src\screens\App\Home.tsx, code is 111, comment is 6, blank is 16.
+src\screens\App\MapView.tsx, code is 123, comment is 8, blank is 13.
+src\screens\App\ModifyLabel.tsx, code is 179, comment is 14, blank is 15.
+src\screens\Auth\ForgotPassword.Action.tsx, code is 52, comment is 6, blank is 7.
+src\screens\Auth\ForgotPassword.Landing.tsx, code is 18, comment is 6, blank is 5.
+src\screens\Auth\ForgotPassword.Reset.tsx, code is 63, comment is 6, blank is 8.
+src\screens\Auth\Landing.tsx, code is 59, comment is 6, blank is 9.
+src\screens\Auth\Login.tsx, code is 97, comment is 6, blank is 13.
+src\screens\Auth\Register.Step1.tsx, code is 112, comment is 7, blank is 13.
+src\screens\Auth\Register.Step2.tsx, code is 56, comment is 7, blank is 9.
+src\screens\Checkout\Checkout.Address.tsx, code is 14, comment is 6, blank is 5.
+src\screens\Checkout\Checkout.Billing.tsx, code is 14, comment is 6, blank is 5.
+src\screens\Checkout\Checkout.Landing.tsx, code is 24, comment is 6, blank is 5.
+src\screens\Profile\Profile.About.tsx, code is 53, comment is 6, blank is 12.
+src\screens\Profile\Profile.Address.tsx, code is 51, comment is 7, blank is 9.
+src\screens\Profile\Profile.Admin.tsx, code is 44, comment is 6, blank is 7.
+src\screens\Profile\Profile.Delete.tsx, code is 60, comment is 6, blank is 6.
+src\screens\Profile\Profile.Developer.tsx, code is 12, comment is 6, blank is 4.
+src\screens\Profile\Profile.Help.tsx, code is 37, comment is 6, blank is 8.
+src\screens\Profile\Profile.Landing.tsx, code is 156, comment is 6, blank is 15.
+src\screens\Profile\Profile.Notifications.tsx, code is 12, comment is 6, blank is 4.
+src\screens\Profile\Profile.Password.tsx, code is 62, comment is 6, blank is 8.
+src\screens\Profile\Profile.Premium.tsx, code is 86, comment is 6, blank is 9.
+src\screens\Profile\Profile.PremiumClaim.tsx, code is 145, comment is 6, blank is 17.
+src\screens\Profile\Profile.PremiumSettings.tsx, code is 89, comment is 6, blank is 13.
+src\screens\Profile\Profile.Rate.tsx, code is 6, comment is 6, blank is 4.
+src\screens\Profile\Profile.TransactionDetails.tsx, code is 136, comment is 6, blank is 13.
+src\screens\Profile\Profile.Transactions.tsx, code is 64, comment is 6, blank is 9.
+src\screens\Profile\Profile.UserInfo.tsx, code is 130, comment is 6, blank is 12.
+src\screens\Store\Store.Landing.tsx, code is 53, comment is 6, blank is 10.
+src\screens\Store\Store.Product.tsx, code is 14, comment is 6, blank is 5.
+src\screens\Terms\AcceptTerms.Action.tsx, code is 81, comment is 6, blank is 12.
+src\screens\Terms\AcceptTerms.Landing.tsx, code is 28, comment is 6, blank is 7.
+src\screens\Verification\Verification.Action.tsx, code is 108, comment is 7, blank is 15.
+src\screens\Verification\Verification.Landing.tsx, code is 18, comment is 6, blank is 5.
+src\types\apiResponse.d.ts, code is 114, comment is 6, blank is 30.
+src\types\cmsResponse.d.ts, code is 67, comment is 6, blank is 5.
+src\types\globals.d.ts, code is 80, comment is 12, blank is 15.
+src\types\inputs.d.ts, code is 98, comment is 6, blank is 20.
+src\types\saleor.d.ts, code is 76, comment is 0, blank is 5.
+tailwind.config.js, code is 45, comment is 2, blank is 2.
+tsconfig.json, code is 11, comment is 0, blank is 0.
+yarn-error.log, code is 5625, comment is 20, blank is 1504.
+yarn.lock, code is 6127, comment is 21, blank is 1647.
+===============================================================================

@@ -16,8 +16,8 @@ interface Product {
         amount;
         currency;
       };
-    };
-  };
+    }[];
+  }[];
 }
 
 interface PageInfo {

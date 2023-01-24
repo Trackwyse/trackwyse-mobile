@@ -1,0 +1,988 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\Users\\Jack\\Desktop\\Current\\trackwyse-mobile",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2023-01-23 23:21:00",
+            "filesum": 153,
+            "codesum": 40270,
+            "commentsum": 1442,
+            "blanksum": 4302,
+            "statistics": {
+                ".json": {
+                    "code": 21562,
+                    "comment": 0,
+                    "blank": 3
+                },
+                ".js": {
+                    "code": 104,
+                    "comment": 2,
+                    "blank": 6
+                },
+                ".ts": {
+                    "code": 1333,
+                    "comment": 620,
+                    "blank": 271
+                },
+                ".tsx": {
+                    "code": 5498,
+                    "comment": 779,
+                    "blank": 870
+                },
+                ".lock": {
+                    "code": 6127,
+                    "comment": 21,
+                    "blank": 1647
+                },
+                "": {
+                    "code": 13,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".log": {
+                    "code": 5625,
+                    "comment": 20,
+                    "blank": 1504
+                },
+                ".md": {
+                    "code": 8,
+                    "comment": 0,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": ".expo\\devices.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".expo\\packager-info.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": ".expo\\README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": ".expo\\settings.json"
+                },
+                {
+                    "blank": 1,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 3,
+                    "code": 45,
+                    "comment": 0,
+                    "filename": "app.config.js"
+                },
+                {
+                    "filename": "assets\\adaptive-icon.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\favicon.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\icon-dev.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\icon.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\splash-dev.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\splash.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "babel.config.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "eas.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 21399,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 74,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 13,
+                    "code": 37,
+                    "comment": 58,
+                    "filename": "src\\api\\content.ts"
+                },
+                {
+                    "blank": 56,
+                    "code": 362,
+                    "comment": 346,
+                    "filename": "src\\api\\index.ts"
+                },
+                {
+                    "blank": 9,
+                    "code": 49,
+                    "comment": 6,
+                    "filename": "src\\App.tsx"
+                },
+                {
+                    "filename": "src\\assets\\diamond.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 2,
+                    "code": 8,
+                    "comment": 6,
+                    "filename": "src\\assets\\index.ts"
+                },
+                {
+                    "filename": "src\\assets\\labelOrange.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\assets\\labelPink.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\assets\\labelYellow.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\assets\\tag.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 7,
+                    "code": 102,
+                    "comment": 6,
+                    "filename": "src\\components\\AddressInput\\AddressInput.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\AddressInput\\index.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 54,
+                    "comment": 9,
+                    "filename": "src\\components\\BadgeButton\\BadgeButton.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\BadgeButton\\index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 33,
+                    "comment": 6,
+                    "filename": "src\\components\\Banner\\Banner.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Banner\\index.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 60,
+                    "comment": 7,
+                    "filename": "src\\components\\Button\\Button.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Button\\index.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 22,
+                    "comment": 6,
+                    "filename": "src\\components\\Chip\\Chip.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Chip\\index.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 33,
+                    "comment": 6,
+                    "filename": "src\\components\\Collapsable\\Collapsable.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Collapsable\\index.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 81,
+                    "comment": 6,
+                    "filename": "src\\components\\ColorSelector\\ColorSelector.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\ColorSelector\\index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 6,
+                    "filename": "src\\components\\Container\\Container.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Container\\index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 20,
+                    "comment": 6,
+                    "filename": "src\\components\\EmptyState\\EmptyState.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\EmptyState\\index.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Header\\index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 37,
+                    "comment": 6,
+                    "filename": "src\\components\\Header\\PremiumHeader.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 19,
+                    "comment": 6,
+                    "filename": "src\\components\\Hyperlink\\Hyperlink.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Hyperlink\\index.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 38,
+                    "comment": 6,
+                    "filename": "src\\components\\IconButton\\IconButton.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\IconButton\\index.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src\\components\\InfoCard\\index.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "src\\components\\InfoCard\\InfoCard.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Input\\index.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 71,
+                    "comment": 7,
+                    "filename": "src\\components\\Input\\input.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Label\\index.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 41,
+                    "comment": 6,
+                    "filename": "src\\components\\Label\\Label.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\LandingCarousel\\index.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 64,
+                    "comment": 6,
+                    "filename": "src\\components\\LandingCarousel\\LandingCarousel.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\ListItem\\index.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 77,
+                    "comment": 6,
+                    "filename": "src\\components\\ListItem\\ListItem.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 28,
+                    "comment": 6,
+                    "filename": "src\\components\\Loaders\\Home.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 18,
+                    "comment": 14,
+                    "filename": "src\\components\\Loaders\\Legal.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 14,
+                    "comment": 14,
+                    "filename": "src\\components\\Loaders\\Maps.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 18,
+                    "comment": 14,
+                    "filename": "src\\components\\Loaders\\Premium.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 6,
+                    "filename": "src\\components\\Loaders\\Store.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 23,
+                    "comment": 14,
+                    "filename": "src\\components\\Loaders\\Transactions.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\LoadingRect\\index.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 51,
+                    "comment": 14,
+                    "filename": "src\\components\\LoadingRect\\LoadingRect.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 47,
+                    "comment": 6,
+                    "filename": "src\\components\\Modals\\UnsavedChanges.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Multiselect\\index.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 53,
+                    "comment": 6,
+                    "filename": "src\\components\\Multiselect\\Multiselect.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 6,
+                    "filename": "src\\components\\Navigation\\NavigationBackArrow.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Permissions\\index.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 15,
+                    "comment": 6,
+                    "filename": "src\\components\\Permissions\\Permissions.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\PrivacyPolicy\\index.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 53,
+                    "comment": 6,
+                    "filename": "src\\components\\PrivacyPolicy\\PrivacyPolicy.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\Product\\index.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\Product\\Product.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\TermsOfService\\index.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 53,
+                    "comment": 6,
+                    "filename": "src\\components\\TermsOfService\\TermsOfService.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Text\\index.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 47,
+                    "comment": 11,
+                    "filename": "src\\components\\Text\\Text.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Transaction\\index.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 45,
+                    "comment": 6,
+                    "filename": "src\\components\\Transaction\\Transaction.tsx"
+                },
+                {
+                    "blank": 26,
+                    "code": 134,
+                    "comment": 6,
+                    "filename": "src\\contexts\\Auth.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 30,
+                    "comment": 13,
+                    "filename": "src\\contexts\\DynamicLabels.tsx"
+                },
+                {
+                    "blank": 28,
+                    "code": 132,
+                    "comment": 8,
+                    "filename": "src\\contexts\\InAppPurchases.tsx"
+                },
+                {
+                    "blank": 16,
+                    "code": 100,
+                    "comment": 12,
+                    "filename": "src\\contexts\\Labels.tsx"
+                },
+                {
+                    "blank": 37,
+                    "code": 142,
+                    "comment": 9,
+                    "filename": "src\\contexts\\Notifications.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src\\contexts\\PostHog.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 36,
+                    "comment": 7,
+                    "filename": "src\\hooks\\useAuthenticatedQuery.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 17,
+                    "comment": 6,
+                    "filename": "src\\hooks\\useBottomSheetRef.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src\\hooks\\useLinking.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 22,
+                    "comment": 6,
+                    "filename": "src\\hooks\\useLocation.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\hooks\\useRandomBannerColor.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 14,
+                    "comment": 6,
+                    "filename": "src\\hooks\\useRefreshControl.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 36,
+                    "comment": 6,
+                    "filename": "src\\hooks\\useVersioning.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 89,
+                    "comment": 6,
+                    "filename": "src\\lib\\constants.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 36,
+                    "comment": 6,
+                    "filename": "src\\lib\\queryClient.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src\\lib\\random.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 3,
+                    "comment": 6,
+                    "filename": "src\\lib\\tailwind.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 43,
+                    "comment": 11,
+                    "filename": "src\\lib\\util\\date.ts"
+                },
+                {
+                    "blank": 9,
+                    "code": 37,
+                    "comment": 25,
+                    "filename": "src\\lib\\util\\string.ts"
+                },
+                {
+                    "blank": 94,
+                    "code": 269,
+                    "comment": 126,
+                    "filename": "src\\lib\\validators.ts"
+                },
+                {
+                    "blank": 34,
+                    "code": 478,
+                    "comment": 54,
+                    "filename": "src\\navigation\\index.tsx"
+                },
+                {
+                    "blank": 18,
+                    "code": 103,
+                    "comment": 6,
+                    "filename": "src\\screens\\App\\AddLabel.tsx"
+                },
+                {
+                    "blank": 23,
+                    "code": 210,
+                    "comment": 16,
+                    "filename": "src\\screens\\App\\FoundLabel.Details.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 54,
+                    "comment": 7,
+                    "filename": "src\\screens\\App\\FoundLabel.ExactLocation.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 54,
+                    "comment": 7,
+                    "filename": "src\\screens\\App\\FoundLabel.RecoveryLocation.tsx"
+                },
+                {
+                    "blank": 17,
+                    "code": 110,
+                    "comment": 6,
+                    "filename": "src\\screens\\App\\FoundLabel.Scan.tsx"
+                },
+                {
+                    "blank": 16,
+                    "code": 111,
+                    "comment": 6,
+                    "filename": "src\\screens\\App\\Home.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 123,
+                    "comment": 8,
+                    "filename": "src\\screens\\App\\MapView.tsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 179,
+                    "comment": 14,
+                    "filename": "src\\screens\\App\\ModifyLabel.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 52,
+                    "comment": 6,
+                    "filename": "src\\screens\\Auth\\ForgotPassword.Action.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 6,
+                    "filename": "src\\screens\\Auth\\ForgotPassword.Landing.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 63,
+                    "comment": 6,
+                    "filename": "src\\screens\\Auth\\ForgotPassword.Reset.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 59,
+                    "comment": 6,
+                    "filename": "src\\screens\\Auth\\Landing.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 97,
+                    "comment": 6,
+                    "filename": "src\\screens\\Auth\\Login.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 112,
+                    "comment": 7,
+                    "filename": "src\\screens\\Auth\\Register.Step1.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 56,
+                    "comment": 7,
+                    "filename": "src\\screens\\Auth\\Register.Step2.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 14,
+                    "comment": 6,
+                    "filename": "src\\screens\\Checkout\\Checkout.Address.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 14,
+                    "comment": 6,
+                    "filename": "src\\screens\\Checkout\\Checkout.Billing.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 24,
+                    "comment": 6,
+                    "filename": "src\\screens\\Checkout\\Checkout.Landing.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 53,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.About.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 51,
+                    "comment": 7,
+                    "filename": "src\\screens\\Profile\\Profile.Address.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 44,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.Admin.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 60,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.Delete.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 12,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.Developer.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 37,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.Help.tsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 156,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.Landing.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 12,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.Notifications.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 62,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.Password.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 86,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.Premium.tsx"
+                },
+                {
+                    "blank": 17,
+                    "code": 145,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.PremiumClaim.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 89,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.PremiumSettings.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 6,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.Rate.tsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 136,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.TransactionDetails.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 64,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.Transactions.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 130,
+                    "comment": 6,
+                    "filename": "src\\screens\\Profile\\Profile.UserInfo.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 53,
+                    "comment": 6,
+                    "filename": "src\\screens\\Store\\Store.Landing.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 14,
+                    "comment": 6,
+                    "filename": "src\\screens\\Store\\Store.Product.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 81,
+                    "comment": 6,
+                    "filename": "src\\screens\\Terms\\AcceptTerms.Action.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 28,
+                    "comment": 6,
+                    "filename": "src\\screens\\Terms\\AcceptTerms.Landing.tsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 108,
+                    "comment": 7,
+                    "filename": "src\\screens\\Verification\\Verification.Action.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 6,
+                    "filename": "src\\screens\\Verification\\Verification.Landing.tsx"
+                },
+                {
+                    "blank": 30,
+                    "code": 114,
+                    "comment": 6,
+                    "filename": "src\\types\\apiResponse.d.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 67,
+                    "comment": 6,
+                    "filename": "src\\types\\cmsResponse.d.ts"
+                },
+                {
+                    "blank": 15,
+                    "code": 80,
+                    "comment": 12,
+                    "filename": "src\\types\\globals.d.ts"
+                },
+                {
+                    "blank": 20,
+                    "code": 98,
+                    "comment": 6,
+                    "filename": "src\\types\\inputs.d.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 76,
+                    "comment": 0,
+                    "filename": "src\\types\\saleor.d.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 45,
+                    "comment": 2,
+                    "filename": "tailwind.config.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "tsconfig.json"
+                },
+                {
+                    "blank": 1504,
+                    "code": 5625,
+                    "comment": 20,
+                    "filename": "yarn-error.log"
+                },
+                {
+                    "blank": 1647,
+                    "code": 6127,
+                    "comment": 21,
+                    "filename": "yarn.lock"
+                }
+            ]
+        }
+    ]
+}

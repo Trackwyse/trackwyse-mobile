@@ -6,18 +6,17 @@
  */
 import React from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { RefreshControl, ScrollView, View } from "react-native";
+import { RefreshControl, ScrollView } from "react-native";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
-import Text from "@/components/Text";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import Container from "@/components/Container";
+import EmptyState from "@/components/EmptyState";
 import Transaction from "@/components/Transaction";
 import useRefreshControl from "@/hooks/useRefreshControl";
 import TransactionsLoader from "@/components/Loaders/Transactions";
-import EmptyState from "@/components/EmptyState";
 
 interface ProfileScreenProps {}
 
@@ -42,7 +41,7 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={tw`h-full`}
-        contentContainerStyle={tw`pb-20 min-h-full`}
+        contentContainerStyle={tw`pb-10 min-h-full`}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}

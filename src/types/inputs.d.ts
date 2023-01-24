@@ -105,6 +105,13 @@ interface SetPremiumInput {
   expiresIn?: number;
 }
 
+interface GetStoreProductsInput {
+  first?: number;
+  after?: string;
+  last?: number;
+  before?: string;
+}
+
 interface GetUserTransactionsInput {
   first?: number;
   after?: string;
