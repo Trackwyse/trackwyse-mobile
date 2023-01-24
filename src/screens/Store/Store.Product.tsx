@@ -44,18 +44,18 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
       </Container>
     );
 
-  const description = JSON.parse(product?.description).blocks[0].data.text;
+  const description = JSON.parse(product?.description).blocks[0].data.text; // UPDATE THIS
 
   return (
     <View>
       <View style={tw`bg-gray-100 w-full h-2/5 relative`}>
-        <SafeAreaView>
+        <SafeAreaView style={tw`z-10`}>
           <Container>
             <IconButton
               filled
               color="white"
               icon="arrow-back"
-              style={tw`my-4`}
+              style={tw`my-4 z-10`}
               size={22}
               fillColor={tw.color("primary-200")}
               onPress={() => navigation.goBack()}
@@ -65,7 +65,7 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
         <View style={tw`absolute w-full h-full justify-center items-center`}>
           <View style={tw`w-64`}>
             <Image
-              source={{ uri: product.media[0].url }}
+              source={{ uri: product.images[0].url }} // UPDATE THIS
               resizeMode="contain"
               style={tw`h-full w-full`}
             />

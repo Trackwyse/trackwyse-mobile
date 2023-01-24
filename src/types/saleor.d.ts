@@ -55,7 +55,7 @@ interface ProductDetails extends Product {
       };
     }[];
   }[];
-  media: {
+  images: {
     url: string;
   }[];
 }
