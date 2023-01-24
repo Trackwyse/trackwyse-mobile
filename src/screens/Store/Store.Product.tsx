@@ -15,6 +15,7 @@ import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
 import useAuthenticatedQuery from "@/hooks/useAuthenticatedQuery";
 import ProductLoader from "@/components/Loaders/Product";
+import ImageCarousel from "@/components/ImageCarousel";
 
 interface StoreScreenProps {
   route: any;
@@ -62,15 +63,7 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
             />
           </Container>
         </SafeAreaView>
-        <View style={tw`absolute w-full h-full justify-center items-center`}>
-          <View style={tw`w-64`}>
-            <Image
-              source={{ uri: product.images[0].url }} // UPDATE THIS
-              resizeMode="contain"
-              style={tw`h-full w-full`}
-            />
-          </View>
-        </View>
+        <ImageCarousel images={product.images.map((image) => image.url)} />
       </View>
       <SafeAreaView>
         <Container>
