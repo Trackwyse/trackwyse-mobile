@@ -667,6 +667,30 @@ const getStoreProducts = async (
 };
 
 /*
+  GET /api/v1/store/products/:id
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - product: Product
+*/
+const getStoreProduct = async (
+  input: GetStoreProductInput,
+  accessToken: string
+): Promise<GetStoreProductAPIResponse> => {
+  const { id } = input;
+
+  return apiClient.get(`/api/v1/store/products/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+/*
   GET /api/v1/transactions/:id
 
   Request Headers:
@@ -759,6 +783,7 @@ export default {
   getUserTransactions,
   getUserTransaction,
   getStoreProducts,
+  getStoreProduct,
 
   setPremium,
 };

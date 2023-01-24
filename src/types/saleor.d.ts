@@ -43,7 +43,22 @@ interface TransactionDetails extends Transaction {
   }[];
 }
 
-interface ProductDetails extends Product {}
+interface ProductDetails extends Product {
+  description: string;
+  variants: {
+    id: string;
+    name: string;
+    channelListings: {
+      price: {
+        amount;
+        currency;
+      };
+    }[];
+  }[];
+  media: {
+    url: string;
+  }[];
+}
 
 type EventType =
   | "ORDER_CREATED"

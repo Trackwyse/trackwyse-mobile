@@ -136,6 +136,12 @@ type GetStoreProductsAPIResponse = APIResponse & {
   };
 };
 
+type GetStoreProductAPIResponse = APIResponse & {
+  data: {
+    product: ProductDetails;
+  };
+};
+
 type GetUserTransactionsAPIResponse = APIResponse & {
   data: {
     pageInfo: PageInfo;

@@ -28,17 +28,16 @@ type RootStackParamList = {
 const Transaction: React.FC<TransactionProps> = ({ transaction }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+  const onPress = () => {
+    navigation.navigate("ProfileTransactionDetails", { transactionID: transaction.id });
+  };
+
   const { chipMessage, chipType } =
     TransactionStatusMessages[transaction.status as keyof typeof TransactionStatusMessages];
 
   return (
     <View style={tw`mt-4`}>
-      <TouchableOpacity
-        style={tw`justify-between flex-row items-center`}
-        onPress={() =>
-          navigation.navigate("ProfileTransactionDetails", { transactionID: transaction.id })
-        }
-      >
+      <TouchableOpacity style={tw`justify-between flex-row items-center`} onPress={onPress}>
         <View style={tw`flex-row items-center`}>
           <IconButton pressable={false} filled size={32} icon="qr-code-outline" />
           <View style={tw`ml-4`}>

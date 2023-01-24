@@ -122,3 +122,7 @@ interface GetUserTransactionsInput {
 interface GetUserTransactionInput {
   id: string;
 }
+
+interface GetStoreProductInput {
+  id: string;
+}
