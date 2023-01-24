@@ -15,6 +15,10 @@ const AppConstants = {
 };
 
 export const TransactionStatusMessages = {
+  DRAFT: {
+    chipMessage: "Draft",
+    chipType: "warning",
+  },
   UNCONFIRMED: {
     chipMessage: "Unconfirmed",
     chipType: "warning",
@@ -40,7 +44,7 @@ export const TransactionStatusMessages = {
     chipType: "success",
   },
   CANCELED: {
-    chipMessage: "Canceled",
+    chipMessage: "Cancelled",
     chipType: "error",
   },
 };

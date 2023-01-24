@@ -642,6 +642,25 @@ const getUserTransactions = async (
 };
 
 /*
+  GET /api/v1/store/products
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - products: Product[]
+*/
+const getStoreProducts = async (accessToken: string): Promise<GetStoreProductsAPIResponse> => {
+  return apiClient.get("/api/v1/store/products", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+/*
   GET /api/v1/transactions/:id
 
   Request Headers:
@@ -733,6 +752,7 @@ export default {
 
   getUserTransactions,
   getUserTransaction,
+  getStoreProducts,
 
   setPremium,
 };

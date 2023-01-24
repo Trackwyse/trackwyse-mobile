@@ -129,6 +129,13 @@ type GetDistanceAPIResponse = APIResponse & {
   };
 };
 
+type GetStoreProductsAPIResponse = APIResponse & {
+  data: {
+    pageInfo: PageInfo;
+    products: Product[];
+  };
+};
+
 type GetUserTransactionsAPIResponse = APIResponse & {
   data: {
     pageInfo: PageInfo;

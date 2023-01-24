@@ -4,6 +4,22 @@ interface Transaction {
   status: string;
 }
 
+interface Product {
+  id: string;
+  name: string;
+  thumbnail: {
+    url: string;
+  };
+  variants: {
+    channelListings: {
+      price: {
+        amount;
+        currency;
+      };
+    };
+  };
+}
+
 interface PageInfo {
   hasNextPage: boolean;
   endCursor: string;
@@ -26,6 +42,8 @@ interface TransactionDetails extends Transaction {
     type: EventType;
   }[];
 }
+
+interface ProductDetails extends Product {}
 
 type EventType =
   | "ORDER_CREATED"
