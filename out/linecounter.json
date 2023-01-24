@@ -5,12 +5,17 @@
     "linecount": [
         {
             "version": "0.2.7",
-            "counttime": "2023-01-23 23:21:00",
-            "filesum": 153,
-            "codesum": 40270,
-            "commentsum": 1442,
-            "blanksum": 4302,
+            "counttime": "2023-01-24 12:42:20",
+            "filesum": 159,
+            "codesum": 40549,
+            "commentsum": 1496,
+            "blanksum": 4346,
             "statistics": {
+                ".ts": {
+                    "code": 1368,
+                    "comment": 631,
+                    "blank": 275
+                },
                 ".json": {
                     "code": 21562,
                     "comment": 0,
@@ -21,15 +26,15 @@
                     "comment": 2,
                     "blank": 6
                 },
-                ".ts": {
-                    "code": 1333,
-                    "comment": 620,
-                    "blank": 271
-                },
                 ".tsx": {
-                    "code": 5498,
-                    "comment": 779,
-                    "blank": 870
+                    "code": 5742,
+                    "comment": 822,
+                    "blank": 910
+                },
+                ".log": {
+                    "code": 5625,
+                    "comment": 20,
+                    "blank": 1504
                 },
                 ".lock": {
                     "code": 6127,
@@ -40,11 +45,6 @@
                     "code": 13,
                     "comment": 0,
                     "blank": 1
-                },
-                ".log": {
-                    "code": 5625,
-                    "comment": 20,
-                    "blank": 1504
                 },
                 ".md": {
                     "code": 8,
@@ -162,9 +162,9 @@
                     "filename": "src\\api\\content.ts"
                 },
                 {
-                    "blank": 56,
-                    "code": 362,
-                    "comment": 346,
+                    "blank": 58,
+                    "code": 374,
+                    "comment": 357,
                     "filename": "src\\api\\index.ts"
                 },
                 {
@@ -359,6 +359,30 @@
                     "filename": "src\\components\\IconButton\\index.tsx"
                 },
                 {
+                    "blank": 8,
+                    "code": 38,
+                    "comment": 6,
+                    "filename": "src\\components\\Image\\Image.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\Image\\index.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 29,
+                    "comment": 6,
+                    "filename": "src\\components\\ImageCarousel\\ImageCarousel.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 6,
+                    "filename": "src\\components\\ImageCarousel\\index.tsx"
+                },
+                {
                     "blank": 1,
                     "code": 2,
                     "comment": 0,
@@ -366,7 +390,7 @@
                 },
                 {
                     "blank": 5,
-                    "code": 24,
+                    "code": 47,
                     "comment": 0,
                     "filename": "src\\components\\InfoCard\\InfoCard.tsx"
                 },
@@ -444,6 +468,12 @@
                 },
                 {
                     "blank": 4,
+                    "code": 25,
+                    "comment": 6,
+                    "filename": "src\\components\\Loaders\\Product.tsx"
+                },
+                {
+                    "blank": 4,
                     "code": 34,
                     "comment": 6,
                     "filename": "src\\components\\Loaders\\Store.tsx"
@@ -515,16 +545,22 @@
                     "filename": "src\\components\\PrivacyPolicy\\PrivacyPolicy.tsx"
                 },
                 {
-                    "blank": 0,
-                    "code": 0,
-                    "comment": 0,
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 6,
                     "filename": "src\\components\\Product\\index.tsx"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 6,
+                    "filename": "src\\components\\Product\\Product.tsx"
                 },
                 {
                     "blank": 0,
                     "code": 0,
                     "comment": 0,
-                    "filename": "src\\components\\Product\\Product.tsx"
+                    "filename": "src\\components\\Quantity\\index.tsx"
                 },
                 {
                     "blank": 2,
@@ -557,8 +593,8 @@
                     "filename": "src\\components\\Transaction\\index.tsx"
                 },
                 {
-                    "blank": 8,
-                    "code": 45,
+                    "blank": 9,
+                    "code": 43,
                     "comment": 6,
                     "filename": "src\\components\\Transaction\\Transaction.tsx"
                 },
@@ -894,14 +930,14 @@
                 },
                 {
                     "blank": 10,
-                    "code": 53,
+                    "code": 69,
                     "comment": 6,
                     "filename": "src\\screens\\Store\\Store.Landing.tsx"
                 },
                 {
-                    "blank": 5,
-                    "code": 14,
-                    "comment": 6,
+                    "blank": 13,
+                    "code": 84,
+                    "comment": 7,
                     "filename": "src\\screens\\Store\\Store.Product.tsx"
                 },
                 {
@@ -929,8 +965,8 @@
                     "filename": "src\\screens\\Verification\\Verification.Landing.tsx"
                 },
                 {
-                    "blank": 30,
-                    "code": 114,
+                    "blank": 31,
+                    "code": 119,
                     "comment": 6,
                     "filename": "src\\types\\apiResponse.d.ts"
                 },
@@ -947,14 +983,14 @@
                     "filename": "src\\types\\globals.d.ts"
                 },
                 {
-                    "blank": 20,
-                    "code": 98,
+                    "blank": 21,
+                    "code": 101,
                     "comment": 6,
                     "filename": "src\\types\\inputs.d.ts"
                 },
                 {
                     "blank": 5,
-                    "code": 76,
+                    "code": 91,
                     "comment": 0,
                     "filename": "src\\types\\saleor.d.ts"
                 },

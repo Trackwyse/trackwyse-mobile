@@ -108,7 +108,7 @@ const MapView: React.FC<MapViewProps> = ({ route, navigation }) => {
                 <InfoCard
                   title={address.address1}
                   subtitle={address.city + ", " + address.state + " " + address.zip5}
-                  icon="globe-outline"
+                  iconLeft="globe-outline"
                   style={tw`mt-3`}
                 />
 
@@ -118,7 +118,7 @@ const MapView: React.FC<MapViewProps> = ({ route, navigation }) => {
                     subtitle={formatSeconds(
                       distanceMutation.data?.data.distance.expectedTravelTimeSeconds
                     )}
-                    icon="navigate-circle-outline"
+                    iconLeft="navigate-circle-outline"
                     style={tw`mt-4`}
                   />
                 )}

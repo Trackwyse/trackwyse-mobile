@@ -16,6 +16,10 @@ import IconButton from "@/components/IconButton";
 import useAuthenticatedQuery from "@/hooks/useAuthenticatedQuery";
 import ProductLoader from "@/components/Loaders/Product";
 import ImageCarousel from "@/components/ImageCarousel";
+import InfoCard from "@/components/InfoCard";
+import { useState } from "react";
+import Quantity from "@/components/Quantity";
+import Button from "@/components/Button";
 
 interface StoreScreenProps {
   route: any;
@@ -24,6 +28,7 @@ interface StoreScreenProps {
 
 const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
   const { productID } = route.params;
+  const [quantity, setQuantity] = useState(1);
 
   const productDetailsQuery = useAuthenticatedQuery({
     queryKey: ["productDetails", productID],
@@ -48,8 +53,8 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
   const description = JSON.parse(product?.description).blocks[0].data.text; // UPDATE THIS
 
   return (
-    <View>
-      <View style={tw`bg-gray-100 w-full h-2/5 relative`}>
+    <View style={tw`flex-1`}>
+      <View style={tw`bg-gray-100 w-full h-1/2`}>
         <SafeAreaView style={tw`z-10`}>
           <Container>
             <IconButton
@@ -65,19 +70,41 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
         </SafeAreaView>
         <ImageCarousel images={product.images.map((image) => image.url)} />
       </View>
-      <SafeAreaView>
+
+      <ScrollView
+        style={tw`w-full h-full`}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={tw`pb-5`}
+      >
         <Container>
-          <ScrollView showsVerticalScrollIndicator={false} style={tw`w-full h-full`}>
-            <View style={tw`flex-row justify-between`}>
-              <Text variant="title" style={tw`font-medium max-w-4/5`}>
-                {product.name}
-              </Text>
-              <Text variant="title">$ {product.variants[0].channelListings[0].price.amount}</Text>
-            </View>
-            <Text variant="subtitle">{description}</Text>
-          </ScrollView>
+          <View style={tw`flex-row justify-between`}>
+            <Text variant="title" style={tw`font-medium max-w-4/5`}>
+              {product.name}
+            </Text>
+            <Text variant="title">${product.variants[0].channelListings[0].price.amount}</Text>
+          </View>
+          <Text variant="subtitle">{description}</Text>
+
+          <InfoCard
+            pressable
+            title="Color Options"
+            subtitle="Current: Navy Blue"
+            iconLeft="color-palette"
+            iconRight="chevron-forward"
+            style={tw`mt-4`}
+          />
+          <InfoCard
+            title="Quantity"
+            subtitle="Adjust quantity"
+            iconLeft="information-circle"
+            style={tw`mt-4`}
+            componentRight={<Quantity quantity={quantity} setQuantity={setQuantity} />}
+          />
+          <Button style={tw`mt-8`} size="lg">
+            Add {quantity} Item(s) to Cart
+          </Button>
         </Container>
-      </SafeAreaView>
+      </ScrollView>
     </View>
   );
 };

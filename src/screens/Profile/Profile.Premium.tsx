@@ -48,25 +48,25 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
             style={tw`mt-5`}
             title="Free Tracking Labels"
             subtitle="Request additional tracking labels every month at no extra cost."
-            icon="cash-outline"
+            iconLeft="cash-outline"
           />
           <InfoCard
-            style={tw`mt-2`}
+            style={tw`mt-3`}
             title="Advanced Mapping"
             subtitle="View item recovery information such as distance, fastest routes, and more."
-            icon="map-outline"
+            iconLeft="map-outline"
           />
           <InfoCard
-            style={tw`mt-2`}
+            style={tw`mt-3`}
             title="Recovery History"
             subtitle="View the recovery history of your labels and previous finders contact information."
-            icon="refresh-circle-outline"
+            iconLeft="refresh-circle-outline"
           />
           <InfoCard
-            style={tw`mt-2`}
+            style={tw`mt-3`}
             title="Secure Recoveries"
             subtitle="Get added protection against fraud, with additional recovery location verification."
-            icon="shield-checkmark-outline"
+            iconLeft="shield-checkmark-outline"
           />
         </ScrollView>
 
