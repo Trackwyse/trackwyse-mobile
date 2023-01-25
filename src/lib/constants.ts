@@ -12,6 +12,8 @@ import { stringifyVersion } from "@/lib/util/string";
 const AppConstants = {
   version: ExpoConstants.manifest?.version,
   versionInt: stringifyVersion(ExpoConstants.manifest?.version || "0.0.0"),
+  stripePublicKey: ExpoConstants.expoConfig?.extra?.stripe.publicKey || "",
+  posthogPublicKey: ExpoConstants.expoConfig?.extra?.posthog.publicKey || "",
 };
 
 export const TransactionStatusMessages = {

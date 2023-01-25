@@ -42,6 +42,13 @@ export default {
     extra: {
       eas: {
         projectId: "1dfd6eca-ffee-4132-bb86-20c878ffabfa"
+      },
+      stripe: {
+        // ADd a production key here later
+        publicKey: "pk_test_51LKPLLLRrR4p45sTnKwSJkz7qOUtms6B8T3mPxxslSAR52R7EYRx2U3lkJEF8PvcvTowrvxk68annvd222YRf7uJ00QFVKAox"
+      },
+      posthog: {
+        publicKey: "phc_AkDMJVw4fkcAjjGrWRclPzYIfnwEJLvOjQJwg2FxncU"
       }
     },
     owner: "js00001"
