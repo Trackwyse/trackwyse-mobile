@@ -33,6 +33,7 @@ const IconButton: React.FC<IconButtonProps> = ({
   const containerClasses = tw.style(
     filled && "rounded-full p-3 self-start",
     filled && { backgroundColor: fillColor },
+    "disabled:opacity-50",
     style
   );
 

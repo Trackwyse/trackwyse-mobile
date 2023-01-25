@@ -64,26 +64,7 @@ interface Checkout {
   id: string;
   billingAddress: Address;
   shippingAddress: Address;
-  lines: {
-    id;
-    quantity;
-    variant: {
-      name: string;
-      images: {
-        url: string;
-      }[];
-    };
-    totalPrice: {
-      net: {
-        amount: number;
-        currency: string;
-      };
-      tax: {
-        amount: number;
-        currency: string;
-      };
-    };
-  }[];
+  lines: CartItem[];
   subtotalPrice: {
     gross: {
       amount: number;
@@ -98,6 +79,27 @@ interface Checkout {
   };
   totalPrice: {
     gross: {
+      amount: number;
+      currency: string;
+    };
+  };
+}
+
+interface CartItem {
+  id: string;
+  quantity: number;
+  variant: {
+    name: string;
+    images: {
+      url: string;
+    }[];
+  };
+  totalPrice: {
+    net: {
+      amount: number;
+      currency: string;
+    };
+    tax: {
       amount: number;
       currency: string;
     };
