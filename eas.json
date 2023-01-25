@@ -6,12 +6,18 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
+      "ios": {
+        "resourceClass":"m1-medium"
+      },
       "env": {
         "APP_VARIANT": "development"
       }
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "ios": {
+        "resourceClass":"m1-medium"
+      }
     },
     "production": {}
   },
