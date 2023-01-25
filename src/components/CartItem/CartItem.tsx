@@ -48,6 +48,7 @@ const CartItem: React.FC<CartItemProps> = ({ cartItem }) => {
     });
   };
 
+  // TODO: Make this faster
   const handleUpdateItem = (quantity: number) => {
     updateItemMutation.mutate(quantity, {
       onSuccess: ({ data }) => {

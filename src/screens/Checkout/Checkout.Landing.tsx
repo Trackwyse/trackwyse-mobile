@@ -24,8 +24,6 @@ const Checkout: React.FC<CheckoutScreenProps> = ({}) => {
 
   if (loading) return <CheckoutLoader />;
 
-  console.log(checkout);
-
   return (
     <SafeAreaView>
       <Container>

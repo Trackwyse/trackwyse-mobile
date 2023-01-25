@@ -20,6 +20,7 @@ interface QuantityProps {
 const Quantity: React.FC<QuantityProps> = ({ quantity, setQuantity, disabled = false }) => {
   const updateQuantity = (value: number) => {
     if (value < 1) return;
+    if (value > 49) return;
     setQuantity(value);
   };
 

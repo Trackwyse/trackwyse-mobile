@@ -23,6 +23,8 @@ import IconButton from "@/components/IconButton";
 import { useCheckout } from "@/contexts/Checkout";
 import ImageCarousel from "@/components/ImageCarousel";
 import ProductLoader from "@/components/Loaders/Product";
+import useBottomSheetRef from "@/hooks/useBottomSheetRef";
+import VariantSelector from "@/components/VariantSelector";
 import useAuthenticatedQuery from "@/hooks/useAuthenticatedQuery";
 
 interface StoreScreenProps {
@@ -33,8 +35,11 @@ interface StoreScreenProps {
 const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
   const { accessToken } = useAuth();
   const { productID } = route.params;
-  const [quantity, setQuantity] = useState(1);
   const { checkout, setCheckout } = useCheckout();
+  const { open: openVariantsSelector, bottomSheetRef } = useBottomSheetRef();
+
+  const [quantity, setQuantity] = useState(1);
+  const [selectedVariant, setSelectedVariant] = useState<number>(0);
 
   const productDetailsQuery = useAuthenticatedQuery({
     queryKey: ["productDetails", productID],
@@ -51,9 +56,9 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
     },
   });
 
-  if (productDetailsQuery.isLoading) return <ProductLoader />;
-
   const product = productDetailsQuery.data?.data.product;
+
+  if (productDetailsQuery.isLoading) return <ProductLoader />;
 
   if (!product)
     return (
@@ -67,7 +72,7 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
   const onAddToCart = () => {
     addProductToCheckoutMutation.mutate(
       {
-        variantId: product.variants[0].id,
+        variantId: product.variants[selectedVariant].id,
         quantity,
       },
       {
@@ -89,6 +94,13 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
 
   return (
     <View style={tw`flex-1`}>
+      <VariantSelector
+        variants={product.variants}
+        selectedVariant={selectedVariant}
+        setSelectedVariant={setSelectedVariant}
+        innerRef={bottomSheetRef}
+      />
+
       <View style={tw`bg-gray-100 w-full h-1/2`}>
         <SafeAreaView style={tw`z-10`}>
           <Container>
@@ -122,8 +134,9 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
 
           <InfoCard
             pressable
+            onPress={openVariantsSelector}
             title="Color Options"
-            subtitle="Current: Navy Blue"
+            subtitle={`Current: ${product.variants[selectedVariant].name}`}
             iconLeft="color-palette"
             iconRight="chevron-forward"
             style={tw`mt-4`}

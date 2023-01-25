@@ -10,14 +10,7 @@ interface Product {
   thumbnail: {
     url: string;
   };
-  variants: {
-    channelListings: {
-      price: {
-        amount;
-        currency;
-      };
-    }[];
-  }[];
+  variants: Variant[];
 }
 
 interface PageInfo {
@@ -45,16 +38,7 @@ interface TransactionDetails extends Transaction {
 
 interface ProductDetails extends Product {
   description: string;
-  variants: {
-    id: string;
-    name: string;
-    channelListings: {
-      price: {
-        amount;
-        currency;
-      };
-    }[];
-  }[];
+  variants: Variant[];
   images: {
     url: string;
   }[];
@@ -104,6 +88,17 @@ interface CartItem {
       currency: string;
     };
   };
+}
+
+interface Variant {
+  id: string;
+  name: string;
+  channelListings: {
+    price: {
+      amount;
+      currency;
+    };
+  }[];
 }
 
 type EventType =

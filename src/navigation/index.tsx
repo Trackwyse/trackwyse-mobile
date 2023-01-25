@@ -69,9 +69,9 @@ import CheckoutLanding from "@/screens/Checkout/Checkout.Landing";
 import CheckoutAddress from "@/screens/Checkout/Checkout.Address";
 import CheckoutBilling from "@/screens/Checkout/Checkout.Billing";
 
-import ForgotPasswordLanding from "@/screens/Auth/ForgotPassword.Landing";
-import ForgotPasswordAction from "@/screens/Auth/ForgotPassword.Action";
 import ForgotPasswordReset from "@/screens/Auth/ForgotPassword.Reset";
+import ForgotPasswordAction from "@/screens/Auth/ForgotPassword.Action";
+import ForgotPasswordLanding from "@/screens/Auth/ForgotPassword.Landing";
 
 import AcceptTermsAction from "@/screens/Terms/AcceptTerms.Action";
 import AcceptTermsLanding from "@/screens/Terms/AcceptTerms.Landing";
