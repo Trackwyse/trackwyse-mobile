@@ -6,20 +6,23 @@
  */
 import lodash from "lodash";
 import { SafeAreaView, ScrollView, View } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
+import Button from "@/components/Button";
+import CartItem from "@/components/CartItem";
+import InfoCard from "@/components/InfoCard";
 import Container from "@/components/Container";
 import EmptyState from "@/components/EmptyState";
 import { useCheckout } from "@/contexts/Checkout";
 import CheckoutLoader from "@/components/Loaders/Checkout";
-import CartItem from "@/components/CartItem";
-import InfoCard from "@/components/InfoCard";
-import Button from "@/components/Button";
 
-interface CheckoutScreenProps {}
+interface CheckoutScreenProps {
+  navigation: NativeStackNavigationProp<any>;
+}
 
-const Checkout: React.FC<CheckoutScreenProps> = ({}) => {
+const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
   const { checkout, loading } = useCheckout();
 
   if (loading) return <CheckoutLoader />;
@@ -51,10 +54,11 @@ const Checkout: React.FC<CheckoutScreenProps> = ({}) => {
 
               <Text style={tw`text-lg font-semibold mt-10`}>Delivery Information</Text>
               <InfoCard
-                style={tw`mt-4`}
                 pressable
-                iconRight="md-chevron-forward"
+                style={tw`mt-4`}
                 iconLeft="location-sharp"
+                iconRight="md-chevron-forward"
+                onPress={() => navigation.navigate("CheckoutAddress")}
                 title={checkout.shippingAddress.address1 || "No Address"}
                 subtitle={
                   checkout.shippingAddress.city +
@@ -67,12 +71,13 @@ const Checkout: React.FC<CheckoutScreenProps> = ({}) => {
 
               <Text style={tw`text-lg font-semibold mt-10`}>Billing Information</Text>
               <InfoCard
-                style={tw`mt-4`}
                 pressable
-                iconRight="md-chevron-forward"
                 iconLeft="card"
+                style={tw`mt-4`}
                 title="VISA Classic"
                 subtitle="****-1234"
+                iconRight="md-chevron-forward"
+                onPress={() => navigation.navigate("CheckoutBilling")}
               />
 
               <Text style={tw`text-lg font-semibold mt-10`}>Order Information</Text>

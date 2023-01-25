@@ -50,12 +50,6 @@ const FoundLabel: React.FC = () => {
               });
             },
             onError: () => {
-              Toast.show({
-                type: "error",
-                text1: "Error",
-                text2: "There was an error updating this label",
-              });
-
               addressInput.setErrors({
                 address1: "Invalid address provided",
               });

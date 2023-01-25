@@ -88,11 +88,11 @@ interface UpdateUserPasswordInput {
 }
 
 interface AddressInput {
-  address1?: string;
-  address2?: string;
-  city?: string;
-  state?: string;
-  zip5?: string;
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zip5: string;
 }
 
 interface GetDistanceInput {
