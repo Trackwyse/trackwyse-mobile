@@ -38,14 +38,14 @@ const Checkout: React.FC<CheckoutScreenProps> = ({}) => {
             <Text style={tw`font-bold text-3xl`}>Checkout</Text>
           </View>
 
-          {lodash.isEmpty(checkout) && (
+          {(lodash.isEmpty(checkout) || lodash.isEmpty(checkout?.lines)) && (
             <EmptyState
               title="Your Cart is Empty"
               subtitle="You have not added any items to your cart yet. Checkout our Store!"
             />
           )}
 
-          {!lodash.isEmpty(checkout) && (
+          {!lodash.isEmpty(checkout) && !lodash.isEmpty(checkout?.lines) && (
             <View>
               {checkout.lines.map((line, index) => (
                 <CartItem key={index} cartItem={line} />

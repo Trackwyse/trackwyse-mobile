@@ -6,6 +6,8 @@
  */
 
 import { useState } from "react";
+import Toast from "react-native-toast-message";
+import { useMutation } from "@tanstack/react-query";
 import { SafeAreaView, ScrollView, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -13,10 +15,12 @@ import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Button from "@/components/Button";
+import { useAuth } from "@/contexts/Auth";
 import Quantity from "@/components/Quantity";
 import InfoCard from "@/components/InfoCard";
 import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
+import { useCheckout } from "@/contexts/Checkout";
 import ImageCarousel from "@/components/ImageCarousel";
 import ProductLoader from "@/components/Loaders/Product";
 import useAuthenticatedQuery from "@/hooks/useAuthenticatedQuery";
@@ -27,8 +31,10 @@ interface StoreScreenProps {
 }
 
 const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
+  const { accessToken } = useAuth();
   const { productID } = route.params;
   const [quantity, setQuantity] = useState(1);
+  const { checkout, setCheckout } = useCheckout();
 
   const productDetailsQuery = useAuthenticatedQuery({
     queryKey: ["productDetails", productID],
@@ -39,9 +45,15 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
     },
   });
 
-  const product = productDetailsQuery.data?.data.product;
+  const addProductToCheckoutMutation = useMutation({
+    mutationFn: (values: AddProductToStoreCheckoutInput) => {
+      return api.addProductToStoreCheckout(values, accessToken);
+    },
+  });
 
   if (productDetailsQuery.isLoading) return <ProductLoader />;
+
+  const product = productDetailsQuery.data?.data.product;
 
   if (!product)
     return (
@@ -50,7 +62,30 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
       </Container>
     );
 
-  const description = JSON.parse(product?.description).blocks[0].data.text; // UPDATE THIS
+  const description = JSON.parse(product?.description).blocks[0].data.text; // TODO: Change this
+
+  const onAddToCart = () => {
+    addProductToCheckoutMutation.mutate(
+      {
+        variantId: product.variants[0].id,
+        quantity,
+      },
+      {
+        onSuccess: ({ data }) => {
+          setCheckout({
+            ...checkout,
+            ...data.checkout,
+          });
+
+          Toast.show({
+            type: "success",
+            text1: "Added to Cart",
+            text2: `${quantity}x ${product.name} added to cart`,
+          });
+        },
+      }
+    );
+  };
 
   return (
     <View style={tw`flex-1`}>
@@ -100,7 +135,12 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
             style={tw`mt-4`}
             componentRight={<Quantity quantity={quantity} setQuantity={setQuantity} />}
           />
-          <Button style={tw`mt-8`} size="lg">
+          <Button
+            style={tw`mt-8`}
+            size="lg"
+            onPress={onAddToCart}
+            loading={addProductToCheckoutMutation.isLoading}
+          >
             Add {quantity} Item(s) to Cart
           </Button>
         </Container>

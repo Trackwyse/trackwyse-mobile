@@ -63,7 +63,11 @@ const CartItem: React.FC<CartItemProps> = ({ cartItem }) => {
     <View style={tw`flex-row w-full mb-2`}>
       <View style={tw`w-36 h-36 py-4 px-6 rounded-md bg-gray-100`}>
         <Image
-          source={{ uri: cartItem.variant.images[0].url }}
+          source={{
+            uri: cartItem?.variant?.images[0]?.url
+              ? cartItem.variant.images[0].url
+              : "https://i.picsum.photos/id/263/200/200.jpg",
+          }}
           resizeMode="contain"
           style={tw`w-full h-full`}
         />
