@@ -154,3 +154,33 @@ type GetUserTransactionAPIResponse = APIResponse & {
     transaction: TransactionDetails;
   };
 };
+
+type GetStoreCheckoutAPIResponse = APIResponse & {
+  data: {
+    checkout: Checkout;
+  };
+};
+
+type AddProductToStoreCheckoutAPIResponse = APIResponse & {
+  data: {
+    checkout: Checkout;
+  };
+};
+
+type RemoveProductFromStoreCheckoutAPIResponse = APIResponse & {
+  data: {
+    checkout: Checkout;
+  };
+};
+
+type UpdateProductInStoreCheckoutAPIResponse = APIResponse & {
+  data: {
+    checkout: Checkout;
+  };
+};
+
+type UpdateStoreCheckoutAddressAPIResponse = APIResponse & {
+  data: {
+    checkout: Checkout;
+  };
+};

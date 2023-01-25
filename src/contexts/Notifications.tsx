@@ -5,6 +5,7 @@
  * Copyright (c) 2023 Trackwyse
  */
 
+import lodash from "lodash";
 import { useMutation } from "@tanstack/react-query";
 import * as RNNotifications from "expo-notifications";
 import { useNavigation } from "@react-navigation/native";
@@ -56,7 +57,7 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
         const { data } = notification.request.content;
 
         // Check if the user is logged in
-        if (!user || Object.keys(user).length <= 0) {
+        if (lodash.isEmpty(user)) {
           return;
         }
 
@@ -76,7 +77,7 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
 
   useEffect(() => {
     (async () => {
-      if (!user || Object.keys(user).length <= 0) {
+      if (lodash.isEmpty(user)) {
         return;
       }
 
@@ -112,7 +113,7 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
   };
 
   const setPushToken = async () => {
-    if (!user || Object.keys(user).length <= 0) {
+    if (lodash.isEmpty(user)) {
       return;
     }
 
@@ -126,7 +127,7 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
   };
 
   const setNotificationStatus = async (status: boolean) => {
-    if (!user || Object.keys(user).length <= 0) {
+    if (lodash.isEmpty(user)) {
       return;
     }
 

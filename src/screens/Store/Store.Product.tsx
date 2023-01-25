@@ -5,21 +5,21 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { SafeAreaView, ScrollView, View, Image } from "react-native";
+import { useState } from "react";
+import { SafeAreaView, ScrollView, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
+import Button from "@/components/Button";
+import Quantity from "@/components/Quantity";
+import InfoCard from "@/components/InfoCard";
 import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
-import useAuthenticatedQuery from "@/hooks/useAuthenticatedQuery";
-import ProductLoader from "@/components/Loaders/Product";
 import ImageCarousel from "@/components/ImageCarousel";
-import InfoCard from "@/components/InfoCard";
-import { useState } from "react";
-import Quantity from "@/components/Quantity";
-import Button from "@/components/Button";
+import ProductLoader from "@/components/Loaders/Product";
+import useAuthenticatedQuery from "@/hooks/useAuthenticatedQuery";
 
 interface StoreScreenProps {
   route: any;

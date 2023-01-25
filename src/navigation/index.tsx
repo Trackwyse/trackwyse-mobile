@@ -21,6 +21,8 @@ import {
   Poppins_800ExtraBold,
   Poppins_900Black,
 } from "@expo-google-fonts/poppins";
+
+import lodash from "lodash";
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -82,6 +84,7 @@ import { useAuth } from "@/contexts/Auth";
 import IconButton from "@/components/IconButton";
 import useVersioning from "@/hooks/useVersioning";
 import { LabelsProvider } from "@/contexts/Labels";
+import { CheckoutProvider } from "@/contexts/Checkout";
 import NotificationsProvider from "@/contexts/Notifications";
 import NavigationWithBack from "@/components/Navigation/NavigationBackArrow";
 
@@ -241,60 +244,62 @@ const AcceptTermsStackNavigator: React.FC = () => {
 */
 const AppTabNavigator: React.FC = () => {
   return (
-    <LabelsProvider>
-      <NotificationsProvider>
-        <Tab.Navigator
-          screenOptions={{
-            headerShown: false,
+    <CheckoutProvider>
+      <LabelsProvider>
+        <NotificationsProvider>
+          <Tab.Navigator
+            screenOptions={{
+              headerShown: false,
 
-            tabBarStyle: { paddingTop: 10 },
-            tabBarActiveTintColor: tw.color("primary-200"),
-            tabBarInactiveTintColor: tw.color("gray-400"),
-          }}
-        >
-          <Tab.Screen
-            name="App"
-            component={AppStackNavigator}
-            options={{
-              tabBarLabel: "Home",
-              tabBarIcon: ({ color }) => {
-                return <Ionicons name="home" size={26} color={color} />;
-              },
+              tabBarStyle: { paddingTop: 10 },
+              tabBarActiveTintColor: tw.color("primary-200"),
+              tabBarInactiveTintColor: tw.color("gray-400"),
             }}
-          />
-          <Tab.Screen
-            name="Store"
-            component={StoreStackNavigator}
-            options={{
-              tabBarLabel: "Store",
-              tabBarIcon: ({ color }) => {
-                return <Ionicons name="pricetags" size={26} color={color} />;
-              },
-            }}
-          />
-          <Tab.Screen
-            name="Checkout"
-            component={CheckoutStackNavigator}
-            options={{
-              tabBarLabel: "Checkout",
-              tabBarIcon: ({ color }) => {
-                return <Ionicons name="cart" size={26} color={color} />;
-              },
-            }}
-          />
-          <Tab.Screen
-            name="Profile"
-            component={ProfileStackNavigator}
-            options={{
-              tabBarLabel: "Profile",
-              tabBarIcon: ({ color }) => {
-                return <Ionicons name="person" size={26} color={color} />;
-              },
-            }}
-          />
-        </Tab.Navigator>
-      </NotificationsProvider>
-    </LabelsProvider>
+          >
+            <Tab.Screen
+              name="App"
+              component={AppStackNavigator}
+              options={{
+                tabBarLabel: "Home",
+                tabBarIcon: ({ color }) => {
+                  return <Ionicons name="home" size={26} color={color} />;
+                },
+              }}
+            />
+            <Tab.Screen
+              name="Store"
+              component={StoreStackNavigator}
+              options={{
+                tabBarLabel: "Store",
+                tabBarIcon: ({ color }) => {
+                  return <Ionicons name="pricetags" size={26} color={color} />;
+                },
+              }}
+            />
+            <Tab.Screen
+              name="Checkout"
+              component={CheckoutStackNavigator}
+              options={{
+                tabBarLabel: "Checkout",
+                tabBarIcon: ({ color }) => {
+                  return <Ionicons name="cart" size={26} color={color} />;
+                },
+              }}
+            />
+            <Tab.Screen
+              name="Profile"
+              component={ProfileStackNavigator}
+              options={{
+                tabBarLabel: "Profile",
+                tabBarIcon: ({ color }) => {
+                  return <Ionicons name="person" size={26} color={color} />;
+                },
+              }}
+            />
+          </Tab.Navigator>
+        </NotificationsProvider>
+      </LabelsProvider>
+    </CheckoutProvider>
   );
 };
 
@@ -305,66 +310,62 @@ const AppTabNavigator: React.FC = () => {
 */
 const AppStackNavigator: React.FC = () => {
   return (
-    <LabelsProvider>
-      <NotificationsProvider>
-        <Stack.Navigator
-          screenOptions={({ navigation }) => ({
-            headerLeft: () => <NavigationWithBack navigation={navigation} />,
-          })}
-        >
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen name="MapView" component={MapView} options={{ headerShown: false }} />
-          <Stack.Screen name="AddLabel" component={AddLabel} options={{ title: "Add Label" }} />
-          <Stack.Screen
-            name="FoundLabelScan"
-            component={FoundLabelScan}
-            options={{ title: "Found Label" }}
-          />
-          <Stack.Screen
-            name="FoundLabelDetails"
-            component={FoundLabelDetails}
-            options={({ navigation }) => ({
-              title: "Found Label",
-              gestureEnabled: false,
-              headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
-            })}
-            initialParams={{ navigateTo: "Home" }}
-          />
-          <Stack.Screen
-            name="FoundLabelExactLocation"
-            component={FoundLabelExactLocation}
-            options={{
-              title: "Exact Location",
-              gestureEnabled: false,
-            }}
-          />
-          <Stack.Screen
-            name="FoundLabelRecoveryLocation"
-            component={FoundLabelRecoveryLocation}
-            options={{
-              title: "Recovery Location",
-              gestureEnabled: false,
-            }}
-          />
-          <Stack.Screen
-            name="EditLabel"
-            component={EditLabel}
-            options={({ navigation }) => ({
-              title: "Edit Label",
-              gestureEnabled: false,
-              headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
-              headerRight: () => <IconButton icon="trash-outline" color="firebrick" />,
-            })}
-          />
-        </Stack.Navigator>
-      </NotificationsProvider>
-    </LabelsProvider>
+    <Stack.Navigator
+      screenOptions={({ navigation }) => ({
+        headerLeft: () => <NavigationWithBack navigation={navigation} />,
+      })}
+    >
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen name="MapView" component={MapView} options={{ headerShown: false }} />
+      <Stack.Screen name="AddLabel" component={AddLabel} options={{ title: "Add Label" }} />
+      <Stack.Screen
+        name="FoundLabelScan"
+        component={FoundLabelScan}
+        options={{ title: "Found Label" }}
+      />
+      <Stack.Screen
+        name="FoundLabelDetails"
+        component={FoundLabelDetails}
+        options={({ navigation }) => ({
+          title: "Found Label",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+        })}
+        initialParams={{ navigateTo: "Home" }}
+      />
+      <Stack.Screen
+        name="FoundLabelExactLocation"
+        component={FoundLabelExactLocation}
+        options={{
+          title: "Exact Location",
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="FoundLabelRecoveryLocation"
+        component={FoundLabelRecoveryLocation}
+        options={{
+          title: "Recovery Location",
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="EditLabel"
+        component={EditLabel}
+        options={({ navigation }) => ({
+          title: "Edit Label",
+          gestureEnabled: false,
+          headerLeft: () => <NavigationWithBack navigation={navigation} returnHome />,
+          headerRight: () => <IconButton icon="trash-outline" color="firebrick" />,
+        })}
+      />
+    </Stack.Navigator>
   );
 };
 
@@ -540,7 +541,7 @@ const RootStackNavigator: React.FC = () => {
   }, [loading, isLoading, isValidVersion, fontsLoaded]);
 
   // This prevents the app from re-rendering after the user is loaded
-  if (loading && Object.keys(user).length === 0) {
+  if (loading && lodash.isEmpty(user)) {
     return null;
   }
 
@@ -548,7 +549,7 @@ const RootStackNavigator: React.FC = () => {
     return null;
   }
 
-  if (!user || Object.keys(user).length === 0) {
+  if (lodash.isEmpty(user)) {
     return <AuthStackNavigator />;
   }
 

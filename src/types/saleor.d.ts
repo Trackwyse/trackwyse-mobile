@@ -60,6 +60,50 @@ interface ProductDetails extends Product {
   }[];
 }
 
+interface Checkout {
+  id: string;
+  billingAddress: Address;
+  shippingAddress: Address;
+  lines: {
+    id;
+    quantity;
+    variant: {
+      name: string;
+      images: {
+        url: string;
+      }[];
+    };
+    totalPrice: {
+      net: {
+        amount: number;
+        currency: string;
+      };
+      tax: {
+        amount: number;
+        currency: string;
+      };
+    };
+  }[];
+  subtotalPrice: {
+    gross: {
+      amount: number;
+      currency: string;
+    };
+  };
+  shippingPrice: {
+    gross: {
+      amount: number;
+      currency: string;
+    };
+  };
+  totalPrice: {
+    gross: {
+      amount: number;
+      currency: string;
+    };
+  };
+}
+
 type EventType =
   | "ORDER_CREATED"
   | "ORDER_CREATED_FROM_REPLACE"

@@ -126,3 +126,25 @@ interface GetUserTransactionInput {
 interface GetStoreProductInput {
   id: string;
 }
+
+interface AddProductToStoreCheckoutInput {
+  variantId: string;
+  quantity: number;
+}
+
+interface RemoveProductFromStoreCheckoutInput {
+  lineId: string;
+}
+
+interface UpdateProductInStoreCheckoutInput {
+  lineId: string;
+  quantity: number;
+}
+
+interface UpdateStoreCheckoutAddressInput {
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zip5: string;
+}

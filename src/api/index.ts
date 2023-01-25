@@ -691,6 +691,169 @@ const getStoreProduct = async (
 };
 
 /*
+  GET /api/v1/store/checkout
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - checkout: Checkout
+*/
+const getStoreCheckout = async (accessToken: string): Promise<GetStoreCheckoutAPIResponse> => {
+  return apiClient.get("/api/v1/store/checkout", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+/*
+  POST /api/v1/store/checkout/add-product
+
+  Request Body:
+    - variantId: string
+    - quantity: number
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - checkout: Checkout
+*/
+const addProductToStoreCheckout = async (
+  values: AddProductToStoreCheckoutInput,
+  accessToken: string
+): Promise<AddProductToStoreCheckoutAPIResponse> => {
+  const { variantId, quantity } = values;
+
+  return apiClient.post(
+    "/api/v1/store/checkout/add-product",
+    {
+      variantId,
+      quantity,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
+/*
+  POST /api/v1/store/checkout/remove-product
+
+  Request Body:
+    - lineId: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - checkout: Checkout
+*/
+const removeProductFromStoreCheckout = async (
+  values: RemoveProductFromStoreCheckoutInput,
+  accessToken: string
+): Promise<RemoveProductFromStoreCheckoutAPIResponse> => {
+  const { lineId } = values;
+
+  return apiClient.post(
+    "/api/v1/store/checkout/remove-product",
+    {
+      lineId,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
+/*
+  POST /api/v1/store/checkout/update-product 
+
+  Request Body:
+    - lineId: string
+    - quantity: number
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - checkout: Checkout
+*/
+const updateProductInStoreCheckout = async (
+  values: UpdateProductInStoreCheckoutInput,
+  accessToken: string
+): Promise<UpdateProductInStoreCheckoutAPIResponse> => {
+  const { lineId, quantity } = values;
+
+  return apiClient.post(
+    "/api/v1/store/checkout/update-product",
+    {
+      lineId,
+      quantity,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
+/*
+  POST /api/v1/store/checkout/update-address
+
+  Request Body:
+    - address1: string
+    - address2: string
+    - city: string
+    - state: string
+    - zip5: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - checkout: Checkout
+*/
+const updateStoreCheckoutAddress = async (
+  values: UpdateStoreCheckoutAddressInput,
+  accessToken: string
+): Promise<UpdateStoreCheckoutAddressAPIResponse> => {
+  const { address1, address2, city, state, zip5 } = values;
+
+  return apiClient.post(
+    "/api/v1/store/checkout/update-address",
+    {
+      address1,
+      address2,
+      city,
+      state,
+      zip5,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
+/*
   GET /api/v1/transactions/:id
 
   Request Headers:
@@ -784,6 +947,12 @@ export default {
   getUserTransaction,
   getStoreProducts,
   getStoreProduct,
+
+  getStoreCheckout,
+  addProductToStoreCheckout,
+  removeProductFromStoreCheckout,
+  updateProductInStoreCheckout,
+  updateStoreCheckoutAddress,
 
   setPremium,
 };
