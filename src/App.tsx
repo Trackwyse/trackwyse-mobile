@@ -18,6 +18,7 @@ import AuthProvider from "@/contexts/Auth";
 import useLinking from "@/hooks/useLinking";
 import queryClient from "@/lib/queryClient";
 import RootStackNavigator from "@/navigation";
+import StripeProvider from "@/contexts/Stripe";
 import PostHogProvider from "@/contexts/PostHog";
 import { DynamicLabelsProvider } from "@/contexts/DynamicLabels";
 import { InAppPurchasesProvider } from "@/contexts/InAppPurchases";
@@ -44,12 +45,14 @@ const App = () => {
           <InAppPurchasesProvider>
             <NavigationContainer linking={linking} theme={theme}>
               <PostHogProvider>
-                <GestureHandlerRootView style={{ flex: 1 }}>
-                  <BottomSheetModalProvider>
-                    <RootStackNavigator />
-                    <Toast />
-                  </BottomSheetModalProvider>
-                </GestureHandlerRootView>
+                <StripeProvider>
+                  <GestureHandlerRootView style={{ flex: 1 }}>
+                    <BottomSheetModalProvider>
+                      <RootStackNavigator />
+                      <Toast />
+                    </BottomSheetModalProvider>
+                  </GestureHandlerRootView>
+                </StripeProvider>
               </PostHogProvider>
             </NavigationContainer>
           </InAppPurchasesProvider>
