@@ -911,6 +911,81 @@ const setPremium = async (
   );
 };
 
+/*
+  POST /api/v1/store/checkout/update-delivery
+
+  Request Body:
+    - shippingMethodId: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - checkout: Checkout
+*/
+const updateDeliveryMethod = async (
+  values: UpdateDeliveryMethodInput,
+  accessToken: string
+): Promise<UpdateDeliveryMethodAPIResponse> => {
+  const { shippingMethodId } = values;
+
+  return apiClient.post(
+    "/api/v1/store/checkout/update-delivery",
+    {
+      shippingMethodId,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
+/*
+  POST /api/v1/store/payment/create
+
+  Response Body:
+    - error: boolean
+    - message: string
+*/
+const createPaymentIntent = async (
+  accessToken: string
+): Promise<CreatePaymentIntentAPIResponse> => {
+  return apiClient.post(
+    "/api/v1/store/payment/create",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
+/*
+  POST /api/v1/store/payment/complete
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - order?: Order
+    - confirmationData?: ConfirmationData
+*/
+const completePayment = async (accessToken: string): Promise<CompletePaymentAPIResponse> => {
+  return apiClient.post(
+    "/api/v1/store/payment/complete",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
 export default {
   getValidClients,
 
@@ -953,6 +1028,9 @@ export default {
   removeProductFromStoreCheckout,
   updateProductInStoreCheckout,
   updateStoreCheckoutAddress,
+  updateDeliveryMethod,
+  createPaymentIntent,
+  completePayment,
 
   setPremium,
 };

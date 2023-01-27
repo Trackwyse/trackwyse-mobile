@@ -148,3 +148,6 @@ interface UpdateStoreCheckoutAddressInput {
   state: string;
   zip5: string;
 }
+interface UpdateDeliveryMethodInput {
+  shippingMethodId: string;
+}

@@ -13,11 +13,11 @@ import { useAuth } from "@/contexts/Auth";
 import { useCheckout } from "@/contexts/Checkout";
 import AddressInput from "@/components/AddressInput";
 
-interface CheckoutScreenProps {
+interface CartScreenProps {
   navigation: NativeStackNavigationProp<any>;
 }
 
-const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
+const Cart: React.FC<CartScreenProps> = ({ navigation }) => {
   const { accessToken } = useAuth();
   const { checkout, setCheckout } = useCheckout();
 
@@ -59,4 +59,4 @@ const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
   );
 };
 
-export default Checkout;
+export default Cart;

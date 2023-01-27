@@ -34,6 +34,19 @@ type DeleteUserAccountAPIResponse = APIResponse;
 
 type SetPremiumAPIResponse = APIResponse;
 
+type CreatePaymentIntentAPIResponse = APIResponse;
+
+type CompletePaymentAPIResponse = APIResponse & {
+  data: {
+    confirmationData?: string;
+    order?: {
+      id: string;
+      userEmail: string;
+      created: string;
+    };
+  };
+};
+
 type RefreshAccessTokenAPIResponse = APIResponse & {
   data: {
     accessToken: string;
@@ -180,6 +193,12 @@ type UpdateProductInStoreCheckoutAPIResponse = APIResponse & {
 };
 
 type UpdateStoreCheckoutAddressAPIResponse = APIResponse & {
+  data: {
+    checkout: Checkout;
+  };
+};
+
+type UpdateDeliveryMethodAPIResponse = APIResponse & {
   data: {
     checkout: Checkout;
   };

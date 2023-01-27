@@ -65,9 +65,9 @@ import ProfileTransactionDetails from "@/screens/Profile/Profile.TransactionDeta
 import StoreProduct from "@/screens/Store/Store.Product";
 import StoreLanding from "@/screens/Store/Store.Landing";
 
-import CheckoutLanding from "@/screens/Checkout/Checkout.Landing";
-import CheckoutAddress from "@/screens/Checkout/Checkout.Address";
-import CheckoutBilling from "@/screens/Checkout/Checkout.Billing";
+import CartLanding from "@/screens/Cart/Cart.Landing";
+import CartAddress from "@/screens/Cart/Cart.Address";
+import CartCheckout from "@/screens/Cart/Cart.Checkout";
 
 import ForgotPasswordReset from "@/screens/Auth/ForgotPassword.Reset";
 import ForgotPasswordAction from "@/screens/Auth/ForgotPassword.Action";
@@ -277,10 +277,10 @@ const AppTabNavigator: React.FC = () => {
               }}
             />
             <Tab.Screen
-              name="Checkout"
-              component={CheckoutStackNavigator}
+              name="Cart"
+              component={CartStackNavigator}
               options={{
-                tabBarLabel: "Checkout",
+                tabBarLabel: "Cart",
                 tabBarIcon: ({ color }) => {
                   return <Ionicons name="cart" size={26} color={color} />;
                 },
@@ -392,28 +392,16 @@ const StoreStackNavigator: React.FC = () => {
   This is a stack navigator that is part of the
   AppTabNavigator.
 */
-const CheckoutStackNavigator: React.FC = () => {
+const CartStackNavigator: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={({ navigation }) => ({
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
-      <Stack.Screen
-        name="CheckoutLanding"
-        component={CheckoutLanding}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CheckoutAddress"
-        component={CheckoutAddress}
-        options={{ title: "Address" }}
-      />
-      <Stack.Screen
-        name="CheckoutBilling"
-        component={CheckoutBilling}
-        options={{ title: "Billing" }}
-      />
+      <Stack.Screen name="CartLanding" component={CartLanding} options={{ headerShown: false }} />
+      <Stack.Screen name="CartAddress" component={CartAddress} options={{ title: "Address" }} />
+      <Stack.Screen name="CartCheckout" component={CartCheckout} options={{ title: "Checkout" }} />
     </Stack.Navigator>
   );
 };

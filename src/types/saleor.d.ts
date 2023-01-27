@@ -49,6 +49,8 @@ interface Checkout {
   billingAddress: Address;
   shippingAddress: Address;
   lines: CartItem[];
+  shippingMethods: ShippingMethod[];
+  deliveryMethod: ShippingMethod;
   subtotalPrice: {
     gross: {
       amount: number;
@@ -99,6 +101,15 @@ interface Variant {
       currency;
     };
   }[];
+}
+
+interface ShippingMethod {
+  id: string;
+  name: string;
+  price: {
+    amount: number;
+    currency: string;
+  };
 }
 
 type EventType =
