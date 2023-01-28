@@ -31,12 +31,19 @@ interface CardSelectorProps {
 }
 
 const CardSelector: React.FC<CardSelectorProps> = ({ innerRef, cardDetails, setCardDetails }) => {
-  const snapPoints = useMemo(() => ["75%"], []);
+  const snapPoints = useMemo(() => ["85%"], []);
 
   return (
     <BottomSheetModal ref={innerRef} snapPoints={snapPoints} backdropComponent={CustomBackdrop}>
       <BottomSheetScrollView>
         <Container style={tw`mt-4`}>
+          <Text variant="title" disableDefaultPadding>
+            Card Details
+          </Text>
+          <Text variant="subtitle" disableDefaultPadding style={tw`mt-2`}>
+            Please enter your payment information below. All payments are processed through Stripe
+            and your information will not be saved.
+          </Text>
           <CardForm
             placeholders={{
               number: "1234 1234 1234 1234",

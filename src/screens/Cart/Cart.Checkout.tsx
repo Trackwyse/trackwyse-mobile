@@ -23,6 +23,7 @@ import CardSelector from "@/components/CardSelector";
 import useBottomSheetRef from "@/hooks/useBottomSheetRef";
 import ShippingSelector from "@/components/ShippingSelector";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import EmptyState from "@/components/EmptyState";
 
 interface CheckoutScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -82,8 +83,8 @@ const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
               } else {
                 setTimeout(() => {
                   completePaymentMutation.mutate(undefined, {
-                    onSuccess: () => {
-                      navigation.navigate("CartLanding");
+                    onSuccess: async () => {
+                      navigation.navigate("CartComplete");
                       setCheckout({} as Checkout);
                       setLoading(false);
                     },
@@ -120,6 +121,14 @@ const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
       },
     });
   };
+
+  if (lodash.isEmpty(checkout))
+    return (
+      <EmptyState
+        title="Your Cart is Empty"
+        subtitle="You have not added any items to your cart yet. Checkout our Store!"
+      />
+    );
 
   return (
     <SafeAreaView>

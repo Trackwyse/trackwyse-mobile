@@ -68,6 +68,7 @@ import StoreLanding from "@/screens/Store/Store.Landing";
 import CartLanding from "@/screens/Cart/Cart.Landing";
 import CartAddress from "@/screens/Cart/Cart.Address";
 import CartCheckout from "@/screens/Cart/Cart.Checkout";
+import CartComplete from "@/screens/Cart/Cart.Complete";
 
 import ForgotPasswordReset from "@/screens/Auth/ForgotPassword.Reset";
 import ForgotPasswordAction from "@/screens/Auth/ForgotPassword.Action";
@@ -396,12 +397,21 @@ const CartStackNavigator: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={({ navigation }) => ({
+        gestureEnabled: false,
         headerLeft: () => <NavigationWithBack navigation={navigation} />,
       })}
     >
       <Stack.Screen name="CartLanding" component={CartLanding} options={{ headerShown: false }} />
       <Stack.Screen name="CartAddress" component={CartAddress} options={{ title: "Address" }} />
       <Stack.Screen name="CartCheckout" component={CartCheckout} options={{ title: "Checkout" }} />
+      <Stack.Screen
+        name="CartComplete"
+        component={CartComplete}
+        options={({ navigation }) => ({
+          title: "Complete",
+          headerLeft: () => <NavigationWithBack navigation={navigation} navigateTo="CartLanding" />,
+        })}
+      />
     </Stack.Navigator>
   );
 };
