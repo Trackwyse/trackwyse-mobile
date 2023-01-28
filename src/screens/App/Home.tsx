@@ -64,14 +64,13 @@ const ListHeader: React.FC<ListHeaderProps> = ({ user, navigation }) => {
       <View style={tw`mt-12 mb-8`}>
         <Text style={tw`font-bold text-3xl`}>Welcome {trimToLength(user?.firstName, 8) || ""}</Text>
       </View>
-      {/* TODO: Move to component */}
+
       <Banner
         title="Do more with Trackwyse Plus"
         cta="Learn More"
         bgColor={bannerColor}
-        onPress={() => navigation.navigate("ProfilePremium")}
+        onPress={() => navigation.navigate("Profile", { screen: "ProfilePremium", initial: false })}
       />
-      {/* END TODO */}
 
       <View style={tw`mt-8`}>
         <Text variant="title" disableDefaultPadding>
@@ -109,7 +108,9 @@ const ListHeader: React.FC<ListHeaderProps> = ({ user, navigation }) => {
 
           <TouchableOpacity
             style={tw`items-center w-28`}
-            onPress={() => navigation.navigate("ProfilePremium")}
+            onPress={() =>
+              navigation.navigate("Profile", { screen: "ProfilePremium", initial: false })
+            }
           >
             <IconButton
               pressable={false}

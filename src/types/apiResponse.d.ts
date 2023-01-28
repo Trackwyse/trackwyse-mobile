@@ -198,6 +198,12 @@ type UpdateStoreCheckoutAddressAPIResponse = APIResponse & {
   };
 };
 
+type UpdateStoreCheckoutBillingAddressAPIResponse = APIResponse & {
+  data: {
+    checkout: Checkout;
+  };
+};
+
 type UpdateDeliveryMethodAPIResponse = APIResponse & {
   data: {
     checkout: Checkout;

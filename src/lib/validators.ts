@@ -189,7 +189,6 @@ const validateVerifyInput = (verifyInput: VerifyInput) => {
   Optional fields: name, phoneNumber, message
 
   Phone number must be 10 digits long, and only numbers
-  TODO: Add color validation
 */
 const validateModifyLabelInput = (modifyLabelInput: ModifyLabelInput) => {
   const errors: ModifyLabelInput = {

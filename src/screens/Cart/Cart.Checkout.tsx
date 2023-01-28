@@ -55,6 +55,7 @@ const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
 
   const isButtonDisabled =
     lodash.isEmpty(checkout.shippingAddress) ||
+    lodash.isEmpty(checkout.billingAddress) ||
     checkout.deliveryMethod === null ||
     cardDetails === null;
 
@@ -156,10 +157,10 @@ const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
             iconLeft="location-sharp"
             iconRight="md-chevron-forward"
             onPress={() => navigation.navigate("CartAddress")}
-            title={checkout.shippingAddress.address1 || "No Address"}
+            title={checkout.shippingAddress.address1 || "No Shipping Address"}
             subtitle={
               lodash.isEmpty(checkout.shippingAddress)
-                ? "Enter your address"
+                ? "Enter your shipping address"
                 : checkout.shippingAddress.city +
                   ", " +
                   checkout.shippingAddress.state +
@@ -183,6 +184,23 @@ const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
           />
 
           <Text style={tw`text-lg font-semibold mt-10`}>Billing Information</Text>
+          <InfoCard
+            pressable
+            style={tw`mt-4`}
+            iconLeft="location-sharp"
+            iconRight="md-chevron-forward"
+            onPress={() => navigation.navigate("CartBillingAddress")}
+            title={checkout.billingAddress.address1 || "No Billing Address"}
+            subtitle={
+              lodash.isEmpty(checkout.billingAddress)
+                ? "Enter your billing address"
+                : checkout.billingAddress.city +
+                  ", " +
+                  checkout.billingAddress.state +
+                  " " +
+                  checkout.billingAddress.zip5
+            }
+          />
           <InfoCard
             pressable
             iconLeft="card"

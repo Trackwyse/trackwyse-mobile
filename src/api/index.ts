@@ -854,6 +854,47 @@ const updateStoreCheckoutAddress = async (
 };
 
 /*
+  POST /api/v1/store/checkout/update-billing-address
+
+  Request Body:
+    - address1: string
+    - address2: string
+    - city: string
+    - state: string
+    - zip5: string
+
+  Request Headers:
+    - Authorization: Bearer <accessToken>
+
+  Response Body:
+    - error: boolean
+    - message: string
+    - checkout: Checkout
+*/
+const updateStoreCheckoutBillingAddress = async (
+  values: UpdateStoreCheckoutBillingAddressInput,
+  accessToken: string
+): Promise<UpdateStoreCheckoutBillingAddressAPIResponse> => {
+  const { address1, address2, city, state, zip5 } = values;
+
+  return apiClient.post(
+    "/api/v1/store/checkout/update-billing-address",
+    {
+      address1,
+      address2,
+      city,
+      state,
+      zip5,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+
+/*
   GET /api/v1/transactions/:id
 
   Request Headers:
@@ -1028,6 +1069,7 @@ export default {
   removeProductFromStoreCheckout,
   updateProductInStoreCheckout,
   updateStoreCheckoutAddress,
+  updateStoreCheckoutBillingAddress,
   updateDeliveryMethod,
   createPaymentIntent,
   completePayment,

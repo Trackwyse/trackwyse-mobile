@@ -45,7 +45,7 @@ const LandingCarousel: React.FC = () => {
           />
         </View>
         <Container style={tw`items-center`}>
-          <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Find lost items.</Text>
+          <Text style={tw`max-w-2/3 text-4xl font-medium my-2`}>Find items.</Text>
           <Text style={tw`text-lg font-medium my-2 text-center`}>
             Get notified when your belongings are found by another user, and view the finder's
             contact information.

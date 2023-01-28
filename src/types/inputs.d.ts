@@ -151,3 +151,11 @@ interface UpdateStoreCheckoutAddressInput {
 interface UpdateDeliveryMethodInput {
   shippingMethodId: string;
 }
+
+interface UpdateStoreCheckoutBillingAddressInput {
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zip5: string;
+}
