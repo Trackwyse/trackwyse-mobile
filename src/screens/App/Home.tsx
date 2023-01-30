@@ -35,7 +35,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      <Container>
+      <Container style={tw`min-h-full`}>
         <FlatList
           data={labels}
           contentContainerStyle={tw`pb-10`}
