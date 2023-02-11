@@ -85,7 +85,6 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
           setAccessToken(data.accessToken);
         },
         onError: (err) => {
-          errorHandler.handle(err);
           setAccessToken("");
         },
       });
@@ -101,7 +100,6 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
           setUser(data.user);
         },
         onError: (err) => {
-          errorHandler.handle(err);
           setUser({} as User);
         },
       });
