@@ -18,6 +18,7 @@ import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import Quantity from "@/components/Quantity";
 import InfoCard from "@/components/InfoCard";
+import errorHandler from "@/lib/errorHandler";
 import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
 import { useCheckout } from "@/contexts/Checkout";
@@ -87,6 +88,9 @@ const Store: React.FC<StoreScreenProps> = ({ route, navigation }) => {
             text1: "Added to Cart",
             text2: `${quantity}x ${product.name} added to cart`,
           });
+        },
+        onError: (err) => {
+          errorHandler.handle(err);
         },
       }
     );

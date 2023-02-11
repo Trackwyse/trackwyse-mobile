@@ -5,7 +5,6 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { AxiosError } from "axios";
 import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { View, KeyboardAvoidingView } from "react-native";
@@ -15,6 +14,7 @@ import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Input from "@/components/Input";
+import errorHandler from "@/lib/errorHandler";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import { validateForgotPasswordInput } from "@/lib/validators";
@@ -42,12 +42,8 @@ const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation }) => 
         onSuccess: () => {
           navigation.navigate("ForgotPasswordReset", { email: values.email });
         },
-        onError: (error) => {
-          if (error instanceof AxiosError) {
-            forgotPasswordInput.setErrors({
-              email: error.response?.data.message || "An error occurred",
-            });
-          }
+        onError: (err) => {
+          errorHandler.handle(err, forgotPasswordInput);
         },
       });
     },

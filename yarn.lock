@@ -1062,6 +1062,11 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
+"@createnextapp/async-local-storage@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@createnextapp/async-local-storage/-/async-local-storage-1.0.1.tgz#9766fc15e88471fd4b0eb83079cd785863ca68d2"
+  integrity sha512-9C6WMjpp2qP9HE/R+rZcMt3ilqeXP6QdMhYzw5gy865xb8ZqYVnJbsLY3hK03qxwSIV8i7Vk4jTzCBdeGkRbuw==
+
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"

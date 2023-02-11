@@ -24,6 +24,7 @@ import { getAddressString } from "@/lib/util/string";
 import { useDynamicLabels } from "@/contexts/DynamicLabels";
 import { validateFoundLabelDetailsInput } from "@/lib/validators";
 import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
+import errorHandler from "@/lib/errorHandler";
 
 interface FoundLabelDetailsScreenProps {
   route: any;
@@ -65,12 +66,8 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
             setIsSaved(true);
             setFoundLabel({ ...foundLabel, ...values });
           },
-          onError: () => {
-            Toast.show({
-              type: "error",
-              text1: "Error",
-              text2: "There was an error updating the label",
-            });
+          onError: (err) => {
+            errorHandler.handle(err, editInput);
           },
         }
       );
@@ -92,6 +89,9 @@ const FoundLabelDetails: React.FC<FoundLabelDetailsScreenProps> = ({ route, navi
         {
           onSuccess: ({ data }) => {
             setFoundLabel(data.label);
+          },
+          onError: (err) => {
+            errorHandler.handle(err);
           },
         }
       );

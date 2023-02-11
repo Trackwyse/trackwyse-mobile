@@ -5,11 +5,12 @@
  * Copyright (c) 2023 Trackwyse
  */
 
+import { useMutation } from "@tanstack/react-query";
 import { createContext, useContext, useState, useEffect } from "react";
 
 import api from "@/api";
 import { useAuth } from "@/contexts/Auth";
-import { useMutation } from "@tanstack/react-query";
+import errorHandler from "@/lib/errorHandler";
 
 interface CheckoutContextData {
   checkout: Checkout;
@@ -40,7 +41,8 @@ const CheckoutProvider: React.FC<{ children?: React.ReactNode }> = ({ children }
       onSuccess: ({ data }) => {
         setCheckout(data.checkout);
       },
-      onError: (error) => {
+      onError: (err) => {
+        errorHandler.handle(err);
         setCheckout({} as Checkout);
       },
     });

@@ -14,6 +14,7 @@ import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import { useAuth } from "@/contexts/Auth";
+import errorHandler from "@/lib/errorHandler";
 import Container from "@/components/Container";
 import Hyperlink from "@/components/Hyperlink";
 import BadgeButton from "@/components/BadgeButton";
@@ -51,12 +52,8 @@ const AcceptTerms: React.FC = () => {
           text2: "Thank you for accepting our terms and conditions",
         });
       },
-      onError: () => {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "Something went wrong",
-        });
+      onError: (err) => {
+        errorHandler.handle(err);
       },
     });
   };

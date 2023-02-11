@@ -21,16 +21,15 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
+import errorHandler from "@/lib/errorHandler";
 import { useLabels } from "@/contexts/Labels";
 import Container from "@/components/Container";
 import IconButton from "@/components/IconButton";
 import { convertDateToReadable } from "@/lib/util/date";
-// import ColorSelector from "@/components/ColorSelector";
 import useRefreshControl from "@/hooks/useRefreshControl";
 import { validateModifyLabelInput } from "@/lib/validators";
 import { colors } from "@/components/ColorSelector/ColorSelector";
 import UnsavedChangesModal from "@/components/Modals/UnsavedChanges";
-import useAuthenticatedMutation from "@/hooks/useAuthenticatedMutation";
 
 interface ModifyLabelScreenProps {
   route: any;
@@ -52,11 +51,6 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
       return api.modifyLabel(values, accessToken);
     },
   });
-  // const modificationMutation = useAuthenticatedMutation({
-  //   mutationFn: (values: ModifyLabelInput) => {
-  //     return api.modifyLabel(values, accessToken);
-  //   },
-  // })
 
   const deletionMutation = useMutation({
     mutationFn: () => {
@@ -95,11 +89,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
           navigation.navigate("Home");
         },
         onError: (err) => {
-          Toast.show({
-            type: "error",
-            text1: "Error",
-            text2: "There was an error updating your label",
-          });
+          errorHandler.handle(err, editInput);
         },
       });
     },
@@ -117,11 +107,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
         });
       },
       onError: (err) => {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "There was an error deleting your label",
-        });
+        errorHandler.handle(err);
       },
     });
   };
@@ -138,11 +124,7 @@ const ModifyLabel: React.FC<ModifyLabelScreenProps> = ({ route, navigation }) =>
         });
       },
       onError: (err) => {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "There was an error recovering your label",
-        });
+        errorHandler.handle(err);
       },
     });
   };

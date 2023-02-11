@@ -9,6 +9,7 @@ import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 
 import api from "@/api";
+import errorHandler from "@/lib/errorHandler";
 import AddressInput from "@/components/AddressInput";
 import { useDynamicLabels } from "@/contexts/DynamicLabels";
 
@@ -49,10 +50,8 @@ const FoundLabel: React.FC = () => {
                 text2: "Updated label location",
               });
             },
-            onError: () => {
-              addressInput.setErrors({
-                address1: "Invalid address provided",
-              });
+            onError: (err) => {
+              errorHandler.handle(err, addressInput);
             },
           }
         );

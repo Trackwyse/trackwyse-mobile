@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import api from "@/api";
 import { useAuth } from "@/contexts/Auth";
+import errorHandler from "@/lib/errorHandler";
 import AddressInput from "@/components/AddressInput";
 
 const Profile: React.FC = () => {
@@ -47,16 +48,8 @@ const Profile: React.FC = () => {
               text2: "User info updated successfully",
             });
           },
-          onError: () => {
-            Toast.show({
-              type: "error",
-              text1: "Error",
-              text2: "There was an error updating your account",
-            });
-
-            addressInput.setErrors({
-              address1: "Invalid address provided",
-            });
+          onError: (err) => {
+            errorHandler.handle(err, addressInput);
           },
         });
       }}

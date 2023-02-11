@@ -17,13 +17,14 @@ import Text from "@/components/Text";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import InfoCard from "@/components/InfoCard";
+import errorHandler from "@/lib/errorHandler";
 import Container from "@/components/Container";
+import EmptyState from "@/components/EmptyState";
 import { useCheckout } from "@/contexts/Checkout";
 import CardSelector from "@/components/CardSelector";
 import useBottomSheetRef from "@/hooks/useBottomSheetRef";
 import ShippingSelector from "@/components/ShippingSelector";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
-import EmptyState from "@/components/EmptyState";
 
 interface CheckoutScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -74,7 +75,6 @@ const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
               const { error, paymentIntent } = result;
 
               if (error) {
-                console.log(error);
                 Toast.show({
                   type: "error",
                   text1: "Error",
@@ -89,12 +89,8 @@ const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
                       setCheckout({} as Checkout);
                       setLoading(false);
                     },
-                    onError: () => {
-                      Toast.show({
-                        type: "error",
-                        text1: "Error",
-                        text2: "There was an error processing your payment",
-                      });
+                    onError: (err) => {
+                      errorHandler.handle(err);
                       setLoading(false);
                     },
                   });
@@ -102,22 +98,14 @@ const Checkout: React.FC<CheckoutScreenProps> = ({ navigation }) => {
               }
             });
           },
-          onError: () => {
-            Toast.show({
-              type: "error",
-              text1: "Error",
-              text2: "There was an error processing your payment",
-            });
+          onError: (err) => {
+            errorHandler.handle(err);
             setLoading(false);
           },
         });
       },
-      onError: () => {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "There was an error processing your payment",
-        });
+      onError: (err) => {
+        errorHandler.handle(err);
         setLoading(false);
       },
     });

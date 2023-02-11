@@ -15,6 +15,7 @@ import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Input from "@/components/Input";
 import { useAuth } from "@/contexts/Auth";
+import errorHandler from "@/lib/errorHandler";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import { validateRegisterInput } from "@/lib/validators";
@@ -53,6 +54,9 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
           onSuccess: ({ data }) => {
             updateAccessToken(data.accessToken);
             updateRefreshToken(data.refreshToken);
+          },
+          onError: (err) => {
+            errorHandler.handle(err, registerInput);
           },
         }
       );

@@ -13,6 +13,7 @@
     "prod": "expo start --no-dev --minify --tunnel"
   },
   "dependencies": {
+    "@createnextapp/async-local-storage": "^1.0.1",
     "@expo-google-fonts/poppins": "^0.2.2",
     "@expo-google-fonts/syne": "^0.2.2",
     "@gorhom/bottom-sheet": "^4",

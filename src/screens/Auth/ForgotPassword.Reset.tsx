@@ -6,7 +6,6 @@
  */
 
 import { useFormik } from "formik";
-import { AxiosError } from "axios";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 import { View, KeyboardAvoidingView } from "react-native";
@@ -16,6 +15,7 @@ import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Input from "@/components/Input";
+import errorHandler from "@/lib/errorHandler";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import { validateResetPasswordInput } from "@/lib/validators";
@@ -54,12 +54,8 @@ const ForgotPassword: React.FC<ForgotPasswordScreenProps> = ({ navigation, route
             text2: "Your can now login with your new password",
           });
         },
-        onError: (error) => {
-          if (error instanceof AxiosError) {
-            resetPasswordInput.setErrors({
-              resetToken: error.response?.data.message || "An error occurred",
-            });
-          }
+        onError: (err) => {
+          errorHandler.handle(err, resetPasswordInput);
         },
       });
     },

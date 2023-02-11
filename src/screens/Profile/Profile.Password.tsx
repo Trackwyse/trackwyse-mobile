@@ -5,7 +5,6 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { AxiosError } from "axios";
 import { useFormik } from "formik";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
@@ -18,6 +17,7 @@ import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
+import errorHandler from "@/lib/errorHandler";
 import Container from "@/components/Container";
 import { validateUpdateUserPasswordInput } from "@/lib/validators";
 
@@ -55,10 +55,7 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           navigation.goBack();
         },
         onError: (err) => {
-          if (err instanceof AxiosError) {
-            const { message } = err.response?.data;
-            userInfoInput.setErrors({ currentPassword: message });
-          }
+          errorHandler.handle(err, userInfoInput);
         },
       });
     },

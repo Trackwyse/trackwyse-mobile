@@ -15,6 +15,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import api from "@/api";
 import { useAuth } from "@/contexts/Auth";
 import { useLabels } from "@/contexts/Labels";
+import errorHandler from "@/lib/errorHandler";
 
 type RootStackParamList = {
   EditLabel: { labelId: string } | undefined;
@@ -140,6 +141,9 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
           onSuccess: ({ data }) => {
             updateUser(data.user);
           },
+          onError: (err) => {
+            errorHandler.handle(err);
+          },
         }
       );
     }
@@ -154,6 +158,9 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
             onSuccess: ({ data }) => {
               updateUser(data.user);
             },
+            onError: (err) => {
+              errorHandler.handle(err);
+            },
           }
         );
       }
@@ -165,6 +172,9 @@ const NotificationsProvider: React.FC<{ children?: React.ReactNode }> = ({ child
         {
           onSuccess: ({ data }) => {
             updateUser(data.user);
+          },
+          onError: (err) => {
+            errorHandler.handle(err);
           },
         }
       );

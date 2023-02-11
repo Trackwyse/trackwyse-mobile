@@ -7,8 +7,17 @@
 
 interface APIResponse {
   data: {
-    error: boolean;
+    error?: APIError;
+    message?: string;
+  };
+}
+
+interface APIError {
+  error: {
+    field?: string;
+    traceback: string;
     message: string;
+    humanMessage: string;
   };
 }
 

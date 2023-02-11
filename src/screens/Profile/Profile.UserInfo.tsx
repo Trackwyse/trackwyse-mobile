@@ -20,6 +20,7 @@ import { useAuth } from "@/contexts/Auth";
 import ListItem from "@/components/ListItem";
 import Container from "@/components/Container";
 import { validateUpdateUserInput } from "@/lib/validators";
+import errorHandler from "@/lib/errorHandler";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -54,12 +55,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
             text2: "User info updated successfully",
           });
         },
-        onError: () => {
-          Toast.show({
-            type: "error",
-            text1: "Error",
-            text2: "There was an error updating your account",
-          });
+        onError: (err) => {
+          errorHandler.handle(err, userInfoInput);
         },
       });
     },

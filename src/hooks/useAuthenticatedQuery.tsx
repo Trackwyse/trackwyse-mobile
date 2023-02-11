@@ -38,7 +38,7 @@ const useAuthenticatedQuery = <
         return false;
       }
 
-      if (error.response?.data?.message === "EXPIRED_TOKEN") {
+      if (error.response?.data?.error?.message === "EXPIRED_TOKEN") {
         // fetch access token and retry
         fetchAccessToken();
 

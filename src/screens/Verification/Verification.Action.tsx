@@ -15,6 +15,7 @@ import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
 import Input from "@/components/Input";
 import { useAuth } from "@/contexts/Auth";
+import errorHandler from "@/lib/errorHandler";
 import Hyperlink from "@/components/Hyperlink";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
@@ -50,10 +51,8 @@ const Verify: React.FC = () => {
             verified: true,
           });
         },
-        onError: (error) => {
-          verifyInput.setErrors({
-            verificationToken: "Invalid verification code",
-          });
+        onError: (err) => {
+          errorHandler.handle(err, verifyInput);
         },
       });
 
@@ -71,10 +70,8 @@ const Verify: React.FC = () => {
           text2: "Please check your email for the verification code",
         });
       },
-      onError: () => {
-        verifyInput.setErrors({
-          verificationToken: "Verification code already sent. Please wait 5 minutes.",
-        });
+      onError: (err) => {
+        errorHandler.handle(err, verifyInput);
       },
     });
   };

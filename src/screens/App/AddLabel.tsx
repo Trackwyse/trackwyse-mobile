@@ -22,6 +22,7 @@ import BadgeButton from "@/components/BadgeButton";
 import Permissions from "@/components/Permissions";
 import { validateLabelUrl } from "@/lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import errorHandler from "@/lib/errorHandler";
 
 interface AddLabelScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -68,12 +69,8 @@ const AddLabel: React.FC<AddLabelScreenProps> = ({ navigation }) => {
 
           navigation.navigate("EditLabel", { labelId });
         },
-        onError: () => {
-          Toast.show({
-            type: "error",
-            text1: "Error",
-            text2: "This label has already been added to an account",
-          });
+        onError: (err) => {
+          errorHandler.handle(err);
         },
       }
     );

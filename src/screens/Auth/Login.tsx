@@ -20,6 +20,7 @@ import Container from "@/components/Container";
 import Hyperlink from "@/components/Hyperlink";
 import { validateLoginInput } from "@/lib/validators";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import errorHandler from "@/lib/errorHandler";
 
 interface LoginScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -53,11 +54,8 @@ const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
             text2: "You have successfully logged in.",
           });
         },
-        onError: () => {
-          loginInput.setErrors({
-            email: "Invalid email or password.",
-            password: "Invalid email or password.",
-          });
+        onError: (err) => {
+          errorHandler.handle(err, loginInput);
         },
       });
     },

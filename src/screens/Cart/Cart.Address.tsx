@@ -10,6 +10,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import api from "@/api";
 import { useAuth } from "@/contexts/Auth";
+import errorHandler from "@/lib/errorHandler";
 import { useCheckout } from "@/contexts/Checkout";
 import AddressInput from "@/components/AddressInput";
 
@@ -48,10 +49,8 @@ const Cart: React.FC<CartScreenProps> = ({ navigation }) => {
 
             navigation.goBack();
           },
-          onError: () => {
-            addressInput.setErrors({
-              address1: "Invalid address provided",
-            });
+          onError: (err) => {
+            errorHandler.handle(err, addressInput);
           },
         });
       }}

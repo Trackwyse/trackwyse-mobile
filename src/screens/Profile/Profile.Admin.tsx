@@ -12,6 +12,7 @@ import Text from "@/components/Text";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/Auth";
 import Container from "@/components/Container";
+import errorHandler from "@/lib/errorHandler";
 
 interface ProfileScreenProps {}
 
@@ -33,12 +34,8 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
           text2: "User is now premium",
         });
       },
-      onError: () => {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "Something went wrong",
-        });
+      onError: (err) => {
+        errorHandler.handle(err);
       },
     });
   };

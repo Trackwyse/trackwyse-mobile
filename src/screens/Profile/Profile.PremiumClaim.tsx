@@ -5,7 +5,6 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { AxiosError } from "axios";
 import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 import { View, ScrollView, RefreshControl } from "react-native";
@@ -23,6 +22,7 @@ import { convertDateToReadable } from "@/lib/util/date";
 import PremiumLoader from "@/components/Loaders/Premium";
 import useRefreshControl from "@/hooks/useRefreshControl";
 import useAuthenticatedQuery from "@/hooks/useAuthenticatedQuery";
+import errorHandler from "@/lib/errorHandler";
 
 interface ProfileScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -57,20 +57,8 @@ const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
           text2: "You have successfully claimed your free labels.",
         });
       },
-      onError: (error) => {
-        if (error instanceof AxiosError) {
-          Toast.show({
-            type: "error",
-            text1: "Error",
-            text2: error.response?.data.message,
-          });
-        } else {
-          Toast.show({
-            type: "error",
-            text1: "Error",
-            text2: "Something went wrong. Please try again later.",
-          });
-        }
+      onError: (err) => {
+        errorHandler.handle(err);
       },
     });
   };

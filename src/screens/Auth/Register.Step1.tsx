@@ -17,6 +17,7 @@ import Input from "@/components/Input";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import { validateRegisterInput } from "@/lib/validators";
+import errorHandler from "@/lib/errorHandler";
 
 interface RegisterScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -53,10 +54,8 @@ const Register: React.FC<RegisterScreenProps> = ({ navigation }) => {
             password: values.password,
           });
         },
-        onError: () => {
-          registerInput.setErrors({
-            email: "Email already in use.",
-          });
+        onError: (err) => {
+          errorHandler.handle(err, registerInput);
         },
       });
 

@@ -4,15 +4,17 @@
  *
  * Copyright (c) 2023 Trackwyse
  */
-import Text from "@/components/Text";
-import Container from "@/components/Container";
-import Input from "@/components/Input";
-import Button from "@/components/Button";
-import tw from "@/lib/tailwind";
 import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "@/contexts/Auth";
+
 import api from "@/api";
+import tw from "@/lib/tailwind";
+import Text from "@/components/Text";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+import { useAuth } from "@/contexts/Auth";
+import Container from "@/components/Container";
+import errorHandler from "@/lib/errorHandler";
 
 interface ProfileScreenProps {}
 
@@ -33,10 +35,8 @@ const Profile: React.FC<ProfileScreenProps> = ({}) => {
         onSuccess: () => {
           removeAllData();
         },
-        onError: () => {
-          deleteAccountInput.setErrors({
-            password: "Incorrect password",
-          });
+        onError: (err) => {
+          errorHandler.handle(err, deleteAccountInput);
         },
       });
     },

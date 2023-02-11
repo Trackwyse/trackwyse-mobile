@@ -5,7 +5,6 @@
  * Copyright (c) 2023 Trackwyse
  */
 
-import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import { Camera, CameraType } from "expo-camera";
@@ -17,6 +16,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import api from "@/api";
 import tw from "@/lib/tailwind";
 import Text from "@/components/Text";
+import errorHandler from "@/lib/errorHandler";
 import Container from "@/components/Container";
 import BadgeButton from "@/components/BadgeButton";
 import Permissions from "@/components/Permissions";
@@ -69,14 +69,7 @@ const FoundLabel: React.FC<FoundLabelScreenProps> = ({ navigation }) => {
           });
         },
         onError: (err) => {
-          if (err instanceof AxiosError) {
-            const statusCode = err.response?.data.message;
-            Toast.show({
-              type: "error",
-              text1: "An error occurred",
-              text2: statusCode,
-            });
-          }
+          errorHandler.handle(err);
         },
       }
     );

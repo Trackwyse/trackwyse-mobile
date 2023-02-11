@@ -5,10 +5,12 @@
  * Copyright (c) 2023 Trackwyse
  */
 
+import { useMutation } from "@tanstack/react-query";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState, useContext } from "react";
-import { useMutation } from "@tanstack/react-query";
+
 import api from "@/api";
+import errorHandler from "@/lib/errorHandler";
 
 interface AuthContextData {
   user: User;
@@ -82,7 +84,8 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
         onSuccess: ({ data }) => {
           setAccessToken(data.accessToken);
         },
-        onError: () => {
+        onError: (err) => {
+          errorHandler.handle(err);
           setAccessToken("");
         },
       });
@@ -97,7 +100,8 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
         onSuccess: ({ data }) => {
           setUser(data.user);
         },
-        onError: () => {
+        onError: (err) => {
+          errorHandler.handle(err);
           setUser({} as User);
         },
       });
@@ -127,6 +131,9 @@ const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
           setUser({} as User);
           updateAccessToken("");
           updateRefreshToken("");
+        },
+        onError: (err) => {
+          errorHandler.handle(err);
         },
       });
     }

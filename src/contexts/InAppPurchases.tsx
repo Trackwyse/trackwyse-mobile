@@ -92,7 +92,7 @@ const InAppPurchasesProvider: React.FC<{ children?: React.ReactNode }> = ({ chil
           },
           onError: (err) => {
             if (err instanceof AxiosError) {
-              const message = err.response?.data?.message;
+              const message = err.response?.data?.error?.message;
 
               if (message && message == "INVALID_SUBSCRIPTION") {
                 RNIAP.finishTransaction({ purchase: pendingPurchase });
